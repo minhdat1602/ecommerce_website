@@ -1,0 +1,42 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ include file="/common/taglib.jsp"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+ 	<link href="<c:url value="https://fonts.googleapis.com/css?family=Montserrat:400,500|Poppins:400,500,600,700|Roboto:400,500"/>"
+          rel="stylesheet"/>
+    <link href="<c:url value="https://cdn.materialdesignicons.com/3.0.39/css/materialdesignicons.min.css"/>" rel="stylesheet"/>
+	<c:url value=" 
+	"/>
+    <!-- PLUGINS CSS STYLE -->
+    <link href="<c:url value="assets/plugins/toaster/toastr.min.css"/>" rel="stylesheet"/>
+    <link href="<c:url value="assets/plugins/nprogress/nprogress.css"/>" rel="stylesheet"/>
+    <link href="<c:url value="assets/plugins/flag-icons/css/flag-icon.min.css"/>" rel="stylesheet"/>
+    <link href="<c:url value="assets/plugins/jvectormap/jquery-jvectormap-2.0.3.css"/>" rel="stylesheet"/>
+    <link href="<c:url value="assets/plugins/ladda/ladda.min.css"/>" rel="stylesheet"/>
+    <link href="<c:url value="assets/plugins/select2/css/select2.min.css"/>" rel="stylesheet"/>
+    <link href="<c:url value="assets/plugins/daterangepicker/daterangepicker.css"/>" rel="stylesheet"/>
+    <link rel="stylesheet" type="text/css" href="<c:url value="assets/css/bootstrap.min.css"/>">
+    <!-- SLEEK CSS -->
+    <link id="sleek-css" rel="stylesheet" href="<c:url value="assets/css/sleek.css"/>"/>
+	
+
+    <!-- FAVICON -->
+    <link href="<c:url value="assets/img/favicon.png"/>" rel="shortcut icon"/>
+</head>
+<body>
+	<%@ include file="/common/admin/menu.jsp" %>
+	<div class="page-wrapper">
+		<%@ include file="/common/admin/header.jsp" %>
+	
+	</div>
+	
+
+	
+	
+
+</body>
+</html>
