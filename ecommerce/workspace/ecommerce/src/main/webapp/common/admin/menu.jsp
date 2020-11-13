@@ -219,15 +219,29 @@
 							<li class="has-sub"><a class="sidenav-item-link"
 								href="javascript:void(0)" data-toggle="collapse"
 								data-target="#product" aria-expanded="false"
-								aria-controls="widgets"> <span class="nav-text">Sản phẩm</span> <b class="caret"></b>
+								aria-controls="widgets"> <span class="nav-text">Sản
+										phẩm</span> <b class="caret"></b>
 							</a>
 								<ul class="collapse" id="product">
 									<div class="sub-menu">
-										<li><a href="<c:url value ="/view/admin/product/list-category-product.jsp"/>">Loại sản phẩm</a></li>
-										<li><a href="<c:url value ="/view/admin/customer/list-customer-group.jsp"/>">Đối tượng khách hàng</a></li>
+										<li><a
+											href="<c:url value ="/view/admin/product/list-category-product.jsp"/>">Loại
+												sản phẩm</a></li>
+										<li><a
+											href="<c:url value ="/view/admin/customer/list-customer-group.jsp"/>">Đối
+												tượng khách hàng</a></li>
+										<li><a
+											href="<c:url value ="/view/admin/product/size/list-size-product.jsp"/>">Kích
+												cỡ</a></li>
+										<li><a
+											href="<c:url value ="/view/admin/product/color/list-color-product.jsp"/>">Màu
+												sắc</a></li>
+										<li><a
+											href="<c:url value ="/view/admin/product/suppliers/list-suppliers.jsp"/>">Nhà
+												phân phối</a></li>
 									</div>
 								</ul></li>
-							
+
 							<!-- 
 							<li class="has-sub"><a class="sidenav-item-link"
 								href="javascript:void(0)" data-toggle="collapse"
@@ -240,10 +254,22 @@
 										<li><a href="general-widget.html">Lượng truy cập</a></li>
 									</div>
 								</ul></li> -->
-							<li><a class="sidenav-item-link"
-								href="<c:url value ="/view/admin/admin-manager/list-admin.jsp"/>"> <span
-									class="nav-text">Quản trị viên</span>
-							</a></li>
+
+							<li class="has-sub"><a class="sidenav-item-link"
+								href="javascript:void(0)" data-toggle="collapse"
+								data-target="#qtv" aria-expanded="false" aria-controls="widgets">
+									<span class="nav-text">Quản trị viên</span> <b class="caret"></b>
+							</a>
+								<ul class="collapse" id="qtv">
+									<div class="sub-menu">
+										<li><a
+											href="<c:url value ="/view/admin/admin-manager/list-admin.jsp"/>">Danh
+												sách</a></li>
+										<li><a
+											href="<c:url value ="/view/admin/admin-manager/list-permission.jsp"/>">Các
+												quyền</a></li>
+									</div>
+								</ul></li>
 							<li class="has-sub"><a class="sidenav-item-link"
 								href="javascript:void(0)" data-toggle="collapse"
 								data-target="#widgets" aria-expanded="false"
@@ -259,30 +285,51 @@
 										<li><a href="chart-widget.html">Deal mỗi tuần</a></li>
 									</div>
 								</ul></li>
+							<li class="has-sub"><a class="sidenav-item-link"
+								href="javascript:void(0)" data-toggle="collapse"
+								data-target="#comment" aria-expanded="false"
+								aria-controls="widgets"> <span class="nav-text">Bình
+										luận</span> <b class="caret"></b>
+							</a>
+								<ul class="collapse" id="comment">
+									<div class="sub-menu">
+										<li><a href="general-widget.html">Sản phẩm</a></li>
+										<li><a href="chart-widget.html">Bài viết</a></li>
+									</div>
+								</ul></li>
 
+							<li><a class="sidenav-item-link" href="user-profile.html">
+									<span class="nav-text">Câu hỏi</span>
+							</a></li>
 
 
 						</div>
+
 					</ul></li>
 
 
 				<li class="has-sub"><a class="sidenav-item-link"
 					href="javascript:void(0)" data-toggle="collapse"
 					data-target="#pages" aria-expanded="false" aria-controls="pages">
-						<i class="mdi mdi-image-filter-none"></i> <span class="nav-text">Pages</span>
-						<b class="caret"></b>
+						<i class="mdi mdi-image-filter-none"></i> <span class="nav-text">Thống
+							kê</span> <b class="caret"></b>
 				</a>
 					<ul class="collapse" id="pages" data-parent="#sidebar-menu">
 						<div class="sub-menu">
 
 
 							<li><a class="sidenav-item-link" href="user-profile.html">
-									<span class="nav-text">User Profile</span>
-
+									<span class="nav-text">Lượt truy cập</span>
+							</a></li>
+							<li><a class="sidenav-item-link" href="user-profile.html">
+									<span class="nav-text">Lượt mua hàng</span>
+							</a></li>
+							<li><a class="sidenav-item-link" href="user-profile.html">
+									<span class="nav-text">Đánh giá sản phẩm</span>
 							</a></li>
 
 
-							<li class="has-sub"><a class="sidenav-item-link"
+							<!-- 	<li class="has-sub"><a class="sidenav-item-link"
 								href="javascript:void(0)" data-toggle="collapse"
 								data-target="#authentication" aria-expanded="false"
 								aria-controls="authentication"> <span class="nav-text">Authentication</span>
@@ -313,13 +360,13 @@
 										<li><a href="error.html">Error</a></li>
 
 									</div>
-								</ul></li>
+								</ul></li> -->
 
 
 						</div>
 					</ul></li>
 
-
+				<!-- 
 				<li class="has-sub"><a class="sidenav-item-link"
 					href="javascript:void(0)" data-toggle="collapse"
 					data-target="#documentation" aria-expanded="false"
@@ -412,7 +459,7 @@
 
 
 						</div>
-					</ul></li>
+					</ul></li> -->
 
 
 			</ul>

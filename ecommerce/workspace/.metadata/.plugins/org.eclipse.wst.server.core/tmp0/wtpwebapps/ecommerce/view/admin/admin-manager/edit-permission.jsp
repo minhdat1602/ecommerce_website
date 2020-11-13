@@ -5,10 +5,10 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Chỉnh Cập nhật quyèn</title>
+<title>Cập nhật quyền quản trị viên</title>
 </head>
 <body>
-	<h3 class="ml-4 mt-3">Chỉnh Cập nhật quyèn</h3>
+	<h3 class="ml-4 mt-3">Cập nhật quyền quản trị viên</h3>
 	<form action="" class="p-5">
 		<div class="form-group">
 			<label for="exampleFormControlInput1">Tên quản trị viên</label> <input

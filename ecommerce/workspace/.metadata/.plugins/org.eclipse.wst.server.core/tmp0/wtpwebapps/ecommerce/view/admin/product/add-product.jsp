@@ -50,13 +50,19 @@
 			</select>
 		</div>
 		<div class="form-group" id="size">
-			<label style="display: block;" for="exampleFormControlSelect2">Kích
-				cỡ</label> <span>S</span> <input type="checkbox" name="size"> <span>M</span>
-			<input type="checkbox" name="size"> <span>L</span> <input
-				type="checkbox" name="size"> <span>XL</span> <input
-				type="checkbox" name="size"> <span>XXL</span> <input
-				type="checkbox" name="size"> <span>XXXL</span> <input
-				type="checkbox" name="size">
+			<label for="exampleFormControlSelect2">Size, Kích cỡ, Màu sắc</label> 
+			<select>
+				
+			</select>
+		</div>
+		<div class="form-group">
+			<label for="exampleFormControlSelect3">Nhà phân phối</label> <select
+				class="form-control" id="exampleFormControlSelect3">
+				<option>Chọn--</option>
+				<option>Yame</option>
+				<option>Routine</option>
+				<option>Ben</option>
+			</select>
 		</div>
 		<div class="form-group">
 			<label for="exampleFormControlInput1">Gía niêm yết</label> <input
