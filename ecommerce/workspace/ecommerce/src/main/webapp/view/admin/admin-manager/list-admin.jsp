@@ -5,18 +5,21 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Danh sách quản trị viên</title>
+<title>Danh sách sản phẩm</title>
 <script
 	src="<c:url value="/template/admin/assets/plugins/jquery/jquery.min.js" />"></script>
 </head>
 <body>
-	<h3 class="ml-4 mt-3">Danh sách quản trị viên</h3>
+	<h3 class="ml-4 mt-3">Danh sách sản phẩm</h3>
 	<div class="product-show-option">
 		<div class="row">
 			<div class="col-lg-7 col-md-7">
 				<div class="select-option">
 					<select id="sorting" class="sorting">
 						<option value="">Tên</option>
+						<option value="">Gía cao</option>
+						<option value="">Gía thấp</option>
+						<option value="">Tồn kho</option>
 					</select> <label for="sorting" id="labelForSorting">Sắp xếp theo: </label> <select
 						id="p-show" class="p-show">
 						<option value="">10</option>
@@ -83,8 +86,8 @@
 	</div>
 	<div class="btn-control ml-2 mb-2">
 		<a style="color: white; text-decoration: none;"
-			href="<c:url value ="/view/admin/admin-manager/edit-permission.jsp"/>"
-			type="button" class="btn btn-info"> Thêm quản trị viên <i
+			href="<c:url value ="/view/admin/product/add-product.jsp"/>"
+			type="button" class="btn btn-info"> Thêm quyền <i
 			class="fa fa-plus ml-2"></i>
 		</a>
 	</div>
