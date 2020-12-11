@@ -6,11 +6,11 @@
     </excludes> 
     
    <decorator name="web" page="web.jsp">
-        <pattern>/*</pattern>
+        <pattern>/view/web*</pattern>
     </decorator>
     
     <decorator name="admin" page="admin.jsp">
-        <pattern>/admin*</pattern>
+        <pattern>/view/admin*</pattern>
     </decorator>
     
  <!--    <decorator name="login" page="login.jsp">

@@ -9,6 +9,6 @@
 </head>
 <body>
 
-	<c:redirect url="/view/admin/product/list-product.jsp"></c:redirect>
+	<c:redirect url="/view/web/index.jsp"></c:redirect>
 </body>
 </html>
