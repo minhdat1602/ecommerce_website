@@ -1,0 +1,21 @@
+package com.ecommerce.mapper;
+
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+import com.ecommerce.model.ProductGroup;
+
+public class ProductGroupMapper implements RowMapper<ProductGroup>{
+
+	@Override
+	public ProductGroup mapRow(ResultSet resultSet) {
+		ProductGroup productGroup = new ProductGroup();
+		try {
+			productGroup.setName(resultSet.getString("name"));
+		} catch (SQLException e) {
+			return null;
+		}
+		return productGroup;
+	}
+	
+}

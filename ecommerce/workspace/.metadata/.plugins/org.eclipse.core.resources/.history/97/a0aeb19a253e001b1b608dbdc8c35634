@@ -1,0 +1,16 @@
+package com.ecommerce.service.impl;
+
+import java.util.List;
+
+import com.ecommerce.model.ProductColor;
+import com.ecommerce.service.IProductColorService;
+
+public class ProductColorService implements IProductColorService{
+
+	@Override
+	public List<ProductColor> findAll() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+}

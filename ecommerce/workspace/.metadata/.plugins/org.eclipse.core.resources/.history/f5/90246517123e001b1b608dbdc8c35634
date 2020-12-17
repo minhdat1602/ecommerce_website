@@ -1,0 +1,66 @@
+package com.ecommerce.utils;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class PriceUtils {
+	private static String originPrice;
+	private static String sellPrice;
+	public PriceUtils(Integer originPrice, Integer sellPrice) {
+		this.originPrice = Integer.toString(originPrice);
+		this.sellPrice = Integer.toString(sellPrice);
+	}
+	public void split() {
+		int lengthOriginPrice;
+		if ((originPrice.length()%3)==0) {
+			lengthOriginPrice = (originPrice.length()%3) - 1;
+		} else lengthOriginPrice = (originPrice.length()%3);
+		String[] originPriceArr = new String[lengthOriginPrice];
+		int index = 0;
+		for (int i = originPriceArr.length-1; i >= 0 ; i--) {
+			if (index%3==0) {
+				originPriceArr[i] = ".";
+			}
+			originPriceArr[i] = Integer.toString(originPrice.indexOf(i));
+			index++;
+		} 
+		originPrice = "";
+		for (String string : originPriceArr) {
+			originPrice += string;
+		}
+	}
+	public void convert(int value) {
+		String price = Integer.toString(value);
+
+		int step = 0;
+		int length = price.length();
+		for (int i = price.length() - 1; i <= 0; i--) {
+			if (step%3==0) {
+				price = price.substring(0, length-step) + "." + price.substring(length-step, length);
+				length++;
+			}
+		}
+		System.out.println(price instanceof String);
+	}
+	public String getOriginPrice() {
+		return originPrice;
+	}
+	public void setOriginPrice(String originPrice) {
+		this.originPrice = originPrice;
+	}
+	public String getSellPrice() {
+		return sellPrice;
+	}
+	public void setSellPrice(String sellPrice) {
+		this.sellPrice = sellPrice;
+	}
+	public static void main(String[] args) {
+		PriceUtils priceUtils = new PriceUtils(60000, 50000);
+//		priceUtils.split();
+//		System.out.println(priceUtils.getOriginPrice());
+		priceUtils.convert(50000);
+		
+		
+		
+	}
+}

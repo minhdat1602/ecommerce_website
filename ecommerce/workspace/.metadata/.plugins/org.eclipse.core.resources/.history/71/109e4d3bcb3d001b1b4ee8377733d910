@@ -1,0 +1,49 @@
+package com.ecommerce.controller.web;
+
+import java.io.IOException;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.inject.Inject;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import com.ecommerce.dao.impl.ProductDAO;
+import com.ecommerce.mapper.ProductMapper;
+import com.ecommerce.mapper.RowMapper;
+import com.ecommerce.model.Product;
+import com.ecommerce.service.IProductService;
+import com.ecommerce.service.impl.ProductService;
+
+
+@WebServlet(urlPatterns = "/shop")
+public class ShopController extends HttpServlet{
+	@Inject
+	private IProductService productService;
+	
+	private List<Product> listProduct;
+	
+	@Override
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		List<Product> listProduct = productService.getAll();
+		req.setAttribute("listProduct", listProduct);
+		req.getRequestDispatcher("/view/web/shop.jsp").forward(req, resp);
+	}
+	
+	
+	
+	
+	@Override
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		
+	}
+	
+}

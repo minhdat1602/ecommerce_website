@@ -1,0 +1,7 @@
+package com.ecommerce.dao;
+
+import com.ecommerce.model.ProductSize;
+
+public interface IProductSizeDAO {
+	List<ProductSize> findAll();
+}

@@ -1,0 +1,95 @@
+package com.ecommerce.controller.web;
+
+import java.io.IOException;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import com.ecommerce.dao.impl.ProductDAO;
+import com.ecommerce.mapper.ProductMapper;
+import com.ecommerce.mapper.RowMapper;
+import com.ecommerce.model.Product;
+import com.ecommerce.service.impl.ProductService;
+
+
+@WebServlet(urlPatterns = "/shop")
+public class ShopController extends HttpServlet{
+//	private ProductService productService;
+	
+	@Override
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		List<Product> listProduct = ProductService.getAll();
+		req.setAttribute("listProduct", listProduct);
+		req.getRequestDispatcher("/view/web/shop.jsp").forward(req, resp);
+	}
+	
+	
+	
+	
+	@Override
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		
+	}
+	
+//	public Connection getConnection() {
+//		try {
+//			Class.forName("com.mysql.jdbc.Driver");
+//			String user = "root";
+//			String password = "016961193922";
+//			String url = "jdbc:mysql://localhost:3306/fashi";
+//			return DriverManager.getConnection(url, user, password);
+//		} catch (ClassNotFoundException | SQLException e) {
+//			return null;
+//		}
+//	}
+//	
+//	
+//	
+//
+//	public List<Product> query(String sql) {
+//		List<Product> results = new ArrayList<Product>();
+//		RowMapper<Product> rowMapper = new ProductMapper();
+//		PreparedStatement preparedStatement = null;
+//		ResultSet resultSet = null;
+//		Connection connection = getConnection();
+//		if (connection != null) {
+//			try {
+//				preparedStatement = connection.prepareStatement(sql);
+////				setParameters(preparedStatement, parameters);
+//				resultSet = preparedStatement.executeQuery();
+//				while(resultSet.next()) {
+//					results.add(rowMapper.mapRow(resultSet));
+//				}
+//				return results;
+//			} catch (SQLException e) {
+//				return null;
+//			} finally {
+//				try {
+//					if (resultSet != null) {
+//						resultSet.close();
+//					}
+//					if (preparedStatement != null) {
+//						preparedStatement.close();
+//					}
+//					if (connection != null) {
+//						connection.close();
+//					}
+//				} catch (Exception e) {
+//					return null;
+//				}
+//			}
+//			
+//		}
+//		return null;
+//	}
+}

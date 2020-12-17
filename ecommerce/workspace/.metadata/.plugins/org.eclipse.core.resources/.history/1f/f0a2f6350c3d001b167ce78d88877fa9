@@ -1,0 +1,29 @@
+package com.ecommerce.mapper;
+
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+import com.ecommerce.model.Product;
+
+public class ProductMapper implements RowMapper<Product>{
+
+	@Override
+	public Product mapRow(ResultSet resultSet) {
+		Product product = new Product();
+		try {
+			product.setId(resultSet.getInt("id"));
+			product.setCode(resultSet.getString("code"));
+			product.setName(resultSet.getString("name"));
+			product.setOriginPrice(resultSet.getInt("origin_price"));
+			product.setSellPrice(resultSet.getInt("sell_price"));
+			product.setGoupId(resultSet.getInt("group_id"));
+			product.setCollectionId(resultSet.getInt("collection_id"));
+			
+			
+		} catch (SQLException e) {
+			return null;
+		}
+		
+	}
+	
+}

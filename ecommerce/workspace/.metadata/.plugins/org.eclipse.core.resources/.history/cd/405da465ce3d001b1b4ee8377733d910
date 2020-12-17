@@ -1,0 +1,7 @@
+package com.ecommerce.dao;
+
+import com.ecommerce.model.ProductGroup;
+
+public interface IProductGroupDAO extends IGenericDAO<ProductGroup>{
+	List findAll();
+}

@@ -1,0 +1,7 @@
+package com.ecommerce.mapper;
+
+import com.ecommerce.model.ProductSize;
+
+public class ProductSizeMapper implements RowMapper<ProductSize>{
+
+}

@@ -1,0 +1,74 @@
+package com.ecommerce.service.impl;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
+import com.ecommerce.dao.impl.ProductDAO;
+import com.ecommerce.mapper.ProductMapper;
+import com.ecommerce.mapper.RowMapper;
+import com.ecommerce.model.Product;
+import com.ecommerce.service.IProductService;
+
+public class ProductService implements IProductService{
+
+	private ProductDAO productDAO;
+		
+
+	public List<Product> getAll() {
+		String sql = "select * from products";
+		return query(sql, new ProductMapper());
+	}
+	public Connection getConnection() {
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+			String user = "root";
+			String password = "016961193922";
+			String url = "jdbc:mysql://localhost:3306/fashi";
+			return DriverManager.getConnection(url, user, password);
+		} catch (ClassNotFoundException | SQLException e) {
+			return null;
+		}
+	}
+
+	public List<Product> query(String sql, RowMapper<Product> rowMapper, Object... parameters) {
+		List<Product> results = new ArrayList<Product>();
+		PreparedStatement preparedStatement = null;
+		ResultSet resultSet = null;
+		Connection connection = getConnection();
+		if (connection != null) {
+			try {
+				preparedStatement = connection.prepareStatement(sql);
+//				setParameters(preparedStatement, parameters);
+				resultSet = preparedStatement.executeQuery();
+				while(resultSet.next()) {
+					results.add(rowMapper.mapRow(resultSet));
+				}
+				return results;
+			} catch (SQLException e) {
+				return null;
+			} finally {
+				try {
+					if (resultSet != null) {
+						resultSet.close();
+					}
+					if (preparedStatement != null) {
+						preparedStatement.close();
+					}
+					if (connection != null) {
+						connection.close();
+					}
+				} catch (Exception e) {
+					return null;
+				}
+			}
+			
+		}
+		return null;
+	}
+	
+}

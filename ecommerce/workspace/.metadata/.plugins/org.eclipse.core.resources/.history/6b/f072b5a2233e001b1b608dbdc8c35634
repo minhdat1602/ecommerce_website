@@ -1,0 +1,8 @@
+package com.ecommerce.dao.impl;
+
+import com.ecommerce.dao.IProductColorDAO;
+import com.ecommerce.model.ProductColor;
+
+public class ProductColorDAO extends AbstractDAO<ProductColor> implements IProductColorDAO{
+	
+}

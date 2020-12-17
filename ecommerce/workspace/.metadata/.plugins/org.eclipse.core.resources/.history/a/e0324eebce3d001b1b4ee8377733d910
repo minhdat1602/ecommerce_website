@@ -1,0 +1,18 @@
+package com.ecommerce.service.impl;
+
+import java.util.List;
+
+import com.ecommerce.dao.IProductGroupDAO;
+import com.ecommerce.model.ProductGroup;
+import com.ecommerce.service.IProductGroupService;
+import com.ecommerce.service.IProductService;
+
+public class ProductGroupService implements IProductGroupService{
+
+	@Override
+	public List<ProductGroup> findAll() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+}

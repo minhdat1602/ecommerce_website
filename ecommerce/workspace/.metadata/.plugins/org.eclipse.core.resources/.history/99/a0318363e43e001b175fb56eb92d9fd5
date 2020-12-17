@@ -1,0 +1,9 @@
+package com.ecommerce.dao.impl;
+
+import com.ecommerce.dao.IProductSizeDAO;
+import com.ecommerce.model.ProductSize;
+import com.ecommerce.service.IProductSizeService;
+
+public class ProductSizeDAO extends AbstractDAO<ProductSize> implements IProductSizeDAO{
+	
+}

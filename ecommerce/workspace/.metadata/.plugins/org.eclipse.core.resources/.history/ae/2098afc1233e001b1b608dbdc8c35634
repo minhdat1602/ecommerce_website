@@ -1,0 +1,7 @@
+package com.ecommerce.mapper;
+
+import com.ecommerce.model.ProductColor;
+
+public class ProductColorMapper implements RowMapper<ProductColor>{
+
+}

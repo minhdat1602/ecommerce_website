@@ -1,0 +1,70 @@
+package com.ecommerce.dao.impl;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
+import com.ecommerce.dao.IGenericDAO;
+import com.ecommerce.mapper.RowMapper;
+import com.mysql.jdbc.Driver;
+
+public class AbstractDAO<T> implements IGenericDAO<T>{
+
+	@Override
+	public Connection getConnection() {
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+			String user = "root";
+			String password = "016961193922";
+			String url = "jdbc:mysql://localhost:3306/fashi";
+			return DriverManager.getConnection(url, user, password);
+		} catch (ClassNotFoundException | SQLException e) {
+			return null;
+		}
+	}
+
+	@Override
+	public List<T> query(String sql, RowMapper<T> rowMapper, Object... parameters) {
+		List<T> results = new ArrayList<T>();
+		PreparedStatement preparedStatement = null;
+		ResultSet resultSet = null;
+		Connection connection = getConnection();
+		if (connection != null) {
+			try {
+				preparedStatement = connection.prepareStatement(sql);
+				setParameters(preparedStatement, parameters);
+				resultSet = preparedStatement.executeQuery();
+				while(resultSet.next()) {
+					results.add(rowMapper.mapRow(resultSet));
+				}
+				return results;
+			} catch (SQLException e) {
+				return null;
+			}
+			
+		}
+	}
+
+	private void setParameters(PreparedStatement preparedStatement, Object... parameters) {
+		for (int i = 0; i < parameters.length; i++) {
+			
+		}
+	}
+
+	@Override
+	public void update(String sql, Object... parameters) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Long insert(String sql, Object... parameters) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}
