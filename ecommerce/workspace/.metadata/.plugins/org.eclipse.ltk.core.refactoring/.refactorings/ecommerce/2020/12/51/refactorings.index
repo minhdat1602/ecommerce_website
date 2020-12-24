@@ -6,3 +6,14 @@
 1607960640737	Rename type 'IProductColor'
 1608129056391	Delete element
 1608132561266	Delete element
+1608214299698	Encapsulate field 'imageUrl'
+1608214770808	Encapsulate field 'descriptions'
+1608215123678	Encapsulate field 'header'
+1608215472453	Encapsulate field 'code'
+1608215483393	Encapsulate field 'code'
+1608215502821	Encapsulate field 'code'
+1608301834110	Move 'hero-1.jpg' to 'sale'
+1608301845539	Move 'time-bg.jpg' to 'sale'
+1608303307195	Move 'blog-1.jpg' to 'sale'
+1608303329849	Move 'blog-2.jpg' to 'sale'
+1608307046587	Encapsulate field 'groupId'

@@ -9,7 +9,7 @@
             <div class="col-lg-5">
                 <div class="footer-left">
                     <div class="footer-logo">
-                        <a href="#"><img src="<c:url value="/template/web/img/footer-logo.png"/>" alt=""></a>
+                        <a href="#"><img src="<c:url value="/template/img/footer-logo.png"/>" alt=""></a>
                     </div>
                     <ul>
                         <li>Địa Chỉ:113 Đường 120, Tân Phú Q9, THPCM</li>
@@ -55,7 +55,7 @@
                         <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
                     </div>
                     <div class="payment-pic">
-                        <img src="<c:url value="/template/web/img/payment-method.png"/>" alt="">
+                        <img src="<c:url value="/template/img/payment-method.png"/>" alt="">
                     </div>
                 </div>
             </div>

@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="<c:url value="/template/web/css/nice-select.css" />" type="text/css">
     <link rel="stylesheet" href="<c:url value="/template/web/css/jquery-ui.min.css" />" type="text/css">
     <link rel="stylesheet" href="<c:url value="/template/web/css/slicknav.min.css" />" type="text/css">
-    <link rel="stylesheet" href="<c:url value="/template/web/css/fashi.css" />" type="text/css">
+    <link rel="stylesheet" href="<c:url value="/template/web/css/style.css" />" type="text/css">
     <script src="<c:url value="/template/web/js/jquery-3.3.1.min.js" />"></script>
 </head>
 <body>
@@ -28,7 +28,8 @@
 	<%@ include file="/common/web/footer.jsp" %>
 
 
-	 <script src="<c:url value="/template/web/js/fashi.js" />"></script>
+	<script src="<c:url value="/template/web/js/fashi.js" />"></script>
+	<script src="<c:url value="/template/web/js/register.js" />"></script>
 	<script src="<c:url value="/template/web/js/bootstrap.min.js" />"></script>
 	<script src="<c:url value="/template/web/js/jquery-ui.min.js" />"></script>
 	<script src="<c:url value="/template/web/js/jquery.countdown.min.js" />"></script>

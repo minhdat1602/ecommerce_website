@@ -69,15 +69,6 @@
 
 								</div>
 							</div>
-							<div
-								class="price-range ui-slider ui-corner-all ui-slider-horizontal ui-widget ui-widget-content"
-								data-min="33" data-max="98">
-								<div class="ui-slider-range ui-corner-all ui-widget-header"></div>
-								<span tabindex="0"
-									class="ui-slider-handle ui-corner-all ui-state-default"></span>
-								<span tabindex="0"
-									class="ui-slider-handle ui-corner-all ui-state-default"></span>
-							</div>
 						</div>
 						<a href="#" class="filter-btn">Lọc</a>
 					</div>
@@ -86,8 +77,8 @@
 						<div class="fw-color-choose">
 							<c:forEach items="${filterByColors}" var="color">
 								<div class="cs-item">
-									<input type="radio" id="cs-blue"> <label
-										class="cs-blue" for="cs-blue"><a href="">${color.name}</a></label>
+									<input type="radio" id="cs-${color.code}"> <label
+										class="cs-${color.code}" for="cs-${color.code}"><a href="">${color.name}</a></label>
 								</div>
 							</c:forEach>
 						</div>
@@ -105,10 +96,10 @@
 					<div class="filter-widget">
 						<h4 class="fw-title">Tags</h4>
 						<div class="fw-tags">
-							<a href="#">Quần</a> <a href="#">Áo</a> <a href="#">Áo Khoác</a>
-							<a href="#">Quần kaki</a> <a href="#">Quần tây</a> <a href="#">Thắt
-								lưng</a>
+							<c:forEach items="${filterByTags}" var="tag">
 
+								<a href="#">${tag.name}</a>
+							</c:forEach>
 						</div>
 					</div>
 				</div>
@@ -139,15 +130,15 @@
 								<c:forEach var="product" items="${listProduct}">
 									<div class="col-lg-4 col-sm-6">
 										<div class="product-item">
-											<a href="<c:url value="/view/web/product-details.jsp"/>">
+											<a
+												href="<c:url value="/products?id=${product.id}"/>">
 												<div class="pi-pic">
 													<img
-														src="<c:url value="/template/web/img/products/${product.imageUrl}"/>"
+														src="<c:url value="/template/img/products/${product.imageUrl}"/>"
 														alt="">
 													<c:if test="${product.sellPrice < product.originPrice}">
 														<div class="sale pp-sale">SALE</div>
 													</c:if>
-
 													<div class="icon">
 														<i class="icon_heart_alt"></i>
 													</div>

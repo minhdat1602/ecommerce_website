@@ -1,5 +1,23 @@
+.zoomImg{
+	width: 400px!important;
+	height: 450px!important;
+}
+form#form p {
+    color: red;
+}
 .fw-color-choose a:hover, .fw-color-choose a:focus {
     color: black;
+}
+section.product-shop.spad.page-details .col-lg-3 {
+    padding-right: 50px;
+    border-right: 1px solid #0000000f;
+}
+
+section.product-shop.spad.page-details .col-lg-9 {
+    padding-left: 50px;
+}
+.col-lg-3.col-md-6.col-sm-8.order-2.order-lg-1.produts-sidebar-filter{
+    padding-right: 50px;
 }
 ul#choose-size {
     padding: 0;
@@ -1645,14 +1663,14 @@ ight {
 }
 
 .filter-widget {
-    margin-bottom: 45px;
+    margin-bottom: 20px;
 }
 
 .filter-widget .fw-title {
     color: #252525;
     font-size: 22px;
     font-weight: 700;
-    margin-bottom: 26px;
+    margin-bottom: 15px;
 }
 
 .filter-widget .filter-catagories li {
@@ -1663,7 +1681,7 @@ ight {
     display: inline-block;
     color: #636363;
     font-size: 16px;
-    line-height: 39px;
+    line-height: 35px;
 }
 
 .filter-widget .fw-brand-check .bc-item {
@@ -1709,7 +1727,7 @@ ight {
 }
 
 .filter-widget .filter-range-wrap {
-    margin-bottom: 40px;
+    margin-bottom: 0px;
 }
 
 .filter-widget .filter-range-wrap .range-slider {
@@ -1739,7 +1757,7 @@ ight {
 }
 
 .filter-widget .filter-range-wrap .range-slider .price-input input:nth-child(1) {
-    margin-right: 28px;
+    margin-right: 0;
 }
 
 .filter-widget .filter-range-wrap .price-range {
@@ -1817,6 +1835,18 @@ ight {
 
 .filter-widget .fw-color-choose .cs-item label.cs-red:before {
     background: #DC3232;
+}
+.filter-widget .fw-color-choose .cs-item label.cs-orange:before {
+    background: orange;
+}
+
+.filter-widget .fw-color-choose .cs-item label.cs-white:before {
+    background: white;
+    border: 1px solid black;
+}
+
+.filter-widget .fw-color-choose .cs-item label.cs-pink:before {
+    background: pink;
 }
 
 .filter-widget .fw-color-choose .cs-item label.cs-green:before {
@@ -1976,15 +2006,18 @@ ight {
     margin-bottom: 10px;
     position: relative;
     z-index: 1;
-    height: 300px;
+    height: 350px;
     text-align: center;
     background: lavender;
     font-size: 40px;
-    line-height: 300px;
+    line-height: 350px;
+    width: 80%;
+    margin-left: 10%;
 }
 
 .product-pic-zoom img {
     min-width: 100%;
+    height: 100%;
 }
 
 .product-pic-zoom .zoom-icon {
@@ -3140,6 +3173,8 @@ ight {
 
 .blog-item .bi-pic img {
     min-width: 100%;
+    width: 100%;
+    height: 350px;
 }
 
 .blog-item .bi-text {
@@ -3907,7 +3942,7 @@ ight {
 
 .product-item .pi-pic img {
     min-width: 100%;
-    height: 350px;
+    height: 300px;
 }
 
 .product-item .pi-pic .sale {

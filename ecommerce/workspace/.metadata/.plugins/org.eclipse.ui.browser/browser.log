@@ -74,3 +74,15 @@ Dec 16, 2020 22:38:25.409 [4228:15320:1216/223825.408:ERROR:upgrade_util_win.cc(
 Dec 16, 2020 22:38:44.76 [4988:13408:1216/223844.075:ERROR:upgrade_util_win.cc(147)] Open Clients key failed: The system cannot find the file specified. (0x2)
 Dec 16, 2020 22:48:43.775 [1216/224843.774:ERROR:directory_reader_win.cc(43)] FindFirstFile: The system cannot find the path specified. (0x3)
 Dec 16, 2020 23:52:03.333 [4988:13408:1216/235203.332:ERROR:upgrade_util_win.cc(147)] Open Clients key failed: The system cannot find the file specified. (0x2)
+
+Dec 18, 2020 18:01:53.28 NEW SESSION
+Dec 18, 2020 18:01:53.28 [14412:13196:1218/180153.024:ERROR:upgrade_util_win.cc(147)] Open Clients key failed: The system cannot find the file specified. (0x2)
+Dec 18, 2020 18:11:52.711 [1218/181152.710:ERROR:directory_reader_win.cc(43)] FindFirstFile: The system cannot find the path specified. (0x3)
+Dec 18, 2020 23:07:16.438 [14412:13356:1218/230716.437:ERROR:connection_factory_impl.cc(428)] Failed to connect to MCS endpoint with error -118
+Dec 18, 2020 23:07:29.762 [14412:13356:1218/230729.761:ERROR:connection_factory_impl.cc(428)] Failed to connect to MCS endpoint with error -105
+Dec 18, 2020 23:08:11.713 [14412:13356:1218/230811.712:ERROR:connection_factory_impl.cc(428)] Failed to connect to MCS endpoint with error -105
+
+Dec 22, 2020 18:09:58.711 NEW SESSION
+Dec 22, 2020 18:09:58.711 [15656:11240:1222/180958.708:ERROR:upgrade_util_win.cc(147)] Open Clients key failed: The system cannot find the file specified. (0x2)
+Dec 22, 2020 18:19:58.311 [1222/181958.310:ERROR:directory_reader_win.cc(43)] FindFirstFile: The system cannot find the path specified. (0x3)
+Dec 22, 2020 22:14:25.44 [15656:11240:1222/221425.043:ERROR:upgrade_util_win.cc(147)] Open Clients key failed: The system cannot find the file specified. (0x2)
