@@ -29,22 +29,22 @@
 				<div class="col-lg-6 offset-lg-3">
 					<div class="register-form">
 						<h2>Đăng ký</h2>
-						<form action="register" id="form">
+						<form action="dang-ky" id="form" method="post">
 							<div class="group-input">
-								<label for="username">Tên*</label> <input type="text"
-									id="username" name="username" pattern="[a-zA-Z]+" required>
+								<label for="fullname">Họ và tên*</label> <input type="text"
+									id="fullname" name="fullname" required  pattern="[a-zA-Z]+">
 									<p></p>
 							</div>
 							<div class="group-input">
 								<label for="gender">Ngày sinh *</label>
-								<input id="birth" name="birth" type="date"  name="birth" required>
+								<input id="birth" name="birth" type="date" required>
 								<p></p>
 							</div>
 							<div class="group-input">
-								<label for="gender">Giới tính *</label> <select id="gender"
+								<label for="gender">Giới tính *</label> <select id="gender"  name="gender" 
 									style="width: 80px; height: 30px; border: 1px lightgray solid" required>
 									<option value="">Chọn--</option>
-									<option value="name">Nam</option>
+									<option value="nam">Nam</option>
 									<option value="nu">Nữ</option>
 									<option value="khac">Khác</option>
 								</select>
@@ -57,8 +57,18 @@
 							</div>
 							<div class="group-input">
 								<label for="username">Số điện thoại*</label> 
-								<input type="text" id="phone" name="phone" pattern="[0-9]+" required>
+								<input type="text" id="phone" name="phone" required pattern="[0-9]+" >
 								<p></p>
+							</div>
+							<div class="group-input">
+								<label for="fullname">Địa chỉ*</label> <input type="text"
+									id="address" name="address" required  pattern="[a-zA-Z]+">
+									<p></p>
+							</div>
+							<div class="group-input">
+								<label for="username">Tên đăng nhập*</label> <input type="text"
+									id="username" name="username" required  pattern="[a-zA-Z]+">
+									<p></p>
 							</div>
 							<div class="group-input">
 								<label for="password">Mật khẩu *</label>

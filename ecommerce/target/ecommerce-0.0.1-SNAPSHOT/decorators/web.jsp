@@ -26,7 +26,7 @@
 	<%@ include file="/common/web/header.jsp" %>
 	<decorator:body></decorator:body>
 	<%@ include file="/common/web/footer.jsp" %>
-
+	
 
 	<script src="<c:url value="/template/web/js/fashi.js" />"></script>
 	<script src="<c:url value="/template/web/js/register.js" />"></script>
