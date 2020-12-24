@@ -1,7 +1,0 @@
-package com.ecommerce.dao;
-
-import java.sql.Connection;
-
-public interface IGenericDAO<T> {
-	Connection getConnection();
-}

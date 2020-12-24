@@ -7,7 +7,7 @@
 	<div id="sidebar" class="sidebar sidebar-with-footer">
 		<!-- Aplication Brand -->
 		<div class="app-brand">
-			<a href="<c:url value ="/view/admin/product/list-product.jsp"/>"> <svg class="brand-icon"
+			<a href="<c:url value ="/admin/danh-sach-san-pham"/>"> <svg class="brand-icon"
 					xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid"
 					width="30" height="33" viewBox="0 0 30 33">
                         <g fill="none" fill-rule="evenodd">
@@ -38,7 +38,7 @@
 						<div class="sub-menu">
 
 							<li class="list-product-page"><a class="sidenav-item-link"
-								href="<c:url value ="/view/admin/product/list-product.jsp"/>">
+								href="<c:url value ="/admin/danh-sach-san-pham"/>">
 									<span class="nav-text">Sản phẩm</span>
 							</a></li>
 

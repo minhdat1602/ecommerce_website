@@ -1,7 +1,0 @@
-package com.ecommerce.mapper;
-
-import com.ecommerce.model.ProductGroup;
-
-public class ProductGroupMapper implements RowMapper<ProductGroup>{
-
-}

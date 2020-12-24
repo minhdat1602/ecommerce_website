@@ -18,7 +18,7 @@
                 </div>
             </div>
             <div class="ht-right">
-                 <a href = "<c:url value = "/view/web/register.jsp"/>" class="register-panel">Đăng ký</a>
+                 <a href = "<c:url value = "/dang-ky"/>" class="register-panel">Đăng ký</a>
                 <a href = "<c:url value = "/view/web/login.jsp"/>" class="login-panel"><i class="fa fa-user"></i>Thành Long</a>
 
                 <ul class="dropdown" id="userOption">
@@ -28,9 +28,9 @@
                 </ul>
                 <div class="lan-selector">
                     <select class="language_drop" name="countries" id="countries" style="width:300px;">
-                        <option value='yt' data-image="<c:url value="/template/web/img/flag-1.jpg"/>" data-imagecss="flag yt"
+                        <option value='yt' data-image="<c:url value="/template/img/flag-1.jpg"/>" data-imagecss="flag yt"
                                 data-title="Việt Nam">Việt</option>
-                        <option value='yu' data-image="<c:url value="/template/web/img/flag-2.jpg"/>" data-imagecss="flag yu"
+                        <option value='yu' data-image="<c:url value="/template/img/flag-2.jpg"/>" data-imagecss="flag yu"
                                 data-title="English">English </option>
                     </select>
                 </div>
@@ -48,8 +48,8 @@
             <div class="row">
                 <div class="col-lg-2 col-md-2">
                     <div class="logo">
-                        <a href = "<c:url value = "/view/web/index.jsp"/>">
-                            <img src="<c:url value="/template/web/img/logo.png "/>" alt="">
+                        <a href = "<c:url value = "/trang-chu"/>">
+                            <img src="<c:url value="/template/img/logo.png "/>" alt="">
                         </a>
                     </div>
                 </div>
@@ -80,7 +80,7 @@
                                     <table>
                                         <tbody>
                                         <tr>
-                                            <td class="si-pic"><img src="<c:url value="/template/web/img/select-product-1.jpg"/>" alt=""></td>
+                                            <td class="si-pic"><img src="<c:url value="/template/img/select-product-1.jpg"/>" alt=""></td>
                                             <td class="si-text">
                                                 <div class="product-selected">
                                                     <p>160.000đ x 1</p>
@@ -92,7 +92,7 @@
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td class="si-pic"><img src="<c:url value="/template/web/img/select-product-2.jpg"/>" alt=""></td>
+                                            <td class="si-pic"><img src="<c:url value="/template/img/select-product-2.jpg"/>" alt=""></td>
                                             <td class="si-text">
                                                 <div class="product-selected">
                                                     <p>260.000đ x 1</p>
@@ -104,7 +104,7 @@
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td class="si-pic"><img src="<c:url value="/template/web/img/select-product-2.jpg"/>" alt=""></td>
+                                            <td class="si-pic"><img src="<c:url value="/template/img/select-product-2.jpg"/>" alt=""></td>
                                             <td class="si-text">
                                                 <div class="product-selected">
                                                     <p>170.000đ x 1</p>
@@ -151,15 +151,15 @@
             </div>
             <nav class="nav-menu mobile-menu">
                 <ul>
-                    <li class="index-page"><a href = "<c:url value = "/view/web/index.jsp"/>">Trang Chủ</a></li>
-                    <li class="shop-page"><a href = "<c:url value = "/view/web/shop.jsp"/>">Shop</a></li>
-                    <li class="collection-page"><a href = "<c:url value = "/view/web/collection.jsp"/>">Bộ Sưu Tập</a>
+                    <li class="index-page"><a href = "<c:url value = "/trang-chu"/>">Trang Chủ</a></li>
+                    <li class="shop-page"><a href = "<c:url value = "/shop"/>">Shop</a></li>
+                    <li class="collection-page"><a href = "<c:url value = "/collection"/>">Bộ Sưu Tập</a>
                         <ul class="dropdown">
                             <li class="collection-page"><a href = "<c:url value = "/view/web/collection-details.jsp"/>">Thu Đông</a></li>
                             <li class="collection-page"><a href = "<c:url value = "/view/web/collection-details.jsp"/>">Mùa Hè</a></li>
                         </ul>
                     </li>
-                    <li class="sale-page"><a href = "<c:url value = "/view/web/sale.jsp"/>">SALE</a>
+                    <li class="sale-page"><a href = "<c:url value = "/sale"/>">SALE</a>
                         <ul class="dropdown">
                             <li class="sale-page"><a href = "<c:url value = "/view/web/sale-details.jsp"/>">Black Friday</a></li>
                             <li class="sale-page"><a href = "<c:url value = "/view/web/sale-details.jsp"/>">Deal of week</a></li>

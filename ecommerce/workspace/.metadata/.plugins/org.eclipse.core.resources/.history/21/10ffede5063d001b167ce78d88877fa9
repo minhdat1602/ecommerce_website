@@ -1,7 +1,0 @@
-package com.ecommerce.mapper;
-
-import com.ecommerce.model.Product;
-
-public class ProductMapper implements RowMapper<Product>{
-
-}

@@ -1,7 +1,0 @@
-package com.ecommerce.service.impl;
-
-import com.ecommerce.service.IProductColor;
-
-public class ProductColor implements IProductColor{
-	
-}

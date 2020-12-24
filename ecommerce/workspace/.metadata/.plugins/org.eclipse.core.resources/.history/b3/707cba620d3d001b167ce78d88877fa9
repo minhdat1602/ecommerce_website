@@ -1,7 +1,0 @@
-package com.ecommerce.service.impl;
-
-import com.ecommerce.service.IProductService;
-
-public class ProductService implements IProductService{
-
-}

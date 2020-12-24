@@ -1,7 +1,0 @@
-package com.ecommerce.dao;
-
-import com.ecommerce.model.ProductBrand;
-
-public interface IProductBrandDAO extends IGenericDAO<ProductBrand>{
-	
-}

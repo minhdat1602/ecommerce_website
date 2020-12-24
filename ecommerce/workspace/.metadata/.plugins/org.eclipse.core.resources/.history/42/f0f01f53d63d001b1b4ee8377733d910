@@ -1,7 +1,0 @@
-package com.ecommerce.mapper;
-
-import com.ecommerce.model.ProductBrand;
-
-public class ProductBrandMapper implements RowMapper<ProductBrand>{
-	
-}
