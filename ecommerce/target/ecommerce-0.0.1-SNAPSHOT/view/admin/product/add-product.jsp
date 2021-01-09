@@ -65,7 +65,7 @@
 			</select>
 		</div>
 		
-		<div class="form-group" id="attribute">
+		<%--<div class="form-group" id="attribute">
 			<label for="exampleFormControlSelect2" style="margin-right: 120px;">Kích
 				cỡ, Màu sắc, Số lượng</label>
 				<select id="warehouse">
@@ -74,14 +74,14 @@
 							<option>B</option>
 							<option>C</option>
 					</select> 
-					<select class="ml-2" id="shelves">
+					&lt;%&ndash;<select class="ml-2" id="shelves">
 							<option>Kệ</option>
 							<option>Ảo</option>
 							<option>1A</option>
 							<option>1B</option>
 							<option>2A</option>
 							<option>2B</option>
-					</select>
+					</select>&ndash;%&gt;
 			<ul id="size_color_quantity">
 				<!-- <li id="line">
 					<select id="size">
@@ -125,7 +125,7 @@
 						});
 					});
 				</script>
-		</div>
+		</div>--%>
 		<div class="form-group">
 			<label for="exampleFormControlSelect3">Thương hiệu</label> <select
 				class="form-control" id="exampleFormControlSelect3">

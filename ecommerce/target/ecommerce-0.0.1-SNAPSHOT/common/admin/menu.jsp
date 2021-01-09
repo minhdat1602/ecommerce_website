@@ -7,7 +7,7 @@
 	<div id="sidebar" class="sidebar sidebar-with-footer">
 		<!-- Aplication Brand -->
 		<div class="app-brand">
-			<a href="<c:url value ="/admin/danh-sach-san-pham"/>"> <svg class="brand-icon"
+			<a href="<c:url value ="/admin/sanpham"/>"> <svg class="brand-icon"
 					xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid"
 					width="30" height="33" viewBox="0 0 30 33">
                         <g fill="none" fill-rule="evenodd">
@@ -37,13 +37,14 @@
 						data-parent="#sidebar-menu">
 						<div class="sub-menu">
 
-							<li class="list-product-page"><a class="sidenav-item-link"
-								href="<c:url value ="/admin/danh-sach-san-pham"/>">
+							<li class="list-product-page">
+								<a class="sidenav-item-link"
+								href="<c:url value ="/admin/sanpham"/>">
 									<span class="nav-text">Sản phẩm</span>
 							</a></li>
 
 							<li class="list-order-page"><a class="sidenav-item-link"
-								href="<c:url value ="/view/admin/order/list-order.jsp"/>"> <span
+								href="<c:url value ="/admin/donhang"/>"> <span
 									class="nav-text">Đơn hàng</span>
 							</a></li>
 
@@ -147,15 +148,18 @@
 						<div class="sub-menu">
 
 							<li class="sales-page"><a class="sidenav-item-link"
-								href="<c:url value ="/view/admin/statistical/sales.jsp"/>">
+								href="<c:url value ="/admin/thongke?type=doanhso"/>">
 									<span class="nav-text">Doanh số</span>
 							</a></li>
-							<li class="buy-time-page"><a class="sidenav-item-link"
-								href="<c:url value ="/view/admin/statistical/buy-times.jsp"/>">
+							<li class="buy-time-page">
+								<a class="sidenav-item-link"
+								   href="<c:url value ="/admi	n/thongke?type=luotmuahang"/>">
 									<span class="nav-text">Lượt mua hàng</span>
-							</a></li>
-							<li class="access-time-page"><a class="sidenav-item-link"
-								href="<c:url value ="/view/admin/statistical/access-times.jsp"/>">
+								</a>
+							</li>
+							<li class="access-time-page">
+								<a class="sidenav-item-link"
+								   href="<c:url value ="/admin/thongke?type=luottruycap"/>">
 									<span class="nav-text">Lượt truy cập</span>
 							</a></li>
 							
