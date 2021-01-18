@@ -95,7 +95,6 @@
 						<h4 class="fw-title">Tags</h4>
 						<div class="fw-tags">
 							<c:forEach items="${filterByTags}" var="tag">
-
 								<a href="#">${tag.name}</a>
 							</c:forEach>
 						</div>

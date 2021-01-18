@@ -17,6 +17,9 @@
     <link rel="stylesheet" href="<c:url value="/template/web/css/slicknav.min.css" />" type="text/css">
     <link rel="stylesheet" href="<c:url value="/template/web/css/style.css" />" type="text/css">
     <script src="<c:url value="/template/web/js/jquery-3.3.1.min.js" />"></script>
+	<script src="<c:url value="/template/web/js/jquery.validate.min.js"/> "></script>
+	<%--CKEDITER--%>
+	<script src="<c:url value="/ckeditor/ckeditor.js"/>"></script>
 </head>
 <body>
 
@@ -26,10 +29,8 @@
 	<%@ include file="/common/web/header.jsp" %>
 	<decorator:body></decorator:body>
 	<%@ include file="/common/web/footer.jsp" %>
-	
 
 	<script src="<c:url value="/template/web/js/fashi.js" />"></script>
-	<script src="<c:url value="/template/web/js/register.js" />"></script>
 	<script src="<c:url value="/template/web/js/bootstrap.min.js" />"></script>
 	<script src="<c:url value="/template/web/js/jquery-ui.min.js" />"></script>
 	<script src="<c:url value="/template/web/js/jquery.countdown.min.js" />"></script>
@@ -39,6 +40,5 @@
 	<script src="<c:url value="/template/web/js/jquery.slicknav.js" />"></script>
 	<script src="<c:url value="/template/web/js/owl.carousel.min.js" />"></script>
 	<script src="<c:url value="/template/web/js/main.js" />"></script>
-
 </body>
 </html>

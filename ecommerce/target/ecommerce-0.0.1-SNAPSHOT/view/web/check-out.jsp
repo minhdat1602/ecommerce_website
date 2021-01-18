@@ -37,21 +37,30 @@
                     <h4>Thông Tin Thanh Toán</h4>
                     <div class="row">
                         <div class="col-lg-6">
-                            <label for="fir">Tên<span>*</span></label>
-                            <input type="text" id="fir">
+                            <label for="fname">Họ<span>*</span></label>
+                            <input type="text" id="fname" name="fname"
+                                value="<c:if test="${not empty USERMODEL}">${USERMODEL.firstName}</c:if>">
                         </div>
-                        <div class="col-lg-12">
-                            <label for="street">Địa chỉ nhận hàng<span>*</span></label>
-                            <input type="text" id="street" class="street-first">
-                   
+                        <div class="col-lg-6">
+                            <label for="lname">Tên<span>*</span></label>
+                            <input type="text" id="lname" name="lname"
+                                   value="<c:if test="${not empty USERMODEL}">${USERMODEL.lastName}</c:if>">
                         </div>
                         <div class="col-lg-6">
                             <label for="email">Email<span>*</span></label>
-                            <input type="text" id="email">
+                            <input type="email" name="email" id="email"
+                                   value="<c:if test="${not empty USERMODEL}">${USERMODEL.email}</c:if>">
                         </div>
                         <div class="col-lg-6">
                             <label for="phone">Số điện thoại<span>*</span></label>
-                            <input type="text" id="phone">
+                            <input type="text" id="phone" name="phone"
+                                   value="<c:if test="${not empty USERMODEL}">${USERMODEL.phone}</c:if>">
+                        </div>
+                        <div class="col-lg-12">
+                            <label for="street">Địa chỉ nhận hàng<span>*</span></label>
+                            <input type="text" id="address" name="address" class="street-first"
+                                   value="<c:if test="${not empty USERMODEL}">${USERMODEL.address}</c:if>">
+                   
                         </div>
                         <div class="col-lg-12">
                             <div class="create-item">
@@ -72,10 +81,28 @@
                         <div class="order-total">
                             <ul class="order-table">
                                 <li>Sản Phẩm <span>Tiền</span></li>
-                                <li class="fw-normal">Áo thun x 1 <span>110.000đ</span></li>
-                                <li class="fw-normal">Quần tây x 1 <span>220.000đ</span></li>
-                                <li class="fw-normal">Tổng tiền <span>330.000đ</span></li>
-                                <li class="total-price">Tổng Cộng<span>330.000đ</span></li>
+                               <%-- <li class="fw-normal">Áo thun x 1 <span>110.000đ</span></li>--%>
+                                <c:forEach var="details" items="${CART.cartDetailsList}">
+                                    <li class="fw-normal">${details.stock.product.name} x ${details.quantity}
+                                        <span>
+                                            <fmt:formatNumber
+                                                    pattern="###,###,### VNĐ"
+                                                    value="${details.stock.product.sellPrice}"/>
+                                        </span>
+                                    </li>
+                                </c:forEach>
+                                <li class="fw-normal">Tổng tiền
+                                    <span>
+                                        <fmt:formatNumber
+                                        pattern="###,###,### VNĐ"
+                                        value="${CART.totalPrice()}"/>
+                                    </span>
+                                </li>
+                                <li class="total-price">Tổng Cộng
+                                    <span>
+                                        330.000đ
+                                    </span>
+                                </li>
                             </ul>
                             <div class="payment-check">
                                 <div class="pc-item">

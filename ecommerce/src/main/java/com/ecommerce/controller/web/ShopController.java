@@ -16,10 +16,10 @@ import com.ecommerce.model.ProductColor;
 import com.ecommerce.model.ProductGroup;
 import com.ecommerce.model.ProductSize;
 import com.ecommerce.service.IProductBrandService;
-/*import com.ecommerce.service.IProductColorService;*/
+import com.ecommerce.service.IProductColorService;
 import com.ecommerce.service.IProductGroupService;
 import com.ecommerce.service.IProductService;
-/*import com.ecommerce.service.IProductSizeService;*/
+import com.ecommerce.service.IProductSizeService;
 
 
 @WebServlet(urlPatterns = "/shop")
@@ -30,11 +30,11 @@ public class ShopController extends HttpServlet{
 	private IProductGroupService productGroupService;
 	@Inject 
 	private IProductBrandService productGroupBrandService;
-/*	@Inject
+	@Inject
 	private IProductColorService productColorService;
 	@Inject
-	private IProductSizeService productSizeService;*/
-
+	private IProductSizeService productSizeService;
+	
 	private List<Product> listProduct;
 	private List<ProductGroup> filterByCustomers;
 	private List<ProductBrand> filterByBrands;
@@ -44,19 +44,19 @@ public class ShopController extends HttpServlet{
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		/*listProduct = productService.findAll();*/
-		/*filterByCustomers = productGroupService.findAll(1);*/
+		listProduct = productService.findAll();
+		filterByCustomers = productGroupService.findAll(1);
 		filterByBrands = productGroupBrandService.findAll();
-/*		filterByColors = productColorService.findAll();
-		filterBySize = productSizeService.findAll();*/
-		/*filterByTags = productGroupService.findAll(2,3);*/
-	/*	req.setAttribute("listProduct", listProduct);
+		filterByColors = productColorService.findAll();
+		filterBySize = productSizeService.findAll();
+		filterByTags = productGroupService.findAll(2,3);
+		req.setAttribute("listProduct", listProduct);
 		req.setAttribute("filterByCustomers", filterByCustomers);
 		req.setAttribute("filterByBrands", filterByBrands);
 		req.setAttribute("filterByColors", filterByColors);
 		req.setAttribute("filterBySize", filterBySize);
 		req.setAttribute("filterByTags", filterByTags);
-		req.getRequestDispatcher("/view/web/shop.jsp").forward(req, resp);*/
+		req.getRequestDispatcher("/view/web/shop.jsp").forward(req, resp);
 	}
 	
 	

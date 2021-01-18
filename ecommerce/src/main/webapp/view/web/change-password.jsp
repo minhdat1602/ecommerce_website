@@ -30,20 +30,28 @@
             <div class="col-lg-6 offset-lg-3">
                 <div class="register-form">
                     <h2>Đổi mật khẩu</h2>
-                    <form action="#">
+                    <form id="pwd" action="<c:url value="capnhat"/> " method="post">
                         <div class="group-input">
-                            <label for="pass">Mật khẩu *</label>
-                            <input type="text" id="pass">
+                            <label for="oldPassword">Mật khẩu *</label>
+                            <input name="oldPassword" type="password" id="oldPassword">
+                            <label style="color:#F00;" for="oldPassword" class="error" >
+                                <%=request.getAttribute("pwd-err") == null ? ""
+                                        : request.getAttribute("pwd-err")%>
+                            </label>
                         </div>
                         <div class="group-input">
-                            <label for="con-pass">Mật khẩu mới</label>
-                            <input type="text" id="con-pass">
+                            <label for="newPassword">Mật khẩu mới</label>
+                            <input name="newPassword" type="password" id="newPassword">
+                            <label style="color:#F00;" for="newPassword" class="error" >
+                            </label>
                         </div>
                         <div class="group-input">
-                            <label for="con-pass">Nhập lại mật khẩu mới*</label>
-                            <input type="text" id="con-pass">
+                            <label for="confirmNewPassword">Nhập lại mật khẩu mới*</label>
+                            <input name="confirmNewPassword" type="password" id="confirmNewPassword">
+                            <label style="color:#F00;" for="confirmNewPassword" class="error" >
+                            </label>
                         </div>
-                    
+                        <input style="display: none" value="pwd" name="page">
                         <button type="submit" class="site-btn register-btn">Thay đổi</button>
                     </form>
                 </div>
@@ -52,5 +60,41 @@
     </div>
 </div>
 <!-- Register Form Section End -->
+<script>
+    $().ready(function (){
+        $("#pwd").validate({
+            rules:{
+                oldPassword:{
+                    minlength: 6,
+                    maxlength: 20,
+                    required: true
+                },
+                newPassword:{
+                    minlength: 6,
+                    maxlength: 20,
+                    required: true
+                },
+                confirmNewPassword:{
+                    equalTo: "#newPassword"
+                }
+            },
+            messages:{
+                oldPassword: {
+                    required: "Mật khẩu không được bỏ trống",
+                    minlength: "Độ dài tối thiểu là 6 ký tự",
+                    maxlength: "Độ dài tối đa là 20 ký tự"
+                },
+                newPassword:{
+                    required: "Mật khẩu không được bỏ trống",
+                    minlength: "Độ dài tối thiểu là 6 ký tự",
+                    maxlength: "Độ dài tối đa là 20 ký tự"
+                },
+                confirmNewPassword:{
+                    equalTo: "Mật khẩu không trùng khớp"
+                }
+            }
+        })
+    })
+</script>
 </body>
 </html>

@@ -1,0 +1,56 @@
+package com.ecommerce.service.impl;
+
+import com.ecommerce.dao.ICartDAO;
+import com.ecommerce.dao.ICartDetailDAO;
+import com.ecommerce.dao.IProductDAO;
+import com.ecommerce.dao.IStockDAO;
+import com.ecommerce.model.Cart;
+import com.ecommerce.model.CartDetails;
+import com.ecommerce.model.Stock;
+import com.ecommerce.service.ICartService;
+
+import javax.inject.Inject;
+import java.util.List;
+
+public class CartService implements ICartService {
+    @Inject
+    private ICartDAO cartDAO;
+    @Inject
+    private ICartDetailDAO cartDetailDAO;
+    @Inject
+    private IStockDAO stockDAO;
+    @Inject
+    private IProductDAO productDAO;
+
+    @Override
+    public Cart findByCustomerId(Integer customerId) {
+        Cart cart = cartDAO.findByCustomerId(customerId);
+
+        List<CartDetails> listDetail = cartDetailDAO.findByCardId(cart.getId());
+
+        for(CartDetails d : listDetail){
+            Stock stock = stockDAO.findById(d.getStockId());
+            stock.setProduct(productDAO.findOne(stock.getProductId()));
+            d.setStock(stock);
+        }
+        cart.setCartDetailsList(listDetail);
+
+        return cart;
+    }
+
+    @Override
+    public boolean deleteDetailItemById(Integer detailCartId) {
+        return cartDetailDAO.delete(detailCartId);
+    }
+
+    @Override
+    public boolean updateItem(CartDetails cartDetails) {
+        return cartDetailDAO.update(cartDetails);
+    }
+
+    @Override
+    public CartDetails insertItem(CartDetails cartDetails) {
+        Integer id  = cartDetailDAO.insert(cartDetails);
+        return cartDetailDAO.findById(id);
+    }
+}

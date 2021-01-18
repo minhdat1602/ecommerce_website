@@ -16,16 +16,17 @@ public class ProductMapper implements RowMapper<Product>{
 			product.setName(resultSet.getString("name"));
 			product.setOriginPrice(resultSet.getInt("origin_price"));
 			product.setSellPrice(resultSet.getInt("sell_price"));
+			product.setGroupProduct(resultSet.getString("category"));
 			product.setGroupId(resultSet.getInt("group_id"));
-			product.setBrandId(resultSet.getInt("brand_id"));
-			product.setCollectionId(resultSet.getInt("collection_id"));
+			product.setBrandProduct(resultSet.getString("brand"));
+			product.setCollectionProduct(resultSet.getString("collection"));
 			product.setImageUrl(resultSet.getString("image_url"));
 			product.setDescription(resultSet.getString("descriptions"));
 			product.setStatus(resultSet.getInt("status"));
 			product.setNewProduct(resultSet.getInt("new"));
 			product.setHotProduct(resultSet.getInt("hot"));
 		} catch (SQLException e) {
-			System.out.println("error trong productMapper roi kiaaaaaaaaaa!");
+			return null;
 		}
 		return product;
 	}

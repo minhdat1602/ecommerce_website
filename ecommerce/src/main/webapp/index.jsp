@@ -9,6 +9,6 @@
 </head>
 <body>
 
-	<c:redirect url="/dang-ky"></c:redirect>
+	<c:redirect url="/trang-chu"></c:redirect>
 </body>
 </html>

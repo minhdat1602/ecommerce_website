@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="/common/taglib.jsp"%>
-<%@page import="com.ecommerce.utils.PriceUtils"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -35,41 +34,107 @@
 				<thead class="thead-dark">
 					<tr>
 						<th scope="col">Mã đơn</th>
-						<th scope="col">Khách hàng</th>
-						<th scope="col">Ngày đặt</th>
+						<th scope="col">Sản phẩm</th>
+						<th scope="col">Số lượng sản phẩm</th>
 						<th scope="col">Tổng giá</th>
-						<th scope="col">Lợi nhuận</th>
-						<th scope="col">Trạng thái</th>
+						<th scope="col">Ngày đặt</th>
+						<th scope="col"><select id="status" style="cursor: pointer;">
+								<option>Trạng thái</option>
+								<option>Đã đặt hàng</option>
+								<option>Đã tiếp nhận</option>
+								<option>Đang xử lý</option>
+								<option>Đã hủy</option>
+								<option>Hoàn thành</option>
+						</select></th>
 						<th scope="col">Chi tiết</th>
 					</tr>
 				</thead>
 				<tbody>
-					<c:forEach items="${orderList}" var="order">
-						<tr>
-							<th scope="row">#${order.code}</th>
-							<td>${order.customer.fullname}</td>
-							<td>${order.created}</td>
-							<td>${PriceUtils.convert(order.totalMoney)} đ</td>
-							<td>${PriceUtils.convert(order.totalMoney - order.totalOriginPrice)} đ</td>
-							<td>
-								<div class="btn btn-primary">
-									<c:choose>
-										<c:when test="${order.status  == 1}">Chờ xử lý</c:when>
-										<c:when test="${order.status  == 2}">Đang gửi</c:when>
-										<c:when test="${order.status  == 3}">Hoàn tất</c:when>
-										<c:when test="${order.status  == 4}">Đã hủy</c:when>
-									</c:choose>
-								</div>
-							</td>
-							<td>
-								<form action="donhang" method="post">
+					<tr>
+						<th scope="row">1</th>
+						<td>Áo khoác dù</td>
+						<td>1</td>
+						<td>120.000 đ</td>
+						<td>2/11/2020</td>
+						<td>
+							<div class="btn btn-primary">Đã tiếp nhận</div>
+						</td>
+						<td><a class="btn" style="text-decoration: none;"
+							href="<c:url value='/view/admin/order/order-detail.jsp'/>">Xem</a></td>
+					</tr>
+					<tr>
+						<th scope="row">2</th>
+						<td>Quần kaki</td>
+						<td>1</td>
+						<td>135.000 đ</td>
+						<td>3/11/2020</td>
+						<td>
+							<div class="btn btn-warning">Đã đặt hàng</div>
+						</td>
+						<td><a class="btn" style="text-decoration: none;"
+							href="<c:url value='/view/admin/order/order-detail.jsp'/>">Xem</a></td>
+					</tr>
+					<tr>
+						<th scope="row">3</th>
+						<td>Áo thun, Quần kaki</td>
+						<td>2</td>
+						<td>510.000 đ</td>
+						<td>4/11/2020</td>
+						<td>
+							<div class="btn btn-info">Đang xử lý</div>
+						</td>
+						<td><a class="btn" style="text-decoration: none;"
+							href="<c:url value='/view/admin/order/order-detail.jsp'/>">Xem</a></td>
+					</tr>
+					<tr>
+						<th scope="row">4</th>
+						<td>Thắt lưng Yame</td>
+						<td>1</td>
+						<td>110.000 đ</td>
+						<td>4/11/2020</td>
+						<td>
+							<div class="btn btn-danger">Đã hủy</div>
+						</td>
+						<td><a class="btn" style="text-decoration: none;"
+							href="<c:url value='/view/admin/order/order-detail.jsp'/>">Xem</a></td>
+					</tr>
+					<tr>
+						<th scope="row">5</th>
+						<td>Áo thun, Quần kaki, Áo khoác</td>
+						<td>3</td>
+						<td>550.000 đ</td>
+						<td>5/11/2020</td>
+						<td>
+							<div class="btn btn-success">Hoàn thành</div>
+						</td>
+						<td><a class="btn" style="text-decoration: none;"
+							href="<c:url value='/view/admin/order/order-detail.jsp'/>">Xem</a></td>
+					</tr>
+					<tr>
+						<th scope="row">6</th>
+						<td>Áo khoác Justmen</td>
+						<td>1</td>
+						<td>260.000 đ</td>
+						<td>8/11/2020</td>
+						<td>
+							<div class="btn btn-primary">Đã tiếp nhận</div>
+						</td>
+						<td><a class="btn" style="text-decoration: none;"
+							href="<c:url value='/view/admin/order/order-detail.jsp'/>">Xem</a></td>
+					</tr>
+					<tr>
+						<th scope="row">7</th>
+						<td>Quần Short</td>
+						<td>1</td>
+						<td>80.000 đ</td>
+						<td>9/11/2020</td>
+						<td>
+							<div class="btn btn-warning">Đã đặt hàng</div>
+						</td>
+						<td><a class="btn" style="text-decoration: none;"
+							href="<c:url value='/view/admin/order/order-detail.jsp'/>">Xem</a></td>
+					</tr>
 
-									<input style = "display:none" type="text" name = "orderId" value="${order.id}"/>
-									<input value="Xem" type="submit" class="btn" style="text-decoration: none;"/>
-								</form>
-							</td>
-						</tr>
-					</c:forEach>
 				</tbody>
 			</table>
 		</div>

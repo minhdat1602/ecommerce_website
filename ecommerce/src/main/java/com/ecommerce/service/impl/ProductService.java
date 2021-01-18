@@ -1,65 +1,24 @@
 package com.ecommerce.service.impl;
 
-import java.awt.print.Pageable;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Set;
 
 import javax.inject.Inject;
 
-import com.ecommerce.dao.IProductBrandDAO;
 import com.ecommerce.dao.IProductDAO;
-import com.ecommerce.dao.IStockDAO;
+import com.ecommerce.dao.impl.ProductDAO;
+import com.ecommerce.model.Collection;
 import com.ecommerce.model.Product;
-import com.ecommerce.model.Stock;
-import com.ecommerce.paging.Pagable;
-import com.ecommerce.service.*;
+import com.ecommerce.model.ProductGroup;
+import com.ecommerce.service.IProductService;
 
 public class ProductService implements IProductService{
-
 	@Inject 
 	private IProductDAO productDAO;
-	@Inject
-	private IStockService stockService;
-	@Inject
-	private IProductBrandService productBrandService;
-	@Inject
-	private ICollectionService collectionService;
-	@Inject
-	private IProductGroupService productGroupService;
-	@Inject
-	private IStockDAO stockDAO;
-
+		
 	@Override
-	public List<Product> findAll(Pagable pagable) {
-		List<Product> list = productDAO.findAll(pagable);
-		for(Product p : list){
-			p.setCollection(collectionService.findOneById(p.getCollectionId()));
-			p.setProductBrand(productBrandService.findOneById(p.getBrandId()));
-			p.setProductGroup(productGroupService.findOneById(p.getGroupId()));
-			p.setStocks(stockDAO.findByProductId(p.getId()));
-		}
-		return list;
+	public List<Product> findAll() {
+		return productDAO.findAll();
 	}
-	public Integer countAll(){
-		return productDAO.countAll();
-	}
-
-	/*public Integer getQuantity(Product product){
-		List<Stock> stocks = stockService.findByProductId(product.getId());
-		Integer quantity = 0;
-		for(Stock stock : stocks){
-			quantity += stock.getQuantity();
-		}
-		return quantity;
-	}
-	public Integer getAllQuantity(List<Product> products){
-		Integer quantity = 0;
-		for(Product product : products){
-			quantity += getQuantity(product);
-		}
-		return quantity;
-	}*/
 
 	@Override
 	public List<Product> findAll(String productGroup, String... attr) {
@@ -67,8 +26,8 @@ public class ProductService implements IProductService{
 	}
 
 	@Override
-	public Product findViaId(Integer id) {
-		return productDAO.findViaId(id);
+	public Product findOne(Integer id) {
+		return productDAO.findOne(id);
 	}
 
 	@Override

@@ -18,10 +18,10 @@ import com.ecommerce.model.ProductGroup;
 import com.ecommerce.model.ProductSize;
 import com.ecommerce.service.IImageService;
 import com.ecommerce.service.IProductBrandService;
-/*import com.ecommerce.service.IProductColorService;*/
+import com.ecommerce.service.IProductColorService;
 import com.ecommerce.service.IProductGroupService;
 import com.ecommerce.service.IProductService;
-/*import com.ecommerce.service.IProductSizeService;*/
+import com.ecommerce.service.IProductSizeService;
 
 @WebServlet(urlPatterns = "/products")
 public class ProductDetailsController extends HttpServlet{
@@ -31,10 +31,10 @@ public class ProductDetailsController extends HttpServlet{
 	private IProductGroupService productGroupService;
 	@Inject 
 	private IProductBrandService productGroupBrandService;
-/*	@Inject
+	@Inject
 	private IProductColorService productColorService;
 	@Inject
-	private IProductSizeService productSizeService;*/
+	private IProductSizeService productSizeService;
 	@Inject
 	private IImageService imageService;
 	
@@ -49,13 +49,13 @@ public class ProductDetailsController extends HttpServlet{
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		/*filterByCustomers = productGroupService.findAll(1);
+		filterByCustomers = productGroupService.findAll(1);
 		filterByBrands = productGroupBrandService.findAll();
-*//*		filterByColors = productColorService.findAll();
-		filterBySize = productSizeService.findAll();*//*
+		filterByColors = productColorService.findAll();
+		filterBySize = productSizeService.findAll();
 		filterByTags = productGroupService.findAll(2,3);
 		Integer id = Integer.parseInt(req.getParameter("id"));
-		product = productService.findViaId(id);
+		product = productService.findOne(id);
 		listImageDetails = imageService.findAllByProductId(id);
 		listRelatedProduct = productService.findRelatedProduct(product.getGroupId());
 		req.setAttribute("filterByCustomers", filterByCustomers);
@@ -66,6 +66,6 @@ public class ProductDetailsController extends HttpServlet{
 		req.setAttribute("product", product);
 		req.setAttribute("listImageDetails", listImageDetails);
 		req.setAttribute("listRelatedProduct", listRelatedProduct);
-		req.getRequestDispatcher("/view/web/product-details.jsp").forward(req, resp);*/
+		req.getRequestDispatcher("/view/web/product-details.jsp").forward(req, resp);
 	}
 }

@@ -2,9 +2,7 @@ package com.ecommerce.dao;
 
 import com.ecommerce.model.Stock;
 
-import java.util.List;
-
-public interface IStockDAO {
-    Stock findViaId(Integer id);
-    List<Stock> findByProductId(Integer productId);
+public interface IStockDAO extends IGenericDAO<Stock>{
+     Stock findById(Integer id);
+     Stock findOne(String size, String color, Integer productId);
 }

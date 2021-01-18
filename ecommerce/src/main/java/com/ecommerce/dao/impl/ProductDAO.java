@@ -3,38 +3,24 @@ package com.ecommerce.dao.impl;
 import java.util.List;
 
 import com.ecommerce.dao.IProductDAO;
+import com.ecommerce.mapper.CollectionMapper;
 import com.ecommerce.mapper.ProductMapper;
 import com.ecommerce.model.Collection;
 import com.ecommerce.model.Product;
-import com.ecommerce.paging.Pagable;
+import com.ecommerce.model.ProductGroup;
 
 public class ProductDAO extends AbstractDAO<Product> implements IProductDAO {
 
 	@Override
-	public List<Product> findAll(Pagable pagable) {
-		String sql;
-		List<Product> list;
-		if(pagable.getSortBy() == null || pagable.getSortBy().equals("")) {
-			sql = "select * from products limit ?,?";
-			list = query(sql, new ProductMapper(),
-					(pagable.getPage() -1) * pagable.getLimit(),
-					pagable.getPage() * pagable.getLimit());
-		}
-		else{
-			sql = "select * from products order by ? ? limit ?, ?";
-			 list = query(sql, new ProductMapper(),
-					 pagable.getSortBy(),
-					 pagable.getSortName(),
-					 (pagable.getPage() - 1)*pagable.getLimit(),
-					 pagable.getPage()*pagable.getLimit());
-		}
-
-		return list;
-	}
-	public Integer countAll(){
-		String sql = "select * from products";
-		List<Product> list = query(sql, new ProductMapper());
-		return list.size();
+	public List<Product> findAll() {
+		StringBuilder sql = new StringBuilder("SELECT p.id, p.code,p.name,");
+		sql.append("p.origin_price,p.sell_price,p.image_url,");
+		sql.append("p.descriptions,p.status,p.new,p.hot,p.group_id,");
+		sql.append("g.name as category,b.name as brand, c.name as collection ");
+		sql.append("FROM products p join products_group g on p.group_id = g.id ");
+		sql.append("join products_brand b on b.id = p.brand_id ");
+		sql.append("join products_collection c on c.id = p.collection_id");
+		return query(sql.toString(), new ProductMapper());
 	}
 
 	@Override
@@ -67,10 +53,16 @@ public class ProductDAO extends AbstractDAO<Product> implements IProductDAO {
 	}
 
 	@Override
-	public Product findViaId(Integer id) {
-		String sql = "select * from products where id = ?";
-		List<Product> list = query(sql,new ProductMapper(), id);
-		return list.size() == 0 ? null : list.get(0);
+	public Product findOne(Integer id) {
+		StringBuilder sql = new StringBuilder("SELECT p.id, p.code,p.name,");
+		sql.append("p.origin_price,p.sell_price,p.image_url,");
+		sql.append("p.descriptions,p.status,p.new,p.hot,p.group_id,");
+		sql.append("g.name as category,b.name as brand, c.name as collection ");
+		sql.append("FROM products p join products_group g on p.group_id = g.id ");
+		sql.append("join products_brand b on b.id = p.brand_id ");
+		sql.append("join products_collection c on c.id = p.collection_id ");
+		sql.append("WHERE p.id = ?");
+		return query(sql.toString(), new ProductMapper(), id).get(0);
 	}
 
 	@Override
