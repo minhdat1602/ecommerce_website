@@ -91,14 +91,19 @@
                                         </span>
                                     </li>
                                 </c:forEach>
-                                <li class="fw-normal">Tổng tiền
+                                <li class="total-price">Tổng tiền
                                     <span>
                                         <fmt:formatNumber
                                         pattern="###,###,### VNĐ"
                                         value="${CART.totalPrice()}"/>
                                     </span>
                                 </li>
-                                <li class="total-price">Tổng Cộng
+                                <li class="total-price">Giá giảm
+                                    <span>
+                                        330.000đ
+                                    </span>
+                                </li>
+                                <li class="total-price">Thành tiền
                                     <span>
                                         330.000đ
                                     </span>
@@ -113,9 +118,11 @@
                                     </label>
                                 </div>
                             </div>
-                            <div class="order-btn">
-                                <button type="submit" class="site-btn place-btn">Đặt Hàng</button>
-                            </div>
+                            <c:if test="${not empty USERMODEL}">
+                                <div class="order-btn">
+                                    <button type="submit" class="site-btn place-btn">Đặt Hàng</button>
+                                </div>
+                            </c:if>
                         </div>
                     </div>
                 </div>

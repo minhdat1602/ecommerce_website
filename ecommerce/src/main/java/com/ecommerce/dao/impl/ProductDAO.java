@@ -12,6 +12,45 @@ import com.ecommerce.model.ProductGroup;
 public class ProductDAO extends AbstractDAO<Product> implements IProductDAO {
 
 	@Override
+	public List<Product> findAll(String segment, String group, Integer isHot, Integer isNew) {
+		StringBuilder sb = new StringBuilder();
+		sb.append("select p.id, p.name, p.code, p.origin_price, p.discount, p.sell_price, ");
+		sb.append("gr.code as group, sm.code as segment,mt.code as material,");
+		sb.append("br.code as brand, cl.code as collection, p.image_url, p.descriptions, p.status, p.new, p.hot ");
+		sb.append("from products p join products_group gr on p.group_id = gr.id ");
+		sb.append("join products_segment sm on p.segment_id = sm.id ");
+		sb.append("join products_material mt on p.material_id = mt.id ");
+		sb.append("join products_brand br on p.brand_id = br.id ");
+		sb.append("join products_collection cl on p.collection_id = cl.id ");
+		sb.append("where gr.code = ? and sm.code = ? and p.hot = ? and p.new = ?");
+
+		String sql = "select p.id, p.name, p.code, p.origin_price, p.discount, p.sell_price, " +
+				"gr.code as group_code, sm.code as segment_code,mt.code as material_code, " +
+				"br.code as brand_code, cl.code as collection_code, p.image_url, p.descriptions, p.status, p.new, p.hot  " +
+				"from products p join products_group gr on p.group_id = gr.id  " +
+				"join products_segment sm on p.segment_id = sm.id  " +
+				"join products_material mt on p.material_id = mt.id  " +
+				"join products_brand br on p.brand_id = br.id  " +
+				"join products_collection cl on p.collection_id = cl.id  " +
+				"where gr.code = ? and sm.code = ? and p.hot = ? and p.new = ? and status = ?";
+
+		List<Product> list = query(sql, new ProductMapper(), segment, group, isHot, isNew, 1);
+		return list;
+	}
+
+	@Override
+	public List<Product> findByGroupId(Integer groupId) {
+		String sql = "select * from products where group_id = ?";
+		return query(sql, new ProductMapper(), groupId);
+	}
+
+	public static void main(String[] args) {
+		ProductDAO dao = new ProductDAO();
+		List<Product> list = dao.findByGroupId(8);
+		System.out.println("a");
+	}
+
+	@Override
 	public List<Product> findAll() {
 		StringBuilder sql = new StringBuilder("SELECT p.id, p.code,p.name,");
 		sql.append("p.origin_price,p.sell_price,p.image_url,");

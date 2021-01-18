@@ -13,6 +13,8 @@ public class ProductSizeMapper implements RowMapper<ProductSize>{
 			size.setId(resultSet.getInt("id"));
 			size.setName(resultSet.getString("name"));
 			size.setCode(resultSet.getString("code"));
+
+			//admin
 		} catch (SQLException e) {
 			return null;
 		}

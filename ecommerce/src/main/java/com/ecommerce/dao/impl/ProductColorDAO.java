@@ -10,8 +10,15 @@ public class ProductColorDAO extends AbstractDAO<ProductColor> implements IProdu
 
 	@Override
 	public List<ProductColor> findAll() {
-		String sql = "select * from product_color";
+		String sql = "select * from products_color";
 		return query(sql, new ProductColorMapper());
 	}
-	
+
+	@Override
+	public ProductColor findById(Integer id) {
+		String sql = "select * from products_color where id = ?";
+		List<ProductColor> list = query(sql, new ProductColorMapper(), id);
+		return list.size() == 0 ? null : list.get(0);
+	}
+
 }

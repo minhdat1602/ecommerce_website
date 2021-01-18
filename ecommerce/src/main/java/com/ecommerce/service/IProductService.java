@@ -7,6 +7,9 @@ import com.ecommerce.model.Product;
 import com.ecommerce.model.ProductGroup;
 
 public interface IProductService {
+	//dat
+	public List<Product> findAll(Integer groupId);
+
 	List<Product> findAll();
 	List<Product> findAll(String productGroup, String...attr);
 	Product findOne(Integer id);

@@ -4,6 +4,9 @@ public class ProductSize extends AbstractModel{
 	private String name;
 	private String code;
 
+	public ProductSize() {
+	}
+
 	public String getName() {
 		return name;
 	}

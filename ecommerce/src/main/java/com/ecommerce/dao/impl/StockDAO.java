@@ -21,4 +21,9 @@ public class StockDAO extends AbstractDAO<Stock> implements IStockDAO {
         return list.size() == 0 ? null : list.get(0);
     }
 
+    @Override
+    public Stock findOne(Integer colorId, Integer sizeId) {
+        return null;
+    }
+
 }

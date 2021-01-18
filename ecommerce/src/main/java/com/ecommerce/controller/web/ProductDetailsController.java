@@ -49,23 +49,23 @@ public class ProductDetailsController extends HttpServlet{
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		filterByCustomers = productGroupService.findAll(1);
+		//filterByCustomers = productGroupService.findAll(1);
 		filterByBrands = productGroupBrandService.findAll();
 		filterByColors = productColorService.findAll();
 		filterBySize = productSizeService.findAll();
-		filterByTags = productGroupService.findAll(2,3);
+		//filterByTags = productGroupService.findAll(2,3);
 		Integer id = Integer.parseInt(req.getParameter("id"));
 		product = productService.findOne(id);
-		listImageDetails = imageService.findAllByProductId(id);
-		listRelatedProduct = productService.findRelatedProduct(product.getGroupId());
-		req.setAttribute("filterByCustomers", filterByCustomers);
+		//listImageDetails = imageService.findAllByProductId(id);
+		//listRelatedProduct = productService.findRelatedProduct(product.getGroupId());
+		//req.setAttribute("filterByCustomers", filterByCustomers);
 		req.setAttribute("filterByBrands", filterByBrands);
 		req.setAttribute("filterByColors", filterByColors);
 		req.setAttribute("filterBySize", filterBySize);
-		req.setAttribute("filterByTags", filterByTags);
+		//req.setAttribute("filterByTags", filterByTags);
 		req.setAttribute("product", product);
-		req.setAttribute("listImageDetails", listImageDetails);
-		req.setAttribute("listRelatedProduct", listRelatedProduct);
+		//req.setAttribute("listImageDetails", listImageDetails);
+		//req.setAttribute("listRelatedProduct", listRelatedProduct);
 		req.getRequestDispatcher("/view/web/product-details.jsp").forward(req, resp);
 	}
 }

@@ -16,5 +16,10 @@ public class ProductColorService implements IProductColorService{
 	public List<ProductColor> findAll() {
 		return productColorDAO.findAll();
 	}
-	
+
+	@Override
+	public ProductColor findById(Integer id) {
+		return productColorDAO.findById(id);
+	}
+
 }

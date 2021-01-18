@@ -44,7 +44,16 @@ public class ShopController extends HttpServlet{
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		listProduct = productService.findAll();
+		String type = req.getParameter("type");
+		Integer page;
+		try {
+			page = Integer.parseInt(req.getParameter("page"));
+		}catch (Exception e){
+			page = 1;
+		}
+		String sortBy = req.getParameter("sortBy");
+		String sortName = req.getParameter("sortName");
+		/*listProduct = productService.findAll();*/
 		filterByCustomers = productGroupService.findAll(1);
 		filterByBrands = productGroupBrandService.findAll();
 		filterByColors = productColorService.findAll();

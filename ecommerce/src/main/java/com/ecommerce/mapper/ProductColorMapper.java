@@ -14,6 +14,8 @@ public class ProductColorMapper implements RowMapper<ProductColor>{
 			color.setId(resultSet.getInt("id"));
 			color.setName(resultSet.getString("name"));
 			color.setCode(resultSet.getString("code"));
+
+			//admin
 		} catch (SQLException e) {
 			return null;
 		}

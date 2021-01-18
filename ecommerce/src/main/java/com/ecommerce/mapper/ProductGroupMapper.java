@@ -14,6 +14,10 @@ public class ProductGroupMapper implements RowMapper<ProductGroup>{
 			productGroup.setId(resultSet.getInt("id"));
 			productGroup.setName(resultSet.getString("name"));
 			productGroup.setCode(resultSet.getString("code"));
+			productGroup.setParentGroupId(resultSet.getInt("parent_id"));
+			productGroup.setLevel(resultSet.getInt("level"));
+
+			//admin
 		} catch (SQLException e) {
 			return null;
 		}

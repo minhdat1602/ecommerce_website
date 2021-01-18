@@ -5,6 +5,9 @@ public class ProductColor extends AbstractModel{
 	private String name;
 	private String code;
 
+	public ProductColor() {
+	}
+
 	public String getName() {
 		return name;
 	}

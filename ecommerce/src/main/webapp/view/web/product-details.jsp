@@ -141,10 +141,10 @@
 									<p>${product.description}</p>
 									<h4>
 										<c:if test="${product.sellPrice < product.originPrice}">
-											${PriceUtils.convert(product.sellPrice)} đ<span>${PriceUtils.convert(product.originPrice)}đ</span>
+											${product.sellPrice} đ<span>${product.originPrice}đ</span>
 										</c:if>
 										<c:if test="${product.sellPrice == product.originPrice}">
-											${PriceUtils.convert(product.sellPrice)} đ
+											${product.sellPrice} đ
 										</c:if>
 
 									</h4>
@@ -209,7 +209,7 @@
 						<div class="tab-item">
 							<ul class="nav" role="tablist">
 								<li><a class="active" data-toggle="tab" href="#tab-1"
-									role="tab">Mô tả</a></li>
+									role="tab">${product.description}</a></li>
 
 								<li><a data-toggle="tab" href="#tab-3" role="tab">Đánh
 										giá(02)</a></li>

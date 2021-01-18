@@ -6,4 +6,5 @@ import com.ecommerce.model.ProductSize;
 
 public interface IProductSizeService {
 	List<ProductSize> findAll();
+	ProductSize findById(Integer id);
 }
