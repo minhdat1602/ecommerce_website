@@ -76,7 +76,8 @@
 							<td style="line-height: 60px;"><input type="checkbox"
 								 name="checkbox" id="checkbox_${product.id}" value="${product.id}"></td>
 							<td style="line-height: 60px;"><a href="<c:url value ="/admin/danh-sach-san-pham?type=edit&id=${product.id}"/>"><i
-									class="fa fa-edit"></i></a></td>
+							class="fa fa-edit"></i></a></td>
+							<%--long ngu--%>
 							<td style="line-height: 60px;" scope="row">${product.id}</td>
 							<td style="line-height: 60px;">${product.name}</td>
 							<td><img style="width: 60px; height: 60px;" alt=""
