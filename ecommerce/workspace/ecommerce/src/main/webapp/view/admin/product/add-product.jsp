@@ -55,7 +55,7 @@
 				sản phẩm</label>
 			<c:if test="${product != null}">
 				<textarea id="description" name = "description" rows="5" cols="50" name="description"
-					value="${product.description}"></textarea>
+					value="">${product.description}</textarea>
 			</c:if>
 			<c:if test="${product == null}">
 				<textarea id="description" name = "description" rows="5" cols="50" name="description" value=""></textarea>
@@ -84,7 +84,7 @@
 					</c:forEach>
 				</c:if>
 				<c:if test="${not empty product}">
-					<c:forEach items="${listProductBrand}" var="group">
+					<c:forEach items="${listProductGroup}" var="group">
 						<c:if test="${product.groupId == group.id}">
 							<option selected="selected" value="${group.id}">${group.code}</option>
 						</c:if>
@@ -125,7 +125,7 @@
 			<c:if test="${product != null}">
 				<input type="text" class="form-control"
 					id="originPrice" name = "originPrice" placeholder="Nhập giá niêm yết"
-					value="${PriceUtils.convert(product.originPrice)} đ">
+					value="${product.originPrice}">
 			</c:if>
 			<c:if test="${product == null}">
 				<input type="text" class="form-control"
@@ -138,7 +138,7 @@
 			<c:if test="${product != null}">
 				<input type="text" class="form-control"
 					id="sellPrice" name = "sellPrice"  placeholder="Nhập giá bán"
-					value="${PriceUtils.convert(product.sellPrice)} đ">
+					value="${product.sellPrice}">
 			</c:if>
 			<c:if test="${product == null}">
 				<input type="text" class="form-control"
@@ -205,7 +205,7 @@
 					data: JSON.stringify(data),
 					success: function (result){
 						alert("Cập nhật sản phẩm thành công");
-						window.location.href = '${newURL}?type=edit&id=' + $("#id").val()
+						window.location.href = '${newURL}?type=edit&id=' +  $("#id").val()
 					},
 					error: function (error){
 						alert("Cập nhật sản phẩm thất bại");

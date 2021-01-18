@@ -80,7 +80,7 @@
 							<td style="line-height: 60px;" scope="row">${product.id}</td>
 							<td style="line-height: 60px;">${product.name}</td>
 							<td><img style="width: 60px; height: 60px;" alt=""
-								src="<c:url value="/template/img/products/${product.imageUrl}"/>"></td>
+								src="${product.imageUrl}"></td>
 							<td style="line-height: 60px;">${product.groupProduct}</td>
 							<td style="line-height: 60px;">${PriceUtils.convert(product.sellPrice)}</td>
 							<td style="line-height: 60px;">${PriceUtils.convert(product.originPrice)}</td>

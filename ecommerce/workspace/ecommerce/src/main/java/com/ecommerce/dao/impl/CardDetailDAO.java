@@ -1,10 +1,10 @@
 package com.ecommerce.dao.impl;
 
+import java.util.List;
+
 import com.ecommerce.dao.ICartDetailDAO;
 import com.ecommerce.mapper.CartDetailMapper;
 import com.ecommerce.model.CartDetails;
-
-import java.util.List;
 
 public class CardDetailDAO extends AbstractDAO<CartDetails> implements ICartDetailDAO {
     @Override
