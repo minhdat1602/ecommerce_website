@@ -25,7 +25,7 @@ public class CartController extends HttpServlet {
     private IProductService productService;
     @Inject
     private IStockService stockService;
-
+    //hello
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.getRequestDispatcher("/view/web/shopping-cart.jsp").forward(req, resp);
