@@ -42,11 +42,18 @@ public class LoginController extends HttpServlet {
         User user = userService.getUser(username.trim());
         if (user != null) {
             if (user.getPassword().equals(password)) {
+
                 HttpSession ss = req.getSession();
                 ss.setAttribute("USERMODEL", user);
-                Cart cart = cartService.findByCustomerId(user.getId());
-                if(cart != null)
-                    ss.setAttribute("CART", cart);
+
+                try {
+                    Cart cart = cartService.findByCustomerId(user.getId());
+                    if(cart != null)
+                        ss.setAttribute("CART", cart);
+                }catch (Exception e){
+                    e.printStackTrace();
+                    System.err.println("ERROR IN SAVE SHOPPING-CART INTO SESSION");
+                }
 
                 resp.sendRedirect(req.getContextPath() + "/trang-chu");
             } else {
