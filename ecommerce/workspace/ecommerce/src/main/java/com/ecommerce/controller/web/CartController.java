@@ -62,23 +62,10 @@ public class CartController extends HttpServlet {
                     resp.sendRedirect("/view/error.jsp");
                 }
             } else if (action.equals("add")) {
-                String size = req.getParameter("size");
-                String color = req.getParameter("color");
-                Integer productId = Integer.parseInt(req.getParameter("productId"));
-
-                Product product = productService.findOne(productId);
-                //Stock stock = stockService.findOne(size, color, productId);
-                //stock.setProduct(product);
-
-                CartDetails newCartDetail = new CartDetails();
-                newCartDetail.setQuantity(1);
-                newCartDetail.setCartId(cart.getId());
-                //newCartDetail.setStockId(stock.getId());
 
 
-                CartDetails iscartDetails = cartService.insertItem(newCartDetail);
-                //iscartDetails.setStock(stock);
-                cart.getCartDetailsList().add(iscartDetails);
+
+
                 resp.sendRedirect(req.getContextPath() + "/products?id=" + productId);
             } else if (action.equals("delete")) {
                 boolean deleted = cartService.deleteDetailItemById(detailCartId);
