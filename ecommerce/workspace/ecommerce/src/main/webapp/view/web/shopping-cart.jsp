@@ -54,8 +54,8 @@
                                     <td class="cart-title first-row">
                                         <h5>${details.stock.product.name}</h5>
                                     </td>
-                                    <td class="cart-title first-row">${details.stock.size}</td>
-                                    <td class="cart-title first-row">${details.stock.color}</td>
+                                    <td class="cart-title first-row">${details.stock.size.name}</td>
+                                    <td class="cart-title first-row">${details.stock.color.name}</td>
                                     <td class="p-price first-row">
                                         <fmt:formatNumber
                                                 pattern="###,###,### VNĐ"
@@ -113,16 +113,17 @@
                     <div class="row">
                         <div class="col-lg-4">
                             <div class="cart-buttons">
-                                <a href="./shop.html" class="primary-btn continue-shop">Tiếp Tục Mua Sắm</a>
+                                <a href="<c:url value="/trang-chu"/> "
+                                   class="primary-btn continue-shop">Tiếp Tục Mua Sắm</a>
 
                             </div>
-                            <div class="discount-coupon">
+                            <%--<div class="discount-coupon">
                                 <h6>Mã Giảm Gía</h6>
                                 <form action="#" class="coupon-form">
                                     <input type="text" placeholder="Nhập mã code">
                                     <button type="submit" class="site-btn coupon-btn">Áp dụng</button>
                                 </form>
-                            </div>
+                            </div>--%>
                         </div>
                         <div class="col-lg-4 offset-lg-4">
                             <div class="proceed-checkout">

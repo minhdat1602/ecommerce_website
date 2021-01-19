@@ -121,7 +121,7 @@
                                                             <input style="display: none" name="action" value="delete">
                                                             <input style="display: none" name="detailCartId"
                                                                    value="${details.id}">
-                                                            <button type="submit">
+                                                            <button style="outline: none; border: none;" type="submit">
                                                                 <i class="ti-close"></i>
                                                             </button>
                                                         </form>

@@ -8,6 +8,7 @@ import com.ecommerce.model.Cart;
 import com.ecommerce.model.CartDetails;
 import com.ecommerce.model.Stock;
 import com.ecommerce.service.ICartService;
+import com.ecommerce.service.IStockService;
 
 import javax.inject.Inject;
 import java.util.List;
@@ -18,7 +19,7 @@ public class CartService implements ICartService {
     @Inject
     private ICartDetailDAO cartDetailDAO;
     @Inject
-    private IStockDAO stockDAO;
+    private IStockService stockService;
     @Inject
     private IProductDAO productDAO;
 
@@ -29,8 +30,8 @@ public class CartService implements ICartService {
         List<CartDetails> listDetail = cartDetailDAO.findByCardId(cart.getId());
 
         for(CartDetails d : listDetail){
-            Stock stock = stockDAO.findById(d.getStockId());
-            stock.setProduct(productDAO.findOne(stock.getProductId()));
+            Stock stock = stockService.findOne(d.getStockId());
+            //stock.setProduct(productDAO.findOne(stock.getProductId()));
             d.setStock(stock);
         }
         cart.setCartDetailsList(listDetail);

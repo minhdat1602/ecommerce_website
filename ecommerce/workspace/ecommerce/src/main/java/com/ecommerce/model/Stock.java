@@ -2,10 +2,14 @@ package com.ecommerce.model;
 
 public class Stock extends AbstractModel{
 	private Integer productId;
-	private String size;
-	private String color;
+	private Integer sizeId;
+	private Integer colorId;
 	private Integer quantity;
+
+	//anh xa
 	private Product product;
+	private ProductSize size;
+	private ProductColor color;
 
 	public Stock() {
 	}
@@ -18,20 +22,20 @@ public class Stock extends AbstractModel{
 		this.productId = productId;
 	}
 
-	public String getSize() {
-		return size;
+	public Integer getSizeId() {
+		return sizeId;
 	}
 
-	public void setSize(String size) {
-		this.size = size;
+	public void setSizeId(Integer sizeId) {
+		this.sizeId = sizeId;
 	}
 
-	public String getColor() {
-		return color;
+	public Integer getColorId() {
+		return colorId;
 	}
 
-	public void setColor(String color) {
-		this.color = color;
+	public void setColorId(Integer colorId) {
+		this.colorId = colorId;
 	}
 
 	public Integer getQuantity() {
@@ -48,5 +52,21 @@ public class Stock extends AbstractModel{
 
 	public void setProduct(Product product) {
 		this.product = product;
+	}
+
+	public ProductSize getSize() {
+		return size;
+	}
+
+	public void setSize(ProductSize size) {
+		this.size = size;
+	}
+
+	public ProductColor getColor() {
+		return color;
+	}
+
+	public void setColor(ProductColor color) {
+		this.color = color;
 	}
 }

@@ -12,7 +12,7 @@ public class CartMapper implements RowMapper<Cart>{
         Cart cart = new Cart();
         try {
             cart.setId(resultSet.getInt("id"));
-            cart.setUserId(resultSet.getInt("user_id"));
+            cart.setUserId(resultSet.getInt("customer_id"));
 
             //admin
 

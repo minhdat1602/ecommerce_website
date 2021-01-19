@@ -3,13 +3,11 @@ package com.ecommerce.model;
 import java.util.List;
 
 public class Cart extends AbstractModel {
-    List<CartDetails> cartDetailsList;
+    private List<CartDetails> cartDetailsList;
     private Integer userId;
 
     public Cart() {
     }
-
-    
 
     public Integer getUserId() {
 		return userId;

@@ -16,5 +16,10 @@ public class ProductSizeService implements IProductSizeService{
 	public List<ProductSize> findAll() {
 		return productSizeDAO.findAll();
 	}
-	
+
+	@Override
+	public ProductSize findOne(Integer id) {
+		return productSizeDAO.findOne(id);
+	}
+
 }

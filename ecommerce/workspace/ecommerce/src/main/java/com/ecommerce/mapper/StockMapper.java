@@ -13,8 +13,8 @@ public class StockMapper implements RowMapper<Stock>{
         try {
             stock.setId(resultSet.getInt("id"));
             stock.setProductId(resultSet.getInt("product_id"));
-            stock.setSize(resultSet.getString("size"));
-            stock.setColor(resultSet.getString("color"));
+            stock.setSizeId(resultSet.getInt("size_id"));
+            stock.setColorId(resultSet.getInt("color_id"));
             stock.setQuantity(resultSet.getInt("quantity"));
         } catch (SQLException e) {
             return null;
