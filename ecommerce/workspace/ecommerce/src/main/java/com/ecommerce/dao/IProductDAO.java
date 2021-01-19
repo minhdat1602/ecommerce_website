@@ -17,7 +17,7 @@ public interface IProductDAO extends IGenericDAO<Product>{
 	List<Product> findAll(Product pageable);
 	void delete(int id);
 	Integer save(Product product);
-	Integer update(Product product);
+	boolean update(Product product);
 	
 	//dat
 		List<Product> findAll(String segment, String group, Integer isHot, Integer isNew);

@@ -41,8 +41,9 @@ public class ProductAPI extends HttpServlet{
 		req.setCharacterEncoding("UTF-8");
 		resp.setContentType("application/json");
 		Product product = HTTPUtil.of(req.getReader()).toModel(Product.class);
-		int id  = productService.update(product);	
-		mapper.writeValue(resp.getOutputStream(), id);
+		product.setImageUrl(ImageUtil.createLink(product.getImageUrl()));
+		boolean success  = productService.update(product);	
+		mapper.writeValue(resp.getOutputStream(), success);
 	}
 	
 	@Override

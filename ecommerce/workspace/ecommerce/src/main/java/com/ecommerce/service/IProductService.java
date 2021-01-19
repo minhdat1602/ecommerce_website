@@ -18,5 +18,5 @@ public interface IProductService {
 	List<Product> findAll(Product pageable);
 	void delete(int[] ids);
 	Integer save(Product product);
-	Integer update(Product product);
+	boolean update(Product product);
 }

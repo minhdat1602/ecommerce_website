@@ -72,7 +72,7 @@ public class ProductService implements IProductService{
 	}
 
 	@Override
-	public Integer update(Product product) {
+	public boolean update(Product product) {
 		return productDAO.update(product);
 	}
 	@Override

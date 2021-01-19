@@ -179,9 +179,20 @@ public class ProductDAO extends AbstractDAO<Product> implements IProductDAO {
 	}
 
 	@Override
-	public Integer update(Product product) {
-//		StringBuilder sql = new StringBuilder("");
-		return 0;
+	public boolean update(Product product) {
+		StringBuilder sql = new StringBuilder("update products products set code =?,name=?,origin_price=?,sell_price=?,group_id=?,brand_id=?,image_url=?,descriptions=? ");
+		sql.append(" where id = ?");
+		return updated(sql.toString(), 
+				product.getCode(),
+				product.getName(),
+				product.getOriginPrice(),
+				product.getSellPrice(),
+				product.getGroupId(),
+				product.getBrandId(),
+				product.getImageUrl(),
+				product.getDescription(),
+				product.getId()
+				);
 	}
 
 }
