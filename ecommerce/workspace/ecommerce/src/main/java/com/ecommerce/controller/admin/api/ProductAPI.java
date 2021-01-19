@@ -19,7 +19,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 public class ProductAPI extends HttpServlet{
 	@Inject
 	private IProductService productService;
-	
+	//bbbbbbbbbbbbbbbbbbbbbbbb
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		ObjectMapper mapper = new ObjectMapper();
