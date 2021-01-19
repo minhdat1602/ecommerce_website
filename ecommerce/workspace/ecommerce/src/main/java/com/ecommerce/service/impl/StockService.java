@@ -29,6 +29,11 @@ public class StockService implements IStockService {
         return stock;
     }
 
+    @Override
+    public Stock findOne(Integer sizeId, Integer colorId, Integer productId) {
+        return stockDAO.findOne(sizeId, colorId, productId);
+    }
+
   /*  @Override
     public Stock findOne(String size, String color, Integer productId) {
         return stockDAO.findOne(size, color, productId);

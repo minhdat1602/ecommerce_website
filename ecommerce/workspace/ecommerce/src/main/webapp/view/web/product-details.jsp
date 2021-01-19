@@ -101,110 +101,118 @@
 					</div>
 				</div>
 
-
 				<div class="col-lg-9">
-					<div class="row">
-						<div class="col-lg-6">
-							<div class="product-pic-zoom">
-								<img class="product-big-img"
-									src="<c:url value="/template/img/products/${product.imageUrl}"/>"
-									alt="">
-								<div class="zoom-icon">
-									<i class="fa fa-search-plus"></i>
+					<form id="product-form" method="POST" action="<c:url value="/gio-hang"/> ">
+						<div class="row">
+							<div class="col-lg-6">
+								<div class="product-pic-zoom">
+									<img class="product-big-img"
+										src="<c:url value="/template/img/products/${product.imageUrl}"/>"
+										alt="">
+									<div class="zoom-icon">
+										<i class="fa fa-search-plus"></i>
+									</div>
+								</div>
+								<div class="product-thumbs">
+									<div class="product-thumbs-track ps-slider owl-carousel">
+										<c:forEach items="${listImageDetails}" var="image">
+											<div class="pt active">
+												<img
+													src="<c:url value="/template/web/img/product-single/${image.imageUrl}"/>"
+													alt="">
+											</div>
+										</c:forEach>
+									</div>
 								</div>
 							</div>
-							<div class="product-thumbs">
-								<div class="product-thumbs-track ps-slider owl-carousel">
-									<c:forEach items="${listImageDetails}" var="image">
-										<div class="pt active">
-											<img
-												src="<c:url value="/template/web/img/product-single/${image.imageUrl}"/>"
-												alt="">
+							<div class="col-lg-6">
+								<div class="product-details">
+									<div class="pd-title">
+										<span></span>
+										<h3>${product.name}</h3>
+										<a href="#" class="heart-icon"><i class="icon_heart_alt"></i></a>
+									</div>
+									<div class="pd-rating">
+										<i class="fa fa-star"></i> <i class="fa fa-star"></i> <i
+											class="fa fa-star"></i> <i class="fa fa-star"></i> <i
+											class="fa fa-star-o"></i> <span>(5)</span>
+									</div>
+									<div class="pd-desc">
+										<p>${product.description}</p>
+										<h4>
+											<c:if test="${product.sellPrice < product.originPrice}">
+												${product.sellPrice} đ<span>${product.originPrice}đ</span>
+											</c:if>
+											<c:if test="${product.sellPrice == product.originPrice}">
+												${product.sellPrice} đ
+											</c:if>
+
+										</h4>
+									</div>
+									<div class="pd-color">
+										<h6>Màu Sắc</h6>
+										<div class="pd-color-choose">
+											<div class="cc-item">
+												<input type="radio" id="cc-black"> <label
+													for="cc-black"></label>
+											</div>
+											<div class="cc-item">
+												<input type="radio" id="cc-yellow"> <label
+													for="cc-yellow" class="cc-yellow"></label>
+											</div>
+											<div class="cc-item">
+												<input type="radio" id="cc-violet"> <label
+													for="cc-violet" class="cc-violet"></label>
+											</div>
 										</div>
-									</c:forEach>
+									</div>
+									<div class="pd-size-choose">
+										<div class="sc-item">
+											<input type="radio" id="sm-size">
+											<label for="sm-size">s</label>
+										</div>
+										<div class="sc-item">
+											<input type="radio" id="md-size">
+											<label for="md-size">m</label>
+										</div>
+										<div class="sc-item">
+											<input type="radio" id="lg-size">
+											<label for="lg-size">l</label>
+										</div>
+										<div class="sc-item">
+											<input type="radio" id="xl-size"> <label for="xl-size">xs</label>
+										</div>
+									</div>
+									<p>
+										Còn lại: <span>1 sản phẩm</span>
+									</p>
+
+									<div class="quantity">
+										<%--<div class="pro-qty">
+											<input type="text" value="1">
+										</div>--%>
+										<button type="submit" class="primary-btn pd-cart">
+											Thêm vào giỏ
+										</button>
+										<%--<a href="#" class="primary-btn pd-cart">Thêm vào giỏ</a>--%>
+									</div>
+									<ul class="pd-tags">
+										<li><span>Loại</span>: ${product.groupProduct}</li>
+										<li><span>TAGS</span>: Quần áo, nữ, kaki</li>
+									</ul>
+									<div class="pd-share">
+
+										<div class="pd-social">
+											<a href="#"><i class="ti-facebook"></i></a> <a href="#"><i
+												class="ti-twitter-alt"></i></a> <a href="#"><i
+												class="ti-linkedin"></i></a>
+										</div>
+									</div>
 								</div>
 							</div>
 						</div>
-						<div class="col-lg-6">
-							<div class="product-details">
-								<div class="pd-title">
-									<span></span>
-									<h3>${product.name}</h3>
-									<a href="#" class="heart-icon"><i class="icon_heart_alt"></i></a>
-								</div>
-								<div class="pd-rating">
-									<i class="fa fa-star"></i> <i class="fa fa-star"></i> <i
-										class="fa fa-star"></i> <i class="fa fa-star"></i> <i
-										class="fa fa-star-o"></i> <span>(5)</span>
-								</div>
-								<div class="pd-desc">
-									<p>${product.description}</p>
-									<h4>
-										<c:if test="${product.sellPrice < product.originPrice}">
-											${product.sellPrice} đ<span>${product.originPrice}đ</span>
-										</c:if>
-										<c:if test="${product.sellPrice == product.originPrice}">
-											${product.sellPrice} đ
-										</c:if>
+					</form>
 
-									</h4>
-								</div>
-								<div class="pd-color">
-									<h6>Màu Sắc</h6>
-									<div class="pd-color-choose">
-										<div class="cc-item">
-											<input type="radio" id="cc-black"> <label
-												for="cc-black"></label>
-										</div>
-										<div class="cc-item">
-											<input type="radio" id="cc-yellow"> <label
-												for="cc-yellow" class="cc-yellow"></label>
-										</div>
-										<div class="cc-item">
-											<input type="radio" id="cc-violet"> <label
-												for="cc-violet" class="cc-violet"></label>
-										</div>
-									</div>
-								</div>
-								<div class="pd-size-choose">
-									<div class="sc-item">
-										<input type="radio" id="sm-size"> <label for="sm-size">s</label>
-									</div>
-									<div class="sc-item">
-										<input type="radio" id="md-size"> <label for="md-size">m</label>
-									</div>
-									<div class="sc-item">
-										<input type="radio" id="lg-size"> <label for="lg-size">l</label>
-									</div>
-									<div class="sc-item">
-										<input type="radio" id="xl-size"> <label for="xl-size">xs</label>
-									</div>
-								</div>
-								<p>
-									Còn lại: <span>1 sản phẩm</span>
-								</p>
-
-								<div class="quantity">
-									<div class="pro-qty">
-										<input type="text" value="1">
-									</div>
-									<a href="#" class="primary-btn pd-cart">Thêm vào giỏ</a>
-								</div>
-								<ul class="pd-tags">
-									<li><span>Loại</span>: ${product.groupProduct}</li>
-									<li><span>TAGS</span>: Quần áo, nữ, kaki</li>
-								</ul>
-								<div class="pd-share">
-
-									<div class="pd-social">
-										<a href="#"><i class="ti-facebook"></i></a> <a href="#"><i
-											class="ti-twitter-alt"></i></a> <a href="#"><i
-											class="ti-linkedin"></i></a>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
 					<div class="product-tab">
 						<div class="tab-item">
 							<ul class="nav" role="tablist">

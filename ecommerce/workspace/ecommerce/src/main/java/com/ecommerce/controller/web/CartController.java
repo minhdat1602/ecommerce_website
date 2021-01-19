@@ -1,9 +1,11 @@
 package com.ecommerce.controller.web;
 
+import com.ecommerce.dao.ICartDetailDAO;
 import com.ecommerce.model.Cart;
 import com.ecommerce.model.CartDetails;
 import com.ecommerce.model.Product;
 import com.ecommerce.model.Stock;
+import com.ecommerce.service.ICartDetailService;
 import com.ecommerce.service.ICartService;
 import com.ecommerce.service.IProductService;
 import com.ecommerce.service.IStockService;
@@ -23,6 +25,8 @@ public class CartController extends HttpServlet {
     private ICartService cartService;
     @Inject
     private IProductService productService;
+    /*@Inject
+    private ICartDetailService cartDetailService;*/
     @Inject
     private IStockService stockService;
     //hello
@@ -62,23 +66,40 @@ public class CartController extends HttpServlet {
                     resp.sendRedirect("/view/error.jsp");
                 }
             } else if (action.equals("add")) {
-                String size = req.getParameter("size");
-                String color = req.getParameter("color");
-                Integer productId = Integer.parseInt(req.getParameter("productId"));
+                Integer sizeId = null;
+                Integer colorId = null;
+                Integer productId = null;
 
-                Product product = productService.findOne(productId);
-                //Stock stock = stockService.findOne(size, color, productId);
-                //stock.setProduct(product);
+                try {
+                    sizeId = Integer.parseInt(req.getParameter("sizeId"));
+                    colorId = Integer.parseInt(req.getParameter("colorId"));
+                    productId = Integer.parseInt(req.getParameter("productId"));
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
 
-                CartDetails newCartDetail = new CartDetails();
-                newCartDetail.setQuantity(1);
-                newCartDetail.setCartId(cart.getId());
-                //newCartDetail.setStockId(stock.getId());
+                Stock stock = stockService.findOne(sizeId, colorId, productId);
+                boolean constaint = false;
 
+                for(CartDetails cd : cart.getCartDetailsList()){
+                    if(cd.getStockId() == stock.getId() ){
+                        cd.sub();
+                        cartService.updateItem(cd);
+                        constaint = true;
+                        break;
+                    }
+                }
+                CartDetails cartDetails = null;
+                if(!constaint){
+                    cartDetails = new CartDetails();
+                    cartDetails.setCartId(cart.getId());
+                    cartDetails.setStock(stock);
+                    cartDetails.setStockId(stock.getId());
+                    cartDetails.setQuantity(1);
 
-                CartDetails iscartDetails = cartService.insertItem(newCartDetail);
-                //iscartDetails.setStock(stock);
-                cart.getCartDetailsList().add(iscartDetails);
+                    cartDetails = cartService.insertItem(cartDetails);
+                }
+                cart.getCartDetailsList().add(cartDetails);
                 resp.sendRedirect(req.getContextPath() + "/products?id=" + productId);
             } else if (action.equals("delete")) {
                 boolean deleted = cartService.deleteDetailItemById(detailCartId);
