@@ -23,7 +23,6 @@ import com.ecommerce.service.IProductGroupService;
 import com.ecommerce.service.IProductService;
 import com.ecommerce.service.IProductSizeService;
 
-@WebServlet(urlPatterns = "/products")
 @WebServlet(urlPatterns = "/sanpham")
 public class ProductDetailsController extends HttpServlet{
 	@Inject
