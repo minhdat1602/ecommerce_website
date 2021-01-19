@@ -97,9 +97,4 @@ public class ProductService implements IProductService{
 	private List<Product> findByGroupId(Integer groupId) {
         return productDAO.findByGroupId(groupId);
     }
-
-	@Override
-	public boolean importProduct(Product product) {
-		return productDAO.importProduct(product);
-	}
 }
