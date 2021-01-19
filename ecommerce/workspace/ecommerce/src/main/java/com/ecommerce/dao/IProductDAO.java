@@ -22,7 +22,4 @@ public interface IProductDAO extends IGenericDAO<Product>{
 	//dat
 		List<Product> findAll(String segment, String group, Integer isHot, Integer isNew);
 		List<Product> findByGroupId(Integer groupId);
-		
-		//15h50 19/1
-		boolean importProduct(Product product);
 }

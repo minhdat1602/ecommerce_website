@@ -19,5 +19,4 @@ public interface IProductService {
 	void delete(int[] ids);
 	Integer save(Product product);
 	boolean update(Product product);
-	boolean importProduct(Product product);
 }
