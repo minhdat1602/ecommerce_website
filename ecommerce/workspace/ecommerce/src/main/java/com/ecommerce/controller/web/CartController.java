@@ -1,14 +1,6 @@
 package com.ecommerce.controller.web;
 
-import com.ecommerce.dao.ICartDetailDAO;
-import com.ecommerce.model.Cart;
-import com.ecommerce.model.CartDetails;
-import com.ecommerce.model.Product;
-import com.ecommerce.model.Stock;
-import com.ecommerce.service.ICartDetailService;
-import com.ecommerce.service.ICartService;
-import com.ecommerce.service.IProductService;
-import com.ecommerce.service.IStockService;
+import java.io.IOException;
 
 import javax.inject.Inject;
 import javax.servlet.ServletException;
@@ -16,7 +8,13 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
+
+import com.ecommerce.model.Cart;
+import com.ecommerce.model.CartDetails;
+import com.ecommerce.model.Stock;
+import com.ecommerce.service.ICartService;
+import com.ecommerce.service.IProductService;
+import com.ecommerce.service.IStockService;
 
 @WebServlet(urlPatterns = "/gio-hang")
 public class CartController extends HttpServlet {

@@ -65,7 +65,7 @@ public class ProductDAO extends AbstractDAO<Product> implements IProductDAO {
 		sql.append("WHERE  p.status = 1 and p.id = ?");
 		return query(sql.toString(), new ProductMapper(), id).get(0);
 	}
-
+	
 	@Override
 	public List<Product> findAllByPromotionId(Integer id) {
 		StringBuilder sql = new StringBuilder("SELECT p.id, p.code,p.name,");
@@ -194,7 +194,6 @@ public class ProductDAO extends AbstractDAO<Product> implements IProductDAO {
 				product.getId()
 				);
 	}
-<<<<<<< HEAD
 	
 	@Override
 	public boolean importProduct(Product product) {
@@ -212,7 +211,5 @@ public class ProductDAO extends AbstractDAO<Product> implements IProductDAO {
 				product.getId()
 				);
 	}
-=======
->>>>>>> 680ba2900a33014fa6d202d93c97303ab4eaf9c8
 
 }
