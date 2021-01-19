@@ -65,7 +65,6 @@ public class ProductController extends HttpServlet {
 				req.setAttribute("product", product);
 				req.getRequestDispatcher("/view/admin/product/add-product.jsp").forward(req, resp);
 			}
-			
 		} else {
 			pageable.setTotalItem(productService.getTotalProduct());
 			pageable.setTotalPage((int) Math.ceil( (double) (pageable.getTotalItem() *10 /pageable.getMaxPageItem()) /10 ));
