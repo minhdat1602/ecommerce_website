@@ -1,5 +1,6 @@
 package com.ecommerce.model;
 
+import java.util.List;
 
 //newProduct và hotProduct nên đổi kiểu boolean sau này dễ xử lý
 public class Product extends AbstractModel{
@@ -18,8 +19,8 @@ public class Product extends AbstractModel{
 	private Integer status;
 	private Integer newProduct;	//tinyint(1) là boolean, trong database khong co boolean
 	private Integer hotProduct;
-	
-	
+	private Integer totalInventory;
+	private List<Stock> listStock;
 	
 	public Integer getNewProduct() {
 		return newProduct;
@@ -111,6 +112,18 @@ public class Product extends AbstractModel{
 	}
 	public void setCollectionId(Integer collectionId) {
 		this.collectionId = collectionId;
+	}
+	public Integer getTotalInventory() {
+		return totalInventory;
+	}
+	public void setTotalInventory(Integer totalInventory) {
+		this.totalInventory = totalInventory;
+	}
+	public List<Stock> getListStock() {
+		return listStock;
+	}
+	public void setListStock(List<Stock> listStock) {
+		this.listStock = listStock;
 	}
 
 	

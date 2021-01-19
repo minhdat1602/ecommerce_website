@@ -110,7 +110,7 @@
                                                     <td class="si-text">
                                                         <div class="product-selected">
                                                             <p><fmt:formatNumber
-                                                                    pattern="###,###,###"
+                                                                    pattern="###,###,### VNĐ"
                                                                     value="${details.stock.product.sellPrice}"/>
                                                                 x ${details.quantity}</p>
                                                             <h6>${details.stock.product.name}</h6>
@@ -121,9 +121,7 @@
                                                             <input style="display: none" name="action" value="delete">
                                                             <input style="display: none" name="detailCartId"
                                                                    value="${details.id}">
-                                                            <button style="background-color: #fff;
-                                                            outline: none; border: none;"
-                                                                    type="submit">
+                                                            <button type="submit">
                                                                 <i class="ti-close"></i>
                                                             </button>
                                                         </form>
