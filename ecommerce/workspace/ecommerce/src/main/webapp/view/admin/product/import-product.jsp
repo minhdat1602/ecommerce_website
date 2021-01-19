@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="/common/taglib.jsp"%>
+<c:url var="apiURL" value="/api/nhap-san-pham"></c:url>
+<c:url var="newURL" value="/admin/danh-sach-san-pham"></c:url>
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,7 +12,8 @@
 <body>
 	<input type="hidden" id="flag-index" value=".list-product-page">
 	<h3 class="ml-4 mt-3">Nhập hàng</h3>
-	<form action="" class="p-5">
+	<div class="wrap-import" style="padding:50px;">
+
 		<div class="form-group">
 			<label for="exampleFormControlInput1">Mã sản phẩm</label> <input
 				type="text" class="form-control" id="exampleFormControlInput1"
@@ -35,28 +38,28 @@
 				cỡ, Màu sắc, Số lượng</label>
 			<ul id="listStock">
 				<c:forEach items="${product.listStock}" var="stock">
-					<form id="formSubmit">
+					<form id="formSubmitUpdate${stock.id}">
 						<li id="oneStock">
 							<div class="form-group">
-								<select class="form-control">
+								<select class="form-control" name="sizeId">
 									<c:forEach items="${listSize}" var="size">
 										<c:if test="${stock.sizeId == size.id}">
-											<option selected="selected" value="${stock.sizeId}">${size.name}</option>
+											<option selected="selected" value="${size.id}">${size.name}</option>
 										</c:if>
 										<c:if test="${stock.sizeId != size.id}">
-											<option value="${stock.sizeId}">${size.name}</option>
+											<option value="${size.id}">${size.name}</option>
 										</c:if>
 									</c:forEach>
 								</select>
 							</div>
 							<div class="form-group">
-								<select class="form-control">
+								<select class="form-control" name="colorId">
 									<c:forEach items="${listColor}" var="color">
 										<c:if test="${stock.colorId == color.id}">
-											<option selected="selected" value="${stock.colorId}">${color.name}</option>
+											<option selected="selected" value="${color.id}">${color.name}</option>
 										</c:if>
 										<c:if test="${stock.colorId != color.id}">
-											<option value="${stock.colorId}">${color.name}</option>
+											<option value="${color.id}">${color.name}</option>
 										</c:if>
 									</c:forEach>
 								</select>
@@ -64,39 +67,70 @@
 							<div class="form-group">
 								<input type="text" class="form-control"
 									id="exampleFormControlInput1" placeholder=""
-									value="${stock.quantity}">
+									value="${stock.quantity}"  name="quantity">
 							</div>
-							<button id="btnUpdate" type="button" class="btn btn-danger">
+							<input type="hidden" name= "id" id="id" value = "${stock.id}">
+							<button data-stock="${stock.id}" type="button" class="btnUpdate btn btn-danger">
 								Cập nhật</button>
+								<input type="hidden" id="stt" value = "${stock.id}">
 						</li>
 					</form>
 				</c:forEach>
+				<form id="formSubmitAdd" style="margin-top:15px;">
+					<li id="oneStock">
+						<div class="form-group">
+							<select class="form-control" name="sizeId">
+								<option value="err">--Chọn--</option>
+								<c:forEach items="${listSize}" var="size">
+									<option value="${size.id}">${size.name}</option>
+								</c:forEach>
+							</select>
+						</div>
+						<div class="form-group">
+							<select class="form-control" name="colorId">
+								<option value="err">--Chọn--</option>
+								<c:forEach items="${listColor}" var="color">
+									<option value="${color.id}">${color.name}</option>
+								</c:forEach>
+							</select>
+						</div>
+						<div class="form-group">
+							<input type="text" class="form-control"
+								id="exampleFormControlInput1" placeholder=""
+								value="" name ="quantity">
+						</div>
+						<input type="hidden" name= "productId" id="productId" value = "${product.id}">
+						<button id="btnAdd" type="button" class="btn btn-primary">
+							Thêm</button>
+					</li>
+				</form>
 			</ul>
-
 		</div>
-
-	</form>
+		<input type="hidden" name= "id" id="id" value = "${product.id}">
+	</div>
 	<a style="color: white; text-decoration: none; width: 20%;"
 		href="<c:url value ="/view/admin/add-product.jsp"/>" type="button"
-		class="btn btn-info ml-5 mb-3"> Nhập</a>
+		class="btn btn-info ml-5 mb-3"> Hoàn tất</a>
+		
 	<script type="text/javascript">
-		var ckeditor = "";
-		$(document).ready(function() {
-			ckeditor = CKEDITOR.replace('description');
-		})
-
-		$("#btnUpdate").click(function() {
+		$(".btnUpdate").click(function() {
 			var data = {};
-			var dataForm = $("#formSubmit").serializeArray();
+			var stt = $(this).attr('data-stock');
+			var dataForm = $("#formSubmitUpdate"+stt).serializeArray();
 			$.each(dataForm, function(i, v) {
 				data["" + v.name + ""] = v.value;
 			})
-			data["description"] = ckeditor.getData();
-			if ($("#id").val() == "") {
-				addNew(data);
-			} else {
-				updateNew(data);
-			}
+			updateNew(data);
+			
+		})
+		$("#btnAdd").click(function() {
+			var data = {};
+			var dataForm = $("#formSubmitAdd").serializeArray();
+			$.each(dataForm, function(i, v) {
+				data["" + v.name + ""] = v.value;
+			})
+			addNew(data);
+			
 		})
 		function addNew(data) {
 			$.ajax({
@@ -107,11 +141,11 @@
 				data : JSON.stringify(data),
 				success : function(result) {
 					alert("Thêm sản phẩm thành công");
-					window.location.href = '${newURL}?type=edit&id=' + result
+					window.location.href = '${newURL}?type=import&id=' + $('#id').val()
 				},
 				error : function(error) {
 					alert("Thêm sản phẩm thất bại");
-					window.location.href = '${newURL}?type=add'
+					window.location.href = '${newURL}?type=import&id=' + $('#id').val()
 				}
 
 			})
@@ -125,14 +159,14 @@
 				dataType : 'text',
 				data : JSON.stringify(data),
 				success : function(result) {
-					alert("Cập nhật sản phẩm thành công");
-					window.location.href = '${newURL}?type=edit&id='
-							+ $("#id").val()
+					alert("Cập nhật thành công");
+					window.location.href = '${newURL}?type=import&id=' + $('#id').val()
+						
 				},
 				error : function(error) {
-					alert("Cập nhật sản phẩm thất bại");
-					window.location.href = '${newURL}?type=edit&id='
-							+ $("#id").val()
+					alert("Cập nhật thất bại");
+					window.location.href = '${newURL}?type=import&id=' + $('#id').val()
+							
 				}
 			})
 		}

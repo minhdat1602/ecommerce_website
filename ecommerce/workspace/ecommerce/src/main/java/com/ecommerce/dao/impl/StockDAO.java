@@ -28,4 +28,27 @@ public class StockDAO extends AbstractDAO<Stock> implements IStockDAO {
 	        return list.size() == 0 ? null : list.get(0);
 	    }
 
+	@Override
+	public boolean update(Stock stock) {
+		String sql = "update stocks set size_id=?,color_id=?,quantity=? where id = ?";
+		return updated(sql,
+				stock.getSizeId(),
+				stock.getColorId(),
+				stock.getQuantity(),
+				stock.getId()
+				);
+	}
+
+	@Override
+	public Integer save(Stock stock) {
+		String sql = "insert into stocks (product_id,size_id,color_id,quantity) values (?,?,?,?)";
+		return insert(sql, 
+						stock.getProductId(),
+						stock.getSizeId(),
+						stock.getColorId(),
+						stock.getQuantity()
+						);
+				
+	}
+
 }

@@ -49,4 +49,16 @@ public class StockService implements IStockService {
     public Stock findOne(Integer size, Integer color, Integer productId) {
         return stockDAO.findOne(size, color, productId);
     }
+
+
+	@Override
+	public boolean update(Stock stock) {
+		return stockDAO.update(stock);
+	}
+
+
+	@Override
+	public Integer save(Stock stock) {
+		return stockDAO.save(stock);
+	}
 }

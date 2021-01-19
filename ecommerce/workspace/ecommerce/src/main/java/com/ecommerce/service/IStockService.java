@@ -9,4 +9,6 @@ public interface IStockService {
 	 Stock findOne(Integer id);
 	 Stock findOne(Integer sizeId, Integer colorId, Integer productId);
 		void setIventory(List<Product> listProduct);
+		boolean update(Stock stock);
+		Integer save(Stock stock);
 }

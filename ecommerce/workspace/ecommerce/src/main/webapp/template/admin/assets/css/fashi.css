@@ -4,11 +4,11 @@
     height: 450px;
 }
 li#oneStock .form-group {
-    width: 100px;
+    width: 129px;
     display: inline;
 }
 li#oneStock .form-group select {
-    width: 100px;
+    width: 125px;
     display: inline;
 }
 li#oneStock .form-group input {
