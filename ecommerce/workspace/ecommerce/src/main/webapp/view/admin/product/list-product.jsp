@@ -88,7 +88,7 @@
 							<td style="line-height: 60px;">${product.status}</td>
 							<td style="line-height: 60px;">${product.totalInventory}</td>
 							<td style="line-height: 60px;"><a
-								href="<c:url value ="/view/admin/product/import-product.jsp"/>">Nhập</a></td>
+								href="<c:url value ="/admin/danh-sach-san-pham?type=import&id=${product.id}"/>">Nhập</a></td>
 						</tr>
 	
 					</c:forEach>

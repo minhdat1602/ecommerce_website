@@ -12,11 +12,15 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.ecommerce.model.Product;
 import com.ecommerce.model.ProductBrand;
+import com.ecommerce.model.ProductColor;
 import com.ecommerce.model.ProductGroup;
+import com.ecommerce.model.ProductSize;
 import com.ecommerce.model.Stock;
 import com.ecommerce.service.IProductBrandService;
+import com.ecommerce.service.IProductColorService;
 import com.ecommerce.service.IProductGroupService;
 import com.ecommerce.service.IProductService;
+import com.ecommerce.service.IProductSizeService;
 import com.ecommerce.service.IStockService;
 import com.ecommerce.utils.FormUtil;
 import com.ecommerce.utils.HTTPUtil;
@@ -32,11 +36,17 @@ public class ProductController extends HttpServlet {
 	private IProductGroupService groupService;
 	@Inject
 	private IStockService stockService;
+	@Inject
+	private IProductColorService productColorService;
+	@Inject
+	private IProductSizeService productSizeService;
 	
 	private List<Stock> listStock;
 	private List<ProductBrand> listProductBrand;
 	private List<Product> listProduct;
 	private List<ProductGroup> listProductGroup;
+	private List<ProductColor> listColor;
+	private List<ProductSize>  listSize;
 	private Product product;
 
 	@Override
@@ -57,13 +67,15 @@ public class ProductController extends HttpServlet {
 			} else if (type.equalsIgnoreCase("add")) {	
 				req.getRequestDispatcher("/view/admin/product/add-product.jsp").forward(req, resp);
 			} else if (type.equalsIgnoreCase("import")) {
-				ObjectMapper mapper = new ObjectMapper();
-				req.setCharacterEncoding("UTF-8");
-				resp.setContentType("application/json");
-				Product product = HTTPUtil.of(req.getReader()).toModel(Product.class);
-				boolean success = productService.importProduct(product);
+				String idStr = req.getParameter("id");
+				Integer id = Integer.parseInt(idStr);
+				product = productService.findOne(id);
+				listColor = productColorService.findAll();
+				listSize = productSizeService.findAll();
+				req.setAttribute("listColor", listColor);
+				req.setAttribute("listSize", listSize);
 				req.setAttribute("product", product);
-				req.getRequestDispatcher("/view/admin/product/add-product.jsp").forward(req, resp);
+				req.getRequestDispatcher("/view/admin/product/import-product.jsp").forward(req, resp);
 			}
 		} else {
 			pageable.setTotalItem(productService.getTotalProduct());

@@ -194,7 +194,7 @@ public class ProductDAO extends AbstractDAO<Product> implements IProductDAO {
 				product.getId()
 				);
 	}
-
+	
 	@Override
 	public boolean importProduct(Product product) {
 		StringBuilder sql = new StringBuilder("update products products set code =?,name=?,origin_price=?,sell_price=?,group_id=?,brand_id=?,image_url=?,descriptions=? ");
