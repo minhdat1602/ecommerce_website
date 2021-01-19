@@ -20,6 +20,10 @@ public class ProductAPI extends HttpServlet{
 	@Inject
 	private IProductService productService;
 	
+	
+//	longggggggggggggggggg
+	
+	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		ObjectMapper mapper = new ObjectMapper();
