@@ -15,6 +15,12 @@ public class StockDAO extends AbstractDAO<Stock> implements IStockDAO {
         return list.size() == 0 ? null : list.get(0);
     }
 
+	@Override
+	public List<Stock> findAllByProductId(Integer id) {
+		 String sql = "select * from stocks where product_id = ?";
+	     return  query(sql, new StockMapper(), id);
+	}
+
   /*  @Override
     public Stock findOne(String size, String color, Integer productId) {
         String sql = "select * from stocks where size = ? and color = ? and product_id = ?";

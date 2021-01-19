@@ -86,7 +86,7 @@
 							<td style="line-height: 60px;">${PriceUtils.convert(product.sellPrice)}</td>
 							<td style="line-height: 60px;">${PriceUtils.convert(product.originPrice)}</td>
 							<td style="line-height: 60px;">${product.status}</td>
-							<td style="line-height: 60px;">158</td>
+							<td style="line-height: 60px;">${product.totalInventory}</td>
 							<td style="line-height: 60px;"><a
 								href="<c:url value ="/view/admin/product/import-product.jsp"/>">Nhập</a></td>
 						</tr>
