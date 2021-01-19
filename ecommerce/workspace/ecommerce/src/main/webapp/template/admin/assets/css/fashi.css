@@ -3,6 +3,18 @@
     position: relative;
     height: 450px;
 }
+li#oneStock .form-group {
+    width: 100px;
+    display: inline;
+}
+li#oneStock .form-group select {
+    width: 100px;
+    display: inline;
+}
+li#oneStock .form-group input {
+    width: 100px;
+    display: inline;
+}
 .form-group img {width: 250px;height: 250px;}
 .list-product img {
     width: 100%;

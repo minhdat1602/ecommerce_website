@@ -1,6 +1,7 @@
 package com.ecommerce.controller.admin;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -70,6 +71,10 @@ public class ProductController extends HttpServlet {
 				String idStr = req.getParameter("id");
 				Integer id = Integer.parseInt(idStr);
 				product = productService.findOne(id);
+				List<Product> list = new ArrayList<Product>();
+				list.add(product);
+				stockService.setIventory(list);
+				product = list.get(0);
 				listColor = productColorService.findAll();
 				listSize = productSizeService.findAll();
 				req.setAttribute("listColor", listColor);

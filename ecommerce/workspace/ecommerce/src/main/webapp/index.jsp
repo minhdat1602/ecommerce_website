@@ -8,6 +8,6 @@
 <title>Trang chủ</title>
 </head>
 <body>
-	<c:redirect url="/admin/danh-sach-san-pham?type=add"></c:redirect>
+	<c:redirect url="/admin/danh-sach-san-pham?type=import&id=1"></c:redirect>
 </body>
 </html>
