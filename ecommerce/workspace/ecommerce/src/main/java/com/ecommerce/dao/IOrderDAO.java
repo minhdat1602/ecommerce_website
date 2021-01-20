@@ -10,4 +10,10 @@ public interface IOrderDAO extends IGenericDAO<Order>{
 
 	Order findOne(Integer id);
 
+	Integer getTotalOrder();
+
+	List<Order> findAll(Order pageable);
+
+	Order findOne(String code);
+
 }

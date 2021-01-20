@@ -23,4 +23,19 @@ public class OrderService implements IOrderService{
 		return orderDAO.findOne(id);
 	}
 
+	@Override
+	public Integer getTotalOrder() {
+		return orderDAO.getTotalOrder();
+	}
+
+	@Override
+	public List<Order> findAll(Order pageable) {
+		return orderDAO.findAll(pageable);
+	}
+
+	@Override
+	public Order findOne(String code) {
+		return orderDAO.findOne(code);
+	}
+
 }

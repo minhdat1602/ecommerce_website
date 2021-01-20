@@ -43,7 +43,7 @@
 							</a></li>
 
 							<li class="list-order-page"><a class="sidenav-item-link"
-								href="<c:url value ="/admin/danh-sach-don-hang"/>"> <span
+								href="<c:url value ="/admin/danh-sach-don-hang?page=1&maxPageItem=10&sorting=date_sell&sortBy=asc"/>"> <span
 									class="nav-text">Đơn hàng</span>
 							</a></li>
 

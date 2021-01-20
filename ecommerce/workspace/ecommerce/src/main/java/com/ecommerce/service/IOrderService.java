@@ -9,4 +9,9 @@ public interface IOrderService {
 	List<Order> findAll();
 
 	Order findOne(Integer id);
+
+	Integer getTotalOrder();
+	List<Order> findAll(Order pageable);
+
+	Order findOne(String code);
 }

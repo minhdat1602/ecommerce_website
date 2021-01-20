@@ -12,9 +12,11 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.ecommerce.dao.IOrderDetailsDAO;
 import com.ecommerce.model.Order;
+import com.ecommerce.model.Product;
 import com.ecommerce.service.IOrderDetailsService;
 import com.ecommerce.service.IOrderService;
 import com.ecommerce.service.IUserService;
+import com.ecommerce.utils.FormUtil;
 import com.fasterxml.jackson.annotation.JsonTypeInfo.Id;
 
 @WebServlet(urlPatterns = "/admin/danh-sach-don-hang")
@@ -33,8 +35,17 @@ public class OrderController extends HttpServlet{
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String idStr = req.getParameter("id");
+		Order pageable = FormUtil.toModel(Order.class, req);
 		if (idStr==null) {
-			listOrder = orderService.findAll();
+			pageable.setTotalItem(orderService.getTotalOrder());
+			pageable.setTotalPage((int) Math.ceil( (double) (pageable.getTotalItem() *10 /pageable.getMaxPageItem()) /10 ));
+			pageable.setOffset((pageable.getPage()-1) * pageable.getMaxPageItem());
+			listOrder = orderService.findAll(pageable);
+			order = new Order();
+			order.setFilter("orders");
+			order.setFilterAttr("code");
+			req.setAttribute("pageable", pageable);
+			req.setAttribute("order", order);
 			req.setAttribute("listOrder", listOrder);
 			req.getRequestDispatcher("/view/admin/order/list-order.jsp").forward(req, resp);
 		} else {

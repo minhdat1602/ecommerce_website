@@ -10,15 +10,25 @@
 		<form action="<c:url value='/admin/search'/>" id="searchForm">
 			<div class="search-form d-none d-lg-inline-block">
 				<div class="input-group">
+				<input type="hidden" id ="orderOrProduct" value = '<c:if test="${not empty listProduct}">product</c:if>'>
 					<select id="filter" name="filter" style="border: none;">
 						<option>--Bộ lọc--</option>
-						<option selected="selected" value="products">Sản phẩm</option>
-						<option value="orders">Hóa đơn</option>
+						<c:if test="${not empty product or not empty listProduct}">
+							<option value="products">Sản phẩm</option>
+						</c:if>
+						<c:if test="${not empty listOrder or not empty order}">
+							<option value="orders">Hóa đơn</option>
+						</c:if>
 					</select>
 					<select id="filterAttr" name="filterAttr" style="border: none;">
 						<option>--Lọc theo--</option>
-						<option selected="selected" value="id">ID</option>
-						<option value="name">Tên</option>
+						<c:if test="${not empty product or not empty listProduct}">
+							<option value="id">ID</option>
+							<option value="name">Tên</option>
+						</c:if>
+						<c:if test="${not empty listOrder or not empty order}">
+							<option value="code">Mã đơn</option>
+						</c:if>
 					</select> 
 					<input type="text" id="search-input"
 						class="form-control" placeholder="Tìm kiếm" autofocus
@@ -55,9 +65,18 @@
 
 
 	<script type="text/javascript">
-		$('#filter').val('${product.filter}').attr('selected','selected');
-		$('#filterAttr').val('${product.filterAttr}').attr('selected','selected');
-		$('#search-input').val('${product.key}');
+		$(function(){
+			console.log($('#orderOrProduct').val());
+			if ($('#orderOrProduct').val()=="product") {
+				$('#filter').val('${product.filter}').attr('selected','selected');
+				$('#filterAttr').val('${product.filterAttr}').attr('selected','selected');
+				$('#search-input').val('${product.key}');
+			} else{
+				$('#filter').val('${order.filter}').attr('selected','selected');
+				$('#filterAttr').val('${order.filterAttr}').attr('selected','selected');
+				$('#search-input').val('${order.key}');
+			}
+		})
 		$("#search-btn").click(function() {
 			$('#searchForm').submit();
 		})

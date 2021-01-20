@@ -8,7 +8,7 @@
 <title>Trang chủ</title>
 </head>
 <body>
-	<c:redirect url="/admin/danh-sach-san-pham?type=list&page=1&maxPageItem=10&sorting=id&sortBy=asc"></c:redirect>
-
+	<c:redirect url="/admin/danh-sach-don-hang?page=1&maxPageItem=10&sorting=date_sell&sortBy=asc"></c:redirect>
+	<%-- <c:redirect url="/admin/search?filter=orders&filterAttr=code&key=dh01"></c:redirect> --%>
 </body>
 </html>
