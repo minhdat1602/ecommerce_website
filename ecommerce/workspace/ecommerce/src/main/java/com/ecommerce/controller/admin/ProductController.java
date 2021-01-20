@@ -88,8 +88,12 @@ public class ProductController extends HttpServlet {
 			pageable.setOffset((pageable.getPage()-1) * pageable.getMaxPageItem());
 			listProduct = productService.findAll(pageable);
 			stockService.setIventory(listProduct);
+			Product product = new Product();
+			product.setFilter("products");
+			product.setFilterAttr("id");
 			req.setAttribute("pageable", pageable);
 			req.setAttribute("listProduct", listProduct);
+			req.setAttribute("product", product);
 			req.getRequestDispatcher("/view/admin/product/list-product.jsp").forward(req, resp);
 		}
 	}

@@ -60,13 +60,6 @@
 						<th scope="col">Phân loại</th>
 						<th scope="col">Gía bán</th>
 						<th scope="col">Gía niêm yết</th>
-						<th scope="col"><select id="status" style="cursor: pointer;">
-								<option>Trạng thái</option>
-								<option>Thông thường</option>
-								<option>Hàng mới</option>
-								<option>Nổi bật</option>
-								<option>Khuyến mãi</option>
-						</select></th>
 						<th scope="col">Tồn kho</th>
 						<th scope="col">Nhập hàng</th>
 					</tr>
@@ -86,7 +79,6 @@
 							<td style="line-height: 60px;">${product.groupProduct}</td>
 							<td style="line-height: 60px;">${PriceUtils.convert(product.sellPrice)}</td>
 							<td style="line-height: 60px;">${PriceUtils.convert(product.originPrice)}</td>
-							<td style="line-height: 60px;">${product.status}</td>
 							<td style="line-height: 60px;">${product.totalInventory}</td>
 							<td style="line-height: 60px;"><a
 								href="<c:url value ="/admin/danh-sach-san-pham?type=import&id=${product.id}"/>">Nhập</a></td>

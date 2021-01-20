@@ -163,7 +163,6 @@
 				success : function(result) {
 					alert("Cập nhật thành công");
 					window.location.href = '${newURL}?type=import&id=' + $('#id').val()
-						
 				},
 				error : function(error) {
 					alert("Cập nhật thất bại");

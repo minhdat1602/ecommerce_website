@@ -1,20 +1,19 @@
 package com.ecommerce.model;
 
 import java.sql.Timestamp;
+import java.util.List;
 
-//status nên là boolean hay Integer =>
-//coupon ở đây có hợp lý vl
-//userId ở đây có hợp lý không, nếu có thì Nullable = true; =>
 public class Order extends AbstractModel{
 	private String code;
 	private Integer totalSellPrice;
 	private Integer totalDiscount;
 	private Integer totalMoney;
-	private String status;	// status là boolean ->
+	private String status;
 	private Integer couponId;
-	private Integer customerId;
-	private Integer userId; // userid là nhân viên bán hàng -> not null
+	private Integer userId;
 	private Timestamp dateSell;
+	private List<OrderDetails> listOrderDetails;
+	private User user;
 	public Order() {
 		super();
 	}
@@ -48,12 +47,7 @@ public class Order extends AbstractModel{
 	public void setCouponId(Integer couponId) {
 		this.couponId = couponId;
 	}
-	public Integer getCustomerId() {
-		return customerId;
-	}
-	public void setCustomerId(Integer customerId) {
-		this.customerId = customerId;
-	}
+
 	public Integer getUserId() {
 		return userId;
 	}
@@ -71,6 +65,18 @@ public class Order extends AbstractModel{
 	}
 	public void setStatus(String status) {
 		this.status = status;
+	}
+	public List<OrderDetails> getListOrderDetails() {
+		return listOrderDetails;
+	}
+	public void setListOrderDetails(List<OrderDetails> listOrderDetails) {
+		this.listOrderDetails = listOrderDetails;
+	}
+	public User getUser() {
+		return user;
+	}
+	public void setUser(User user) {
+		this.user = user;
 	}
 
 	

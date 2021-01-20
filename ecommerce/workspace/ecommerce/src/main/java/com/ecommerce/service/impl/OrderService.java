@@ -6,6 +6,7 @@ import javax.inject.Inject;
 
 import com.ecommerce.dao.IOrderDAO;
 import com.ecommerce.model.Order;
+import com.ecommerce.model.OrderDetails;
 import com.ecommerce.service.IOrderService;
 
 public class OrderService implements IOrderService{
@@ -16,5 +17,10 @@ public class OrderService implements IOrderService{
 	public List<Order> findAll() {
 		return orderDAO.findAll();
 	}
-	
+
+	@Override
+	public Order findOne(Integer id) {
+		return orderDAO.findOne(id);
+	}
+
 }

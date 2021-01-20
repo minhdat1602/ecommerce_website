@@ -63,7 +63,8 @@ public class ProductDAO extends AbstractDAO<Product> implements IProductDAO {
 		sql.append("join products_brand b on b.id = p.brand_id ");
 		sql.append("join products_collection c on c.id = p.collection_id ");
 		sql.append("WHERE  p.status = 1 and p.id = ?");
-		return query(sql.toString(), new ProductMapper(), id).get(0);
+		List<Product> result = query(sql.toString(), new ProductMapper(), id);
+		return (result.size() > 0) ? result.get(0) : null;
 	}
 	
 	@Override

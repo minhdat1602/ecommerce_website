@@ -12,12 +12,12 @@
 				<div class="input-group">
 					<select id="filter" name="filter" style="border: none;">
 						<option>--Bộ lọc--</option>
-						<option value="products">Sản phẩm</option>
+						<option selected="selected" value="products">Sản phẩm</option>
 						<option value="orders">Hóa đơn</option>
 					</select>
 					<select id="filterAttr" name="filterAttr" style="border: none;">
 						<option>--Lọc theo--</option>
-						<option value="id">ID</option>
+						<option selected="selected" value="id">ID</option>
 						<option value="name">Tên</option>
 					</select> 
 					<input type="text" id="search-input"

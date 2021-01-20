@@ -3,6 +3,10 @@
     position: relative;
     height: 450px;
 }
+.navbar-right {
+    position: absolute;
+    right: 0;
+}
 li#oneStock .form-group {
     width: 129px;
     display: inline;

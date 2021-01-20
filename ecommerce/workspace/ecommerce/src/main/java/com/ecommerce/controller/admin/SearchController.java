@@ -63,8 +63,10 @@ public class SearchController extends HttpServlet{
 				Integer id = Integer.parseInt(key);
 				Product product = productService.findOne(id);
 				listProduct = new ArrayList<Product>();
-				listProduct.add(product);
-				stockService.setIventory(listProduct);
+				if (product!=null) {
+					listProduct.add(product);
+					stockService.setIventory(listProduct);
+				}	
 			}
 			req.setAttribute("listProduct", listProduct);
 			req.setAttribute("product", product);
