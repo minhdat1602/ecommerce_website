@@ -115,9 +115,8 @@ public class ProductDAO extends AbstractDAO<Product> implements IProductDAO {
 		sql.append("join products_brand b on b.id = p.brand_id ");
 		sql.append("join products_collection c on c.id = p.collection_id ");
 		sql.append("where p.status = 1 ");
-		sql.append("limit ? offset ? ");
-		
-		return query(sql.toString(), new ProductMapper(), pageable.getMaxPageItem(), pageable.getOffset());
+		sql.append(" order by "+ pageable.getSorting() + " " + pageable.getSortBy() +" limit ?,? ");
+		return query(sql.toString(), new ProductMapper(), pageable.getOffset(),pageable.getMaxPageItem());
 	}
 
 	@Override

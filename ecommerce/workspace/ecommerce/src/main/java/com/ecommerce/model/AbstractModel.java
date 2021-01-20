@@ -12,6 +12,8 @@ public abstract class AbstractModel {
 	private Integer maxPageItem;
 	private Integer totalPage;
 	private Integer totalItem;
+	private String sorting;
+	private String sortBy;
 	private Integer offset;
 	private Integer limit;
 	private int[] ids;
@@ -34,9 +36,6 @@ public abstract class AbstractModel {
 	public void setLimit(Integer limit) {
 		this.limit = limit;
 	}
-	private String sortName;
-	private String sortBy;
-	
 	
 	public Integer getPage() {
 		return page;
@@ -62,11 +61,12 @@ public abstract class AbstractModel {
 	public void setTotalItem(Integer totalItem) {
 		this.totalItem = totalItem;
 	}
-	public String getSortName() {
-		return sortName;
+
+	public String getSorting() {
+		return sorting;
 	}
-	public void setSortName(String sortName) {
-		this.sortName = sortName;
+	public void setSorting(String sorting) {
+		this.sorting = sorting;
 	}
 	public String getSortBy() {
 		return sortBy;
@@ -104,5 +104,6 @@ public abstract class AbstractModel {
 	public void setLastModifiedDate(Timestamp lastModifiedDate) {
 		this.lastModifiedDate = lastModifiedDate;
 	}
+	
 	
 }

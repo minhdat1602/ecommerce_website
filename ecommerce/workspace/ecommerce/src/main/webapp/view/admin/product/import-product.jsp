@@ -13,7 +13,8 @@
 	<input type="hidden" id="flag-index" value=".list-product-page">
 	<h3 class="ml-4 mt-3">Nhập hàng</h3>
 	<div class="wrap-import" style="padding:50px;">
-
+		
+		<input type="hidden" name= "id" id="id" value = "${product.id}">
 		<div class="form-group">
 			<label for="exampleFormControlInput1">Mã sản phẩm</label> <input
 				type="text" class="form-control" id="exampleFormControlInput1"
@@ -69,7 +70,7 @@
 									id="exampleFormControlInput1" placeholder=""
 									value="${stock.quantity}"  name="quantity">
 							</div>
-							<input type="hidden" name= "id" id="id" value = "${stock.id}">
+							<input type="hidden" name= "id" id="stockId" value = "${stock.id}">
 							<button data-stock="${stock.id}" type="button" class="btnUpdate btn btn-danger">
 								Cập nhật</button>
 								<input type="hidden" id="stt" value = "${stock.id}">
@@ -102,14 +103,15 @@
 						<input type="hidden" name= "productId" id="productId" value = "${product.id}">
 						<button id="btnAdd" type="button" class="btn btn-primary">
 							Thêm</button>
+						
 					</li>
 				</form>
 			</ul>
 		</div>
-		<input type="hidden" name= "id" id="id" value = "${product.id}">
+		
 	</div>
 	<a style="color: white; text-decoration: none; width: 20%;"
-		href="<c:url value ="/view/admin/add-product.jsp"/>" type="button"
+		href="<c:url value ="/admin/danh-sach-san-pham?type=list&page=1&maxPageItem=5"/>" type="button"
 		class="btn btn-info ml-5 mb-3"> Hoàn tất</a>
 		
 	<script type="text/javascript">

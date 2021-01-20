@@ -31,16 +31,17 @@
 			<div class="row">
 				<div class="col-lg-7 col-md-7">
 					<div class="select-option">
-						<select id="sorting" class="sorting">
-							<option value="">Tên</option>
-							<option value="">Gía cao</option>
-							<option value="">Gía thấp</option>
-							<option value="">Tồn kho</option>
+						<select id="sorting" name="sorting" class="sorting">
+							<option value="">--Chọn--</option>
+							<option value="idasc">ID (tăng dần)</option>
+							<option value="iddesc">ID (giảm dần</option>
+							
 						</select> <label for="sorting" id="labelForSorting">Sắp xếp theo: </label> <select
-							id="p-show" class="p-show">
-							<option value="">10</option>
-							<option value="">15</option>
-							<option value="">20</option>
+							 class="p-show" name="maxPageItem" id="maxPageItem" value="${pageable.maxPageItem}">
+							<option value="">--Chọn--</option>
+							<option value="10">10</option>
+							<option value="15">15</option>
+							<option value="20">20</option>
 						</select> <label for="p-show" id="labelForTotalItem">Hiển thị:</label>
 					</div>
 				</div>
@@ -86,7 +87,7 @@
 							<td style="line-height: 60px;">${PriceUtils.convert(product.sellPrice)}</td>
 							<td style="line-height: 60px;">${PriceUtils.convert(product.originPrice)}</td>
 							<td style="line-height: 60px;">${product.status}</td>
-							<td style="line-height: 60px;">158</td>
+							<td style="line-height: 60px;">${product.totalInventory}</td>
 							<td style="line-height: 60px;"><a
 								href="<c:url value ="/admin/danh-sach-san-pham?type=import&id=${product.id}"/>">Nhập</a></td>
 						</tr>
@@ -98,8 +99,8 @@
 			</table>
 					<input type="hidden" name="type" id="type" value="">
 					<input type="hidden" name="page" id="page" value="${pageable.page}"> 
-					<input type="hidden" name="maxPageItem" id="maxPageItem" value="${pageable.maxPageItem}">
-					
+					<input type="hidden" name="sorting" id="sorting" value="${pageable.sorting}">
+					<input type="hidden" name="sortBy" id="sortBy" value="${pageable.sortBy}"> 		
 					
 		</div>
 		
@@ -126,7 +127,44 @@
 	</form>
 
 	<script type="text/javascript">
-		$(function() {
+		
+		$(function() {	
+			$('#sorting').on('change', function (e) {
+			    var sorting = $('#sorting').val();
+			    $('#sorting').val("id");
+			    if (sorting=="idasc") {
+			    	$('#sortBy').val("asc");
+				} else {
+					$('#sortBy').val("desc");
+				}
+			    var totalPages = ${pageable.totalPage};
+				var startPage = ${pageable.page};
+				var maxPageItem = ${pageable.maxPageItem};
+			    $('#type').val("list");
+				$('#maxPageItem').val(maxPageItem);
+				$('#page').val(startPage);
+				$('#submitForm').submit();
+			});
+			$('#maxPageItem').on('change', function (e) {
+			    var sorting = $('#sorting').val();
+			    $('#sorting').val("id");
+			    if (sorting=="idasc") {
+			    	$('#sortBy').val("asc");
+				} else {
+					$('#sortBy').val("desc");
+				}
+			    var totalPages = ${pageable.totalPage};
+				var startPage = ${pageable.page};
+				var maxPageItem = $('#maxPageItem').val();
+			    $('#type').val("list");
+				$('#maxPageItem').val(maxPageItem);
+				$('#page').val(startPage);
+				$('#submitForm').submit();
+			});
+			$('#maxPageItem').val(${pageable.maxPageItem}).attr('selected','selected');
+			$('#sorting').val('${pageable.sorting}${pageable.sortBy}').attr('selected','selected');
+			var sorting = "${pageable.sorting}";
+			var sortBy = "${pageable.sortBy}";
 			var totalPages = ${pageable.totalPage};
 			var startPage = ${pageable.page};
 			var maxPageItem = ${pageable.maxPageItem};
@@ -139,6 +177,8 @@
 						$('#type').val("list");
 						$('#maxPageItem').val(maxPageItem);
 						$('#page').val(page);
+						$('#sorting').val(sorting);
+						$('#sortBy').val(sortBy);
 						$('#submitForm').submit();
 					}
 				}
@@ -147,18 +187,20 @@
 			});
 		});
 		$("#btnDelete").click(function (){
-			var data = {};
-			var ids = $('tbody input[type=checkbox]:checked').map(function (){
-				return $(this).val();
-			}).get();
-			console.log(ids);
-			if (ids.length == 0) {
-				alert("Chọn sản phẩm muốn xóa")
-			} else{
-				data['ids'] = ids;
-				deleteNew(data);
-			}
-			
+			if (confirm("Bạn chắc chắn muốn xóa sản phầm này?")) {
+				if (confirm("Xác nhận xóa")) {
+					var data = {};
+					var ids = $('tbody input[type=checkbox]:checked').map(function (){
+						return $(this).val();
+					}).get();
+					if (ids.length == 0) {
+						alert("Chọn sản phẩm muốn xóa")
+					} else{
+						data['ids'] = ids;
+						deleteNew(data);
+					}
+				  } 
+			  }
 		})
 		function deleteNew(data) {
 			$.ajax({
