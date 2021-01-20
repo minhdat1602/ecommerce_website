@@ -97,4 +97,9 @@ public class ProductService implements IProductService{
 	private List<Product> findByGroupId(Integer groupId) {
         return productDAO.findByGroupId(groupId);
     }
+
+	@Override
+	public List<Product> findAllByKey(String filterAttr, String key) {
+		return productDAO.findAllByKey(filterAttr,key);
+	}
 }

@@ -10,13 +10,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.ecommerce.model.Product;
+import com.ecommerce.model.Stock;
 import com.ecommerce.service.IProductService;
 import com.ecommerce.utils.HTTPUtil;
 import com.ecommerce.utils.ImageUtil;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-@WebServlet (urlPatterns = "/api/san-pham")
-public class ProductAPI extends HttpServlet{
+@WebServlet(urlPatterns = "/api/search")
+public class SearchAPI extends HttpServlet{
 	@Inject
 	private IProductService productService;
 	
@@ -33,26 +34,5 @@ public class ProductAPI extends HttpServlet{
 		product.setCollectionId(1);
 		int id = productService.save(product);
 		mapper.writeValue(resp.getOutputStream(), id);
-	}
-	
-	@Override
-	protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		ObjectMapper mapper = new ObjectMapper();
-		req.setCharacterEncoding("UTF-8");
-		resp.setContentType("application/json");
-		Product product = HTTPUtil.of(req.getReader()).toModel(Product.class);
-		product.setImageUrl(ImageUtil.createLink(product.getImageUrl()));
-		boolean success  = productService.update(product);	
-		mapper.writeValue(resp.getOutputStream(), success);
-	}
-	
-	@Override
-	protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		ObjectMapper mapper = new ObjectMapper();
-		req.setCharacterEncoding("UTF-8");
-		resp.setContentType("application/json");
-		Product deleteProduct = HTTPUtil.of(req.getReader()).toModel(Product.class);
-		productService.delete(deleteProduct.getIds());
-		mapper.writeValue(resp.getOutputStream(), "{}");
 	}
 }

@@ -25,4 +25,5 @@ public interface IProductDAO extends IGenericDAO<Product>{
 		
 		//15h50 19/1
 		boolean importProduct(Product product);
+		List<Product> findAllByKey(String filterAttr,String key);
 }

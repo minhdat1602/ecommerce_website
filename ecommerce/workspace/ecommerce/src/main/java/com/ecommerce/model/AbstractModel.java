@@ -17,7 +17,28 @@ public abstract class AbstractModel {
 	private Integer offset;
 	private Integer limit;
 	private int[] ids;
+	private String filter;
+	private String filterAttr;
+	private String key;
 	
+	public String getFilter() {
+		return filter;
+	}
+	public void setFilter(String filter) {
+		this.filter = filter;
+	}
+	public String getFilterAttr() {
+		return filterAttr;
+	}
+	public void setFilterAttr(String filterAttr) {
+		this.filterAttr = filterAttr;
+	}
+	public String getKey() {
+		return key;
+	}
+	public void setKey(String key) {
+		this.key = key;
+	}
 	public int[] getIds() {
 		return ids;
 	}

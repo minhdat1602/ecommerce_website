@@ -1,31 +1,38 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ include file="/common/taglib.jsp"%>
+<c:url var="apiURL" value="/api/search"></c:url>
+<c:url var="newURL" value="/admin/danh-sach-san-pham"></c:url>
 <!-- Header -->
 <header class="main-header " id="header">
 	<nav class="navbar navbar-static-top navbar-expand-lg">
 		<!-- search form -->
-		<div class="search-form d-none d-lg-inline-block">
-			<div class="input-group">
-				<select id="filter" style="border: none;">
-					<option disabled="disabled">Bộ lọc</option>
-					<option>Hóa đơn</option>
-					<option>Sản phẩm</option>
-					<option>Khách hàng</option>
-					<option>Quản trị viên</option>
-				</select>
-				<input type="text" name="query" id="search-input"
-					class="form-control" placeholder="Tìm kiếm" autofocus
-					autocomplete="off" />
-				<button type="button" name="search" id="search-btn"
-					class="btn btn-flat">
-					<i class="mdi mdi-magnify"></i>
-				</button>
+		<form action="<c:url value='/admin/search'/>" id="searchForm">
+			<div class="search-form d-none d-lg-inline-block">
+				<div class="input-group">
+					<select id="filter" name="filter" style="border: none;">
+						<option>--Bộ lọc--</option>
+						<option value="products">Sản phẩm</option>
+						<option value="orders">Hóa đơn</option>
+					</select>
+					<select id="filterAttr" name="filterAttr" style="border: none;">
+						<option>--Lọc theo--</option>
+						<option value="id">ID</option>
+						<option value="name">Tên</option>
+					</select> 
+					<input type="text" id="search-input"
+						class="form-control" placeholder="Tìm kiếm" autofocus
+						autocomplete="off" name = "key"/>
+					<button type="button" name="search" id="search-btn"
+						class="btn btn-flat">
+						<i class="mdi mdi-magnify"></i>
+					</button>
+				</div>
+				<div id="search-results-container">
+					<ul id="search-results"></ul>
+				</div>
 			</div>
-			<div id="search-results-container">
-				<ul id="search-results"></ul>
-			</div>
-		</div>
-
+		</form>
 		<div class="navbar-right ">
 			<ul class="nav navbar-nav">
 				<!-- User Account -->
@@ -46,5 +53,15 @@
 		</div>
 	</nav>
 
+
+	<script type="text/javascript">
+		$('#filter').val('${product.filter}').attr('selected','selected');
+		$('#filterAttr').val('${product.filterAttr}').attr('selected','selected');
+		$('#search-input').val('${product.key}');
+		$("#search-btn").click(function() {
+			$('#searchForm').submit();
+		})
+
+	</script>
 
 </header>
