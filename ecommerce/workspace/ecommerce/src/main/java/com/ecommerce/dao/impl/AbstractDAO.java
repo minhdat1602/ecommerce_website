@@ -30,6 +30,18 @@ public class AbstractDAO<T> implements IGenericDAO<T>{
 		}
 	}
 	
+//	@Override
+//	public Connection getConnection() {
+//		try {
+//			Class.forName("com.mysql.jdbc.Driver");
+//			String user = "root";
+//			String password = "LDHxfb34534";
+//			String url = "jdbc:mysql://node9546-fashi.th.app.ruk-com.cloud/fashi";
+//			return DriverManager.getConnection(url, user, password);
+//		} catch (ClassNotFoundException | SQLException e) {
+//			return null;
+//		}
+//	}
 	@Override
 	public List<T> query(String sql, RowMapper<T> rowMapper, Object... parameters) {
 		List<T> results = new ArrayList<T>();

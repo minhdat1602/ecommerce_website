@@ -1,5 +1,7 @@
 package com.ecommerce.service.impl;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
 import com.ecommerce.dao.IUserDAO;
@@ -38,6 +40,16 @@ public class UserService implements IUserService{
 	@Override
 	public User findOneByEmail(String email) {
 		return userDAO.findOneByEmail(email);
+	}
+
+	@Override
+	public List<User> findAll(User pageable) {
+		return userDAO.findAll(pageable);
+	}
+
+	@Override
+	public Integer getTotalUser() {
+		return userDAO.getTotalUser();
 	}
 
 }

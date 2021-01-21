@@ -56,7 +56,7 @@
 	src="<c:url value="/template/admin/assets/plugins/nprogress/nprogress.js" />"></script>
 	<script src="<c:url value='/ckeditor/ckeditor.js'/>" type="text/javascript"></script>
 </head>
-<body class="sidebar-fixed sidebar-dark header-light header-fixed"
+<body class="sidebar-dark header-light"
 	id="body">
 
 	<script>

@@ -74,7 +74,7 @@ public class UserDAO extends AbstractDAO<User> implements IUserDAO{
 		String sql = "select * from users where id = ?";
 		return query(sql, new UserMapper(), id).get(0);
 	}
-	//dat
+	
 	@Override
 	public User getUser(String username){
 		String sql = "select * from users where username = ?";
@@ -87,6 +87,18 @@ public class UserDAO extends AbstractDAO<User> implements IUserDAO{
 		String sql = "select * from users where email = ?";
 		List<User> list = query(sql, new UserMapper(), email);
 		return list.size() == 0 ? null :list.get(0);
+	}
+
+	@Override
+	public List<User> findAll(User pageable) {
+		String sql = "select * from users where status = 1";
+		return query(sql, new UserMapper());
+	}
+
+	@Override
+	public Integer getTotalUser() {
+		String sql = "select count(id) from users where status = 1";
+		return count(sql);
 	}
 
 }

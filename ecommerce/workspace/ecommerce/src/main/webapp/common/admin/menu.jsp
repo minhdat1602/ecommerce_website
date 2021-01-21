@@ -150,15 +150,6 @@
 								href="<c:url value ="/view/admin/statistical/buy-times.jsp"/>">
 									<span class="nav-text">Lượt mua hàng</span>
 							</a></li>
-							<li class="access-time-page"><a class="sidenav-item-link"
-								href="<c:url value ="/view/admin/statistical/access-times.jsp"/>">
-									<span class="nav-text">Lượt truy cập</span>
-							</a></li>
-							
-							<li class="favorite-product-page"><a class="sidenav-item-link"
-								href="<c:url value ="/view/admin/statistical/favorite-product.jsp"/>">
-									<span class="nav-text">Sản phẩm yêu thích</span>
-							</a></li>
 							<li class="feedback-page"><a class="sidenav-item-link"
 								href="<c:url value ="/admin/danh-sach-gop-y"/>">
 									<span class="nav-text">Góp ý</span>
@@ -167,7 +158,6 @@
 								href="<c:url value ="/view/admin/statistical/list-faq.jsp"/>">
 									<span class="nav-text">Câu hỏi thường gặp</span>
 							</a></li>
-
 						</div>
 					</ul></li>
 

@@ -1,5 +1,7 @@
 package com.ecommerce.dao;
 
+import java.util.List;
+
 import com.ecommerce.model.User;
 
 public interface IUserDAO extends IGenericDAO<User>{
@@ -13,4 +15,8 @@ public interface IUserDAO extends IGenericDAO<User>{
 	User getUser(String username);
 
 	User findOneByEmail(String email);
+
+	List<User> findAll(User pageable);
+
+	Integer getTotalUser();
 }

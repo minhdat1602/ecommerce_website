@@ -23,6 +23,7 @@ public class UserMapper implements RowMapper<User>{
 			user.setAddress(resultSet.getString("address"));
 			user.setStatus(resultSet.getInt("status"));
 			user.setGroupId(resultSet.getInt("group_id"));
+			user.setDateRegister(resultSet.getDate("date_register"));
 			//admin (code's dat)
 		} catch (SQLException e) {
 			return null;

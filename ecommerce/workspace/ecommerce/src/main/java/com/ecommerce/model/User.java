@@ -14,6 +14,7 @@ public class User extends AbstractModel {
     private String address;
     private Integer status;
     private Integer groupId;
+    private Date dateRegister;
 
     //otp for mail
     private Code code;
@@ -130,4 +131,12 @@ public class User extends AbstractModel {
     public void setGroupId(Integer groupId) {
         this.groupId = groupId;
     }
+
+	public Date getDateRegister() {
+		return dateRegister;
+	}
+
+	public void setDateRegister(Date dateRegister) {
+		this.dateRegister = dateRegister;
+	}
 }
