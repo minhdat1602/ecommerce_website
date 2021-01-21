@@ -34,7 +34,7 @@
 			</div>
 		</div>
 		<div class="container-fuild mt-3"
-			style="height: 450px; overflow-y: scroll; overflow-x: hidden;">
+			style="height: 600px; overflow-y: scroll; overflow-x: hidden;">
 			<div class="row">
 				<table class="table text-center">
 					<thead class="thead-dark">

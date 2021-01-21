@@ -69,7 +69,7 @@
 								<ul class="collapse" id="product">
 									<div class="sub-menu">
 										<li class="list-product-group-page"><a
-											href="<c:url value ="/admin/danh-sach-nhom-san-pham"/>">Nhóm
+											href="<c:url value ="/admin/danh-sach-nhom-san-pham?type=list"/>">Nhóm
 												sản phẩm</a></li>
 										<li class="list-size-page"><a
 											href="<c:url value ="/admin/danh-sach-size"/>">Kích
@@ -85,24 +85,13 @@
 
 
 
-							<li class="has-sub"><a class="sidenav-item-link"
-								href="javascript:void(0)" data-toggle="collapse"
-								data-target="#qtv" aria-expanded="false" aria-controls="widgets">
-									<span class="nav-text">Quản trị viên</span> <b class="caret"></b>
-							</a>
-								<ul class="collapse" id="qtv">
-									<div class="sub-menu">
-										<li class="list-manager-page"><a
-											href="<c:url value ="/view/admin/admin-manager/list-admin.jsp"/>">Danh
-												sách</a></li>
-										<li class="list-permission-page"><a
-											href="<c:url value ="/view/admin/admin-manager/list-permission.jsp"/>">Các
-												quyền</a></li>
-									</div>
-								</ul></li>
+							<li  class="list-permission-page"><a class="sidenav-item-link"
+								href="<c:url value ="/admin/danh-sach-quyen?type=list&sorting=customer"/>">
+									<span class="nav-text">Các quyền</span>
+							</a></li>
 							<li  class="list-customer-page"><a class="sidenav-item-link"
-								href="<c:url value ="/view/admin/customer/list-customer-information.jsp"/>">
-									<span class="nav-text">Khách hàng</span>
+								href="<c:url value ="/admin/danh-sach-nguoi-dung?type=list&page=1&maxPageItem=10&sorting=customer"/>">
+									<span class="nav-text">Người dùng</span>
 							</a></li>
 							<li class="has-sub"><a class="sidenav-item-link"
 								href="javascript:void(0)" data-toggle="collapse"

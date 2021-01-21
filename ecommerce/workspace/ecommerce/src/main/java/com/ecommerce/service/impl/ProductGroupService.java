@@ -33,4 +33,14 @@ public class ProductGroupService implements IProductGroupService{
 	public List<ProductGroup> findByParentId(Integer parentId) {
 		return productGroupDAO.findByParentId(parentId);
 	}
+
+	@Override
+	public Integer save(ProductGroup group) {
+		return productGroupDAO.save(group);
+	}
+
+	@Override
+	public boolean update(ProductGroup group) {
+		return productGroupDAO.update(group);
+	}
 }

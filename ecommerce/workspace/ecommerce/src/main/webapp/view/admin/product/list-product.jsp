@@ -23,7 +23,7 @@
 	src="<c:url value="/template/admin/assets/plugins/jquery/jquery.min.js" />"></script>
 </head>
 <body>
-<form action="<c:url value='/admin/danh-sach-san-pham'/>" method="get"
+	<form action="<c:url value='/admin/danh-sach-san-pham'/>" method="get"
 		id="submitForm">
 		<input type="hidden" id="flag-index" value=".list-product-page">
 		<h3 class="ml-4 mt-3">Danh sách sản phẩm</h3>
@@ -35,9 +35,10 @@
 							<option value="">--Chọn--</option>
 							<option value="idasc">ID (tăng dần)</option>
 							<option value="iddesc">ID (giảm dần</option>
-							
-						</select> <label for="sorting" id="labelForSorting">Sắp xếp theo: </label> <select
-							 class="p-show" name="maxPageItem" id="maxPageItem" value="${pageable.maxPageItem}">
+
+						</select> <label for="sorting" id="labelForSorting">Sắp xếp theo: </label>
+						<select class="p-show" name="maxPageItem" id="maxPageItem"
+							value="${pageable.maxPageItem}">
 							<option value="">--Chọn--</option>
 							<option value="10">10</option>
 							<option value="15">15</option>
@@ -47,7 +48,7 @@
 				</div>
 			</div>
 		</div>
-	
+
 		<div class="scrollDiv">
 			<table class="table text-center">
 				<thead class="thead-dark">
@@ -68,9 +69,11 @@
 					<c:forEach items="${listProduct}" var="product">
 						<tr>
 							<td style="line-height: 60px;"><input type="checkbox"
-								 name="checkbox" id="checkbox_${product.id}" value="${product.id}"></td>
-							<td style="line-height: 60px;"><a href="<c:url value ="/admin/danh-sach-san-pham?type=edit&id=${product.id}"/>"><i
-							class="fa fa-edit"></i></a></td>
+								name="checkbox" id="checkbox_${product.id}"
+								value="${product.id}"></td>
+							<td style="line-height: 60px;"><a
+								href="<c:url value ="/admin/danh-sach-san-pham?type=edit&id=${product.id}"/>"><i
+									class="fa fa-edit"></i></a></td>
 							<%--long ngu--%>
 							<td style="line-height: 60px;" scope="row">${product.id}</td>
 							<td style="line-height: 60px;">${product.name}</td>
@@ -83,23 +86,23 @@
 							<td style="line-height: 60px;"><a
 								href="<c:url value ="/admin/danh-sach-san-pham?type=import&id=${product.id}"/>">Nhập</a></td>
 						</tr>
-	
+
 					</c:forEach>
-					
+
 				</tbody>
-	
+
 			</table>
-					<input type="hidden" name="type" id="type" value="">
-					<input type="hidden" name="page" id="page" value="${pageable.page}"> 
-					<input type="hidden" name="sorting" id="sorting" value="${pageable.sorting}">
-					<input type="hidden" name="sortBy" id="sortBy" value="${pageable.sortBy}"> 		
-					
+			<input type="hidden" name="type" id="type" value=""> <input
+				type="hidden" name="page" id="page" value="${pageable.page}">
+			<input type="hidden" name="sorting" id="sorting"
+				value="${pageable.sorting}"> <input type="hidden"
+				name="sortBy" id="sortBy" value="${pageable.sortBy}">
+
 		</div>
-		
+
 		<div class="btn-control ml-2 mb-2">
-			<button id="checkAll" type="button"  class="btn btn-secondary">
-				Chọn tất cả
-			</button>
+			<button id="checkAll" type="button" class="btn btn-secondary">
+				Chọn tất cả</button>
 			<button id="btnDelete" type="button" class="btn btn-danger">
 				Xóa<i class="fa fa-trash ml-2"></i>
 			</button>
@@ -114,8 +117,8 @@
 				<ul class="pagination" id="pagination"></ul>
 			</nav>
 		</div>
-		
-	
+
+
 	</form>
 
 	<script type="text/javascript">
@@ -179,20 +182,20 @@
 			});
 		});
 		$("#btnDelete").click(function (){
-			if (confirm("Bạn chắc chắn muốn xóa sản phầm này?")) {
-				if (confirm("Xác nhận xóa")) {
-					var data = {};
-					var ids = $('tbody input[type=checkbox]:checked').map(function (){
-						return $(this).val();
-					}).get();
-					if (ids.length == 0) {
-						alert("Chọn sản phẩm muốn xóa")
-					} else{
+			var data = {};
+			var ids = $('tbody input[type=checkbox]:checked').map(function (){
+				return $(this).val();
+			}).get();
+			if (ids.length == 0) {
+				alert("Chọn sản phẩm muốn xóa")
+			} else{
+				if (confirm("Bạn chắc chắn muốn xóa sản phầm này?")) {
+					if (confirm("Xác nhận xóa")) {
 						data['ids'] = ids;
 						deleteNew(data);
 					}
 				  } 
-			  }
+			}
 		})
 		function deleteNew(data) {
 			$.ajax({
@@ -211,7 +214,7 @@
 			})
 		}
 	</script>
-	
+
 
 </body>
 </html>

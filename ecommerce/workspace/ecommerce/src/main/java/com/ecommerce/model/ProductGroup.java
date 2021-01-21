@@ -3,7 +3,7 @@ package com.ecommerce.model;
 public class ProductGroup extends AbstractModel{
 	private String name;
 	private String code;
-	private Integer parentGroupId;
+	private Integer parentId;
 	private Integer level;
 	public String getName() {
 		return name;
@@ -17,17 +17,18 @@ public class ProductGroup extends AbstractModel{
 	public void setCode(String code) {
 		this.code = code;
 	}
-	public Integer getParentGroupId() {
-		return parentGroupId;
-	}
-	public void setParentGroupId(Integer parentGroupId) {
-		this.parentGroupId = parentGroupId;
-	}
+
 	public Integer getLevel() {
 		return level;
 	}
 	public void setLevel(Integer level) {
 		this.level = level;
+	}
+	public Integer getParentId() {
+		return parentId;
+	}
+	public void setParentId(Integer parentId) {
+		this.parentId = parentId;
 	}
 	
 }

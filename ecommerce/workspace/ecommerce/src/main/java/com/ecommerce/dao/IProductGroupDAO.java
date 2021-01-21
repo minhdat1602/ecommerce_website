@@ -12,4 +12,6 @@ public interface IProductGroupDAO extends IGenericDAO<ProductGroup>{
 	ProductGroup findOneById(Integer groupId);
 
 	List<ProductGroup> findByParentId(Integer parentId);
+	Integer save(ProductGroup group);
+	boolean update(ProductGroup group);
 }

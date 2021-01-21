@@ -11,7 +11,7 @@
 </head>
 <body>
 <form action="<c:url value='/admin/danh-sach-quyen'/>" method="get" id="submitForm">
-	<input type="hidden" id="flag-index" value=".list-customer-page">
+	<input type="hidden" id="flag-index" value=".list-permission-page">
 	<h3 class="ml-4 mt-3">Danh sách quyền</h3>
 	
 	<div class="product-show-option">

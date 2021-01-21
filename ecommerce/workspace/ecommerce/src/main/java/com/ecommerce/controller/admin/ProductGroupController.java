@@ -22,8 +22,23 @@ public class ProductGroupController extends HttpServlet{
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		listProductGroup = productGroupService.findAll(1,2,3);
-		req.setAttribute("listProductGroup", listProductGroup);
-		req.getRequestDispatcher("/view/admin/product/list-product-group.jsp").forward(req, resp);
+		String type = req.getParameter("type");
+		if (type.equalsIgnoreCase("list")) {
+			listProductGroup = productGroupService.findAll(1,2,3);
+			req.setAttribute("listProductGroup", listProductGroup);
+			req.getRequestDispatcher("/view/admin/product/list-product-group.jsp").forward(req, resp);
+		} else if (type.equalsIgnoreCase("edit")) {
+			listProductGroup = productGroupService.findAll(1,2,3);
+			Integer id = Integer.parseInt(req.getParameter("id"));
+			ProductGroup group = productGroupService.findOneById(id);
+			req.setAttribute("group", group);
+			req.setAttribute("listProductGroup", listProductGroup);
+			req.getRequestDispatcher("/view/admin/product/add-product-group.jsp").forward(req, resp);
+		} else if (type.equalsIgnoreCase("add")) {
+			listProductGroup = productGroupService.findAll(1,2,3);
+			req.setAttribute("listProductGroup", listProductGroup);
+			req.getRequestDispatcher("/view/admin/product/add-product-group.jsp").forward(req, resp);
+		}
+		
 	}
 }

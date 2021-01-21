@@ -52,7 +52,7 @@ li#oneStock .form-group input {
     color: blue;
 }
 .content-wrapper .scrollDiv {
-    height: 450px;
+    height: 600px;
     overflow-y: scroll;
 }
  label#labelForSorting {

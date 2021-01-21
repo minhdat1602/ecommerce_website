@@ -51,4 +51,16 @@ public class ProductGroupDAO extends AbstractDAO<ProductGroup> implements IProdu
 		String sql = "select * from products_group where parent_id = ?";
 		return query(sql, new ProductGroupMapper(), parentId);
 	}
+
+	@Override
+	public Integer save(ProductGroup group) {
+		String sql = "insert into products_group (name, code, parent_id, level) values (?,?,?,?)";
+		return insert(sql, group.getName(),group.getCode(), group.getParentId(),group.getLevel());
+	}
+
+	@Override
+	public boolean update(ProductGroup group) {
+		String sql = "update products_group set code=?,name=?,parent_id=?,level=? where id = ?";
+		return updated(sql, group.getCode(),group.getName(),group.getParentId(),group.getLevel(),group.getId());
+	}
 }

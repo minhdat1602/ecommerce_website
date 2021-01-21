@@ -12,9 +12,10 @@ public class ProductGroupMapper implements RowMapper<ProductGroup>{
 		ProductGroup productGroup = new ProductGroup();
 		try {
 			productGroup.setId(resultSet.getInt("id"));
+			productGroup.setLevel(resultSet.getInt("level"));
 			productGroup.setName(resultSet.getString("name"));
 			productGroup.setCode(resultSet.getString("code"));
-			productGroup.setParentGroupId(resultSet.getInt("parent_id"));
+			productGroup.setParentId(resultSet.getInt("parent_id"));
 		} catch (SQLException e) {
 			return null;
 		}
