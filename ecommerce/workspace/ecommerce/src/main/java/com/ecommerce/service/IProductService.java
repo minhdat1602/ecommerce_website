@@ -20,4 +20,5 @@ public interface IProductService {
 	Integer save(Product product);
 	boolean update(Product product);
 	List<Product> findAllByKey(String filterAttr, String key);
+	void updateImageDetails(Product product);
 }

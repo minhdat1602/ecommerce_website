@@ -15,5 +15,13 @@ public class ImageService implements IImageService{
 	public List<Images> findAllByProductId(Integer productId) {
 		return imageDAO.findAllByProductId(productId);
 	}
+	@Override
+	public Integer save(String url) {
+		return imageDAO.save(url);
+	}
+	@Override
+	public void delete(Integer id) {
+		imageDAO.delete(id);
+	}
 
 }

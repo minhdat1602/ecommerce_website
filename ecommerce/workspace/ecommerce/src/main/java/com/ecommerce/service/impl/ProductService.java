@@ -8,16 +8,24 @@ import javax.inject.Inject;
 import com.ecommerce.dao.IProductDAO;
 import com.ecommerce.dao.impl.ProductDAO;
 import com.ecommerce.model.Collection;
+import com.ecommerce.model.Images;
 import com.ecommerce.model.Product;
 import com.ecommerce.model.ProductGroup;
+import com.ecommerce.service.IImageService;
+import com.ecommerce.service.IImageTypeService;
 import com.ecommerce.service.IProductGroupService;
 import com.ecommerce.service.IProductService;
+import com.ecommerce.utils.ImageUtil;
 
 public class ProductService implements IProductService{
 	@Inject 
 	private IProductDAO productDAO;
 	 @Inject
-	    private IProductGroupService productGroupService;
+	private IProductGroupService productGroupService;
+	 @Inject
+	 private IImageService imageService;
+	 @Inject
+	 private IImageTypeService imageTypeService;
 		
 	@Override
 	public List<Product> findAll() {
@@ -101,5 +109,26 @@ public class ProductService implements IProductService{
 	@Override
 	public List<Product> findAllByKey(String filterAttr, String key) {
 		return productDAO.findAllByKey(filterAttr,key);
+	}
+
+	@Override
+	public void updateImageDetails(Product product) {
+		List<Images> list = imageService.findAllByProductId(product.getId());
+		imageTypeService.deleteAllByProductId(product.getId());
+		if (list!=null) {
+			for (Images images : list) {
+				imageService.delete(images.getId());
+			}
+		}
+		String[] listImage = product.getListImage();
+		List<Integer> ids = new ArrayList<Integer>();
+		for (String url : listImage) {
+			url = ImageUtil.createLink(url);
+			Integer id = imageService.save(url);
+			ids.add(id);
+		}
+		for (Integer id : ids) {
+			imageTypeService.save(id,product.getId());
+		}
 	}
 }

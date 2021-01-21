@@ -26,12 +26,15 @@
 		</c:if>
 	</h3>
 	<form id="formSubmit" action="" class="p-5">
+		
 		<div class="form-group">
 			<label for="exampleFormControlInput1">Mã sản phẩm</label>
 			<c:if test="${product != null}">
 				<input type="text" class="form-control"
 					id="code" name="code" placeholder="Mã sản phẩm"
 					value="${product.code}">
+					<input type="hidden" class="form-control"
+					id="id" name="id" value="${product.id}">
 			</c:if>
 			<c:if test="${product == null}">
 				<input type="text" class="form-control"
@@ -74,6 +77,27 @@
 					id="imageUrl" name="imageUrl" placeholder="Link" value="">
 			</c:if>
 		</div>
+		<div class="form-group" id="imageDetails">
+			<label for="exampleFormControlInput1">Hình ảnh chi tiết</label>
+			<c:if test="${product != null}">
+				<c:forEach items="${listImage}" var="image">
+					<div class="oneImage">
+						<input type="text" class="imageType form-control"
+							name="imageDetails" placeholder="Link"
+							value="${image.imageUrl}">
+							<img id="imagedetails" alt="" src="${image.imageUrl}">
+					</div>
+					<button style="color: white; text-decoration: none; width: 10%;margin-left:85px;" type="button"
+					 class="deleteImage btn btn-danger ml-5 mb-3"> Xóa ảnh</button>
+				</c:forEach>		
+				
+			</c:if>
+		</div>
+		
+		
+		<button style="color: white; text-decoration: none; width: 20%;display:block;margin-top:25px;" type="button"
+					class="btn btn-info ml-5 mb-3" id='addImage'> Thêm ảnh
+		</button>
 		<div class="form-group">
 			<label for="exampleFormControlSelect1">Phân loại</label> <select
 				class="form-control" id="groupId" name ="groupId">
@@ -156,21 +180,43 @@
 			Cập nhật sản phẩm
 		</c:if>
 	 </a>
-		
-		
+
 		<script type="text/javascript">
 		 	var ckeditor = "";
 	        $(document).ready(function (){
 	            ckeditor = CKEDITOR.replace('description');
 	        })
+	        $("#addImage").click(function (){
+	        	$("#imageDetails").append('<div class="oneImage"><input type="text" class="imageType form-control" name="imageDetails" placeholder="Link" value=""></div><button style="color: white; text-decoration: none; width: 10%;margin-left:85px;" type="button" class="deleteImage btn btn-danger ml-5 mb-3"> Xóa ảnh</button>');
+	        	 $(".deleteImage").click(function (){
+	        		 if (confirm("Xóa ảnh ?")) {
+			        	 ($(this).prev(".oneImage")).remove();
+			        	 $(this).remove();
+	        		 }
+		        })
+	        })
 	        
+	        
+	         $(".deleteImage").click(function (){
+	        	 if (confirm("Xóa ảnh ?")) {
+	        		 ($(this).prev(".oneImage")).remove();
+		        	 $(this).remove();
+				}
+	        })
 	        $("#btnAddOrUpdate").click(function (){
 				var data = {};
+				 var imageDetails =  $('.imageType').map(function (){
+						return $(this).val();
+					}).get();
 				var dataForm = $("#formSubmit").serializeArray();
 				$.each(dataForm, function (i, v){
-					data[""+v.name+""] = v.value;
+					if (!(v.name == "imageDetails")) {
+						data[""+v.name+""] = v.value;
+					}
 				})
+				data["listImage"] = imageDetails;
 				data["description"] = ckeditor.getData();
+
 				if ($("#id").val() == ""){
 					addNew(data);
 				} else {

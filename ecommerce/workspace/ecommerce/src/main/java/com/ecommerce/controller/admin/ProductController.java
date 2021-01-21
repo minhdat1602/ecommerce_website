@@ -11,12 +11,14 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.ecommerce.model.Images;
 import com.ecommerce.model.Product;
 import com.ecommerce.model.ProductBrand;
 import com.ecommerce.model.ProductColor;
 import com.ecommerce.model.ProductGroup;
 import com.ecommerce.model.ProductSize;
 import com.ecommerce.model.Stock;
+import com.ecommerce.service.IImageService;
 import com.ecommerce.service.IProductBrandService;
 import com.ecommerce.service.IProductColorService;
 import com.ecommerce.service.IProductGroupService;
@@ -41,6 +43,8 @@ public class ProductController extends HttpServlet {
 	private IProductColorService productColorService;
 	@Inject
 	private IProductSizeService productSizeService;
+	@Inject
+	private IImageService imageService;
 	
 	private List<Stock> listStock;
 	private List<ProductBrand> listProductBrand;
@@ -62,8 +66,11 @@ public class ProductController extends HttpServlet {
 			if (type.equalsIgnoreCase("edit")) {
 				String idStr = req.getParameter("id");
 				Integer id = Integer.parseInt(idStr);
+				List<Images> listImage = new ArrayList<Images>();
+				listImage = imageService.findAllByProductId(id);
 				product = productService.findOne(id);
 				req.setAttribute("product", product);
+				req.setAttribute("listImage", listImage);
 				req.getRequestDispatcher("/view/admin/product/add-product.jsp").forward(req, resp);
 			} else if (type.equalsIgnoreCase("add")) {	
 				req.getRequestDispatcher("/view/admin/product/add-product.jsp").forward(req, resp);

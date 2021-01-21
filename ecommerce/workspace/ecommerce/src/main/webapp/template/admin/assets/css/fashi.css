@@ -3,6 +3,11 @@
     position: relative;
     height: 450px;
 }
+img#imagedetails {
+    width: 175px;
+    height: 175px;
+    margin-left:40px;
+}
 .navbar-right {
     position: absolute;
     right: 0;

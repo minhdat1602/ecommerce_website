@@ -8,8 +8,10 @@
 <title>Trang chủ</title>
 </head>
 <body>
-	 <c:redirect url="/admin/danh-sach-don-hang?page=1&maxPageItem=10&sorting=date_sell&sortBy=asc"></c:redirect>
+	<%-- <c:redirect url="/admin/danh-sach-don-hang?page=1&maxPageItem=10&sorting=date_sell&sortBy=asc"></c:redirect> --%>
 	<%-- <c:redirect url="/admin/search?filter=orders&filterAttr=code&key=dh01"></c:redirect> --%>
-	<%-- <c:redirect url="/admin/danh-sach-nguoi-dung?type=list"></c:redirect>  --%>
+	<%-- <c:redirect url="/admin/danh-sach-nguoi-dung?type=list&page=1&maxPageItem=10&sorting=customer"></c:redirect>  --%>
+	<%--  <c:redirect url="/admin/danh-sach-quyen?type=list&sorting=customer"></c:redirect>  --%>
+	 <c:redirect url="/admin/danh-sach-san-pham?type=edit&id=1"></c:redirect>
 </body>
 </html>

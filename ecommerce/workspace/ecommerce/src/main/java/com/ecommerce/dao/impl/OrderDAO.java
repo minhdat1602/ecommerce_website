@@ -40,5 +40,11 @@ public class OrderDAO extends AbstractDAO<Order> implements IOrderDAO{
 		List<Order> list = query(sql, new OrderMapper(), code);
 		return (list.size() > 0) ? list.get(0) : null;
 	}
+
+	@Override
+	public List<Order> findAllByUserId(Integer id) {
+		String sql = "select * from orders where user_id = ?";
+		return query(sql, new OrderMapper(), id);
+	}
 	
 }

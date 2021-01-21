@@ -91,8 +91,14 @@ public class UserDAO extends AbstractDAO<User> implements IUserDAO{
 
 	@Override
 	public List<User> findAll(User pageable) {
-		String sql = "select * from users where status = 1";
-		return query(sql, new UserMapper());
+		String sql;
+		if (pageable.getGroupId()!=null) {
+			sql = "select * from users where status = 1 and group_id = ? limit ?,?";
+		} else {
+			sql = "select * from users where status = 1 and group_id <> 1 limit ?,?";
+			return query(sql, new UserMapper(),pageable.getOffset(),pageable.getMaxPageItem());
+		}
+		return query(sql, new UserMapper(),pageable.getGroupId(),pageable.getOffset(),pageable.getMaxPageItem());
 	}
 
 	@Override

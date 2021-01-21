@@ -38,4 +38,9 @@ public class OrderService implements IOrderService{
 		return orderDAO.findOne(code);
 	}
 
+	@Override
+	public List<Order> findAllByUserId(Integer id) {
+		return orderDAO.findAllByUserId(id);
+	}
+
 }

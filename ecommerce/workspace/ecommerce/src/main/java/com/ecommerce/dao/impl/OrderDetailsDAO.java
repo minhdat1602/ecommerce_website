@@ -13,5 +13,4 @@ public class OrderDetailsDAO extends AbstractDAO<OrderDetails> implements IOrder
 		String sql = "select * from orders_detail where order_id = ?";
 		return query(sql, new OrderDetailsMapper(), id);
 	}
-
 }

@@ -26,12 +26,14 @@ public class ProductAPI extends HttpServlet{
 		req.setCharacterEncoding("UTF-8");
 		resp.setContentType("application/json");
 		Product product = HTTPUtil.of(req.getReader()).toModel(Product.class);
-		product.setImageUrl(ImageUtil.createLink(product.getImageUrl()));
 		product.setStatus(1);
 		product.setNewProduct(1);
 		product.setHotProduct(0);
 		product.setCollectionId(1);
+		product.setImageUrl(ImageUtil.createLink(product.getImageUrl()));
 		int id = productService.save(product);
+		product.setId(id);
+		productService.updateImageDetails(product);
 		mapper.writeValue(resp.getOutputStream(), id);
 	}
 	
@@ -42,6 +44,7 @@ public class ProductAPI extends HttpServlet{
 		resp.setContentType("application/json");
 		Product product = HTTPUtil.of(req.getReader()).toModel(Product.class);
 		product.setImageUrl(ImageUtil.createLink(product.getImageUrl()));
+		productService.updateImageDetails(product);
 		boolean success  = productService.update(product);	
 		mapper.writeValue(resp.getOutputStream(), success);
 	}

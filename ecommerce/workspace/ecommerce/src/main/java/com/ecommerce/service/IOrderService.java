@@ -14,4 +14,6 @@ public interface IOrderService {
 	List<Order> findAll(Order pageable);
 
 	Order findOne(String code);
+
+	List<Order> findAllByUserId(Integer id);
 }

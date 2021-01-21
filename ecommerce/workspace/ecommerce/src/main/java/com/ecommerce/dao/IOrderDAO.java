@@ -16,4 +16,6 @@ public interface IOrderDAO extends IGenericDAO<Order>{
 
 	Order findOne(String code);
 
+	List<Order> findAllByUserId(Integer id);
+
 }

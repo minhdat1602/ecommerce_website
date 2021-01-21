@@ -21,6 +21,7 @@ public class Product extends AbstractModel{
 	private Integer hotProduct;
 	private Integer totalInventory;
 	private List<Stock> listStock;
+	private String[] listImage;
 	
 	public Integer getNewProduct() {
 		return newProduct;
@@ -124,6 +125,12 @@ public class Product extends AbstractModel{
 	}
 	public void setListStock(List<Stock> listStock) {
 		this.listStock = listStock;
+	}
+	public String[] getListImage() {
+		return listImage;
+	}
+	public void setListImage(String[] listImage) {
+		this.listImage = listImage;
 	}
 
 	
