@@ -11,26 +11,8 @@
 </head>
 <body>
 	<input type="hidden" id="flag-index" value=".feedback-page">
-	<h3 class="ml-4 mt-3">Danh sách góp ý</h3>
-	<div class="product-show-option">
-		<div class="row">
-			<div class="col-lg-7 col-md-7">
-				<div class="select-option">
-					<select id="sorting" class="sorting">
-						<option value="">Tên</option>
-						<option value="">Gía cao</option>
-						<option value="">Gía thấp</option>
-						<option value="">Tồn kho</option>
-					</select> <label for="sorting" id="labelForSorting">Sắp xếp theo: </label> <select
-						id="p-show" class="p-show">
-						<option value="">10</option>
-						<option value="">15</option>
-						<option value="">20</option>
-					</select> <label for="p-show" id="labelForTotalItem">Hiển thị:</label>
-				</div>
-			</div>
-		</div>
-	</div>
+	<h3 class="ml-4 mt-3 mb-5">Danh sách góp ý</h3>
+	
 	<div class="scrollDiv">
 		<table class="table text-center">
 			<thead class="thead-dark">
@@ -54,18 +36,6 @@
 			</tbody>
 		</table>
 	</div>
-
-	<nav aria-label="Page navigation example">
-		<ul class="pagination">
-			<li class="page-item"><a class="page-link" href="#">Previous</a></li>
-			<li class="page-item"><a class="page-link" href="#">1</a></li>
-			<li class="page-item"><a class="page-link" href="#">2</a></li>
-			<li class="page-item"><a class="page-link" href="#">3</a></li>
-			<li class="page-item"><a class="page-link" href="#">Next</a></li>
-		</ul>
-	</nav>
-
-
 
 </body>
 </html>

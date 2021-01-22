@@ -22,6 +22,7 @@ public class Product extends AbstractModel{
 	private Integer totalInventory;
 	private List<Stock> listStock;
 	private String[] listImage;
+	private Integer buyTimes;
 	
 	public Integer getNewProduct() {
 		return newProduct;
@@ -131,6 +132,12 @@ public class Product extends AbstractModel{
 	}
 	public void setListImage(String[] listImage) {
 		this.listImage = listImage;
+	}
+	public Integer getBuyTimes() {
+		return buyTimes;
+	}
+	public void setBuyTimes(Integer buyTimes) {
+		this.buyTimes = buyTimes;
 	}
 
 	

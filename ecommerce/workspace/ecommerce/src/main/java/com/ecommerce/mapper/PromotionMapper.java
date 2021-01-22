@@ -18,8 +18,8 @@ public class PromotionMapper implements RowMapper<Promotion>{
 			promotion.setDescriptions(resultSet.getString("descriptions"));
 			promotion.setImageUrl(resultSet.getString("image_url"));
 			promotion.setValue(resultSet.getInt("value"));
-			promotion.setDateBegin(resultSet.getTimestamp("date_begin"));
-			promotion.setDateEnd(resultSet.getTimestamp("date_end"));
+			promotion.setDateBegin(resultSet.getDate("date_begin"));
+			promotion.setDateEnd(resultSet.getDate("date_end"));
 		} catch (SQLException e) {
 			return null;
 		}

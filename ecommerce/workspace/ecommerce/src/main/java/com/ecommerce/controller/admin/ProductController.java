@@ -26,8 +26,6 @@ import com.ecommerce.service.IProductService;
 import com.ecommerce.service.IProductSizeService;
 import com.ecommerce.service.IStockService;
 import com.ecommerce.utils.FormUtil;
-import com.ecommerce.utils.HTTPUtil;
-import com.fasterxml.jackson.databind.ObjectMapper;
 
 @WebServlet(urlPatterns = "/admin/danh-sach-san-pham")
 public class ProductController extends HttpServlet {

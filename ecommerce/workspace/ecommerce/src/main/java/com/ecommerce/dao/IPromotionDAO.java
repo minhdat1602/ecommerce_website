@@ -8,4 +8,8 @@ public interface IPromotionDAO extends IGenericDAO<Promotion>{
 	List<Promotion> findAll();
 
 	Promotion findOneById(Integer id);
+
+	void delete(int id, Integer promotionId);
+
+	Integer save(int i, Integer id);
 }

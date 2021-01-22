@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="/common/taglib.jsp"%>
+<%@page import="com.ecommerce.utils.PriceUtils"%>
+<c:url var="apiURL" value="/api/san-pham-khuyen-mai"></c:url>
+<c:url var="newURL" value="/admin/danh-sach-khuyen-mai"></c:url>
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,277 +11,221 @@
 <title>Thêm chương trình khuyến mãi</title>
 </head>
 <body>
-<input type="hidden" id="flag-index" value=".list-promotion-page">
-	<h3 class="ml-4 mt-3">Thêm chương trình khuyến mãi</h3>
-	<form action="" class="p-5">
-		<div class="form-group">
-			<label for="exampleFormControlInput1">Mã chương trình</label> <input
-				type="text" class="form-control" id="exampleFormControlInput1"
-				placeholder="Mã chương trình">
-		</div>
-		<div class="form-group">
-			<label for="exampleFormControlInput1">Tên chương trình</label> <input
-				type="text" class="form-control" id="exampleFormControlInput1"
-				placeholder="Tên chương trình">
-		</div>
-		<div class="form-group">
-			<label for="exampleFormControlInput1">Hỉnh ảnh</label> <input
-				type="file" class="form-control" id="exampleFormControlInput1"
-				placeholder="Tên chương trình">
-		</div>
-		<div class="form-group">
-			<label for="exampleFormControlInput1" class=" d-block">Mô tả chương trình</label> 
-			<textarea rows="10" cols="90" class="p-2"></textarea>
-		</div>
-		<div class="form-group">
-			<label for="exampleFormControlInput1">Giảm giá</label> <input
-				type="text" class="form-control" id="exampleFormControlInput1"
-				placeholder="Giảm giá">
-		</div>
-		<div class="form-group">
-			<label for="exampleFormControlInput1">Bắt đầu</label> <input
-				type="text" class="form-control" id="exampleFormControlInput1"
-				placeholder="Bắt đầu">
-		</div>
-		<div class="form-group">
-			<label for="exampleFormControlInput1">Kết thúc</label> <input
-				type="text" class="form-control" id="exampleFormControlInput1"
-				placeholder="Kết thúc">
-		</div>
-		<div class="form-group" id="attribute">
-			<label for="exampleFormControlSelect2" style="display: block;">Thêm sản phẩm vào chương trình</label>
-			<!-- <ul id="size_color_quantity">
-				<li id="line"><select id="group1">
-						<option>Nam</option>
-						<option>M</option>
-						<option>L</option>
-						<option>XL</option>
-						<option>XXL</option>
-				</select> <select id="color">
-						<option>Đỏ</option>
-						<option>Vàng</option>
-						<option>Tím</option>
-						<option>Trắng</option>
-				</select> <input type="text" id="quntity" name='quantity'></li>	
-			</ul> -->
-			
-			
-			<div class="scrollDiv" style="height: 70px;">
-				<table class="table text-center">
-					<thead class="thead-dark">
-						<tr>
-							<th scope="col">Xóa</th>
-							<th scope="col">Cập nhật</th>
-							<th scope="col">ID</th>
-							<th scope="col">Tên</th>
-							<th scope="col">Hình ảnh</th>
-							<th scope="col"><select id="category"
-								style="cursor: pointer;">
-									<option>Phân loại</option>
-									<optgroup label="Quần">
-										<option>Tất cả Quần</option>
-										<option>Kaki</option>
-										<option>Tây</option>
-									</optgroup>
-									<optgroup label="Áo">
-										<option>Tất cả Áo</option>
-										<option>Thun</option>
-										<option>Khoác</option>
-										<option>Sơ mi</option>
-									</optgroup>
-									<optgroup label="Phụ kiện">
-										<option>Tất cả PK</option>
-										<option>Thắt lưng</option>
-										<option>Ví</option>
-										<option>Tất</option>
-									</optgroup>
-							</select></th>
-							<th scope="col"><select id="for" style="cursor: pointer;">
-									<option>Dành cho</option>
-									<option>Nam</option>
-									<option>Nữ</option>
-									<option>Trẻ em</option>
-							</select></th>
-							<th scope="col">Gía bán</th>
-							<th scope="col">Gía niêm yết</th>
-							<th scope="col"><select id="status" style="cursor: pointer;">
-									<option>Trạng thái</option>
-									<option>Thông thường</option>
-									<option>Hàng mới</option>
-									<option>Nổi bật</option>
-									<option>Khuyến mãi</option>
-							</select></th>
-							<th scope="col">Tồn kho</th>
-						</tr>
-					</thead>
-<%-- 					<tbody class="scrollDiv">
+	<input type="hidden" id="flag-index" value=".list-promotion-page">
+	<h3 class="ml-4 mt-3">
+		<c:if test="${promotion == null}">
+			Thêm chương trình khuyến mãi
+		</c:if>
+		<c:if test="${promotion != null}">
+			Chỉnh sửa chương trình khuyến mãi
+		</c:if>
+	</h3>
+	<form id="formSubmit" action="" class="p-5">
 
-						<tr>
-							<td style="line-height: 60px;"><input type="checkbox"
-								name="delete"></td>
-							<td style="line-height: 60px;"><a href=""><i
-									class="fa fa-edit"></i></a></td>
-							<td style="line-height: 60px;" scope="row">1</td>
-							<td style="line-height: 60px;">Áo len</td>
-							<td><img style="width: 60px; height: 60px;" alt=""
-								src="<c:url value="/template/admin/images/products/product-1.jpg"/>"></td>
-							<td style="line-height: 60px;">Áo</td>
-							<td style="line-height: 60px;">Nữ</td>
-							<td style="line-height: 60px;">100.000</td>
-							<td style="line-height: 60px;">200.000</td>
-							<td style="line-height: 60px;">Khuyến mãi</td>
-							<td style="line-height: 60px;">158</td>
-						</tr>
-						<tr>
-							<td style="line-height: 60px;"><input type="checkbox"
-								name="delete"></td>
-							<td style="line-height: 60px;"><a href=""><i
-									class="fa fa-edit"></i></a></td>
-							<td style="line-height: 60px;" scope="row">2</td>
-							<td style="line-height: 60px;">Áo len croptop</td>
-							<td><img style="width: 60px; height: 60px;" alt=""
-								src="<c:url value="/template/admin/images/products/product-2.jpg"/>"></td>
-							<td style="line-height: 60px;">Áo</td>
-							<td style="line-height: 60px;">Nữ</td>
-							<td style="line-height: 60px;">150.000</td>
-							<td style="line-height: 60px;">200.000</td>
-							<td style="line-height: 60px;">Khuyến mãi</td>
-							<td style="line-height: 60px;">98</td>
-						</tr>
-						<tr>
-							<td style="line-height: 60px;"><input type="checkbox"
-								name="delete"></td>
-							<td style="line-height: 60px;"><a href=""><i
-									class="fa fa-edit"></i></a></td>
-							<td style="line-height: 60px;" scope="row">3</td>
-							<td style="line-height: 60px;">Áo khoác kaki</td>
-							<td><img style="width: 60px; height: 60px;" alt=""
-								src="<c:url value="/template/admin/images/products/product-3.jpg"/>"></td>
-							<td style="line-height: 60px;">Áo</td>
-							<td style="line-height: 60px;">Nam</td>
-							<td style="line-height: 60px;">220.000</td>
-							<td style="line-height: 60px;">220.000</td>
-							<td style="line-height: 60px;">Hàng mới</td>
-							<td style="line-height: 60px;">35</td>
-						</tr>
-						<tr>
-							<td style="line-height: 60px;"><input type="checkbox"
-								name="delete"></td>
-							<td style="line-height: 60px;"><a href=""><i
-									class="fa fa-edit"></i></a></td>
-							<td style="line-height: 60px;" scope="row">4</td>
-							<td style="line-height: 60px;">Khăn choàng cổ</td>
-							<td><img style="width: 60px; height: 60px;" alt=""
-								src="<c:url value="/template/admin/images/products/product-4.jpg"/>"></td>
-							<td style="line-height: 60px;">Phụ kiện</td>
-							<td style="line-height: 60px;">Nữ</td>
-							<td style="line-height: 60px;">100.000</td>
-							<td style="line-height: 60px;">100.000</td>
-							<td style="line-height: 60px;">Hàng mới</td>
-							<td style="line-height: 60px;">45</td>
-						</tr>
-						<tr>
-							<td style="line-height: 60px;"><input type="checkbox"
-								name="delete"></td>
-							<td style="line-height: 60px;"><a href=""><i
-									class="fa fa-edit"></i></a></td>
-							<td style="line-height: 60px;" scope="row">5</td>
-							<td style="line-height: 60px;">Nón lưỡi trai</td>
-							<td><img style="width: 60px; height: 60px;" alt=""
-								src="<c:url value="/template/admin/images/products/product-5.jpg"/>"></td>
-							<td style="line-height: 60px;">Phụ kiện</td>
-							<td style="line-height: 60px;">Nữ</td>
-							<td style="line-height: 60px;">80.000</td>
-							<td style="line-height: 60px;">80.000</td>
-							<td style="line-height: 60px;">Hàng mới</td>
-							<td style="line-height: 60px;">33</td>
-						</tr>
-						<tr>
-							<td style="line-height: 60px;"><input type="checkbox"
-								name="delete"></td>
-							<td style="line-height: 60px;"><a href=""><i
-									class="fa fa-edit"></i></a></td>
-							<td style="line-height: 60px;" scope="row">6</td>
-							<td style="line-height: 60px;">Áo len tay dài</td>
-							<td><img style="width: 60px; height: 60px;" alt=""
-								src="<c:url value="/template/admin/images/products/product-6.jpg"/>"></td>
-							<td style="line-height: 60px;">Áo</td>
-							<td style="line-height: 60px;">Nữ</td>
-							<td style="line-height: 60px;">190.000</td>
-							<td style="line-height: 60px;">190.000</td>
-							<td style="line-height: 60px;">Hàng mới</td>
-							<td style="line-height: 60px;">61</td>
-						</tr>
-						<tr>
-							<td style="line-height: 60px;"><input type="checkbox"
-								name="delete"></td>
-							<td style="line-height: 60px;"><a href=""><i
-									class="fa fa-edit"></i></a></td>
-							<td style="line-height: 60px;" scope="row">7</td>
-							<td style="line-height: 60px;">Ba lô</td>
-							<td><img style="width: 60px; height: 60px;" alt=""
-								src="<c:url value="/template/admin/images/products/product-7.jpg"/>"></td>
-							<td style="line-height: 60px;">Phụ kiện</td>
-							<td style="line-height: 60px;">Nam</td>
-							<td style="line-height: 60px;">120.000</td>
-							<td style="line-height: 60px;">120.000</td>
-							<td style="line-height: 60px;">Hàng mới</td>
-							<td style="line-height: 60px;">71</td>
-						</tr>
-						<tr>
-							<td style="line-height: 60px;"><input type="checkbox"
-								name="delete"></td>
-							<td style="line-height: 60px;"><a href=""><i
-									class="fa fa-edit"></i></a></td>
-							<td style="line-height: 60px;" scope="row">8</td>
-							<td style="line-height: 60px;">Áo khoác dù</td>
-							<td><img style="width: 60px; height: 60px;" alt=""
-								src="<c:url value="/template/admin/images/products/product-8.jpg"/>"></td>
-							<td style="line-height: 60px;">Áo</td>
-							<td style="line-height: 60px;">Nam</td>
-							<td style="line-height: 60px;">250.000</td>
-							<td style="line-height: 60px;">250.000</td>
-							<td style="line-height: 60px;">Hàng mới</td>
-							<td style="line-height: 60px;">78</td>
-						</tr>
- --%>
-
-					</tbody>
-				</table>
-			</div>
-
-
-
-			<div class="btn-control ml-2 mb-2">
-				<button type="button" class="btn btn-danger">
-					Xóa<i class="fa fa-trash ml-2"></i>
-				</button>
-				<button type="button" class="btn btn-danger">
-					Xóa tất cả<i class="fa fa-trash  ml-2"></i>
-				</button>
-				<a style="color: white; text-decoration: none;"
-					href="<c:url value ="/view/admin/sale/add-product-promotions.jsp"/>"
-					type="button" class="btn btn-info"> Thêm<i
-					class="fa fa-plus ml-2"></i>
-				</a>
-			</div>
-					
-					
-					
-			<!-- 	<script type="text/javascript">
-					$(document).ready(function() {
-						$('#addLine').on('click', function(event) {
-							event.preventDefault();
-							$('#size_color_quantity').append('<li class="mt-1"><select id="size"><option>S</option><option>M</option><option>L</option><option>XL</option><option>XXL</option></select><select id="color"><option>Đỏ</option><option>Vàng</option><option>Tím</option><option>Trắng</option></select><input type="text" id="quntity" name="quantity"></li>'); 
-						});
-					});
-				</script> -->
+		<div class="form-group">
+			<label for="exampleFormControlInput1">Mã chương trình khuyến
+				mãi</label>
+			<c:if test="${promotion != null}">
+				<input type="text" class="form-control" id="code" name="code"
+					placeholder="Mã sản phẩm" value="${promotion.code}">
+			</c:if>
+			<c:if test="${promotion == null}">
+				<input type="text" class="form-control" id="code" name="code"
+					placeholder="Mã chương trình khuyến mãi" value="">
+			</c:if>
 		</div>
-		
-		
+		<div class="form-group">
+			<label for="exampleFormControlInput1">Tiêu đề</label>
+			<c:if test="${promotion != null}">
+				<input type="text" class="form-control" id="header" name="header"
+					placeholder="Nhập giá trị" value="${promotion.header}">
+			</c:if>
+			<c:if test="${promotion == null}">
+				<input type="text" class="form-control" id="header" name="header"
+					placeholder="Nhập tiêu đề">
+			</c:if>
+		</div>
+		<div class="form-group">
+			<label for="exampleFormControlInput1">Tên chương trình khuyến
+				mãi</label>
+			<c:if test="${promotion != null}">
+				<input type="text" class="form-control" id="name" name="name"
+					placeholder="Tên sản phẩm" value="${promotion.name}">
+			</c:if>
+			<c:if test="${promotion == null}">
+				<input type="text" class="form-control" id="name" name="name"
+					placeholder="Tên chương trình khuyến mãi" value="">
+			</c:if>
+		</div>
+		<div class="form-group">
+			<label for="exampleFormControlInput1" class="d-block">Mô tả
+				chương trình khuyến mãi</label>
+			<c:if test="${promotion != null}">
+				<textarea id="description" name="description" rows="5" cols="50"
+					name="descriptions" value="">${promotion.descriptions}</textarea>
+			</c:if>
+			<c:if test="${promotion == null}">
+				<textarea id="description" name="description" rows="5" cols="50"
+					name="description" value=""></textarea>
+			</c:if>
+		</div>
+		<div class="form-group">
+			<label for="exampleFormControlInput1">Hình ảnh chương trình
+				khuyến mãi</label>
+			<c:if test="${promotion != null}">
+				<input type="text" class="form-control" id="imageUrl"
+					name="imageUrl" placeholder="Link" value="${promotion.imageUrl}">
+				<img alt="" src="${promotion.imageUrl}">
+			</c:if>
+			<c:if test="${promotion == null}">
+				<input type="text" class="form-control" id="imageUrl"
+					name="imageUrl" placeholder="Link" value="">
+			</c:if>
+		</div>
+
+		<div class="form-group">
+			<label for="exampleFormControlInput1">Giảm giá %</label>
+			<c:if test="${promotion != null}">
+				<input type="text" class="form-control" id="value" name="value"
+					placeholder="Nhập giá trị" value="${promotion.value}">
+			</c:if>
+			<c:if test="${promotion == null}">
+				<input type="text" class="form-control" id="originPrice"
+					name="originPrice" placeholder="Nhập giá trị">
+			</c:if>
+		</div>
+
+		<div class="form-group">
+			<label for="exampleFormControlInput1">Ngày bắt đầu</label>
+			<c:if test="${promotion != null}">
+				<input type="date" class="form-control" id="dateBegin"
+					name="dateBegin" placeholder="Nhập giá trị"
+					value="${promotion.dateBegin}">
+			</c:if>
+			<c:if test="${promotion == null}">
+				<input type="date" class="form-control" id="dateBegin"
+					name="dateBegin" placeholder="Chọn ngày bắt đầu">
+			</c:if>
+		</div>
+		<div class="form-group">
+			<label for="exampleFormControlInput1">Ngày kết thúc</label>
+			<c:if test="${promotion != null}">
+				<input type="date" class="form-control" id="dateBegin"
+					name="dateEnd" placeholder="Nhập giá trị"
+					value="${promotion.dateEnd}">
+			</c:if>
+			<c:if test="${promotion == null}">
+				<input type="date" class="form-control" id="dateEnd" name="dateEnd"
+					placeholder="Chọn ngày bắt đầu">
+			</c:if>
+		</div>
+
+		<label style="font-size: 25px;" for="exampleFormControlInput1">Danh
+			sách sản phẩm trong chương trình</label>
+		<div class="scrollDiv">
+			<table class="table text-center">
+				<thead class="thead-dark">
+					<tr>
+						<th scope="col">Chọn</th>
+						<th scope="col">ID</th>
+						<th scope="col">Tên</th>
+						<th scope="col">Hình ảnh</th>
+						<th scope="col">Phân loại</th>
+						<th scope="col">Gía bán</th>
+						<th scope="col">Gía niêm yết</th>
+						<th scope="col">Tồn kho</th>
+						<th scope="col">Nhập hàng</th>
+					</tr>
+				</thead>
+				<tbody class="scrollDiv">
+					<c:if test="${not empty listProduct}">
+						<c:forEach items="${listProduct}" var="product">
+							<tr>
+								<td style="line-height: 60px;"><input type="checkbox"
+								name="checkbox" id="checkbox_${product.id}"
+								value="${product.id}"></td>
+								<td style="line-height: 60px;" scope="row">${product.id}</td>
+								<td style="line-height: 60px;">${product.name}</td>
+								<td><img style="width: 60px; height: 60px;" alt=""
+									src="${product.imageUrl}"></td>
+								<td style="line-height: 60px;">${product.groupProduct}</td>
+								<td style="line-height: 60px;">${PriceUtils.convert(product.sellPrice)}</td>
+								<td style="line-height: 60px;">${PriceUtils.convert(product.originPrice)}</td>
+								<td style="line-height: 60px;">${product.totalInventory}</td>
+								<td style="line-height: 60px;"><a
+									href="<c:url value ="/admin/danh-sach-san-pham?type=import&id=${product.id}"/>">Nhập</a></td>
+							</tr>
+
+						</c:forEach>
+					</c:if>
+				</tbody>
+
+			</table>
+
+		</div>
+		<div class="btn-control ml-2 mb-2">
+			<button id="checkAll" type="button" class="btn btn-secondary">
+				Chọn tất cả</button>
+			<button id="btnDelete" type="button" class="btn btn-danger">
+				Xóa<i class="fa fa-trash ml-2"></i>
+			</button>
+			<a
+				href="<c:url value ="/admin/them-san-pham-khuyen-mai?id=${promotion.id}&page=1&maxPageItem=10&sorting=id&sortBy=asc"/>"
+				style="color: white; text-decoration: none; width: 20%;"
+				type="button" class="btn btn-danger ml-5 mb-3" id=updateProduct>
+				Thêm sản phẩm </a>
+		</div>
+		<input type="hidden" name="id" id="id" value="${promotion.id}" />
 	</form>
 	<a style="color: white; text-decoration: none; width: 20%;"
-		href="<c:url value ="/view/admin/add-product.jsp"/>" type="button"
-		class="btn btn-info ml-5 mb-3"> Thêm </a>
+		type="button" class="btn btn-info ml-5 mb-3" id='btnAddOrUpdate'>
+		<c:if test="${empty promotion}">
+			Thêm chương trình khuyến mãi
+		</c:if> <c:if test="${not empty promotion}">
+			Cập nhật chương trình khuyến mãi
+		</c:if>
+	</a>
+	<script type="text/javascript">
+		var ckeditor = "";
+		$(document).ready(function() {
+			ckeditor = CKEDITOR.replace('description');
+		})
+		
+		$("#btnDelete").click(function (){
+			var data = {};
+			var ids = $('tbody input[type=checkbox]:checked').map(function (){
+				return $(this).val();
+			}).get();
+			var id = ${promotion.id};
+			if (ids.length == 0) {
+				alert("Chọn sản phẩm muốn xóa")
+			} else{
+				if (confirm("Bạn chắc chắn muốn xóa sản phầm này?")) {
+					if (confirm("Xác nhận xóa")) {
+						data['ids'] = ids;
+						data["id"] = id;
+						deleteNew(data);
+					}
+				  } 
+			}
+		})
+		function deleteNew(data) {
+			$.ajax({
+				url: '${apiURL}',
+				type: 'DELETE',
+				contentType: 'application/json',
+				data: JSON.stringify(data),
+				success: function (result){
+					alert("Xóa thành công");
+					window.location.href = '${newURL}?type=edit&id=' + $('#id').val()
+				},
+				error: function (error){
+					alert("Xóa thất bại");
+					window.location.href = '${newURL}?type=edit&id=' + $('#id').val()
+				}
+			})
+		}
+
+	</script>
 </body>
 </html>

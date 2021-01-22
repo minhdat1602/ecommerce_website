@@ -21,5 +21,19 @@ public class PromotionService implements IPromotionService{
 	public Promotion findOneById(Integer id) {
 		return promotionDAO.findOneById(id);
 	}
+
+	@Override
+	public void delete(int[] ids, Integer promotionId) {
+		for (int id : ids) {
+			promotionDAO.delete(id,promotionId);
+		}
+	}
+
+	@Override
+	public void save(int[] ids, Integer id) {
+		for (int i : ids) {
+			promotionDAO.save(i,id);
+		}
+	}
 		
 }

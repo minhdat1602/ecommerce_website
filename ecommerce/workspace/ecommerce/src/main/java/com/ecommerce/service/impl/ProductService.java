@@ -26,6 +26,9 @@ public class ProductService implements IProductService{
 	 private IImageService imageService;
 	 @Inject
 	 private IImageTypeService imageTypeService;
+	
+	 @Inject
+	 private IProductService productService;
 		
 	@Override
 	public List<Product> findAll() {
@@ -129,6 +132,27 @@ public class ProductService implements IProductService{
 		}
 		for (Integer id : ids) {
 			imageTypeService.save(id,product.getId());
+		}
+	}
+
+	@Override
+	public void getBuyTimes(List<Product> listProduct) {
+		for (Product product : listProduct) {
+			product.setBuyTimes(productDAO.countBuyTimes(product.getId()));
+		}
+	}
+
+	@Override
+	public List<Product> findAllNotInPromotionId(Product pageable, int promotionId) {
+		return productDAO.findAllNotInPromotionId(pageable,promotionId);
+	}
+
+	@Override
+	public void updateSellPrice(int[] ids, Integer value) {
+		for (int id : ids) {
+			Product product = productDAO.findOne(id);
+			product.setSellPrice((product.getOriginPrice()*value)/100);
+			productService.update(product);
 		}
 	}
 }

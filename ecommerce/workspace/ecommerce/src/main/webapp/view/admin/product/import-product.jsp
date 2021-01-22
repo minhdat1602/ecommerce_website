@@ -111,7 +111,7 @@
 		
 	</div>
 	<a style="color: white; text-decoration: none; width: 20%;"
-		href="<c:url value ="/admin/danh-sach-san-pham?type=list&page=1&maxPageItem=5"/>" type="button"
+		href="<c:url value ="/admin/danh-sach-san-pham?type=list&page=1&maxPageItem=10&sorting=id&sortBy=asc"/>" type="button"
 		class="btn btn-info ml-5 mb-3"> Hoàn tất</a>
 		
 	<script type="text/javascript">

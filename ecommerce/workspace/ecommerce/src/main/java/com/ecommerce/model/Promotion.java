@@ -1,6 +1,6 @@
 package com.ecommerce.model;
 
-import java.sql.Timestamp;
+import java.sql.Date;
 
 // giảm giá sản phẩm đơn giản -> giá trị cụ thể, giảm giá nâng cao -> project xong -> improve
 public class Promotion extends AbstractModel{
@@ -10,8 +10,20 @@ public class Promotion extends AbstractModel{
 	private String header;
 	private String imageUrl;
 	private Integer value;
-	private Timestamp dateBegin;
-	private Timestamp dateEnd;
+	private Date dateBegin;
+	public Date getDateBegin() {
+		return dateBegin;
+	}
+	public void setDateBegin(Date dateBegin) {
+		this.dateBegin = dateBegin;
+	}
+	public Date getDateEnd() {
+		return dateEnd;
+	}
+	public void setDateEnd(Date dateEnd) {
+		this.dateEnd = dateEnd;
+	}
+	private Date dateEnd;
 	public String getCode() {
 		return code;
 	}
@@ -30,18 +42,7 @@ public class Promotion extends AbstractModel{
 	public void setValue(Integer value) {
 		this.value = value;
 	}
-	public Timestamp getDateBegin() {
-		return dateBegin;
-	}
-	public void setDateBegin(Timestamp dateBegin) {
-		this.dateBegin = dateBegin;
-	}
-	public Timestamp getDateEnd() {
-		return dateEnd;
-	}
-	public void setDateEnd(Timestamp dateEnd) {
-		this.dateEnd = dateEnd;
-	}
+
 	public String getImageUrl() {
 		return imageUrl;
 	}

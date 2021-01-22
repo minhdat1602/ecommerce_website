@@ -32,11 +32,10 @@
 		<table class="table text-center">
 			<thead class="thead-dark">
 				<tr>
-					<th scope="col">Xóa</th>
-					<th scope="col">Cập nhật</th>
 					<th scope="col">ID</th>
 					<th scope="col">Mã</th>
 					<th scope="col">Tên chương trình</th>
+					<th scope="col">Giảm giá</th>
 					<th scope="col">Bắt đầu</th>
 					<th scope="col">Kết thúc</th>
 					<th scope="col">Xem chi tiết</th>
@@ -46,54 +45,26 @@
 			<c:forEach items="${listPromotion}" var="promotion">
 			
 					<tr>
-						<td><input type="checkbox" name="delete"></td>
-						<td><a href=""><i class="fa fa-edit"></i></a></td>
 						<th scope="row">${promotion.id}</th>
 						<td>${promotion.code}</td>
 						<td>${promotion.name}</td>
+						<td>${promotion.value}%</td>
 						<td>${promotion.dateBegin}</td>
 						<td>${promotion.dateEnd}</td>
-						<td><a
-							href="<c:url value ="/view/admin/sale/add-promotions.jsp"/>">Xem</a></td>
+						<td><a href="<c:url value ="/admin/danh-sach-khuyen-mai?type=edit&id=${promotion.id}"/>">Xem</a></td>
 					</tr>
 			</c:forEach>	
 			</tbody>
 		</table>
 	</div>
 	<div class="btn-control ml-2 mb-2">
-		<button type="button" class="btn btn-danger">
-			Xóa<i class="fa fa-trash ml-2"></i>
-		</button>
-		<button type="button" class="btn btn-danger">
-			Xóa tất cả<i class="fa fa-trash  ml-2"></i>
-		</button>
 		<a style="color: white; text-decoration: none;"
-			href="<c:url value ="/view/admin/sale/add-promotions.jsp"/>"
+			href="<c:url value ="/admin/danh-sach-khuyen-mai?type=add"/>"
 			type="button" class="btn btn-info"> Thêm chương trình <i
 			class="fa fa-plus ml-2"></i>
 		</a>
 	</div>
 
-	<nav aria-label="Page navigation example">
-		<ul class="pagination">
-			<li class="page-item"><a class="page-link" href="#">Previous</a></li>
-			<li class="page-item"><a class="page-link" href="#">1</a></li>
-			<li class="page-item"><a class="page-link" href="#">2</a></li>
-			<li class="page-item"><a class="page-link" href="#">3</a></li>
-			<li class="page-item"><a class="page-link" href="#">Next</a></li>
-		</ul>
-	</nav>
-
-	<ul id="pagination-demo" class="pagination-lg"></ul>
-
-	<!-- 	<script type="text/javascript">
-		$(document).ready(function() {
-			$('#pagination-demo').twbsPagination({
-				totalPages : 50,
-				visiblePages : 5
-			});
-		});
-	</script> -->
 
 </body>
 </html>

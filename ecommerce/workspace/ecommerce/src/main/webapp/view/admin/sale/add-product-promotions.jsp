@@ -1,239 +1,213 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	<%@page import="com.ecommerce.utils.PriceUtils"%>
+	<c:url var="apiURL" value="/api/san-pham-khuyen-mai"></c:url>
+<c:url var="newURL" value="/admin/danh-sach-khuyen-mai"></c:url>
 <%@ include file="/common/taglib.jsp"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Chọn sản phẩm sale</title>
+<title>Chọn sản phẩm khuyến mãi</title>
 <style type="text/css">
-	.scrollDiv .table.text-center img {
-		width: 60px;
-		height: 60px;
-	}
-	
-	.scrollDiv .table.text-center  td {
-		line-height: 60px;
-	}
+.scrollDiv .table.text-center img {
+	width: 60px;
+	height: 60px;
+}
+
+.scrollDiv .table.text-center  td {
+	line-height: 60px;
+}
 </style>
 <script
 	src="<c:url value="/template/admin/assets/plugins/jquery/jquery.min.js" />"></script>
 </head>
 <body>
-<input type="hidden" id="flag-index" value=".list-promotion-page">
-	<h3 class="ml-4 mt-3">Chọn sản phẩm cho chương trình khuyến mãi</h3>
-	<div class="product-show-option">
-		<div class="row">
-			<div class="col-lg-7 col-md-7">
-				<div class="select-option">
-					<select id="sorting" class="sorting">
-						<option value="">Tên</option>
-						<option value="">Gía cao</option>
-						<option value="">Gía thấp</option>
-						<option value="">Tồn kho</option>
-					</select> <label for="sorting" id="labelForSorting">Sắp xếp theo: </label> <select
-						id="p-show" class="p-show">
-						<option value="">10</option>
-						<option value="">15</option>
-						<option value="">20</option>
-					</select> <label for="p-show" id="labelForTotalItem">Hiển thị:</label>
+	<form action="<c:url value='/admin/danh-sach-san-pham'/>" method="get"
+		id="submitForm">
+		<input type="hidden" id="flag-index" value=".list-promotion-page">
+		<h3 class="ml-4 mt-3">Danh sách sản phẩm khuyến mãi</h3>
+		<div class="product-show-option">
+			<div class="row">
+				<div class="col-lg-7 col-md-7">
+					<div class="select-option">
+						<select id="sorting" name="sorting" class="sorting">
+							<option value="">--Chọn--</option>
+							<option value="idasc">ID (tăng dần)</option>
+							<option value="iddesc">ID (giảm dần</option>
+
+						</select> <label for="sorting" id="labelForSorting">Sắp xếp theo: </label>
+						<select class="p-show" name="maxPageItem" id="maxPageItem"
+							value="${pageable.maxPageItem}">
+							<option value="">--Chọn--</option>
+							<option value="10">10</option>
+							<option value="15">15</option>
+							<option value="20">20</option>
+						</select> <label for="p-show" id="labelForTotalItem">Hiển thị:</label>
+					</div>
 				</div>
 			</div>
 		</div>
-	</div>
 
-	<div class="scrollDiv">
-		<table class="table text-center">
-			<thead class="thead-dark">
-				<tr>
-					<th scope="col">Thêm</th>
-					<th scope="col">ID</th>
-					<th scope="col">Tên</th>
-					<th scope="col">Hình ảnh</th>
-					<th scope="col"><select id="category" style="cursor: pointer;">
-							<option>Phân loại</option>
-							<optgroup label="Quần">
-								<option>Tất cả Quần</option>
-								<option>Kaki</option>
-								<option>Tây</option>
-							</optgroup>
-							<optgroup label="Áo">
-								<option>Tất cả Áo</option>
-								<option>Thun</option>
-								<option>Khoác</option>
-								<option>Sơ mi</option>
-							</optgroup>
-							<optgroup label="Phụ kiện">
-								<option>Tất cả PK</option>
-								<option>Thắt lưng</option>
-								<option>Ví</option>
-								<option>Tất</option>
-							</optgroup>
-					</select></th>
-					<th scope="col"><select id="for" style="cursor: pointer;">
-							<option>Dành cho</option>
-							<option>Nam</option>
-							<option>Nữ</option>
-							<option>Trẻ em</option>
-					</select></th>
-					<th scope="col">Gía bán</th>
-					<th scope="col">Gía niêm yết</th>
-					<th scope="col"><select id="status" style="cursor: pointer;">
-							<option>Trạng thái</option>
-							<option>Thông thường</option>
-							<option>Hàng mới</option>
-							<option>Nổi bật</option>
-							<option>Khuyến mãi</option>
-					</select></th>
-					<th scope="col">Tồn kho</th>
-				</tr>
-			</thead>
-			<tbody class="scrollDiv">
+		<div class="scrollDiv">
+			<table class="table text-center">
+				<thead class="thead-dark">
+					<tr>
+						<th scope="col">Xóa</th>
+						<th scope="col">Cập nhật</th>
+						<th scope="col">ID</th>
+						<th scope="col">Tên</th>
+						<th scope="col">Hình ảnh</th>
+						<th scope="col">Phân loại</th>
+						<th scope="col">Gía bán</th>
+						<th scope="col">Gía niêm yết</th>
+						<th scope="col">Tồn kho</th>
+						<th scope="col">Nhập hàng</th>
+					</tr>
+				</thead>
+				<tbody class="scrollDiv">
+					<c:forEach items="${listProduct}" var="product">
+						<tr>
 
-				<tr>
-					<td style="line-height: 60px;"><input type="checkbox" name="delete"></td>
-					<td style="line-height: 60px;" scope="row">1</td>
-					<td style="line-height: 60px;">Áo len</td>
-					<td><img style="width: 60px;height: 60px;" alt=""
-						src="<c:url value="/template/admin/images/products/product-1.jpg"/>"></td>
-					<td style="line-height: 60px;">Áo</td>
-					<td style="line-height: 60px;">Nữ</td>
-					<td style="line-height: 60px;">100.000</td>
-					<td style="line-height: 60px;">200.000</td>
-					<td style="line-height: 60px;">Khuyến mãi</td>
-					<td style="line-height: 60px;">158</td>
-				</tr>
-				<tr>
-					<td style="line-height: 60px;"><input type="checkbox" name="delete"></td>
-				
-					<td style="line-height: 60px;" scope="row">2</td>
-					<td style="line-height: 60px;">Áo len croptop</td>
-					<td><img style="width: 60px;height: 60px;" alt=""
-						src="<c:url value="/template/admin/images/products/product-2.jpg"/>"></td>
-					<td style="line-height: 60px;">Áo</td>
-					<td style="line-height: 60px;">Nữ</td>
-					<td style="line-height: 60px;">150.000</td>
-					<td style="line-height: 60px;">200.000</td>
-					<td style="line-height: 60px;">Khuyến mãi</td>
-					<td style="line-height: 60px;">98</td>
-				</tr>
-				<tr>
-					<td style="line-height: 60px;"><input type="checkbox" name="delete"></td>
 
-					<td style="line-height: 60px;" scope="row">3</td>
-					<td style="line-height: 60px;">Áo khoác kaki</td>
-					<td><img style="width: 60px;height: 60px;" alt=""
-						src="<c:url value="/template/admin/images/products/product-3.jpg"/>"></td>
-					<td style="line-height: 60px;">Áo</td>
-					<td style="line-height: 60px;">Nam</td>
-					<td style="line-height: 60px;">220.000</td>
-					<td style="line-height: 60px;">220.000</td>
-					<td style="line-height: 60px;">Hàng mới</td>
-					<td style="line-height: 60px;">35</td>
-				</tr>
-				<tr>
-					<td style="line-height: 60px;"><input type="checkbox" name="delete"></td>
+							<td style="line-height: 60px;"><input type="checkbox"
+								name="checkbox" id="checkbox_${product.id}"
+								value="${product.id}"></td>
 
-					<td style="line-height: 60px;" scope="row">4</td>
-					<td style="line-height: 60px;">Khăn choàng cổ</td>
-					<td><img style="width: 60px;height: 60px;" alt=""
-						src="<c:url value="/template/admin/images/products/product-4.jpg"/>"></td>
-					<td style="line-height: 60px;">Phụ kiện</td>
-					<td style="line-height: 60px;">Nữ</td>
-					<td style="line-height: 60px;">100.000</td>
-					<td style="line-height: 60px;">100.000</td>
-					<td style="line-height: 60px;">Hàng mới</td>
-					<td style="line-height: 60px;">45</td>
-				</tr>
-				<tr>
-					<td style="line-height: 60px;"><input type="checkbox" name="delete"></td>
+
+							<td style="line-height: 60px;"><a
+								href="<c:url value ="/admin/danh-sach-san-pham?type=edit&id=${product.id}"/>"><i
+									class="fa fa-edit"></i></a></td>
+							<td style="line-height: 60px;" scope="row">${product.id}</td>
+							<td style="line-height: 60px;">${product.name}</td>
+							<td><img style="width: 60px; height: 60px;" alt=""
+								src="${product.imageUrl}"></td>
+							<td style="line-height: 60px;">${product.groupProduct}</td>
+							<td style="line-height: 60px;">${PriceUtils.convert(product.sellPrice)}</td>
+							<td style="line-height: 60px;">${PriceUtils.convert(product.originPrice)}</td>
+							<td style="line-height: 60px;">${product.totalInventory}</td>
+							<td style="line-height: 60px;"><a
+								href="<c:url value ="/admin/danh-sach-san-pham?type=import&id=${product.id}"/>">Nhập</a></td>
+						</tr>
+
+					</c:forEach>
+
+				</tbody>
+
+			</table>
+			<input type="hidden" name="type" id="type" value=""> <input
+				type="hidden" name="page" id="page" value="${pageable.page}">
+			<input type="hidden" name="sorting" id="sorting"
+				value="${pageable.sorting}"> <input type="hidden"
+				name="sortBy" id="sortBy" value="${pageable.sortBy}">
+			<input type="hidden" name="id" id="id" value="${promotion.id}">
+		</div>
+
+		<div class="btn-control ml-2 mb-2">
+			<button id="checkAll" type="button" class="btn btn-secondary">
+				Chọn tất cả</button>
+			<button id="addProduct" type="button" class="btn btn-primary">
+				Thêm</button>
+		</div>
+		<div style="margin-left: 5px;" class="container">
+			<nav aria-label="Page navigation">
+				<ul class="pagination" id="pagination"></ul>
+			</nav>
+		</div>
+	</form>
+	<script type="text/javascript">
 		
-					<td style="line-height: 60px;" scope="row">5</td>
-					<td style="line-height: 60px;">Nón lưỡi trai</td>
-					<td><img style="width: 60px;height: 60px;" alt=""
-						src="<c:url value="/template/admin/images/products/product-5.jpg"/>"></td>
-					<td style="line-height: 60px;">Phụ kiện</td>
-					<td style="line-height: 60px;">Nữ</td>
-					<td style="line-height: 60px;">80.000</td>
-					<td style="line-height: 60px;">80.000</td>
-					<td style="line-height: 60px;">Hàng mới</td>
-					<td style="line-height: 60px;">33</td>
-				</tr>
-				<tr>
-					<td style="line-height: 60px;"><input type="checkbox" name="delete"></td>
-
-					<td style="line-height: 60px;" scope="row">6</td>
-					<td style="line-height: 60px;">Áo len tay dài</td>
-					<td><img style="width: 60px;height: 60px;" alt=""
-						src="<c:url value="/template/admin/images/products/product-6.jpg"/>"></td>
-					<td style="line-height: 60px;">Áo</td>
-					<td style="line-height: 60px;">Nữ</td>
-					<td style="line-height: 60px;">190.000</td>
-					<td style="line-height: 60px;">190.000</td>
-					<td style="line-height: 60px;">Hàng mới</td>
-					<td style="line-height: 60px;">61</td>
-				</tr>
-				<tr>
-					<td style="line-height: 60px;"><input type="checkbox" name="delete"></td>
-
-					<td style="line-height: 60px;" scope="row">7</td>
-					<td style="line-height: 60px;">Ba lô</td>
-					<td><img style="width: 60px;height: 60px;" alt=""
-						src="<c:url value="/template/admin/images/products/product-7.jpg"/>"></td>
-					<td style="line-height: 60px;">Phụ kiện</td>
-					<td style="line-height: 60px;">Nam</td>
-					<td style="line-height: 60px;">120.000</td>
-					<td style="line-height: 60px;">120.000</td>
-					<td style="line-height: 60px;">Hàng mới</td>
-					<td style="line-height: 60px;">71</td>
-				</tr>
-				<tr>
-					<td style="line-height: 60px;"><input type="checkbox" name="delete"></td>
-
-					<td style="line-height: 60px;" scope="row">8</td>
-					<td style="line-height: 60px;">Áo khoác dù</td>
-					<td><img style="width: 60px;height: 60px;" alt=""
-						src="<c:url value="/template/admin/images/products/product-8.jpg"/>"></td>
-					<td style="line-height: 60px;">Áo</td>
-					<td style="line-height: 60px;">Nam</td>
-					<td style="line-height: 60px;">250.000</td>
-					<td style="line-height: 60px;">250.000</td>
-					<td style="line-height: 60px;">Hàng mới</td>
-					<td style="line-height: 60px;">78</td>
-				</tr>
-
-				
-			</tbody>
-		</table>
-	</div>
-	<div class="btn-control ml-2 mb-2">
-		<a style="color: white; text-decoration: none;"
-			href="<c:url value ="/view/admin/sale/add-promotions.jsp"/>"
-			type="button" class="btn btn-info"> Thêm<i
-			class="fa fa-plus ml-2"></i>
-		</a>
-	</div>
-
-	<nav aria-label="Page navigation example">
-		<ul class="pagination">
-			<li class="page-item"><a class="page-link" href="#">Previous</a></li>
-			<li class="page-item"><a class="page-link" href="#">1</a></li>
-			<li class="page-item"><a class="page-link" href="#">2</a></li>
-			<li class="page-item"><a class="page-link" href="#">3</a></li>
-			<li class="page-item"><a class="page-link" href="#">Next</a></li>
-		</ul>
-	</nav>
-
-	<ul id="pagination-demo" class="pagination-lg"></ul>
-
-	<!-- 	<script type="text/javascript">
-		$(document).ready(function() {
-			$('#pagination-demo').twbsPagination({
-				totalPages : 50,
-				visiblePages : 5
+		$(function() {	
+			$('#sorting').on('change', function (e) {
+			    var sorting = $('#sorting').val();
+			    $('#sorting').val("id");
+			    if (sorting=="idasc") {
+			    	$('#sortBy').val("asc");
+				} else {
+					$('#sortBy').val("desc");
+				}
+			    var totalPages = ${pageable.totalPage};
+				var startPage = ${pageable.page};
+				var maxPageItem = ${pageable.maxPageItem};
+			    $('#type').val("list");
+				$('#maxPageItem').val(maxPageItem);
+				$('#page').val(startPage);
+				$('#submitForm').submit();
+			});
+			$('#maxPageItem').on('change', function (e) {
+			    var sorting = $('#sorting').val();
+			    $('#sorting').val("id");
+			    if (sorting=="idasc") {
+			    	$('#sortBy').val("asc");
+				} else {
+					$('#sortBy').val("desc");
+				}
+			    var totalPages = ${pageable.totalPage};
+				var startPage = ${pageable.page};
+				var maxPageItem = $('#maxPageItem').val();
+			    $('#type').val("list");
+				$('#maxPageItem').val(maxPageItem);
+				$('#page').val(startPage);
+				$('#submitForm').submit();
+			});
+			$('#maxPageItem').val(${pageable.maxPageItem}).attr('selected','selected');
+			$('#sorting').val('${pageable.sorting}${pageable.sortBy}').attr('selected','selected');
+			var sorting = "${pageable.sorting}";
+			var sortBy = "${pageable.sortBy}";
+			var totalPages = ${pageable.totalPage};
+			var startPage = ${pageable.page};
+			var maxPageItem = ${pageable.maxPageItem};
+			window.pagObj = $('#pagination').twbsPagination({
+				totalPages : totalPages,
+				visiblePages : 10,
+				startPage : startPage,
+				onPageClick : function(event, page) {
+					if (startPage != page) {
+						$('#type').val("list");
+						$('#maxPageItem').val(maxPageItem);
+						$('#page').val(page);
+						$('#sorting').val(sorting);
+						$('#sortBy').val(sortBy);
+						$('#submitForm').submit();
+					}
+				}
+			}).on('page', function(event, page) {
+				console.info(page + ' (from event listening)');
 			});
 		});
-	</script> -->
+		$("#addProduct").click(function (){
+			var data = {};
+			var ids = $('tbody input[type=checkbox]:checked').map(function (){
+				return $(this).val();
+			}).get();
+			if (ids.length == 0) {
+				alert("Chọn sản phẩm muốn thêm")
+			} else{
+				if (confirm("Bạn chắc chắn muốn thêm sản phầm này?")) {
+					if (confirm("Xác nhận thêm")) {
+						data['ids'] = ids;
+						addNew(data);
+					}
+				  } 
+			}
+		})
+		function addNew(data) {
+			$.ajax({
+				url: '${apiURL}',
+				type: 'POST',
+				contentType: 'application/json',
+				data: JSON.stringify(data),
+				success: function (result){
+					alert("Thêm thành công");
+					window.location.href = '${newURL}?type=edit&id=' + $('#id').val()
+				},
+				error: function (error){
+					alert("Thêm thất bại");
+					window.location.href = '${newURL}?type=edit&id=' + $('#id').val()
+				}
+			})
+		}
+	</script>
 
 </body>
 </html>

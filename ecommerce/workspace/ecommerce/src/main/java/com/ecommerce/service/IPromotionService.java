@@ -7,4 +7,6 @@ import com.ecommerce.model.Promotion;
 public interface IPromotionService {
 	List<Promotion> findAll();
 	Promotion findOneById(Integer id);
+	void delete(int[] ids, Integer promotionId);
+	void save(int[] ids, Integer id);
 }

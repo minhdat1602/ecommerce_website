@@ -21,4 +21,7 @@ public interface IProductService {
 	boolean update(Product product);
 	List<Product> findAllByKey(String filterAttr, String key);
 	void updateImageDetails(Product product);
+	void getBuyTimes(List<Product> listProduct);
+	List<Product> findAllNotInPromotionId(Product pageable, int parseInt);
+	void updateSellPrice(int[] ids, Integer value);
 }

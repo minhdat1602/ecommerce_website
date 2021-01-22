@@ -93,22 +93,10 @@
 								href="<c:url value ="/admin/danh-sach-nguoi-dung?type=list&page=1&maxPageItem=10&sorting=customer"/>">
 									<span class="nav-text">Người dùng</span>
 							</a></li>
-							<li class="has-sub"><a class="sidenav-item-link"
-								href="javascript:void(0)" data-toggle="collapse"
-								data-target="#sale" aria-expanded="false" aria-controls="sale">
-									<span class="nav-text">Khuyến mãi</span> <b class="caret"></b>
-							</a>
-								<ul class="collapse" id="sale">
-									<div class="sub-menu">
-
-										<li class="list-promotion-page"><a
-											href="<c:url value ="/admin/danh-sach-khuyen-mai"/>">Chương
-												trình</a></li>
-
-										<li class="list-coupon-page"><a href="<c:url value ="/view/admin/sale/list-coupon.jsp"/>">Mã giảm giá</a></li>
-
-									</div>
-								</ul></li>
+							<li  class="list-promotion-page"><a class="sidenav-item-link"
+								href="<c:url value ="/admin/danh-sach-khuyen-mai?type=list"/>">
+									<span class="nav-text">Khuyến mãi</span>
+							</a></li>
 								
 							<li class="list-collection-page"><a class="sidenav-item-link"
 								href="<c:url value ="/admin/danh-sach-bo-suu-tap"/>"> <span
@@ -136,7 +124,7 @@
 									<span class="nav-text">Doanh số</span>
 							</a></li>
 							<li class="buy-time-page"><a class="sidenav-item-link"
-								href="<c:url value ="/view/admin/statistical/buy-times.jsp"/>">
+								href="<c:url value ="/admin/luot-mua-hang?page=1&maxPageItem=10&sorting=id&sortBy=asc"/>">
 									<span class="nav-text">Lượt mua hàng</span>
 							</a></li>
 							<li class="feedback-page"><a class="sidenav-item-link"

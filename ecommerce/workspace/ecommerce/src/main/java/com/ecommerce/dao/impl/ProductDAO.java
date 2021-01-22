@@ -224,5 +224,26 @@ public class ProductDAO extends AbstractDAO<Product> implements IProductDAO {
 		sql.append("where p.status = 1 and p."+filterAttr+" like ?");
 		return query(sql.toString(), new ProductMapper(),key);
 	}
-	
+
+	@Override
+	public Integer countBuyTimes(Integer id) {
+		StringBuilder sql = new StringBuilder("SELECT sum(od.quantity) as totalBuyTimes from products p join stocks s on p.id =s.product_id ");
+		sql.append("join orders_detail od on s.id = od.stock_id where p.id = ?");
+		return count(sql.toString(), id);
+	}
+
+	@Override
+	public List<Product> findAllNotInPromotionId(Product pageable, int promotionId) {
+		StringBuilder sql = new StringBuilder("SELECT p.id, p.code,p.name,");
+		sql.append("p.origin_price,p.sell_price,p.image_url,");
+		sql.append("p.descriptions,p.status,p.new,p.hot,p.group_id,p.brand_id as brand_id,");
+		sql.append("g.name as category,b.name as brand, c.name as collection ");
+		sql.append("FROM products p join products_group g on p.group_id = g.id ");
+		sql.append("join products_brand b on b.id = p.brand_id ");
+		sql.append("join products_collection c on c.id = p.collection_id ");
+		sql.append("where p.status = 1  and p.id not in (select id from promotion_product where promotion_id = ?)");
+		sql.append(" order by "+ pageable.getSorting() + " " + pageable.getSortBy() +" limit ?,? ");
+		System.out.println(sql.toString());
+		return query(sql.toString(), new ProductMapper(), promotionId, pageable.getOffset(),pageable.getMaxPageItem());
+	}
 }
