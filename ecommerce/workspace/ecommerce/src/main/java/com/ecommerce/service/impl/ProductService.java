@@ -26,9 +26,7 @@ public class ProductService implements IProductService{
 	 private IImageService imageService;
 	 @Inject
 	 private IImageTypeService imageTypeService;
-	
-	 @Inject
-	 private IProductService productService;
+
 		
 	@Override
 	public List<Product> findAll() {
@@ -151,8 +149,8 @@ public class ProductService implements IProductService{
 	public void updateSellPrice(int[] ids, Integer value) {
 		for (int id : ids) {
 			Product product = productDAO.findOne(id);
-			product.setSellPrice((product.getOriginPrice()*value)/100);
-			productService.update(product);
+			product.setSellPrice((product.getOriginPrice()*(100-value))/100);
+			update(product);
 		}
 	}
 }

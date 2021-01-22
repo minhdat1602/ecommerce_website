@@ -3,6 +3,7 @@
 <%@ include file="/common/taglib.jsp"%>
 <%@page import="com.ecommerce.utils.PriceUtils"%>
 <c:url var="apiURL" value="/api/san-pham-khuyen-mai"></c:url>
+<c:url var="apiPromotionURL" value="/api/khuyen-mai"></c:url>
 <c:url var="newURL" value="/admin/danh-sach-khuyen-mai"></c:url>
 <!DOCTYPE html>
 <html>
@@ -61,12 +62,12 @@
 			<label for="exampleFormControlInput1" class="d-block">Mô tả
 				chương trình khuyến mãi</label>
 			<c:if test="${promotion != null}">
-				<textarea id="description" name="description" rows="5" cols="50"
-					name="descriptions" value="">${promotion.descriptions}</textarea>
+				<textarea id="descriptions" name="descriptions" rows="5" cols="50"
+					value="">${promotion.descriptions}</textarea>
 			</c:if>
 			<c:if test="${promotion == null}">
-				<textarea id="description" name="description" rows="5" cols="50"
-					name="description" value=""></textarea>
+				<textarea id="descriptions" name="descriptions" rows="5" cols="50"
+					 value=""></textarea>
 			</c:if>
 		</div>
 		<div class="form-group">
@@ -90,8 +91,8 @@
 					placeholder="Nhập giá trị" value="${promotion.value}">
 			</c:if>
 			<c:if test="${promotion == null}">
-				<input type="text" class="form-control" id="originPrice"
-					name="originPrice" placeholder="Nhập giá trị">
+				<input type="text" class="form-control" id="value"
+					name="value" placeholder="Nhập giá trị">
 			</c:if>
 		</div>
 
@@ -110,7 +111,7 @@
 		<div class="form-group">
 			<label for="exampleFormControlInput1">Ngày kết thúc</label>
 			<c:if test="${promotion != null}">
-				<input type="date" class="form-control" id="dateBegin"
+				<input type="date" class="form-control" id="dateEnd"
 					name="dateEnd" placeholder="Nhập giá trị"
 					value="${promotion.dateEnd}">
 			</c:if>
@@ -188,7 +189,7 @@
 	<script type="text/javascript">
 		var ckeditor = "";
 		$(document).ready(function() {
-			ckeditor = CKEDITOR.replace('description');
+			ckeditor = CKEDITOR.replace('descriptions');
 		})
 		
 		$("#btnDelete").click(function (){
@@ -196,7 +197,7 @@
 			var ids = $('tbody input[type=checkbox]:checked').map(function (){
 				return $(this).val();
 			}).get();
-			var id = ${promotion.id};
+			var id = $('#id').val();
 			if (ids.length == 0) {
 				alert("Chọn sản phẩm muốn xóa")
 			} else{
@@ -225,7 +226,55 @@
 				}
 			})
 		}
-
+		 $("#btnAddOrUpdate").click(function (){
+				var data = {};
+				var dataForm = $("#formSubmit").serializeArray();
+				$.each(dataForm, function (i, v){
+					data[""+v.name+""] = v.value;
+				})
+				data["descriptions"] = ckeditor.getData();
+				if ($("#id").val() == ""){
+					addNew(data);
+				} else {
+					updateNew(data);
+				}
+			})
+			function addNew(data) {
+				$.ajax({
+					url: '${apiPromotionURL}',
+					type: 'POST',
+					contentType: 'application/json',
+					dataType: 'text',
+					data: JSON.stringify(data),
+					success: function (result){
+						alert("Thêm chương trình thành công");
+						window.location.href = '${newURL}?type=edit&id=' + result
+					},
+					error: function (error){
+						alert("Thêm chương trình thất bại");
+						window.location.href = '${newURL}?type=add'
+					}
+	
+				})
+			}
+	
+			function updateNew(data) {
+				$.ajax({
+					url: '${apiPromotionURL}',
+					type: 'PUT',
+					contentType: 'application/json',
+					dataType: 'text',
+					data: JSON.stringify(data),
+					success: function (result){
+						alert("Cập nhật chương trình thành công");
+						window.location.href = '${newURL}?type=edit&id=' +  $("#id").val()
+					},
+					error: function (error){
+						alert("Cập nhật chương trình thất bại");
+						window.location.href = '${newURL}?type=edit&id=' + $("#id").val()
+					}
+				})
+			}
 	</script>
 </body>
 </html>

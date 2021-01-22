@@ -241,9 +241,8 @@ public class ProductDAO extends AbstractDAO<Product> implements IProductDAO {
 		sql.append("FROM products p join products_group g on p.group_id = g.id ");
 		sql.append("join products_brand b on b.id = p.brand_id ");
 		sql.append("join products_collection c on c.id = p.collection_id ");
-		sql.append("where p.status = 1  and p.id not in (select id from promotion_product where promotion_id = ?)");
+		sql.append("where p.status = 1  and p.id not in (select product_id from promotion_product where promotion_id = ?)");
 		sql.append(" order by "+ pageable.getSorting() + " " + pageable.getSortBy() +" limit ?,? ");
-		System.out.println(sql.toString());
 		return query(sql.toString(), new ProductMapper(), promotionId, pageable.getOffset(),pageable.getMaxPageItem());
 	}
 }

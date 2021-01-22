@@ -9,4 +9,6 @@ public interface IPromotionService {
 	Promotion findOneById(Integer id);
 	void delete(int[] ids, Integer promotionId);
 	void save(int[] ids, Integer id);
+	Integer save(Promotion promotion);
+	boolean update(Promotion promotion);
 }

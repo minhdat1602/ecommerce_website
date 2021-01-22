@@ -1,14 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	<%@ include file="/common/taglib.jsp"%>
 	<%@page import="com.ecommerce.utils.PriceUtils"%>
 	<c:url var="apiURL" value="/api/san-pham-khuyen-mai"></c:url>
 <c:url var="newURL" value="/admin/danh-sach-khuyen-mai"></c:url>
-<%@ include file="/common/taglib.jsp"%>
+
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Chọn sản phẩm khuyến mãi</title>
+<title>Chọn sản phẩm khuyến mãi </title>
 <style type="text/css">
 .scrollDiv .table.text-center img {
 	width: 60px;
@@ -23,10 +24,10 @@
 	src="<c:url value="/template/admin/assets/plugins/jquery/jquery.min.js" />"></script>
 </head>
 <body>
-	<form action="<c:url value='/admin/danh-sach-san-pham'/>" method="get"
+	<form action="<c:url value='/admin/them-san-pham-khuyen-mai'/>" method="get"
 		id="submitForm">
 		<input type="hidden" id="flag-index" value=".list-promotion-page">
-		<h3 class="ml-4 mt-3">Danh sách sản phẩm khuyến mãi</h3>
+		<h3 class="ml-4 mt-3">Danh sách sản phẩm khuyến mãi: ${promotion.name}</h3>
 		<div class="product-show-option">
 			<div class="row">
 				<div class="col-lg-7 col-md-7">
@@ -177,6 +178,7 @@
 		});
 		$("#addProduct").click(function (){
 			var data = {};
+			var id = $('#id').val();
 			var ids = $('tbody input[type=checkbox]:checked').map(function (){
 				return $(this).val();
 			}).get();
@@ -186,6 +188,7 @@
 				if (confirm("Bạn chắc chắn muốn thêm sản phầm này?")) {
 					if (confirm("Xác nhận thêm")) {
 						data['ids'] = ids;
+						data['id'] = id;
 						addNew(data);
 					}
 				  } 

@@ -35,5 +35,15 @@ public class PromotionService implements IPromotionService{
 			promotionDAO.save(i,id);
 		}
 	}
+
+	@Override
+	public Integer save(Promotion promotion) {
+		return promotionDAO.save(promotion);
+	}
+
+	@Override
+	public boolean update(Promotion promotion) {
+		return promotionDAO.update(promotion);
+	}
 		
 }

@@ -12,4 +12,8 @@ public interface IPromotionDAO extends IGenericDAO<Promotion>{
 	void delete(int id, Integer promotionId);
 
 	Integer save(int i, Integer id);
+
+	Integer save(Promotion promotion);
+
+	boolean update(Promotion promotion);
 }

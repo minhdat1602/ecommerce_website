@@ -45,8 +45,7 @@ public class PromotionProductController extends HttpServlet{
 		pageable.setTotalItem(productService.getTotalProduct());
 		pageable.setTotalPage((int) Math.ceil( (double) (pageable.getTotalItem() *10 /pageable.getMaxPageItem()) /10 ));
 		pageable.setOffset((pageable.getPage()-1) * pageable.getMaxPageItem());
-		listProduct = productService.findAllNotInPromotionId(pageable,Integer.parseInt(req.getParameter("id")));
-		List<Product> listProductPromotion = productService.findAllByPromotionId(Integer.parseInt(req.getParameter("id")));
+		listProduct = productService.findAllNotInPromotionId(pageable,Integer.parseInt(req.getParameter("id")));	
 		stockService.setIventory(listProduct);
 		Product product = new Product();
 		product.setFilter("products");
@@ -54,7 +53,6 @@ public class PromotionProductController extends HttpServlet{
 		Promotion promotion = promotionService.findOneById(Integer.parseInt(req.getParameter("id")));
 		req.setAttribute("pageable", pageable);
 		req.setAttribute("listProduct", listProduct);
-		req.setAttribute("listProductPromotion", listProductPromotion);
 		req.setAttribute("promotion", promotion);
 		req.setAttribute("product", product);
 		req.getRequestDispatcher("/view/admin/sale/add-product-promotions.jsp").forward(req, resp);

@@ -32,4 +32,36 @@ public class PromotionDAO extends AbstractDAO<Promotion> implements IPromotionDA
 		return insert(sql, i,id);
 	}
 
+	@Override
+	public Integer save(Promotion promotion) {
+		String sql = "insert into promotions (code,name,image_url,descriptions,value,date_begin,date_end,header) values (?,?,?,?,?,?,?,?)";
+		return insert(sql, 
+						promotion.getCode(),
+						promotion.getName(),
+						promotion.getImageUrl(),
+						promotion.getDescriptions(),
+						promotion.getValue(),
+						promotion.getDateBegin(),
+						promotion.getDateEnd(),
+						promotion.getHeader()
+						);
+	}
+
+	@Override
+	public boolean update(Promotion promotion) {
+		String sql = "update promotions set code=?,name=?,image_url=?,descriptions=?,value=?,date_begin=?,date_end=?,header=? where id =?";
+		return updated(sql, 
+						promotion.getCode(),
+						promotion.getName(),
+						promotion.getImageUrl(),
+						promotion.getDescriptions(),
+						promotion.getValue(),
+						promotion.getDateBegin(),
+						promotion.getDateEnd(),
+						promotion.getHeader(),
+						promotion.getId()
+						);
+
+	}
+
 }
