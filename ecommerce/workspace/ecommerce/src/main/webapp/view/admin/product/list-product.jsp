@@ -63,6 +63,7 @@
 						<th scope="col">Gía niêm yết</th>
 						<th scope="col">Tồn kho</th>
 						<th scope="col">Nhập hàng</th>
+						<th scope="col">Đánh giá</th>
 					</tr>
 				</thead>
 				<tbody class="scrollDiv">
@@ -85,6 +86,8 @@
 							<td style="line-height: 60px;">${product.totalInventory}</td>
 							<td style="line-height: 60px;"><a
 								href="<c:url value ="/admin/danh-sach-san-pham?type=import&id=${product.id}"/>">Nhập</a></td>
+							<td style="line-height: 60px;"><a
+								href="<c:url value ="/admin/danh-sach-danh-gia?type=view&id=${product.id}"/>">Xem</a></td>
 						</tr>
 
 					</c:forEach>

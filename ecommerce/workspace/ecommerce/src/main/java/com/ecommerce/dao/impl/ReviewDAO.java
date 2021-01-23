@@ -95,4 +95,16 @@ public class ReviewDAO extends AbstractDAO<Review> implements IReviewDAO {
 		return null;
 	}
 
+	@Override
+	public List<Review> findAllByProductId(Integer id) {
+		String sql = "select * from reviews where product_id = ?";
+		return query(sql, new ReviewMapper(), id);
+	}
+
+	@Override
+	public boolean update(Review review) {
+		String sql = "update reviews set reply = ? where id = ?";
+		return updated(sql, review.getReply(), review.getId());
+	}
+
 }

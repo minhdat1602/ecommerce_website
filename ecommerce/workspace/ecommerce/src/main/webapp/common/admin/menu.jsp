@@ -78,7 +78,7 @@
 											href="<c:url value ="/admin/danh-sach-mau"/>">Màu
 												sắc</a></li>
 										<li class="list-review-page"><a
-											href="<c:url value ="/admin/danh-sach-danh-gia"/>">
+											href="<c:url value ="/admin/danh-sach-danh-gia?type=list"/>">
 												Đánh giá</a></li>
 									</div>
 								</ul></li>
@@ -130,10 +130,6 @@
 							<li class="feedback-page"><a class="sidenav-item-link"
 								href="<c:url value ="/admin/danh-sach-gop-y"/>">
 									<span class="nav-text">Góp ý</span>
-							</a></li>
-							<li class="faq-page"><a class="sidenav-item-link"
-								href="<c:url value ="/view/admin/statistical/list-faq.jsp"/>">
-									<span class="nav-text">Câu hỏi thường gặp</span>
 							</a></li>
 						</div>
 					</ul></li>

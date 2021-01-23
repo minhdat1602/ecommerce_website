@@ -16,12 +16,11 @@ public class ReviewMapper implements RowMapper<Review>{
 			review.setProductId(resultSet.getInt("product_id"));
 			review.setVote(resultSet.getInt("vote"));
 			review.setComment(resultSet.getString("comment"));
-			review.setDateReview(resultSet.getTimestamp("date_review"));
+			review.setDateReview(resultSet.getDate("date_review"));
 			review.setReply(resultSet.getString("reply"));
 			return review;
 		} catch (SQLException e) {
 			return null;
 		}
 	}
-	
 }

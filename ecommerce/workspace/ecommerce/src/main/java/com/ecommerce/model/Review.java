@@ -1,5 +1,6 @@
 package com.ecommerce.model;
 
+import java.sql.Date;
 import java.sql.Timestamp;
 
 // Chưa có trong database
@@ -9,11 +10,12 @@ public class Review extends  AbstractModel{
     private Integer productId;
     private int vote;
     private String comment;
-    private Timestamp dateReview;
+    private Date dateReview;
     private String reply;
     private double averageStar;
     private int totalComment;
     private Product product;
+    private User user;
     
 	public double getAverageStar() {
 		return averageStar;
@@ -60,12 +62,7 @@ public class Review extends  AbstractModel{
 	public void setComment(String comment) {
 		this.comment = comment;
 	}
-	public Timestamp getDateReview() {
-		return dateReview;
-	}
-	public void setDateReview(Timestamp dateReview) {
-		this.dateReview = dateReview;
-	}
+	
 	public String getReply() {
 		return reply;
 	}
@@ -77,6 +74,18 @@ public class Review extends  AbstractModel{
 	}
 	public void setProduct(Product product) {
 		this.product = product;
+	}
+	public Date getDateReview() {
+		return dateReview;
+	}
+	public void setDateReview(Date dateReview) {
+		this.dateReview = dateReview;
+	}
+	public User getUser() {
+		return user;
+	}
+	public void setUser(User user) {
+		this.user = user;
 	}
 
     

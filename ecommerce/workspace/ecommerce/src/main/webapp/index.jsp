@@ -14,7 +14,8 @@
 	<%--  <c:redirect url="/admin/danh-sach-quyen?type=list&sorting=customer"></c:redirect>  --%>
 	<%--  <c:redirect url="/admin/danh-sach-san-pham?type=edit&id=1"></c:redirect> --%>
 	<%-- <c:redirect url="/admin/danh-sach-nhom-san-pham?type=list"></c:redirect> --%>
-	<c:redirect url="admin/them-san-pham-khuyen-mai?id=1&page=1&maxPageItem=10&sorting=id&sortBy=asc"></c:redirect>
+	<%-- <c:redirect url="/admin/them-san-pham-khuyen-mai?id=1&page=1&maxPageItem=10&sorting=id&sortBy=asc"></c:redirect> --%>
 	<%-- <c:redirect url="/admin/danh-sach-khuyen-mai?type=edit&id=1"></c:redirect> --%>
+	<c:redirect url="/admin/danh-sach-danh-gia?type=list"></c:redirect>
 </body>
 </html>

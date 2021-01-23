@@ -3,6 +3,18 @@
     position: relative;
     height: 450px;
 }
+.avatar-text h6 {
+    font-size: 20px;
+}
+
+.avatar-text input.f-13 {
+    width: 350px;
+}
+
+.customer-review-option.ml-5 img {
+    width: 200px;
+    height: 200px;
+}
 img#imagedetails {
     width: 175px;
     height: 175px;
@@ -115,7 +127,6 @@ div#size span {
 }
 
 .customer-review-option .comment-option .co-item {
-    margin-bottom: 20px;
 }
 
 .customer-review-option .comment-option .co-item .avatar-pic {
@@ -131,6 +142,7 @@ div#size span {
 
 .customer-review-option .comment-option .co-item .avatar-text {
     display: table;
+    margin-bottom: 35px;
 }
 
 .customer-review-option .comment-option .co-item .avatar-text .at-rating {
@@ -171,7 +183,7 @@ div#size span {
 }
 
 .customer-review-option .comment-option .co-item .avatar-text .at-reply {
-    font-size: 14px;
+    font-size: 20px;
     color: #636363;
 }
 

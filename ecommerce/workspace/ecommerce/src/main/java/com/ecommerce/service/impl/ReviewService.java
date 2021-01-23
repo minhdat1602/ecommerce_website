@@ -10,12 +10,15 @@ import com.ecommerce.dao.IProductDAO;
 import com.ecommerce.dao.IReviewDAO;
 import com.ecommerce.model.Review;
 import com.ecommerce.service.IReviewService;
+import com.ecommerce.service.IUserService;
 
 public class ReviewService implements IReviewService{
 	@Inject 
 	private IProductDAO productDAO;
 	@Inject
 	private IReviewDAO reviewDAO;
+	@Inject
+	private IUserService userService;
 	@Override
 	public List<Review> findAll() {
 		List<Integer> listProductId = reviewDAO.findAllProductId();
@@ -29,6 +32,23 @@ public class ReviewService implements IReviewService{
 			listReview.add(review);
 		}
 		return listReview;
+	}
+	@Override
+	public List<Review> findAllByProductId(Integer id) {
+		List<Review> listReview = reviewDAO.findAllByProductId(id);
+		for (Review review : listReview) {
+			review.setUser(userService.findOneById(review.getCommentator()));
+		}
+		return listReview;
+		
+	}
+	@Override
+	public Double avgStarByProductId(Integer id) {
+		return reviewDAO.avgStar(id);
+	}
+	@Override
+	public boolean update(Review review) {
+		return reviewDAO.update(review);
 	}
 
 	

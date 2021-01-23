@@ -52,7 +52,7 @@
 						<td>${review.totalComment}</td>
 						<td>${review.averageStar}</td>
 						<td><a
-							href="<c:url value ="/view/admin/product/review/review-details.jsp"/>">Xem</a></td>
+							href="<c:url value ="/admin/danh-sach-danh-gia?type=view&id=${review.product.id}"/>">Xem chi tiết</a></td>
 					</tr>
 				</c:forEach>
 			</tbody>

@@ -23,6 +23,7 @@ public class Product extends AbstractModel{
 	private List<Stock> listStock;
 	private String[] listImage;
 	private Integer buyTimes;
+	private Double avgStar;
 	
 	public Integer getNewProduct() {
 		return newProduct;
@@ -138,6 +139,12 @@ public class Product extends AbstractModel{
 	}
 	public void setBuyTimes(Integer buyTimes) {
 		this.buyTimes = buyTimes;
+	}
+	public Double getAvgStar() {
+		return avgStar;
+	}
+	public void setAvgStar(Double avgStar) {
+		this.avgStar = avgStar;
 	}
 
 	

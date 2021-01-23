@@ -12,4 +12,8 @@ public interface IReviewDAO extends IGenericDAO<Review>{
 	Integer countByProductId(Integer productId);
 
 	Double avgStar(Integer productId);
+
+	List<Review> findAllByProductId(Integer id);
+
+	boolean update(Review review);
 }
