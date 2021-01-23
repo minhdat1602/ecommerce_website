@@ -62,5 +62,14 @@ public class CartDetails extends AbstractModel {
     public void plus() {
         ++quantity;
     }
-
+    @Override
+    public String toString() {
+        return "CartDetails{" +
+                "cartId=" + cartId +
+                ", stockId=" + stockId +
+                ", quantity=" + quantity +
+                ", stock=" + stock +
+                ", cart=" + cart +
+                '}';
+    }
 }

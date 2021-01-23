@@ -44,4 +44,10 @@ public class CardDetailDAO extends AbstractDAO<CartDetails> implements ICartDeta
         List<CartDetails> list = query(sql, new CartDetailMapper(), id);
         return list.size() == 0 ? null : list.get(0);
     }
+    @Override
+    public CartDetails findOne(Integer cartId, Integer stockId) {
+        String sql = "select * from carts_detail where cart_id = ? and stock_id = ?";
+        List<CartDetails> list = query(sql, new CartDetailMapper(), cartId, stockId);
+        return list.size() == 0 ? null : list.get(0);
+    }
 }

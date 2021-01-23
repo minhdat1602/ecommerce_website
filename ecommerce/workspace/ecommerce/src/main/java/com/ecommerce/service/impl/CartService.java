@@ -54,4 +54,10 @@ public class CartService implements ICartService {
         Integer id  = cartDetailDAO.insert(cartDetails);
         return cartDetailDAO.findById(id);
     }
+    @Override
+    public Cart insert(Cart cart) {
+        Integer id = cartDAO.insert(cart);
+        return cartDAO.findById(id);
+    }
+
 }

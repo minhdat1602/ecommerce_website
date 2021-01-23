@@ -29,31 +29,42 @@ public class HomeController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        req.setCharacterEncoding("UTF-8");
+        resp.setCharacterEncoding("UTF-8");
         groupMen = productGroupService.findAll(2, "NAM");
         groupWomen = productGroupService.findAll(2, "NU");
 
         String men = req.getParameter("men");
         String women = req.getParameter("women");
 
-        if(men == null)
-            men = "4";
-        if(women == null)
-            women = "10";
+        Product pageable = new Product();
+        pageable.setLimit(9);
+        pageable.setOffset(0);
+        Integer isHot = 1;
+        Integer isNew = 1;
+        Integer level = 2;
 
         if (men == null || men.equals(""))
-            listForMen = productService.findAll(4);//id
-        else {
-            listForMen = productService.findAll(Integer.parseInt(men));
-        }
+            men = "Áo nam";
+        String[] groupNameMenArr = new String[1];
+        groupNameMenArr[0] = men;
+        pageable.setGroupNameArr(groupNameMenArr);
+        listForMen = productService.findAll(pageable, 1, 1, pageable.getGroupNameArr(), pageable.getBrandNameArr(),
+                pageable.getCollectionNameArr(), level);
+
+        /*listForMen = productService.findAll(pageable, isHot, isNew, men, null, null);*/
 
         if (women == null || women.equals(""))
-            listForWomen = productService.findAll(10);
-        else {
-            listForWomen = productService.findAll(Integer.parseInt(women));
-        }
+            women = "Áo nữ";
+        String[] groupNameWomanArr = new String[1];
+        groupNameWomanArr[0] = women;
+        pageable.setGroupNameArr(groupNameWomanArr);
+        productService.findAll(pageable, 1, 1, pageable.getGroupNameArr(), pageable.getBrandNameArr(),
+                pageable.getCollectionNameArr(), level);
+        /*listForWomen = productService.findAll(pageable, isHot, isNew, women, null, null);*/
 
-		req.setAttribute("men", men);
-		req.setAttribute("women", women);
+        req.setAttribute("men", men);
+        req.setAttribute("women", women);
         req.setAttribute("listMen", listForMen);
         req.setAttribute("listWomen", listForWomen);
         req.setAttribute("groupMen", groupMen);

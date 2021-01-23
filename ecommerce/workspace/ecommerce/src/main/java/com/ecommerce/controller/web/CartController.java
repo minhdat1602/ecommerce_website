@@ -1,6 +1,12 @@
 package com.ecommerce.controller.web;
 
-import java.io.IOException;
+import com.ecommerce.model.Cart;
+import com.ecommerce.model.CartDetails;
+import com.ecommerce.model.Stock;
+import com.ecommerce.service.ICartService;
+import com.ecommerce.service.IProductService;
+import com.ecommerce.service.IStockService;
+import com.ecommerce.utils.FormUtil;
 
 import javax.inject.Inject;
 import javax.servlet.ServletException;
@@ -8,13 +14,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import com.ecommerce.model.Cart;
-import com.ecommerce.model.CartDetails;
-import com.ecommerce.model.Stock;
-import com.ecommerce.service.ICartService;
-import com.ecommerce.service.IProductService;
-import com.ecommerce.service.IStockService;
+import java.io.IOException;
+import java.util.List;
 
 @WebServlet(urlPatterns = "/gio-hang")
 public class CartController extends HttpServlet {
@@ -27,20 +28,27 @@ public class CartController extends HttpServlet {
     private ICartDetailService cartDetailService;*/
     @Inject
     private IStockService stockService;
+
     //hello
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.getRequestDispatcher("/view/web/shopping-cart.jsp").forward(req, resp);
     }
 
-    @Override
+   /* @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String action;
-        Integer detailCartId;
+        Integer detailCartId = null;
+        action = req.getParameter("action");
+        System.out.println(action);
         try {
-            action = req.getParameter("action");
-            System.out.println(action);
-            detailCartId = Integer.parseInt(req.getParameter("detailCartId"));
+
+
+            try {
+                detailCartId = Integer.parseInt(req.getParameter("detailCartId"));
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
             Cart cart = (Cart) req.getSession().getAttribute("CART");
             if (action.equals("update")) {
                 String method;
@@ -64,54 +72,53 @@ public class CartController extends HttpServlet {
                     resp.sendRedirect("/view/error.jsp");
                 }
             } else if (action.equals("add")) {
-                Integer sizeId = null;
-                Integer colorId = null;
-                Integer productId = null;
 
-                try {
-                    sizeId = Integer.parseInt(req.getParameter("sizeId"));
-                    colorId = Integer.parseInt(req.getParameter("colorId"));
-                    productId = Integer.parseInt(req.getParameter("productId"));
-                }catch (Exception e){
-                    e.printStackTrace();
-                }
+                Stock stock = FormUtil.toModel(Stock.class, req);
 
-                Stock stock = stockService.findOne(sizeId, colorId, productId);
                 boolean constaint = false;
 
-                for(CartDetails cd : cart.getCartDetailsList()){
-                    if(cd.getStockId() == stock.getId() ){
-                        cd.sub();
-                        cartService.updateItem(cd);
+                CartDetails c;
+                for (CartDetails cd : cart.getCartDetailsList()) {
+                    if (cd.getStockId() == stock.getId()) {
+                        cd.plus();
+                        boolean updated = cartService.updateItem(cd);
+                        System.out.println(updated);
                         constaint = true;
                         break;
                     }
                 }
                 CartDetails cartDetails = null;
-                if(!constaint){
+                if (!constaint) {
                     cartDetails = new CartDetails();
                     cartDetails.setCartId(cart.getId());
-                    cartDetails.setStock(stock);
                     cartDetails.setStockId(stock.getId());
                     cartDetails.setQuantity(1);
+                    cartDetails.setStock(stock);
+                    System.out.println(cartDetails.toString());
+                    CartDetails a;
+                    a = cartService.insertItem(cartDetails);
 
-                    cartDetails = cartService.insertItem(cartDetails);
+                    List<CartDetails> list = cart.getCartDetailsList();
+                    list.add(a);
+                    req.getSession().removeAttribute("CART");
+                    cart.setCartDetailsList(list);
+                    *//*req.getSession().setAttribute("CART", cart);*//*
                 }
-                cart.getCartDetailsList().add(cartDetails);
-                resp.sendRedirect(req.getContextPath() + "/products?id=" + productId);
+
+                req.getSession().setAttribute("CART", cart);
             } else if (action.equals("delete")) {
                 boolean deleted = cartService.deleteDetailItemById(detailCartId);
                 System.out.println("DELETED: " + deleted);
                 if (deleted) {
                     boolean rmItem = cart.removeItem(detailCartId);
                     System.out.println("Remove item: " + rmItem);
-                    /*req.removeAttribute("CART");
-                    req.getSession().setAttribute("CART", cart);*/
+                    *//*req.removeAttribute("CART");
+                    req.getSession().setAttribute("CART", cart);*//*
                 }
             }
-            resp.sendRedirect(req.getRequestURI());
         } catch (Exception e) {
-            resp.sendRedirect("/view/error.jsp");
+            System.err.println("XXXXXXXXXXXXXXXXXXXXXXXXXXXXx");
         }
-    }
+        resp.sendRedirect(req.getRequestURI());*/
+  //  }
 }

@@ -11,4 +11,7 @@ public interface IStockService {
 		void setIventory(List<Product> listProduct);
 		boolean update(Stock stock);
 		Integer save(Stock stock);
+
+	//dat
+	List<Stock> findAllByProductId(Integer id);
 }

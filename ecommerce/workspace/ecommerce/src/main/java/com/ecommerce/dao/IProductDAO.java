@@ -28,4 +28,9 @@ public interface IProductDAO extends IGenericDAO<Product>{
 		List<Product> findAllByKey(String filterAttr,String key);
 		Integer countBuyTimes(Integer id);
 		List<Product> findAllNotInPromotionId(Product pageable, int promotionId);
+
+	public List<Product> findAll(Product pageable, Integer isHot, Integer isNew,
+								 String[] groupNameArr, String[] brandNameArr, String[] collectionNameArr
+			, Integer level);
+	public List<Product> findAll(Product pageable,Integer isHot, Integer isNew ,Integer level, String words);
 }

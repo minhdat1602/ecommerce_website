@@ -20,7 +20,55 @@ public abstract class AbstractModel {
 	private String filter;
 	private String filterAttr;
 	private String key;
-	
+
+	//22.1
+	private String[] groupNameArr;
+	private String[] brandNameArr;
+	private String[] collectionNameArr;
+	//22.1
+	private Integer priceMin;
+	private Integer priceMax;
+
+	public String[] getGroupNameArr() {
+		return groupNameArr;
+	}
+
+	public void setGroupNameArr(String[] groupNameArr) {
+		this.groupNameArr = groupNameArr;
+	}
+
+	public String[] getBrandNameArr() {
+		return brandNameArr;
+	}
+
+	public void setBrandNameArr(String[] brandNameArr) {
+		this.brandNameArr = brandNameArr;
+	}
+
+	public String[] getCollectionNameArr() {
+		return collectionNameArr;
+	}
+
+	public void setCollectionNameArr(String[] collectionNameArr) {
+		this.collectionNameArr = collectionNameArr;
+	}
+
+	public Integer getPriceMin() {
+		return priceMin;
+	}
+
+	public void setPriceMin(Integer priceMin) {
+		this.priceMin = priceMin;
+	}
+
+	public Integer getPriceMax() {
+		return priceMax;
+	}
+
+	public void setPriceMax(Integer priceMax) {
+		this.priceMax = priceMax;
+	}
+
 	public String getFilter() {
 		return filter;
 	}

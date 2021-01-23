@@ -147,5 +147,4 @@ public class Product extends AbstractModel{
 		this.avgStar = avgStar;
 	}
 
-	
 }

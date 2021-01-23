@@ -42,10 +42,8 @@ public class LoginController extends HttpServlet {
         User user = userService.getUser(username.trim());
         if (user != null) {
             if (user.getPassword().equals(password)) {
-
                 HttpSession ss = req.getSession();
                 ss.setAttribute("USERMODEL", user);
-
                 try {
                     Cart cart = cartService.findByCustomerId(user.getId());
                     if(cart != null)

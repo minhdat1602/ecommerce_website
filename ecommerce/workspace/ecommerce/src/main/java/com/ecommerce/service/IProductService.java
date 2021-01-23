@@ -24,4 +24,12 @@ public interface IProductService {
 	void getBuyTimes(List<Product> listProduct);
 	List<Product> findAllNotInPromotionId(Product pageable, int parseInt);
 	void updateSellPrice(int[] ids, Integer value);
+
+	//dat
+	/*List<Product> findAll(Product pageable, Integer isHot, Integer isNew,
+						  String groupName, String brandName, String collectionName);*/
+	public List<Product> findAll(Product pageable, Integer isHot, Integer isNew,
+								 String[] groupNameArr, String[] brandNameArr, String[] collectionNameArr
+			, Integer level);
+	public List<Product> findAll(Product pageable,Integer isHot, Integer isNew ,Integer level, String words) ;
 }

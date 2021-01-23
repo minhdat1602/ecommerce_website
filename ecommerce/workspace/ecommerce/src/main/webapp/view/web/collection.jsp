@@ -15,7 +15,7 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="breadcrumb-text">
-                    <a href = "<c:url value = "/view/web/index.jsp"/>"><i class="fa fa-home"></i> Trang chủ</a>
+                    <a href = "<c:url value = "/trang-chu"/>"><i class="fa fa-home"></i> Trang chủ</a>
                     <span>Các bộ sưu tập</span>
                 </div>
             </div>
@@ -37,7 +37,7 @@
 									<div class="blog-item">
 										<div class="bi-pic">
 											<img
-												src="<c:url value="/template/web/img/collection/${collection.imageUrl}"/>"
+												src="${collection.imageUrl}"
 												alt="">
 										</div>
 										<div class="bi-text">

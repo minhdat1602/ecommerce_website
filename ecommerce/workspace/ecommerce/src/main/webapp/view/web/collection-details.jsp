@@ -33,14 +33,14 @@
 				<div class="col-lg-12">
 					<div class="blog-details-inner">
 						<div class="blog-detail-title">
-							<h2>${collection.name }</h2>
+							<h2>Bộ sưu tập: ${collection.name }</h2>
 
 						</div>
 					</div>
 					<div class="col-lg-12 order-1 order-lg-2">
 						<div class="product-show-option">
 							<div class="row">
-								<div class="col-lg-7 col-md-7">
+								<%--<div class="col-lg-7 col-md-7">
 									<div class="select-option">
 										<label class="mr-2" for="p-show" id="labelForTotalItem">Hiển
 											thị:</label> <select id="p-show" class="p-show">
@@ -51,25 +51,24 @@
 											xếp theo: </label> <select id="sorting" class="sorting">
 											<option value="">Tên</option>
 										</select>
-
-
 									</div>
-								</div>
-								<div class="col-lg-5 col-md-5 text-right">
+								</div>--%>
+								<%--<div class="col-lg-5 col-md-5 text-right">
 									<p>Hiển thị 01-08 của 36 Sản phẩm</p>
-								</div>
+								</div>--%>
+									<%--<p class="mt-2">${collection.description}</p>--%>
 							</div>
 						</div>
 						<div class="product-list">
 							<div class="row">
-								<c:forEach var="product" items="${listProduct}">
+								<c:forEach var="product" begin="0" end="11" items="${listProduct}">
 									<div class="col-lg-3 col-sm-6">
 										<div class="product-item">
-											<a href="<c:url value="/products?id=${product.id}"/>">
+											<a href="<c:url value="/sanpham?id=${product.id}"/>">
 												<div class="pi-pic">
 													<img
-														src="<c:url value="/template/img/products/${product.imageUrl}"/>"
-														alt="">
+														src="${product.imageUrl}"
+														alt="collection picture">
 													<c:if test="${product.sellPrice < product.originPrice}">
 														<div class="sale pp-sale">SALE</div>
 													</c:if>
@@ -90,7 +89,6 @@
 														<c:if test="${product.sellPrice == product.originPrice}">
 															${PriceUtils.convert(product.sellPrice)} đ
 													</c:if>
-
 													</div>
 												</div>
 											</a>
@@ -99,7 +97,7 @@
 								</c:forEach>
 							</div>
 						</div>
-						<div class="loading-more">
+						<%--<div class="loading-more">
 							<nav aria-label="Page navigation example">
 								<ul class="pagination">
 									<li class="page-item"><a class="page-link" href="#">Previous</a></li>
@@ -112,7 +110,7 @@
 									<li class="page-item"><a class="page-link" href="#">Next</a></li>
 								</ul>
 							</nav>
-						</div>
+						</div>--%>
 					</div>
 				</div>
 			</div>

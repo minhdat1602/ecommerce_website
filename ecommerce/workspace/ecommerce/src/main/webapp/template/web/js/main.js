@@ -208,6 +208,11 @@
         $(this).addClass('active');
     });
 
+    $(".fw-color-choose .sc-item label, .pd-color-choose .sc-item label").on('click', function () {
+        $(".fw-color-choose .sc-item label, .pd-color-choose .sc-item lab   el").removeClass('active');
+        $(this).addClass('active');
+    });
+
     /*-------------------
 		Nice Select
     --------------------- */

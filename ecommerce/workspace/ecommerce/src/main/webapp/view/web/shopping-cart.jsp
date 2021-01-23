@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" %>
 <%@ include file="/common/taglib.jsp" %>
+<%@page import="com.ecommerce.utils.PriceUtils" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -31,6 +32,7 @@
             <c:if test="${(not empty CART) and (CART.cartDetailsList.size() != 0)}">
                 <div class="col-lg-12">
                     <div class="cart-table">
+
                         <table>
                             <thead>
                             <tr>
@@ -41,69 +43,65 @@
                                 <th>Giá Sản Phẩm</th>
                                 <th>Số Lượng</th>
                                 <th>Tổng Tiền</th>
-                                    <%--<th><i class="ti-close"></i></th>--%>
                             </tr>
                             </thead>
                             <tbody>
                                 <%--Items begin--%>
                             <c:forEach var="details" items="${CART.cartDetailsList}">
-                                <tr>
-                                    <td class="cart-pic first-row"><img
-                                            src="<c:url value="${details.stock.product.imageUrl}"/>"
-                                            alt="Ảnh sản phẩm"></td>
+
+                                <tr class="row${details.id}">
+                                    <td class="cart-pic first-row">
+                                        <img src="<c:url value="${details.stock.product.imageUrl}"/>"
+                                             alt="Ảnh sản phẩm">
+                                    </td>
                                     <td class="cart-title first-row">
                                         <h5>${details.stock.product.name}</h5>
                                     </td>
                                     <td class="cart-title first-row">${details.stock.size.name}</td>
                                     <td class="cart-title first-row">${details.stock.color.name}</td>
-                                    <td class="p-price first-row">
-                                        <fmt:formatNumber
-                                                pattern="###,###,### VNĐ"
-                                                value="${details.stock.product.sellPrice}"/>
+                                    <td class="p-price${details.id} first-row money">
+                                            <%--<fmt:formatNumber
+                                                    pattern="###,###,### VNĐ"
+                                                    value="${details.stock.product.sellPrice}"/>--%>
+                                            ${details.stock.product.sellPrice}
                                     </td>
-                                    <td class="qua-col first-row">
-                                        <div class="quantity">
-                                            <div class="pro-qty">
+                                    <form id="form-detail${details.id}">
+                                        <input type="hidden" name="id" value="${details.id}"></input>
+                                        <input type="hidden" name="cartId" value="${details.cartId}"></input>
+                                        <input type="hidden" name="stockId"
+                                               value="${details.stockId}"></input>
+                                        <td class="qua-col first-row">
+                                            <div class="quantity">
+                                                <div class="pro-qty">
                                                 <span class="dec qtybtn">
-                                                    <form class="sub" id="sub" action="<c:url value="/gio-hang"/> "
-                                                          method="POST">
-                                                        <input style="display: none" name="action" value="update">
-                                                        <input style="display: none" name="detailCartId"
-                                                               value="${details.id}">
-                                                        <input style="display: none" name="method" value="sub">
-                                                        <button style="border: none; outline: none; background-color: #ffffff;"
-                                                                id="subBtn" type="submit" class="dec qtybtn">-</button>
-                                                    </form>
+                                                        <button type="button"
+                                                                detail-id="${details.id}"
+                                                                style="border: none; outline: none; background-color: #ffffff;"
+                                                                class="subBtn dec qtybtn">-</button>
                                                 </span>
-                                                <input type="text" value="${details.quantity}">
-                                                <span class="inc qtybtn">
-                                                    <form class="plus" id="plus" action="<c:url value="/gio-hang"/> "
-                                                          method="POST">
-                                                        <input style="display: none" name="action" value="update">
-                                                        <input style="display: none" name="detailCartId"
-                                                               value="${details.id}">
-                                                        <input style="display: none" name="method" value="plus">
-                                                        <button style="border: none; outline: none; background-color: #ffffff;"
-                                                                id="plusBtn" type="submit" class="inc qtybtn">+</button>
-                                                    </form>
+                                                    <input id="quan${details.id}" name="quantity" type="text"
+                                                           value="${details.quantity}"></input>
+                                                    <span class="inc qtybtn">
+                                                        <button type="button"
+                                                                detail-id="${details.id}"
+                                                                style="border: none; outline: none; background-color: #ffffff;"
+                                                                class="plusBtn inc qtybtn">+</button>
                                                 </span>
+                                                </div>
                                             </div>
-                                        </div>
-                                    </td>
-                                    <td class="total-price first-row">
-                                        <fmt:formatNumber
-                                                pattern="###,###,### VNĐ"
-                                                value="${details.stock.product.sellPrice * details.quantity}"/>
+                                        </td>
+                                    </form>
+                                    <td class="total-price${details.id} first-row money">
+                                            <%--<fmt:formatNumber
+                                                    pattern="###,###,### VNĐ"
+                                                    value="${details.stock.product.sellPrice * details.quantity}"/>--%>
+                                            ${details.stock.product.sellPrice * details.quantity}
                                     </td>
                                     <td class="close-td first-row">
-                                        <form action="<c:url value="/gio-hang"/>" method="POST">
-                                            <input style="display: none" name="action" value="delete">
-                                            <input style="display: none" name="detailCartId"
-                                                   value="${details.id}">
-                                            <button type="submit" style="outline: none; border: none;background-color: #fff;">
-                                                <i class="ti-close"></i>
-                                            </button>
-                                        </form>
+                                        <button detail-id="${details.id}" class="deleteBtn" type="button"
+                                                style="outline: none; border: none;background-color: #fff;">
+                                            <i class="ti-close"></i>
+                                        </button>
                                     </td>
                                 </tr>
                             </c:forEach>
@@ -117,24 +115,25 @@
                                    class="primary-btn continue-shop">Tiếp Tục Mua Sắm</a>
 
                             </div>
-                            <%--<div class="discount-coupon">
-                                <h6>Mã Giảm Gía</h6>
-                                <form action="#" class="coupon-form">
-                                    <input type="text" placeholder="Nhập mã code">
-                                    <button type="submit" class="site-btn coupon-btn">Áp dụng</button>
-                                </form>
-                            </div>--%>
+                                <%--<div class="discount-coupon">
+                                    <h6>Mã Giảm Gía</h6>
+                                    <form action="#" class="coupon-form">
+                                        <input type="text" placeholder="Nhập mã code">
+                                        <button type="submit" class="site-btn coupon-btn">Áp dụng</button>
+                                    </form>
+                                </div>--%>
                         </div>
                         <div class="col-lg-4 offset-lg-4">
                             <div class="proceed-checkout">
                                 <ul>
                                         <%--<li class="subtotal"> Tổng<span>590.000đ</span></li>--%>
                                     <li class="cart-total">Tổng giá
-                                        <span>
-                                         <fmt:formatNumber
-                                                 pattern="###,###,### VNĐ"
-                                                 value="${CART.totalPrice()}"/>
-                                    </span>
+                                        <span id="totalAll" class="all-price money">
+                                                <%--<fmt:formatNumber
+                                                        pattern="###,###,### VNĐ"
+                                                        value="${CART.totalPrice()}"/>--%>
+                                            ${CART.totalPrice()}
+                                        </span>
                                     </li>
                                 </ul>
                                 <a href="#" class="proceed-btn">THANH TOÁN</a>
@@ -219,11 +218,119 @@
         </div>
     </div>
 </div>
-<script>
+<script type="text/javascript">
     $(document).ready(function () {
-        $("#subBtn").click(function () {
-            $("#sub").submit();
+        $(".subBtn").click(function () {
+            var id = $(this).attr('detail-id');
+            var old = $("#quan" + id).val();
+            if (parseInt(old) > 1) {
+                $("#quan" + id).val(parseInt(old) - 1);
+                $("#quan2" + id).text(parseInt(old) - 1);
+                var data = {};
+                var dataForm = $("#form-detail" + id).serializeArray();
+                $.each(dataForm, function (i, v) {
+                    data["" + v.name + ""] = v.value;
+                })
+
+                var price = $(".p-price" + id).text().replace(/\D/g, '');
+                var totalPrice = $(".total-price" + id).text().replace(/\D/g, '');
+                var totalAll = $("#totalAll").text().replace(/\D/g, '');
+
+                var numVND = new Intl.NumberFormat("it-IT", {
+                    style: "currency",
+                    currency: "VND"
+                })
+
+                $(".total-price" + id).text(numVND.format(parseInt(totalPrice) - parseInt(price)));
+                $(".all-price").text(numVND.format(parseInt(totalAll) - parseInt(price)))
+
+                update(data);
+            }
         })
+
+        $(".plusBtn").click(function () {
+            var id = $(this).attr('detail-id');
+            var old = $("#quan" + id).val();
+            $("#quan" + id).val(1 + parseInt(old));
+            $("#quan2" + id).text(1 + parseInt(old));
+            var data = {};
+            var dataForm = $("#form-detail" + id).serializeArray();
+            $.each(dataForm, function (i, v) {
+                data["" + v.name + ""] = v.value;
+            })
+
+            var price = $(".p-price" + id).text().replace(/\D/g, '');
+            var totalPrice = $(".total-price" + id).text().replace(/\D/g, '');
+            var totalAll = $("#totalAll").text().replace(/\D/g, '');
+
+            var numVND = new Intl.NumberFormat("it-IT", {
+                style: "currency",
+                currency: "VND"
+            })
+
+            $(".total-price" + id).text(numVND.format(parseInt(totalPrice) + parseInt(price)));
+            $(".all-price").text(numVND.format(parseInt(totalAll) + parseInt(price)))
+
+            update(data);
+        })
+
+        $(".deleteBtn").click(function () {
+            var id = $(this).attr('detail-id');
+            var data = {};
+            var dataForm = $("#form-detail" + id).serializeArray();
+            $.each(dataForm, function (i, v) {
+                data["" + v.name + ""] = v.value;
+            })
+
+            var totalPrice = $(".total-price" + id).text().replace(/\D/g, '');
+            var totalAll = $("#totalAll").text().replace(/\D/g, '');
+
+            var numVND = new Intl.NumberFormat("it-IT", {
+                style: "currency",
+                currency: "VND"
+            })
+
+            $(".all-price").text(numVND.format(parseInt(totalAll) - parseInt(totalPrice)))
+
+            remove(data);
+
+            $(".row" + id).remove();
+            var qty = $('.qty').text();
+            $('.qty').text(parseInt(qty) - 1)
+        })
+
+        function update(data) {
+            $.ajax({
+                url: "<c:url value="/api/sanpham-giohang"/>  ",
+                type: "PUT",
+                contentType: "application/json",
+                dataType: "text",
+                data: JSON.stringify(data),
+                success: function (result) {
+                    console.log('updated quantity success')
+                },
+                error: function (result) {
+                    console.log("updated quantity error")
+                },
+
+            })
+        }
+
+        function remove(data) {
+            $.ajax({
+                url: "<c:url value="/api/sanpham-giohang"/> ",
+                type: "DELETE",
+                contentType: "application/json",
+                dataType: "text",
+                data: JSON.stringify(data),
+                success: function (result) {
+                    console.log('Delete quantity success')
+                },
+                error: function (result) {
+                    console.log("delete quantity error")
+                },
+            })
+        }
     })
 </script>
 <!-- Partner Logo Section End -->

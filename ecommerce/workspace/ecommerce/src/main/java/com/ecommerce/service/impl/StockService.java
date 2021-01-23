@@ -61,4 +61,16 @@ public class StockService implements IStockService {
 	public Integer save(Stock stock) {
 		return stockDAO.save(stock);
 	}
+
+	//dat ngay 19
+	@Override
+	public List<Stock> findAllByProductId(Integer id) {
+		List<Stock> stocks = stockDAO.findAllByProductId(id);
+		for (Stock s: stocks
+		) {
+			s.setSize(productSizeService.findOne(s.getSizeId()));
+			s.setColor(productColorService.findOne(s.getColorId()));
+		}
+		return stockDAO.findAllByProductId(id);
+	}
 }

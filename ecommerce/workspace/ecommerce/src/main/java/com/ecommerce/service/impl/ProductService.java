@@ -153,4 +153,19 @@ public class ProductService implements IProductService{
 			update(product);
 		}
 	}
+
+	//dat
+	/*@Override
+	public List<Product> findAll(Product pageable, Integer isHot, Integer isNew, String groupName, String brandName, String collectionName) {
+		return productDAO.findAll(pageable, isHot, isNew, groupName, brandName, collectionName);
+	}*/
+	@Override
+	public List<Product> findAll(Product pageable, Integer isHot, Integer isNew, String[] groupNameArr, String[] brandNameArr, String[] collectionNameArr, Integer level) {
+		return productDAO.findAll(pageable, isHot, isNew, groupNameArr, brandNameArr, collectionNameArr, level);
+	}
+	@Override
+	public List<Product> findAll(Product pageable, Integer isHot, Integer isNew, Integer level, String words) {
+		return productDAO.findAll(pageable, isHot, isNew, level, words);
+	}
+
 }

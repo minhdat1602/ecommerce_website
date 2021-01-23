@@ -4,6 +4,11 @@ import com.ecommerce.model.CartDetails;
 
 public interface ICartDetailService {
 
-    boolean insert(CartDetails cartDetails);
+    CartDetails findOne(Integer cartId, Integer stockId);
+    CartDetails findById(Integer id);
+    CartDetails insert(CartDetails cartDetails);
+    boolean update(CartDetails cartDetails);
+    boolean delete(Integer id);
+    void setForeign(CartDetails cartDetails);
 
 }

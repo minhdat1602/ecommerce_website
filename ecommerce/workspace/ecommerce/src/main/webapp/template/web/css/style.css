@@ -1807,7 +1807,7 @@ ight {
     display: inline-block;
     text-transform: uppercase;
 }
-
+/*
 .filter-widget .fw-color-choose .cs-item {
     width: 50%;
     float: left;
@@ -1868,23 +1868,23 @@ ight {
     background: #252525;
     border-radius: 50%;
     content: "";
-}
+}*/
 
-.filter-widget .fw-size-choose .sc-item {
+.filter-widget .fw-size-choose  .sc-item {
     display: inline-block;
     margin-right: 5px;
 }
 
-.filter-widget .fw-size-choose .sc-item:last-child {
+.filter-widget .fw-size-choose  .sc-item:last-child {
     margin-right: 0;
 }
 
-.filter-widget .fw-size-choose .sc-item input {
+.filter-widget .fw-size-choose  .sc-item input {
     position: absolute;
     visibility: hidden;
 }
 
-.filter-widget .fw-size-choose .sc-item label {
+.filter-widget .fw-size-choose  .sc-item label {
     font-size: 16px;
     color: #252525;
     font-weight: 700;
@@ -1901,6 +1901,41 @@ ight {
     background: #252525;
     color: #ffffff;
 }
+
+/*test*/
+
+.filter-widget .fw-color-choose  .sc-item {
+    display: inline-block;
+    margin-right: 5px;
+}
+
+.filter-widget .fw-color-choose  .sc-item:last-child {
+    margin-right: 0;
+}
+
+.filter-widget .fw-color-choose  .sc-item input {
+    position: absolute;
+    visibility: hidden;
+}
+
+.filter-widget .fw-color-choose .sc-item label {
+    font-size: 16px;
+    color: #252525;
+    font-weight: 700;
+    height: 40px;
+    width: 60px;
+    border: 1px solid #ebebeb;
+    text-align: center;
+    line-height: 40px;
+    text-transform: uppercase;
+    cursor: pointer;
+}
+
+.filter-widget .fw-color-choose .sc-item label.active {
+    background: #252525;
+    color: #ffffff;
+}
+
 
 .filter-widget .fw-tags a {
     display: inline-block;

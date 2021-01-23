@@ -1,5 +1,10 @@
 package com.ecommerce.dao.impl;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import com.ecommerce.dao.IProductDAO;
@@ -89,9 +94,7 @@ public class ProductDAO extends AbstractDAO<Product> implements IProductDAO {
 
 	@Override
 	public List<Product> findAllByCollectionId(Integer id) {
-		StringBuilder sql = new StringBuilder("SELECT p.id, p.code,p.name,");
-		sql.append("p.origin_price,p.sell_price,p.image_url,");
-		sql.append("p.descriptions,p.status,p.new,p.hot,p.group_id,");
+		StringBuilder sql = new StringBuilder("SELECT p.*, ");
 		sql.append("g.name as category,b.name as brand, c.name as collection ");
 		sql.append("FROM products p join products_group g on p.group_id = g.id ");
 		sql.append("join products_brand b on b.id = p.brand_id ");
@@ -244,5 +247,341 @@ public class ProductDAO extends AbstractDAO<Product> implements IProductDAO {
 		sql.append("where p.status = 1  and p.id not in (select product_id from promotion_product where promotion_id = ?)");
 		sql.append(" order by "+ pageable.getSorting() + " " + pageable.getSortBy() +" limit ?,? ");
 		return query(sql.toString(), new ProductMapper(), promotionId, pageable.getOffset(),pageable.getMaxPageItem());
+	}
+	//dat
+	public List<Product> findAll(Product pageable, Integer isHot, Integer isNew,
+								 String groupName, String brandName, String collectionName) {
+
+		String sql = "select p.*, gr.name as category, br.name as brand, cl.name as collection " +
+				" from products p " +
+				" join products_brand br on br.id = p.brand_id " +
+				" join products_group gr on gr.id = p.group_id " +
+				" join products_collection cl on cl.id = p.collection_id " +
+				" where p.status = 1 ";
+		if (isHot != null)
+			sql += " and hot = ? ";
+		else
+			sql += " and hot is not ?";
+		if (isNew != null)
+			sql += " and new = ?";
+		else
+			sql += " and new is not ?";
+		if (groupName != null)
+			sql += " and gr.name = ?";
+		else
+			sql += " and gr.name is not ?";
+		if (brandName != null)
+			sql += " and br.name = ?";
+		else
+			sql += " and br.name is not ?";
+		if (collectionName != null)
+			sql += " and cl.name = ?";
+		else
+			sql += " and cl.name is not ?";
+		sql += " limit ? offset ? ";
+		return query(sql, new ProductMapper(), isHot, isNew, groupName, brandName, collectionName,
+				pageable.getLimit(), pageable.getOffset());
+	}
+
+	// Câu truy vấn cấp bậc huyền thoại
+	public List<Product> findAll(Product pageable, Integer isHot, Integer isNew,
+								 String[] groupNameArr, String[] brandNameArr, String[] collectionNameArr
+			, Integer level) {
+		String[] param;
+
+		String sql = "select p.*, lv3.name as category, br.name as brand, cl.name as collection " +
+				" from products p " +
+				" join products_brand br on br.id = p.brand_id " +
+				" join products_group lv3 on lv3.id = p.group_id ";
+		if (level <= 2)
+			sql += " join products_group lv2 on lv2.id = lv3.parent_id ";
+		if (level == 1)
+			sql += " join products_group lv1 on lv1.id = lv2.parent_id ";
+
+		sql += " join products_collection cl on cl.id = p.collection_id " +
+				" where p.status = 1 ";
+
+		if (isHot != null)
+			sql += " and hot = ? ";
+		else
+			sql += " and hot is not ?";
+		if (isNew != null)
+			sql += " and new = ?";
+		else
+			sql += " and new is not ?";
+		if (groupNameArr != null)
+			for (int i = 0; i < groupNameArr.length; i++) {
+				if (i == 0)
+					sql += " and lv" + level + ".name = ? ";
+				else
+					sql += " or lv" + level + ".name = ? ";
+			}
+		else
+			sql += " and lv" + level + ".name is not ? ";
+		if (brandNameArr != null)
+			for (int i = 0; i < brandNameArr.length; i++) {
+				if (i == 0)
+					sql += " and br.name = ? ";
+				else
+					sql += " or br.name = ? ";
+			}
+		else
+			sql += " and br.name is not ? ";
+		if (collectionNameArr != null)
+			for (int i = 0; i < collectionNameArr.length; i++) {
+				if (i == 0)
+					sql += " and cl.name = ?";
+				else
+					sql += " or cl.name = ? ";
+			}
+		else
+			sql += " and cl.name is not ?";
+		sql += " limit ? offset ? ";
+
+		List<Product> results = new ArrayList<Product>();
+		PreparedStatement preparedStatement = null;
+		ResultSet resultSet = null;
+		Connection connection = getConnection();
+		if (connection != null) {
+			try {
+				preparedStatement = connection.prepareStatement(sql);
+				int n = 1;
+				if (isHot != null)
+					preparedStatement.setInt(n++, isHot);
+				else
+					preparedStatement.setString(n++, null);
+				if (isNew != null)
+					preparedStatement.setInt(n++, isNew);
+				else
+					preparedStatement.setString(n++, null);
+				if (groupNameArr != null)
+					for (int i = 0; i < groupNameArr.length; i++) {
+						preparedStatement.setString(n++, groupNameArr[i]);
+					}
+				else {
+					preparedStatement.setString(n++, null);
+				}
+				if (brandNameArr != null)
+					for (int i = 0; i < brandNameArr.length; i++) {
+						preparedStatement.setString(n++, brandNameArr[i]);
+					}
+				else
+					preparedStatement.setString(n++, null);
+				if (collectionNameArr != null)
+					for (int i = 0; i < collectionNameArr.length; i++) {
+						preparedStatement.setString(n++, collectionNameArr[i]);
+					}
+				else
+					preparedStatement.setString(n++, null);
+
+				preparedStatement.setInt(n++, pageable.getLimit());
+				preparedStatement.setInt(n++, pageable.getOffset());
+
+				resultSet = preparedStatement.executeQuery();
+
+				while (resultSet.next()) {
+					Product product = new Product();
+					product.setId(resultSet.getInt("id"));
+					product.setCode(resultSet.getString("code"));
+					product.setName(resultSet.getString("name"));
+					product.setOriginPrice(resultSet.getInt("origin_price"));
+					product.setSellPrice(resultSet.getInt("sell_price"));
+					product.setGroupProduct(resultSet.getString("category"));
+					product.setGroupId(resultSet.getInt("group_id"));
+					product.setBrandId(resultSet.getInt("brand_id"));
+					product.setBrandProduct(resultSet.getString("brand"));
+					product.setCollectionProduct(resultSet.getString("collection"));
+					product.setImageUrl(resultSet.getString("image_url"));
+					product.setDescription(resultSet.getString("descriptions"));
+					product.setStatus(resultSet.getInt("status"));
+					product.setNewProduct(resultSet.getInt("new"));
+					product.setHotProduct(resultSet.getInt("hot"));
+
+					results.add(product);
+				}
+				return results;
+			} catch (SQLException e) {
+				return null;
+			} finally {
+				try {
+					if (resultSet != null) {
+						resultSet.close();
+					}
+					if (preparedStatement != null) {
+						preparedStatement.close();
+					}
+					if (connection != null) {
+						connection.close();
+					}
+				} catch (Exception e) {
+					return null;
+				}
+			}
+
+		}
+		return null;
+	}
+
+	// Câu truy vấn cấp bậc huyền thoại
+	public List<Product> findAll(Product pageable, Integer isHot, Integer isNew, Integer level, String words) {
+		String[] param;
+
+		String sql = "select p.*, lv3.name as category, br.name as brand, cl.name as collection " +
+				" from products p " +
+				" join products_brand br on br.id = p.brand_id " +
+				" join products_group lv3 on lv3.id = p.group_id ";
+		if (level <= 2)
+			sql += " join products_group lv2 on lv2.id = lv3.parent_id ";
+		if (level == 1)
+			sql += " join products_group lv1 on lv1.id = lv2.parent_id ";
+
+		sql += " join products_collection cl on cl.id = p.collection_id " +
+				" where p.status = 1 ";
+
+		if (isHot != null)
+			sql += " and hot = ? ";
+		else
+			sql += " and hot is not ?";
+		if (isNew != null)
+			sql += " and new = ?";
+		else
+			sql += " and new is not ?";
+		if (pageable.getGroupNameArr() != null) {
+			for (int i = 0; i < pageable.getGroupNameArr().length; i++) {
+				if (i == 0)
+					sql += " and ( lv" + level + ".name = ? ";
+				else
+					sql += " or lv" + level + ".name = ? ";
+			}
+			sql += " ) ";
+		} else
+			sql += " and lv" + level + ".name is not ? ";
+		if (pageable.getBrandNameArr() != null) {
+			for (int i = 0; i < pageable.getBrandNameArr().length; i++) {
+				if (i == 0)
+					sql += " and ( br.name = ? ";
+				else
+					sql += " or br.name = ? ";
+			}
+			sql += " ) ";
+		} else
+			sql += " and br.name is not ? ";
+		if (pageable.getCollectionNameArr() != null) {
+			for (int i = 0; i < pageable.getCollectionNameArr().length; i++) {
+				if (i == 0)
+					sql += "and ( cl.name = ?";
+				else
+					sql += " or cl.name = ? ";
+			}
+			sql += " ) ";
+		} else
+			sql += " and cl.name is not ?";
+		//tiem kiem
+		if (level == 1)
+			sql += " and ( lv3.name like " + " ? or " + " lv2.name like " + " ? or" +
+					" lv1.name like " + " ? or " + " p.name like " + " ? " + " ) ";
+		else if (level == 2)
+			sql += " and ( lv3.name like " + " ? or " + " lv2.name like " + " ? or" +
+					" p.name like " + " ? " + " ) ";
+
+		sql += " and sell_price between ? and ? ";
+		sql += " order by hot, new desc ";
+		sql += " limit ? offset ? ";
+
+		List<Product> results = new ArrayList<Product>();
+		PreparedStatement preparedStatement = null;
+		ResultSet resultSet = null;
+		Connection connection = getConnection();
+		if (connection != null) {
+			try {
+				preparedStatement = connection.prepareStatement(sql);
+				int n = 1;
+				if (isHot != null)
+					preparedStatement.setInt(n++, isHot);
+				else
+					preparedStatement.setString(n++, null);
+				if (isNew != null)
+					preparedStatement.setInt(n++, isNew);
+				else
+					preparedStatement.setString(n++, null);
+				if (pageable.getGroupNameArr() != null)
+					for (int i = 0; i < pageable.getGroupNameArr().length; i++) {
+						preparedStatement.setString(n++, pageable.getGroupNameArr()[i]);
+					}
+				else {
+					preparedStatement.setString(n++, null);
+				}
+				if (pageable.getBrandNameArr() != null)
+					for (int i = 0; i < pageable.getBrandNameArr().length; i++) {
+						preparedStatement.setString(n++, pageable.getBrandNameArr()[i]);
+					}
+				else
+					preparedStatement.setString(n++, null);
+				if (pageable.getCollectionNameArr() != null)
+					for (int i = 0; i < pageable.getCollectionNameArr().length; i++) {
+						preparedStatement.setString(n++, pageable.getCollectionNameArr()[i]);
+					}
+				else
+					preparedStatement.setString(n++, null);
+				if (level == 1)
+					for (int i = 0; i < 4; i++) {
+						preparedStatement.setString(n++, words);
+					}
+				else if (level == 2)
+					for (int i = 0; i < 3; i++) {
+						preparedStatement.setString(n++, words);
+					}
+
+				preparedStatement.setInt(n++, pageable.getPriceMin());
+				preparedStatement.setInt(n++, pageable.getPriceMax());
+
+
+				preparedStatement.setInt(n++, pageable.getLimit());
+				preparedStatement.setInt(n++, pageable.getOffset());
+
+
+				resultSet = preparedStatement.executeQuery();
+
+				while (resultSet.next()) {
+					Product product = new Product();
+					product.setId(resultSet.getInt("id"));
+					product.setCode(resultSet.getString("code"));
+					product.setName(resultSet.getString("name"));
+					product.setOriginPrice(resultSet.getInt("origin_price"));
+					product.setSellPrice(resultSet.getInt("sell_price"));
+					product.setGroupProduct(resultSet.getString("category"));
+					product.setGroupId(resultSet.getInt("group_id"));
+					product.setBrandId(resultSet.getInt("brand_id"));
+					product.setBrandProduct(resultSet.getString("brand"));
+					product.setCollectionProduct(resultSet.getString("collection"));
+					product.setImageUrl(resultSet.getString("image_url"));
+					product.setDescription(resultSet.getString("descriptions"));
+					product.setStatus(resultSet.getInt("status"));
+					product.setNewProduct(resultSet.getInt("new"));
+					product.setHotProduct(resultSet.getInt("hot"));
+
+					results.add(product);
+				}
+				return results;
+			} catch (SQLException e) {
+				return null;
+			} finally {
+				try {
+					if (resultSet != null) {
+						resultSet.close();
+					}
+					if (preparedStatement != null) {
+						preparedStatement.close();
+					}
+					if (connection != null) {
+						connection.close();
+					}
+				} catch (Exception e) {
+					return null;
+				}
+			}
+
+		}
+		return null;
 	}
 }

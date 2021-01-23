@@ -7,6 +7,8 @@
 <head>
     <meta charset="UTF-8">
     <title>Cửa hàng</title>
+    <style>
+    </style>
 </head>
 <body>
 <input id="flag-index" type="hidden" value=".shop-page">
@@ -26,167 +28,239 @@
 <!-- Breadcrumb Section End -->
 
 <!-- Product Shop Section Begin -->
-<section class="product-shop spad">
-    <div class="container">
-        <div class="row">
-            <div
-                    class="col-lg-3 col-md-6 col-sm-8 order-2 order-lg-1 produts-sidebar-filter">
-                <div class="filter-widget">
-                    <h4 class="fw-title">Dành cho</h4>
-                    <ul class="filter-catagories">
-                        <c:forEach var="customer" items="${filterByCustomers}">
-                            <li><a href="#">${customer.name}</a></li>
-                        </c:forEach>
-                    </ul>
-                </div>
-                <div class="filter-widget">
-                    <h4 class="fw-title">Thương hiệu</h4>
-                    <ul class="filter-catagories">
-                        <c:forEach begin="0" end="4" items="${filterByBrands}" var="brand">
-                            <li><a href="#">${brand.name}</a></li>
-                        </c:forEach>
-                    </ul>
-                </div>
-                <div class="filter-widget">
-                    <h4 class="fw-title">Giá</h4>
-                    <div class="filter-range-wrap">
-                        <div class="range-slider">
-                            <div class="price-input">
-                                <div class="input-group mb-3">
-                                    <input name="price" type="text" class="form-control"
-                                           placeholder="Giá từ">
-                                    <div class="input-group-append">
-                                        <span class="input-group-text" id="basic-addon2">đ</span>
-                                    </div>
-                                </div>
-                                <div class="input-group mb-3">
-                                    <input name="price" type="text" class="form-control"
-                                           placeholder="Đến">
-                                    <div class="input-group-append">
-                                        <span class="input-group-text" id="basic-addon1">đ</span>
-                                    </div>
-                                </div>
-
-                            </div>
-                        </div>
-                    </div>
-                    <a href="#" class="filter-btn">Lọc</a>
-                </div>
-                <div class="filter-widget">
-                    <h4 class="fw-title">Màu Sắc</h4>
-                    <div class="fw-color-choose">
-                        <c:forEach items="${filterByColors}" var="color">
-                            <div class="cs-item">
-                                <input type="radio" id="cs-${color.code}"> <label
-                                    class="cs-${color.code}" for="cs-${color.code}">
-                                <a href="">${color.name}
-                                </a>
-                            </label>
-                            </div>
-                        </c:forEach>
-                    </div>
-                </div>
-                <div class="filter-widget">
-                    <h4 class="fw-title">Size</h4>
-                    <div class="fw-size-choose">
-                        <ul id="choose-size">
-                            <c:forEach items="${filterBySize}" var="size">
-                                <li><a href="">${size.name}</a></li>
+<form action="<c:url value="/cuahang"/>" method="get"
+      id="submitForm">
+    <section class="product-shop spad">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3 col-md-6 col-sm-8 order-2 order-lg-1 produts-sidebar-filter">
+                    <%--<div class="filter-widget">
+                        <h4 class="fw-title">Dành Cho</h4>
+                        <ul class="filter-catagories">
+                            <c:forEach items="${filterByCustomers}" var="group">
+                                <li><a href="#">${group.name}</a></li>
                             </c:forEach>
                         </ul>
+                    </div>--%>
+                    <div class="filter-widget">
+                        <h4 class="fw-title">Thương hiệu</h4>
+                        <div class="fw-brand-check">
+                            <c:forEach items="${filterByCustomers}" var="group">
+                                <div class="bc-item">
+                                    <label for="gr-${group.id}">
+                                            ${group.name}
+                                        <input
+                                        <c:if test="${fn:contains(groupNameStr, group.name)}">
+                                                checked='checked'
+                                        </c:if>
+                                                class="group-name" value="${group.name}" name="groupName"
+                                                type="checkbox" id="gr-${group.id}">
+                                        <span class="checkmark"></span>
+                                    </label>
+                                </div>
+                            </c:forEach>
+                        </div>
                     </div>
-                </div>
-                <div class="filter-widget">
-                    <h4 class="fw-title">Tags</h4>
-                    <div class="fw-tags">
-                        <c:forEach items="${filterByTags}" var="tag">
-
-                            <a href="#">${tag.name}</a>
-                        </c:forEach>
+                    <div class="filter-widget">
+                        <h4 class="fw-title">Thương hiệu</h4>
+                        <div class="fw-brand-check">
+                            <c:forEach items="${filterByBrands}" var="brand">
+                                <div class="bc-item">
+                                    <label for="bc-${brand.id}">
+                                            ${brand.name}
+                                        <input
+                                        <c:if test="${fn:contains(brandNameStr, brand.name)}">
+                                                checked='checked'
+                                        </c:if>
+                                                class="brand-name" name="brandName" value="${brand.name}"
+                                                type="checkbox" id="bc-${brand.id}">
+                                        <span class="checkmark"></span>
+                                    </label>
+                                </div>
+                            </c:forEach>
+                        </div>
                     </div>
-                </div>
-            </div>
-            <div class="col-lg-9 order-1 order-lg-2 ">
-                <div class="product-show-option">
-                    <div class="row">
-                        <div class="col-lg-7 col-md-7 mb-4">
-                            <div class="select-option">
-                                <label class="mr-2" for="p-show" id="labelForTotalItem">Hiển
-                                    thị:</label> <select id="p-show" class="p-show">
-                                <option value="">10</option>
-                                <option value="">15</option>
-                                <option value="">20</option>
-                            </select> <label class="ml-2 mr-2" for="sorting" id="labelForSorting">Sắp
-                                xếp theo: </label> <select id="sorting" class="sorting">
-                                <option value="">Tên</option>
-                            </select>
-
-
+                    <%--<div class="filter-widget">
+                        <h4 class="fw-title">Giá</h4>
+                        <div class="filter-range-wrap">
+                            <div class="range-slider">
+                                <div class="price-input">
+                                    <input name="priceMin" value="${priceMin}" type="text" id="minamount">
+                                    <input name="priceMax" value="${priceMax}" type="text" id="maxamount">
+                                </div>
+                            </div>
+                            <div class="price-range ui-slider ui-corner-all ui-slider-horizontal ui-widget ui-widget-content"
+                                 data-min="33" data-max="98">
+                                <div class="ui-slider-range ui-corner-all ui-widget-header"></div>
+                                <span tabindex="0" class="ui-slider-handle ui-corner-all ui-state-default"></span>
+                                <span tabindex="0" class="ui-slider-handle ui-corner-all ui-state-default"></span>
                             </div>
                         </div>
-                        <div class="col-lg-5 col-md-5 text-right">
-                            <p>Hiển thị 01-08 của 36 Sản phẩm</p>
+                        <a href="#" class="filter-btn">Lọc</a>
+                    </div>--%>
+                    <div class="filter-widget">
+                        <h4 class="fw-title">Giá</h4>
+                        <div class="filter-range-wrap">
+                            <div class="range-slider">
+                                <div class="price-input">
+                                    <div class="input-group mb-3">
+                                        <input id="priceMin" name="priceMin" value="${priceMin}" type="text"
+                                               class="form-control"
+                                               placeholder="Giá từ">
+                                        <div class="input-group-append">
+                                            <span class="input-group-text" id="basic-addon2">đ</span>
+                                        </div>
+                                    </div>
+                                    <div class="input-group mb-3">
+                                        <input id="priceMax" name="priceMax" value="${priceMax}" type="text"
+                                               class="form-control"
+                                               placeholder="Đến">
+                                        <div class="input-group-append">
+                                            <span class="input-group-text" id="basic-addon1">đ</span>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <a id="filter-btn" style="cursor: pointer" class="filter-btn">Lọc</a>
+                    </div>
+                    <div class="filter-widget">
+                        <h4 class="fw-title">Tags</h4>
+                        <div class="fw-tags">
+                            <c:forEach items="${filterByTags}" var="t">
+                                <c:choose>
+                                    <c:when test="${t.name eq tag && level == 2}">
+                                        <a class="tag-btn"
+                                           tag-data="${t.name}" style="cursor: pointer;
+                                            background-color: #0d3f2f; color: #ffffff;">${t.name}</a>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <a class="tag-btn"
+                                           tag-data="${t.name}" style="cursor: pointer;">${t.name}</a>
+                                    </c:otherwise>
+                                </c:choose>
+                            </c:forEach>
+                        </div>
+                        <input id="tag-value" type="hidden" name="tag" value="${tag}">
+                    </div>
+                </div>
+                <div class="col-lg-9 order-1 order-lg-2">
+                    <div class="product-show-option">
+                        <div class="row">
+                            <div class="col-lg-7 col-md-7">
+                                <div class="select-option">
+                                    <select id="sorting" name="sorting" class="sorting">
+                                        <option
+                                                <c:if test="${sorting eq 'normal'}">selected="selected"</c:if>
+                                                value="normal">Bình thường
+                                        </option>
+                                        <option
+                                                <c:if test="${sorting eq 'isNew'}">selected="selected"</c:if>
+                                                value="isNew">Sản phẩm mới
+                                        </option>
+                                        <
+                                        <option
+                                                <c:if test="${sorting eq 'isHot'}">selected="selected"</c:if>
+                                                value="isHot">Sản phẩm hot
+                                        </option>
+                                    </select>
+                                    <%--<select class="p-show">
+                                        <option value="">Show:</option>
+                                    </select>--%>
+                                </div>
+                            </div>
+                            <div class="col-lg-5 col-md-5 text-right">
+                                <c:if test="${pageable.totalItem == 0}">
+                                    <p>Không có sản phẩm nào</p>
+                                </c:if>
+                                <c:if test="${pageable.totalItem >= ((pageable.page)*pageable.maxPageItem)}">
+                                    <p>Hiển thị ${(pageable.page - 1)*pageable.maxPageItem + 1}
+                                        - ${(pageable.page)*pageable.maxPageItem}
+                                        của ${pageable.totalItem} Sản phẩm</p>
+                                </c:if>
+                                <c:if test="${(((pageable.page)*pageable.maxPageItem) > pageable.totalItem)
+                                && pageable.totalItem != 0}">
+                                    <p>Hiển thị ${(pageable.page - 1)*pageable.maxPageItem+1}
+                                        - ${pageable.totalItem}
+                                        của ${pageable.totalItem} Sản phẩm</p>
+                                </c:if>
+                            </div>
                         </div>
                     </div>
                     <div class="product-list">
                         <div class="row">
-                            <c:forEach var="product" items="${listProduct}">
+                            <c:forEach items="${listProduct}" var="product">
                                 <div class="col-lg-4 col-sm-6">
                                     <div class="product-item">
-                                        <a
-                                                href="<c:url value="/products?id=${product.id}"/>">
-                                            <div class="pi-pic">
-                                                <img
-                                                        src="<c:url value="/template/img/products/${product.imageUrl}"/>"
-                                                        alt="">
-                                                <c:if test="${product.sellPrice < product.originPrice}">
-                                                    <div class="sale pp-sale">SALE</div>
-                                                </c:if>
-                                                <div class="icon">
+                                        <div class="pi-pic">
+                                            <a href="<c:url value="/sanpham?id=${product.id}"/> ">
+                                                <img src="${product.imageUrl}" alt="product picture"/>
+                                            </a>
+                                            <c:if test="${product.originPrice > product.sellPrice}">
+                                                <div class="sale pp-sale">
+                                                    Sale
+                                                </div>
+                                            </c:if>
+                                                <%--HINH TRAI TIM (SP YEU THICH)--%>
+                                                <%--<div class="icon">
                                                     <i class="icon_heart_alt"></i>
-                                                </div>
-                                            </div>
-                                            <div class="pi-text">
-                                                <div class="catagory-name">${product.groupProduct}</div>
-                                                <a>
-                                                    <h5>${product.name}</h5>
-                                                </a>
-                                                <div class="product-price">
-                                                    <c:if test="${product.sellPrice < product.originPrice}">
-                                                        ${PriceUtils.convert(product.sellPrice)} đ
-                                                        <span>${PriceUtils.convert(product.originPrice)} đ</span>
-                                                    </c:if>
-                                                    <c:if test="${product.sellPrice == product.originPrice}">
-                                                        ${PriceUtils.convert(product.sellPrice)} đ
-                                                    </c:if>
+                                                </div>--%>
 
-                                                </div>
+                                                <%--<ul>
+                                                    <li class="w-icon active"><a href="#"><i class="icon_bag_alt"></i></a></li>
+                                                    <li class="quick-view"><a href="#">+ Quick View</a></li>
+                                                    <li class="w-icon"><a href="#"><i class="fa fa-random"></i></a></li>
+                                                </ul>--%>
+                                        </div>
+                                        <div class="pi-text">
+                                            <div class="catagory-name">${product.groupProduct}</div>
+                                            <a href="<c:url value="/sanpham?id=${product.id}"/> ">
+                                                <h5>${product.name}</h5>
+                                            </a>
+                                            <div class="product-price">
+                                                <c:if test="${product.originPrice > product.sellPrice}">
+                                                    ${PriceUtils.convert(product.sellPrice)} đ
+                                                    <span>${PriceUtils.convert(product.originPrice)} đ</span>
+                                                </c:if>
+                                                <c:if test="${product.originPrice <= product.sellPrice}">
+                                                    ${PriceUtils.convert(product.originPrice)} đ
+                                                </c:if>
                                             </div>
-                                        </a>
+                                        </div>
                                     </div>
                                 </div>
                             </c:forEach>
-
                         </div>
                     </div>
-                    <div class="loading-more">
-                        <nav aria-label="Page navigation example">
-                            <ul class="pagination">
-                                <li class="page-item"><a class="page-link" href="#"><</a></li>
-                                <li class="page-item"><a class="page-link" href="#">1</a></li>
-                                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                <li class="page-item"><a class="page-link" href="#">4</a></li>
-                                <li class="page-item"><a class="page-link" href="#">5</a></li>
-                                <li class="page-item"><a class="page-link" href="#">6</a></li>
-                                <li class="page-item"><a class="page-link" href="#">></a></li>
-                            </ul>
+
+                    <input type="hidden" name="page" id="page" value="${pageable.page}">
+                    <input type="hidden" name="maxPageItem" id="maxPageItem" value="${pageable.maxPageItem}">
+                    <input type="hidden" name="groupNameStr" id="groupNameStr" value="${groupNameStr}">
+                    <input type="hidden" name="brandNameStr" id="brandNameStr" value="${brandNameStr}">
+                    <input type="hidden" name="level" id="level" value="${level}">
+                    <input type="hidden" name="words" id="words" value="${words}">
+
+                    <%--pagination--%>
+                    <div class="container">
+                        <nav aria-label="Page navigation">
+                            <ul class="pagination" id="pagination"></ul>
                         </nav>
                     </div>
+
+                    <%--<div class="loading-more">
+                        <i class="icon_loading"></i>
+                        <a href="#">
+                            Loading More
+                        </a>
+                    </div>--%>
+
                 </div>
             </div>
         </div>
-</section>
+    </section>
+</form>
+
 <!-- Product Shop Section End -->
 
 <!-- Partner Logo Section Begin -->
@@ -232,5 +306,75 @@
     </div>
 </div>
 <!-- Partner Logo Section End -->
+
+<script type="text/javascript">
+
+    $(".tag-btn").click(function () {
+        var value = $(this).attr('tag-data');
+        $("#tag-value").val(value);
+        $('#page').val(1);
+        $("#level").val(2);
+        $("#submitForm").submit();
+    })
+
+    $("#sorting").change(function () {
+        var value = $(this).attr('tag-data');
+        if (value != null && !value.equals("")) {
+            $("#tag-value").val(value);
+        }
+
+        $('#page').val(1);
+
+        $("#submitForm").submit();
+    })
+
+    $("#filter-btn").click(function (e) {
+        var data = {};
+        var groupNameStr = $(".group-name:checked").map(function () {
+            return $(this).val();
+        }).get();
+        var brandNameStr = $(".brand-name:checked").map(function () {
+            return $(this).val();
+        }).get();
+
+        $("#groupNameStr").val(groupNameStr);
+        $("#brandNameStr").val(brandNameStr);
+
+
+        console.log($("#groupNameStr").val());
+        if ($("#groupNameStr").val() != null && $("#groupNameStr").val().trim() != "") {
+            $("#level").val(1);
+        }
+
+        var oldMin = $("#priceMin").val();
+        $("#priceMin").val(oldMin);
+        var oldMax = $("#priceMax").val();
+        $("#priceMax").val(oldMax);
+
+        $('#page').val(1);
+        $("#submitForm").submit();
+    })
+
+    $(function () {
+        var totalPages = ${pageable.totalPage};
+        var startPage = ${pageable.page};
+        var maxPageItem = ${pageable.maxPageItem};
+        window.pagObj = $('#pagination').twbsPagination({
+            totalPages: totalPages,
+            visiblePages: maxPageItem,
+            startPage: startPage,
+            onPageClick: function (event, page) {
+                if (startPage != page) {
+                    $('#maxPageItem').val(maxPageItem);
+                    $('#page').val(page);
+                   /* $("#words").val(${words})*/
+                    $('#submitForm').submit();
+                }
+            }
+        }).on('page', function (event, page) {
+            console.info(page + ' (from event listening)');
+        });
+    });
+</script>
 </body>
 </html>

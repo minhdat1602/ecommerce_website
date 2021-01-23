@@ -31,7 +31,7 @@
                         <li><a href="<c:url value = "/capnhat?page=info"/>">Đổi thông tin</a></li>
                         <li><a href="<c:url value = "/view/web/list-order.jsp"/>">Đơn hàng</a></li>
                         <li>
-                            <a href="<c:url value="/dang-nhap?action=logout"/>   ">Đăng xuất</a>
+                            <a href="<c:url value="/dang-nhap?action=logout"/>">Đăng xuất</a>
                         </li>
                     </ul>
                 </c:if>
@@ -67,16 +67,28 @@
                     </div>
                 </div>
                 <div class="col-lg-7 col-md-7">
-                    <div class="advanced-search">
-                        <button type="button" class="category-btn">Tìm kiếm</button>
-                        <div class="input-group">
-                            <input id="search-" type="text" placeholder="" style="color: black;">
-                            <a style="color: black;" href="<c:url value = "/view/web/search.jsp"/>">
-                                <button type="button"><i class="ti-search"></i></button>
-                            </a>
+                    <form id="search-form" method="get" action="<c:url  value="/cuahang"/> ">
+                        <div class="advanced-search">
+                            <button type="button" class="category-btn">Tìm kiếm</button>
+                            <div class="input-group">
+                                <input id="search-" <c:if test="${not empty words}">value="${words}"</c:if>
+                                       name="words" type="text" placeholder="" style="color: black;">
+                                <%--<a style="color: black;" href="<c:url value = "/tiemkiem"/>">--%>
+                                    <button type="button" id="search-btn"><i class="ti-search"></i></button>
+                                <%--</a>--%>
+                            </div>
                         </div>
-                    </div>
+                    </form>
                 </div>
+                <script>
+                    $(document).ready(function (){
+                        $("#search-btn").click(function (){
+                            if( $("#search-").val() != null &&  $("#search-").val().trim() != ""){
+                                $("#search-form").submit();
+                            }
+                        })
+                    })
+                </script>
                 <div class="col-lg-3 text-right col-md-3">
                     <ul class="nav-right">
                         <li class="heart-icon">
@@ -88,7 +100,7 @@
                         <li class="cart-icon">
                             <a href="<c:url value = "/gio-hang"/>">
                                 <i class="icon_bag_alt"></i>
-                                <span>
+                                <span class="qty">
                                     <c:if test="${(empty CART) or (CART.cartDetailsList.size() == 0)}">
                                         0
                                     </c:if>
@@ -103,54 +115,49 @@
                                         <table>
                                             <tbody>
                                             <c:forEach items="${CART.cartDetailsList}" var="details">
-                                                <tr>
+                                                <tr class="row${details.id}">
                                                     <td class="si-pic"><img
                                                             src="<c:url value="${details.stock.product.imageUrl}"/>"
                                                             alt="Picture"></td>
                                                     <td class="si-text">
                                                         <div class="product-selected">
-                                                            <p><fmt:formatNumber
+                                                            <div style="font-size: 15px"><fmt:formatNumber
                                                                     pattern="###,###,###"
                                                                     value="${details.stock.product.sellPrice}"/>
-                                                                x ${details.quantity}</p>
+                                                                x
+                                                                <span id="quan2${details.id}">${details.quantity}</span>
+                                                            </div>
                                                             <h6>${details.stock.product.name}</h6>
                                                         </div>
                                                     </td>
                                                     <td class="si-close">
-                                                        <form action="<c:url value="/gio-hang"/>" method="POST">
-                                                            <input style="display: none" name="action" value="delete">
-                                                            <input style="display: none" name="detailCartId"
-                                                                   value="${details.id}">
-                                                            <button style="background-color: #fff;
-                                                            outline: none; border: none;"
-                                                                    type="submit">
-                                                                <i class="ti-close"></i>
-                                                            </button>
-                                                        </form>
+                                                        <button class="deleteBtn" style="background-color: #fff;
+                                                                outline: none; border: none;"
+                                                                type="submit">
+                                                            <i class="ti-close"></i>
+                                                        </button>
                                                     </td>
                                                 </tr>
                                             </c:forEach>
-                                                <%--<tr>
-                                                    <td class="si-pic"><img src="<c:url value="/template/img/select-product-2.jpg"/>" alt=""></td>
-                                                    <td class="si-text">
-                                                        <div class="product-selected">
-                                                            <p>260.000đ x 1</p>
-                                                            <h6>Áo Len 2020</h6>
-                                                        </div>
-                                                    </td>
-                                                    <td class="si-close">
-                                                        <i class="ti-close"></i>
-                                                    </td>
-                                                </tr>--%>
+                                                <%--    <tr>
+                                                        <td class="si-pic"><img src="<c:url value="/template/img/select-product-2.jpg"/>" alt=""></td>
+                                                        <td class="si-text">
+                                                            <div class="product-selected">
+                                                                <p>260.000đ x 1</p>
+                                                                <h6>Áo Len 2020</h6>
+                                                            </div>
+                                                        </td>
+                                                        <td class="si-close">
+                                                            <i class="ti-close"></i>
+                                                        </td>
+                                                    </tr>--%>
                                             </tbody>
                                         </table>
                                     </div>
                                     <div class="select-total">
                                         <span>Tổng:</span>
-                                        <h5>
-                                            <fmt:formatNumber
-                                                    pattern="###,###,### VNĐ"
-                                                    value="${CART.totalPrice()}"/>
+                                        <h5 class="money all-price">
+                                                ${CART.totalPrice()}
                                         </h5>
                                     </div>
                                     <div class="select-button">
@@ -161,10 +168,8 @@
                             </c:if>
                         </li>
                         <c:if test="${(CART.cartDetailsList.size() != 0) || (empty CART)}">
-                            <li class="cart-price">
-                                <fmt:formatNumber
-                                        pattern="###,###,### VNĐ"
-                                        value="${CART.totalPrice()}"/>
+                            <li class="cart-price all-price money">
+                                    ${CART.totalPrice()}
                             </li>
                         </c:if>
                     </ul>
@@ -179,24 +184,29 @@
                     <i class="ti-menu"></i>
                     <span>TẤT CẢ SẢN PHẨM</span>
                     <ul class="depart-hover">
-                        <li class="active"><a href="#">Quần Áo Nam</a></li>
-                        <li><a href="#">Quần Áo Nữ</a></li>
-                        <li><a href="#">Quần Áo Trẻ Em</a></li>
-                        <li><a href="#">Phụ Kiện</a></li>
-
+                        <c:forEach items="${lv1}" var="lv1">
+                            <li>
+                                <a href="<c:url value="/cuahang?groupNameStr=${lv1.name}"/>">${lv1.name}
+                                </a>
+                            </li>
+                        </c:forEach>
                     </ul>
                 </div>
             </div>
             <nav class="nav-menu mobile-menu">
                 <ul>
                     <li class="index-page"><a href="<c:url value = "/trang-chu"/>">Trang Chủ</a></li>
-                    <li class="shop-page"><a href="<c:url value = "/shop"/>">Shop</a></li>
+                    <li class="shop-page"><a href="<c:url value = "/cuahang"/>">Cửa hàng</a></li>
                     <li class="collection-page"><a href="<c:url value = "/collection"/>">Bộ Sưu Tập</a>
                         <ul class="dropdown">
-                            <li class="collection-page"><a href="<c:url value = "/view/web/collection-details.jsp"/>">Thu
-                                Đông</a></li>
-                            <li class="collection-page"><a href="<c:url value = "/view/web/collection-details.jsp"/>">Mùa
-                                Hè</a></li>
+                            <c:forEach items="${CL}" var="cl">
+                                <li class="collection-page">
+                                    <a href="<c:url value = "/collection?id=${cl.id}"/>">
+                                        ${cl.name}</a></li>
+                            </c:forEach>
+
+                            <%--<li class="collection-page"><a href="<c:url value = "/view/web/collection-details.jsp"/>">Mùa
+                                Hè</a></li>--%>
                         </ul>
                     </li>
                     <li class="sale-page"><a href="<c:url value = "/sale"/>">SALE</a>

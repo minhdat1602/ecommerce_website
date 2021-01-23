@@ -11,4 +11,5 @@ public interface IStockDAO extends IGenericDAO<Stock>{
 	List<Stock> findAllByProductId(Integer id);
 	boolean update(Stock stock);
 	Integer save(Stock stock);
+
 }

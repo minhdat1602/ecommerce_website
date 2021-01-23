@@ -19,5 +19,15 @@
 		<filter-name>sitemesh</filter-name>
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
+	<!--menu filter-->
+
+	<filter>
+		<filter-name>MenuController</filter-name>
+		<filter-class>com.ecommerce.controller.web.MenuController</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>MenuController</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
 
 </web-app>
