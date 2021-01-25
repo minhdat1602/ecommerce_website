@@ -17,4 +17,9 @@ public class UserGroupService implements IUserGroupService{
 		return userGroupDAO.findAll();
 	}
 
+	@Override
+	public UserGroup getNameByUserId(Integer id) {
+		return userGroupDAO.getNameByUserId(id);
+	}
+
 }

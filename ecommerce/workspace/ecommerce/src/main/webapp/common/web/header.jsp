@@ -28,6 +28,9 @@
                         <i class="fa fa-user"></i>
                         Xin chào: ${USERMODEL.lastName}</a>
                     <ul class="dropdown" id="userOption">
+                    <c:if test="${USERMODEL.isAdmin()}">
+                 	   <li><a href="<c:url value = "/admin/danh-sach-san-pham?type=list&page=1&maxPageItem=10&sorting=id&sortBy=asc"/>">Trang quản trị</a></li>
+                    </c:if>
                         <li><a href="<c:url value = "/capnhat?page=info"/>">Đổi thông tin</a></li>
                         <li><a href="<c:url value = "/view/web/list-order.jsp"/>">Đơn hàng</a></li>
                         <li>

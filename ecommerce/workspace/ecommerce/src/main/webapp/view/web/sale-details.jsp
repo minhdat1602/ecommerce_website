@@ -42,28 +42,13 @@
 						</div>
 					</div>
 					<div class="col-lg-12 order-1 order-lg-2">
-						<div class="product-show-option">
-							<div class="row">
-								<div class="col-lg-7 col-md-7">
-									<div class="select-option">
-										<select class="sorting">
-											<option value="">Mặc định phân loại</option>
-										</select> <select class="p-show">
-											<option value="">Hiển Thị:</option>
-										</select>
-									</div>
-								</div>
-								<div class="col-lg-5 col-md-5 text-right">
-									<p>Hiển thị 01-09 của 36 Sản phẩm</p>
-								</div>
-							</div>
-						</div>
+						
 						<div class="product-list">
 							<div class="row">
 								<c:forEach var="product" items="${listProduct}">
 									<div class="col-lg-3 col-sm-6">
 										<div class="product-item">
-											<a href="<c:url value="/products?id=${product.id}"/>">
+											<a href="<c:url value="/sanpham?id=${product.id}"/>">
 												<div class="pi-pic">
 													<img
 														src="<c:url value="/template/img/products/${product.imageUrl}"/>"
@@ -97,20 +82,7 @@
 								</c:forEach>
 							</div>
 						</div>
-						<div class="loading-more">
-							<nav aria-label="Page navigation example">
-								<ul class="pagination">
-									<li class="page-item"><a class="page-link" href="#">Previous</a></li>
-									<li class="page-item"><a class="page-link" href="#">1</a></li>
-									<li class="page-item"><a class="page-link" href="#">2</a></li>
-									<li class="page-item"><a class="page-link" href="#">3</a></li>
-									<li class="page-item"><a class="page-link" href="#">4</a></li>
-									<li class="page-item"><a class="page-link" href="#">5</a></li>
-									<li class="page-item"><a class="page-link" href="#">6</a></li>
-									<li class="page-item"><a class="page-link" href="#">Next</a></li>
-								</ul>
-							</nav>
-						</div>
+						
 					</div>
 				</div>
 			</div>

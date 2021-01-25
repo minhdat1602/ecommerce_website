@@ -8,4 +8,6 @@ public interface IUserGroupService {
 
 	List<UserGroup> findAll();
 
+	UserGroup getNameByUserId(Integer id);
+
 }

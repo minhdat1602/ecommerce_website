@@ -8,4 +8,6 @@ public interface IUserGroupDAO extends IGenericDAO<UserGroup>{
 
 	List<UserGroup> findAll();
 
+	UserGroup getNameByUserId(Integer id);
+
 }

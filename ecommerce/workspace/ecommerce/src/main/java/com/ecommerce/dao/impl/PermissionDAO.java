@@ -10,8 +10,14 @@ public class PermissionDAO extends AbstractDAO<Permission> implements IPermissio
 
 	@Override
 	public List<Permission> findAllByGroupCode(String sorting) {
-		String sql = "select p.id,p.name,p.action from users_group ug join permissions p on ug.id = p.user_group_id where code = ?";
+		String sql = "select DISTINCT p.* from users u join users_group ug on u.group_id = ug.id join user_group_permission ugp on ugp.user_group_id = ug.id join permissions p on p.id =ugp.permission_id where ug.code = ?";
 		return query(sql, new PermissionMapper(),sorting);
+	}
+
+	@Override
+	public List<Permission> findAllByUserId(Integer id) {
+		String sql = "select p.* from users u join users_group ug on u.group_id = ug.id join user_group_permission ugp on ugp.user_group_id = ug.id join permissions p on p.id =ugp.permission_id where u.id = ?";
+		return query(sql, new PermissionMapper(), id);
 	}
 
 }

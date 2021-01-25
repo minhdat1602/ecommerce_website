@@ -13,15 +13,20 @@ import javax.servlet.http.HttpSession;
 import com.ecommerce.model.Cart;
 import com.ecommerce.model.User;
 import com.ecommerce.service.ICartService;
+import com.ecommerce.service.IPermissionService;
+import com.ecommerce.service.IUserGroupService;
 import com.ecommerce.service.IUserService;
 
 @WebServlet(urlPatterns = {"/dang-nhap"})
 public class LoginController extends HttpServlet {
     @Inject
     private IUserService userService;
-
     @Inject
     private ICartService cartService;
+    @Inject
+    private IPermissionService permissionService;
+    @Inject
+    private IUserGroupService groupService;
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -42,6 +47,8 @@ public class LoginController extends HttpServlet {
         User user = userService.getUser(username.trim());
         if (user != null) {
             if (user.getPassword().equals(password)) {
+            	user.setListPermission(permissionService.findAllByUserId(user.getId()));
+            	user.setGroup((groupService.getNameByUserId(user.getId())).getName());
                 HttpSession ss = req.getSession();
                 ss.setAttribute("USERMODEL", user);
                 try {
@@ -52,8 +59,11 @@ public class LoginController extends HttpServlet {
                     e.printStackTrace();
                     System.err.println("ERROR IN SAVE SHOPPING-CART INTO SESSION");
                 }
-
-                resp.sendRedirect(req.getContextPath() + "/trang-chu");
+                if (user.isAdmin()) {
+                	resp.sendRedirect(req.getContextPath() + "/admin/danh-sach-san-pham?type=list&page=1&maxPageItem=10&sorting=id&sortBy=asc");
+				} else {
+					resp.sendRedirect(req.getContextPath() + "/trang-chu");
+				}
             } else {
                 req.setAttribute("username", username);
                 req.setAttribute("pwd-err", "Mật khẩu không chính xác");

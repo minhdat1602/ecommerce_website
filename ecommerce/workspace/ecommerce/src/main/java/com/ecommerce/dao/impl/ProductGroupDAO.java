@@ -22,11 +22,6 @@ public class ProductGroupDAO extends AbstractDAO<ProductGroup> implements IProdu
 		return query(sql.toString(), new ProductGroupMapper(), level);
 	}
 
-	public static void main(String[] args) {
-		ProductGroupDAO dao = new ProductGroupDAO();
-		List<ProductGroup> list = dao.findAll(1);
-		System.out.println("a");
-	}
 
 	@Override
 	public List<ProductGroup> findAll(Integer level, String segment) {

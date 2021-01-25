@@ -1,6 +1,7 @@
 package com.ecommerce.model;
 
 import java.sql.Date;
+import java.util.List;
 
 public class User extends AbstractModel {
     private String username;
@@ -15,6 +16,8 @@ public class User extends AbstractModel {
     private Integer status;
     private Integer groupId;
     private Date dateRegister;
+    private String group;
+    private List<Permission> listPermission;
 
     //otp for mail
     private Code code;
@@ -138,5 +141,37 @@ public class User extends AbstractModel {
 
 	public void setDateRegister(Date dateRegister) {
 		this.dateRegister = dateRegister;
+	}
+
+	public List<Permission> getListPermission() {
+		return listPermission;
+	}
+
+	public void setListPermission(List<Permission> listPermission) {
+		this.listPermission = listPermission;
+	}
+	public boolean containsPremission(String name) {
+		for (Permission permission : listPermission) {
+			if (permission.getName().equalsIgnoreCase(name)) {
+				return true;
+			}
+		}
+		return false;
+	}
+	public boolean isAdmin() {
+		for (Permission permission : listPermission) {
+			if (permission.getName().contains("admin")) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	public String getGroup() {
+		return group;
+	}
+
+	public void setGroup(String group) {
+		this.group = group;
 	}
 }

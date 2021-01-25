@@ -59,7 +59,7 @@ public class HomeController extends HttpServlet {
         String[] groupNameWomanArr = new String[1];
         groupNameWomanArr[0] = women;
         pageable.setGroupNameArr(groupNameWomanArr);
-        productService.findAll(pageable, 1, 1, pageable.getGroupNameArr(), pageable.getBrandNameArr(),
+        listForWomen = productService.findAll(pageable, 1, 1, pageable.getGroupNameArr(), pageable.getBrandNameArr(),
                 pageable.getCollectionNameArr(), level);
         /*listForWomen = productService.findAll(pageable, isHot, isNew, women, null, null);*/
 

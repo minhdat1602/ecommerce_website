@@ -17,4 +17,9 @@ public class PermissionService implements IPermissionService{
 		return permissionDAO.findAllByGroupCode(sorting);
 	}
 
+	@Override
+	public List<Permission> findAllByUserId(Integer id) {
+		return permissionDAO.findAllByUserId(id);
+	}
+
 }

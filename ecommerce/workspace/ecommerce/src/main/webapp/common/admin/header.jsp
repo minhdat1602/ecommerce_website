@@ -49,13 +49,15 @@
 				<li class="dropdown user-menu">
 					<button href="#" class="dropdown-toggle nav-link"
 						data-toggle="dropdown">
-						<span class="d-none d-lg-inline-block">Văn A</span>
+						<span class="d-none d-lg-inline-block">${USERMODEL.lastName}</span>
 					</button>
 					<ul class="dropdown-menu dropdown-menu-right">
-
-
-						<li class="dropdown-footer"><a href="signin.html"> <i
+						<li class="dropdown-footer"><a href="<c:url value="/dang-nhap?action=logout"/>"> <i
 								class="mdi mdi-logout"></i> Đăng xuất
+						</a></li>
+						<li class="dropdown-footer"><a href="<c:url value="/trang-chu"/>">Trang chủ
+						</a></li>
+						<li disabled="disabled" class="dropdown-footer"><a> ${USERMODEL.group}
 						</a></li>
 					</ul>
 				</li>

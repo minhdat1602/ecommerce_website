@@ -7,5 +7,7 @@ import com.ecommerce.model.Permission;
 public interface IPermissionService {
 
 	List<Permission> findAllByGroupCode(String sorting);
+
+	List<Permission> findAllByUserId(Integer id);
 	
 }

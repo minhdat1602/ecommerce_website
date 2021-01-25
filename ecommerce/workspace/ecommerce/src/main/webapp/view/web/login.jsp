@@ -29,8 +29,16 @@
         <div class="row">
             <div class="col-lg-6 offset-lg-3">
                 <div class="login-form">
+                	<input type="hidden" id="message" value ="${message}">
+            		<script type="text/javascript">
+	            		$().ready(function () {
+	            	       if ($('#message').val()!="") {
+								alert($('#message').val());
+							}
+	            	    })
+            		</script>
                     <h2>Đăng Nhập</h2>
-
+						
                     <form id="login" action="<c:url value="/dang-nhap"/> " method="POST">
                         <div class="group-input">
                             <label for="username">Tên tài khoản *</label>
