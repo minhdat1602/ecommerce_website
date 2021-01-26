@@ -29,7 +29,9 @@ public class ProductDetailsController extends HttpServlet {
     private IImageService imageService;
     @Inject
     private IStockService stockService;
-
+    @Inject
+    private IReviewService reviewService;
+    
     private List<ProductGroup> filterByCustomers;
     private List<ProductBrand> filterByBrands;
     private List<ProductColor> filterByColors;
@@ -38,6 +40,7 @@ public class ProductDetailsController extends HttpServlet {
     private Product product;
     private List<Images> listImageDetails;
     private List<Product> listRelatedProduct;
+    private List<Review> listReview;
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -48,6 +51,8 @@ public class ProductDetailsController extends HttpServlet {
         filterByTags = productGroupService.findAll(2);
         Integer id = Integer.parseInt(req.getParameter("id"));
         product = productService.findOne(id);
+        product.setAvgStar(reviewService.avgStarByProductId(id));
+        listReview = reviewService.findAllByProductId(id);
         ArrayList list = new ArrayList<>();
         list.add(product);
         stockService.setIventory(list);
@@ -56,6 +61,7 @@ public class ProductDetailsController extends HttpServlet {
 
         listImageDetails = imageService.findAllByProductId(id);
         listRelatedProduct = productService.findRelatedProduct(product.getGroupId());
+        req.setAttribute("listReview", listReview);
         req.setAttribute("filterByCustomers", filterByCustomers);
         req.setAttribute("filterByBrands", filterByBrands);
         req.setAttribute("filterByColors", filterByColors);
