@@ -43,7 +43,7 @@
                         </ul>
                     </div>--%>
                     <div class="filter-widget">
-                        <h4 class="fw-title">Thương hiệu</h4>
+                        <h4 class="fw-title">Dành cho</h4>
                         <div class="fw-brand-check">
                             <c:forEach items="${filterByCustomers}" var="group">
                                 <div class="bc-item">

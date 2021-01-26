@@ -120,7 +120,7 @@
 						<div class="sub-menu">
 
 							<li class="sales-page"><a class="sidenav-item-link"
-								href="<c:url value ="/view/admin/statistical/sales.jsp"/>">
+								href="<c:url value ="/admin/doanh-so?filter=CURRENT_DATE"/>">
 									<span class="nav-text">Doanh số</span>
 							</a></li>
 							<li class="buy-time-page"><a class="sidenav-item-link"

@@ -7,5 +7,9 @@ import com.ecommerce.model.OrderDetails;
 public interface IOrderDetailsDAO extends IGenericDAO<OrderDetails>{
 
 	List<OrderDetails> findAllOrderDetail(Integer id);
+
+	Integer getBuyTimesByProductGroupId(Integer id,String filter);
+
+	Integer getSalesByProductGroupId(Integer id,String filter);
 	
 }

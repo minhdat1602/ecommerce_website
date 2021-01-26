@@ -91,9 +91,9 @@ public class AbstractDAO<T> implements IGenericDAO<T>{
 				while(resultSet.next()) {
 					return resultSet.getInt(1);
 				}
-				return null;
+				return 0;
 			} catch (SQLException e) {
-				return null;
+				return 0;
 			} finally {
 				try {
 					if (resultSet != null) {
@@ -106,12 +106,12 @@ public class AbstractDAO<T> implements IGenericDAO<T>{
 						connection.close();
 					}
 				} catch (Exception e) {
-					return null;
+					return 0;
 				}
 			}
 			
 		}
-		return null;
+		return 0;
 	}
 	
 	@Override

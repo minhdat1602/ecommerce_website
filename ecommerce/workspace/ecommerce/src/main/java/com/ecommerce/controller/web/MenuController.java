@@ -2,8 +2,10 @@ package com.ecommerce.controller.web;
 
 import com.ecommerce.model.Collection;
 import com.ecommerce.model.ProductGroup;
+import com.ecommerce.model.Promotion;
 import com.ecommerce.service.ICollectionService;
 import com.ecommerce.service.IProductGroupService;
+import com.ecommerce.service.IPromotionService;
 
 import javax.inject.Inject;
 import javax.servlet.*;
@@ -14,7 +16,10 @@ public class MenuController implements Filter {
     @Inject
     private ICollectionService collectionService;
     @Inject
+    private IPromotionService promotionService;
+    @Inject
     private IProductGroupService productGroupService;
+    
 
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
@@ -27,7 +32,8 @@ public class MenuController implements Filter {
 
         List<ProductGroup> groupListLv1 =productGroupService.findAll(1);
         servletRequest.setAttribute("lv1", groupListLv1);
-
+        List<Promotion> listPromotion = promotionService.findAll();
+        servletRequest.setAttribute("listPromotion", listPromotion);
         // Cho phép request được đi tiếp. (Vượt qua Filter này).
         filterChain.doFilter(servletRequest, servletResponse);
     }

@@ -13,4 +13,40 @@ public class OrderDetailsDAO extends AbstractDAO<OrderDetails> implements IOrder
 		String sql = "select * from orders_detail where order_id = ?";
 		return query(sql, new OrderDetailsMapper(), id);
 	}
+
+	@Override
+	public Integer getBuyTimesByProductGroupId(Integer id, String filter) {
+		StringBuilder sql  = new StringBuilder("select count(od.quantity) from orders_detail od join stocks on od.stock_id = stocks.id join products p on p.id = stocks.product_id join orders o on o.id = od.order_id where p.group_id = ? ");
+		if (filter.equalsIgnoreCase("CURRENT_DATE")) {
+			sql.append(" and o.date_sell = ");
+		} else if (filter.equalsIgnoreCase("WEEK(CURRENT_DATE())")) {
+			sql.append(" and WEEK(o.date_sell) = ");
+		} else if (filter.equalsIgnoreCase("MONTH(CURRENT_DATE())")) {
+			sql.append(" and MONTH(o.date_sell) = ");
+		} else if (filter.equalsIgnoreCase("YEAR(CURRENT_DATE())")) {
+			sql.append(" and YEAR(o.date_sell) = ");
+		} else if (filter.equalsIgnoreCase("ALLTIME")) {
+			return count(sql.toString(),id);
+		}
+		sql.append(filter);
+		return count(sql.toString(), id, filter);
+	}
+
+	@Override
+	public Integer getSalesByProductGroupId(Integer id, String filter) {
+		StringBuilder sql = new StringBuilder("select  sum(od.price*od.quantity - od.discount*od.quantity) from orders_detail od join stocks on od.stock_id = stocks.id join products p on p.id = stocks.product_id join orders o on o.id = od.order_id where p.group_id = ? ");
+		if (filter.equalsIgnoreCase("CURRENT_DATE")) {
+			sql.append(" and o.date_sell = ");
+		} else if (filter.equalsIgnoreCase("WEEK(CURRENT_DATE())")) {
+			sql.append(" and WEEK(o.date_sell) = ");
+		} else if (filter.equalsIgnoreCase("MONTH(CURRENT_DATE())")) {
+			sql.append(" and MONTH(o.date_sell) = ");
+		} else if (filter.equalsIgnoreCase("YEAR(CURRENT_DATE())")) {
+			sql.append(" and YEAR(o.date_sell) = ");
+		} else if (filter.equalsIgnoreCase("ALLTIME")) {
+			return count(sql.toString(),id);
+		}
+		sql.append(filter);
+		return count(sql.toString(), id, filter);
+	}
 }

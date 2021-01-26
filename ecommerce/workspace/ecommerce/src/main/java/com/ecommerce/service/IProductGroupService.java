@@ -14,4 +14,5 @@ public interface IProductGroupService {
 	List<ProductGroup> findByParentId(Integer parentId);
 	Integer save(ProductGroup group);
 	boolean update(ProductGroup group);
+	void setSales(List<ProductGroup> listProductGroup, String filter);
 }

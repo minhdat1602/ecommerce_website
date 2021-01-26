@@ -432,7 +432,7 @@
 					/*get stock quantity*/
 					var sizeId = 0;
 					var colorId = 0;
-					submit
+					
 					$("#submit").click(function() {
 						var data = {};
 						dataForm = $("#review").serializeArray();

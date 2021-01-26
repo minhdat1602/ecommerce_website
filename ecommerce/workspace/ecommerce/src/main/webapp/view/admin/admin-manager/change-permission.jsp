@@ -73,12 +73,12 @@
 				dataType : 'text',
 				data : JSON.stringify(data),
 				success : function(result) {
-					alert(data["id"]);
+					alert"Cập nhật thành công");
 					window.location.href = '${newURL}?id='
 							+ $('#id').val()
 				},
 				error : function(error) {
-					alert(data["id"]);
+					alert"Cập nhật thất bại");
 					window.location.href = '${newURL}?id='
 							+ $('#id').val()
 
