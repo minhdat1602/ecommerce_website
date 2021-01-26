@@ -1,6 +1,10 @@
 package com.ecommerce.controller.admin.api;
 
 import java.io.IOException;
+import java.sql.Date;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.Calendar;
 
 import javax.inject.Inject;
 import javax.servlet.ServletException;
@@ -28,5 +32,17 @@ public class ReviewAPI extends HttpServlet{
 		Review review = HTTPUtil.of(req.getReader()).toModel(Review.class);
 		boolean success = reviewService.update(review);
 		mapper.writeValue(resp.getOutputStream(), success);
+	}
+	
+	@Override
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		ObjectMapper mapper = new ObjectMapper();
+		req.setCharacterEncoding("UTF-8");
+		resp.setContentType("application/json");
+		Review review = HTTPUtil.of(req.getReader()).toModel(Review.class);
+		Date date = new Date(System.currentTimeMillis());
+		review.setDateReview(date);
+		Integer id = reviewService.save(review);
+		mapper.writeValue(resp.getOutputStream(), id);
 	}
 }

@@ -42,7 +42,7 @@ public class RegisterController extends HttpServlet {
             user.setPassword(password);
             user.setEmail(email);
             user.setStatus(1);
-            user.setGroupId(4);
+            user.setGroupId(1);
             //chua dung
             user.setCreatedDate(new Timestamp(Calendar.getInstance().getTimeInMillis()));
             try {

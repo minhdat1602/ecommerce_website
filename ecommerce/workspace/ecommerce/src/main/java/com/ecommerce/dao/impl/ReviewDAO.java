@@ -7,6 +7,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.omg.CORBA.REBIND;
+
 import com.ecommerce.dao.IReviewDAO;
 import com.ecommerce.mapper.ReviewMapper;
 import com.ecommerce.model.Review;
@@ -105,6 +107,17 @@ public class ReviewDAO extends AbstractDAO<Review> implements IReviewDAO {
 	public boolean update(Review review) {
 		String sql = "update reviews set reply = ? where id = ?";
 		return updated(sql, review.getReply(), review.getId());
+	}
+
+	@Override
+	public Integer save(Review review) {
+		String sql = "insert into reviews (commentator, product_id, vote, comment, date_review) values (?,?,?,?,?)";
+		return insert(sql, 
+						review.getCommentator(), 
+						review.getProductId(),
+						review.getVote(),
+						review.getComment(),
+						review.getDateReview());
 	}
 
 }

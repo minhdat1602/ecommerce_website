@@ -49,7 +49,7 @@
 				<li class="dropdown user-menu">
 					<button href="#" class="dropdown-toggle nav-link"
 						data-toggle="dropdown">
-						<span class="d-none d-lg-inline-block">${USERMODEL.lastName}</span>
+						<span class="d-none d-lg-inline-block">${USERMODEL.firstName} ${USERMODEL.lastName}</span>
 					</button>
 					<ul class="dropdown-menu dropdown-menu-right">
 						<li class="dropdown-footer"><a href="<c:url value="/dang-nhap?action=logout"/>"> <i

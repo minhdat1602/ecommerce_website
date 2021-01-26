@@ -16,4 +16,6 @@ public interface IReviewDAO extends IGenericDAO<Review>{
 	List<Review> findAllByProductId(Integer id);
 
 	boolean update(Review review);
+
+	Integer save(Review review);
 }

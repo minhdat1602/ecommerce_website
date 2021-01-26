@@ -12,4 +12,6 @@ public interface IReviewService {
 	Double avgStarByProductId(Integer id);
 
 	boolean update(Review review);
+
+	Integer save(Review review);
 }

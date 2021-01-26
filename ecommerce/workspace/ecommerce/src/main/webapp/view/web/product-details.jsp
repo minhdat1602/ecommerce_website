@@ -2,6 +2,8 @@
 	pageEncoding="UTF-8"%>
 <%@page import="com.ecommerce.utils.PriceUtils"%>
 <%@ include file="/common/taglib.jsp"%>
+<c:url var="apiURL" value="/api/danh-gia"></c:url>
+<c:url var="newURL" value="/sanpham"></c:url>
 <!DOCTYPE html>
 <html>
 <head>
@@ -115,7 +117,7 @@
 								<div class="product-thumbs-track ps-slider owl-carousel">
 									<c:forEach items="${listImageDetails}" var="image">
 										<div class="pt active">
-											<img src="${image.imageUrl}" alt="product picture detail">
+											<img class="imageDetails" src="${image.imageUrl}" alt="product picture detail">
 										</div>
 									</c:forEach>
 								</div>
@@ -234,10 +236,10 @@
 						<div class="tab-item">
 							<ul class="nav" role="tablist">
 								<li><a class="active" data-toggle="tab" href="#tab-1"
-									role="tab">${product.description}</a></li>
+									role="tab">Mô tả</a></li>
 
 								<li><a data-toggle="tab" href="#tab-3" role="tab">Đánh
-										giá(02)</a></li>
+										giá(${listReview.size()})</a></li>
 							</ul>
 						</div>
 						<div class="tab-item-content">
@@ -245,65 +247,55 @@
 								<div class="tab-pane fade-in active" id="tab-1" role="tabpanel">
 									<div class="product-content">
 										<div class="row">
-											<div class="col-lg-7">
-
-												<p>Sản phẩm được làm từ chất liệu kaki:</p>
-												<ul>
-													<li>Thoáng mát</li>
-													<li>Trẻ trung</li>
-													<li>Bắt kịp xu hướng</li>
-
-												</ul>
-
-											</div>
-											<div class="col-lg-5">
-												<img
-													src="<c:url value="/template/web/img/product-single/product-1.jpg"/>"
-													alt="">
-											</div>
+											<div class="col-lg-12">${product.description}</div>
 										</div>
 									</div>
 								</div>
 
 								<div class="tab-pane fade" id="tab-3" role="tabpanel">
 									<div class="customer-review-option">
-										<h4>${listReview.size()}Bình luận</h4>
+										<h4>${listReview.size()} Bình luận</h4>
 										<div class="comment-option">
+											<h3 class="mb-3">Đánh giá trung bình : ${product.avgStar}</h3>
 											<c:forEach items="${listReview}" var="review">
 												<div class="co-item">
 													<div class="avatar-text">
-														Đánh giá trung bình : ${product.avgStar}
 														<h5>
-															${review.user.name } <span>${review.dateReview }</span>
+															${review.user.lastName } ${review.user.firstName } <span>${review.dateReview }</span>
+															${review.vote} sao
 														</h5>
 														<div class="at-reply">${review.comment}</div>
 													</div>
 												</div>
 											</c:forEach>
 										</div>
-										<div class="personal-rating">
-											<h6>Đánh giá của bạn</h6>
-											<div class="rating">
-												<select name="rating">
-													<option value="1">1</option>
-													<option value="2">2</option>
-													<option value="3">3</option>
-													<option value="4">4</option>
-													<option value="5">5</option>
-												</select>
-											</div>
-										</div>
-										<div class="leave-comment">
-											<h4>Bình luận</h4>
-											<%--<form action="#" class="comment-form">
-                                            <div class="row">
-                                                <div class="col-lg-12">
-                                                    <textarea placeholder="Bình luận"></textarea>
-                                                    <button type="submit" class="site-btn">Gửi</button>
-                                                </div>
-                                            </div>
-                                        </form>--%>
-										</div>
+										<c:if test="${not empty USERMODEL }">
+											<form id="review" class="comment-form">
+												<div class="leave-comment mt-5">
+													<h6>Đánh giá của bạn</h6>
+													<div class="rating">
+														<select name="vote">
+															<option value="1">1</option>
+															<option value="2">2</option>
+															<option value="3">3</option>
+															<option value="4">4</option>
+															<option value="5">5</option>
+														</select>
+													</div>
+													<h4>Bình luận</h4>
+													<div class="row">
+														<div class="col-lg-12">
+															<textarea cols="50" name="comment" rows="5"
+																placeholder="Bình luận"></textarea>
+															<button id="submit" class="site-btn d-block">Gửi</button>
+														</div>
+													</div>
+													<input type="hidden" name="productId" id="productId"
+														value="${product.id}"> <input type="hidden"
+														name="commentator" value="${USERMODEL.id}">
+												</div>
+											</form>
+										</c:if>
 									</div>
 								</div>
 							</div>
@@ -440,7 +432,20 @@
 					/*get stock quantity*/
 					var sizeId = 0;
 					var colorId = 0;
-
+					submit
+					$("#submit").click(function() {
+						var data = {};
+						dataForm = $("#review").serializeArray();
+						$.each(dataForm, function(i, v) {
+							data["" + v.name + ""] = v.value;
+						});
+						addNew(data)
+					})
+					$(".imageDetails").click(function() {
+						var url = $(this).attr('src');
+						$(".zoomImg").attr('src', url);
+						$(".product-big-img").attr('src', url);
+					})
 					$('input[name="sizeId"]').change(function() {
 						sizeId = $(this).val();
 						$("#size-err").text('');
@@ -453,6 +458,25 @@
 							getQuantity(data);
 						}
 					});
+
+					function addNew(data) {
+						$.ajax({
+							url : '${apiURL}',
+							type : 'POST',
+							contentType : 'application/json',
+							dataType : 'text',
+							data : JSON.stringify(data),
+							success : function(result) {
+								window.location.href = '${newURL}?id='
+										+ $("#productId").val();
+							},
+							error : function(error) {
+								window.location.href = '${newURL}?id='
+										+ $("#productId").val();
+							}
+
+						})
+					}
 
 					$('input[name="colorId"]').change(function() {
 						colorId = $(this).val();

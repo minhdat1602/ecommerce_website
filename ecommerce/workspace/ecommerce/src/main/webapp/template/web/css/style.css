@@ -9,7 +9,10 @@ ul#userOption {
     box-shadow: 0 0 3px 0px #0000002b;
     display: none;
 }
-
+.pt.active img {
+    width: 100%;
+    height: 100%;
+}
 ul#userOption li {
     width: 100%;
     height: 50px;
@@ -2082,7 +2085,7 @@ ight {
     cursor: pointer;
     position: relative;
     width: 100%;
-    height: 150px;
+    height: 125px;
     background: lightgray;
     text-align: center;
     line-height: 150px;
@@ -2371,7 +2374,7 @@ ight {
     font-weight: 700;
     color: #b2b2b2;
     text-transform: uppercase;
-    padding: 18px 61px;
+    padding: 20px 164px;
     position: relative;
     border-top: 1px solid #ebebeb;
     border-left: 1px solid #ebebeb;

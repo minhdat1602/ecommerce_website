@@ -50,6 +50,10 @@ public class ReviewService implements IReviewService{
 	public boolean update(Review review) {
 		return reviewDAO.update(review);
 	}
+	@Override
+	public Integer save(Review review) {
+		return reviewDAO.save(review);
+	}
 
 	
 }
