@@ -37,7 +37,7 @@
                             <thead>
                             <tr>
                                 <th>Hình</th>
-                                <th class="p-name">Tên Sản Phẩm</th>
+                                <th style="text-align: center" class="p-name">Tên Sản Phẩm</th>
                                 <th>Kích cỡ</th>
                                 <th>Màu sắc</th>
                                 <th>Giá Sản Phẩm</th>
@@ -47,64 +47,141 @@
                             </thead>
                             <tbody>
                                 <%--Items begin--%>
-                            <c:forEach var="details" items="${CART.cartDetailsList}">
+                            <%--<c:if test="${not empty USERMODEL}">
+                                <c:forEach var="details" items="${CART.cartDetailsList}">
 
-                                <tr class="row${details.id}">
-                                    <td class="cart-pic first-row">
-                                        <img src="<c:url value="${details.stock.product.imageUrl}"/>"
-                                             alt="Ảnh sản phẩm">
-                                    </td>
-                                    <td class="cart-title first-row">
-                                        <h5>${details.stock.product.name}</h5>
-                                    </td>
-                                    <td class="cart-title first-row">${details.stock.size.name}</td>
-                                    <td class="cart-title first-row">${details.stock.color.name}</td>
-                                    <td class="p-price${details.id} first-row money">
-                                            <%--<fmt:formatNumber
-                                                    pattern="###,###,### VNĐ"
-                                                    value="${details.stock.product.sellPrice}"/>--%>
-                                            ${details.stock.product.sellPrice}
-                                    </td>
-                                    <form id="form-detail${details.id}">
-                                        <input type="hidden" name="id" value="${details.id}"></input>
-                                        <input type="hidden" name="cartId" value="${details.cartId}"></input>
-                                        <input type="hidden" name="stockId"
-                                               value="${details.stockId}"></input>
-                                        <td class="qua-col first-row">
-                                            <div class="quantity">
-                                                <div class="pro-qty">
+                                    <tr class="row${details.id}">
+                                        <td style="width: 80px;" class="cart-pic first-row">
+                                            <img src="<c:url value="${details.stock.product.imageUrl}"/>"
+                                                 alt="Ảnh sản phẩm">
+                                        </td>
+                                        <td class="cart-title first-row" style="text-align: center">
+                                            <h5>${details.stock.product.name}</h5>
+                                        </td>
+                                        <td style="text-align: center"
+                                            class="cart-title first-row">${details.stock.size.name}</td>
+                                        <td style="text-align: center"
+                                            class="cart-title first-row">${details.stock.color.name}</td>
+                                        <td class="p-price${details.id} first-row money">
+                                                &lt;%&ndash;<fmt:formatNumber
+                                                        pattern="###,###,### VNĐ"
+                                                        value="${details.stock.product.sellPrice}"/>&ndash;%&gt;
+                                                ${details.stock.product.sellPrice}
+                                        </td>
+                                        <form id="form-detail${details.id}">
+                                            <input type="hidden" name="id" value="${details.id}"></input>
+                                            <input type="hidden" name="cartId" value="${details.cartId}"></input>
+                                            <input type="hidden" name="stockId"
+                                                   value="${details.stockId}"></input>
+                                            <td class="qua-col first-row">
+                                                <div class="quantity">
+                                                    <div class="pro-qty">
                                                 <span class="dec qtybtn">
                                                         <button type="button"
                                                                 detail-id="${details.id}"
                                                                 style="border: none; outline: none; background-color: #ffffff;"
                                                                 class="subBtn dec qtybtn">-</button>
                                                 </span>
-                                                    <input id="quan${details.id}" name="quantity" type="text"
-                                                           value="${details.quantity}"></input>
-                                                    <span class="inc qtybtn">
+                                                        <input id="quan${details.id}" name="quantity" type="text"
+                                                               value="${details.quantity}"></input>
+                                                        <span class="inc qtybtn">
                                                         <button type="button"
                                                                 detail-id="${details.id}"
                                                                 style="border: none; outline: none; background-color: #ffffff;"
                                                                 class="plusBtn inc qtybtn">+</button>
                                                 </span>
+                                                    </div>
                                                 </div>
-                                            </div>
+                                            </td>
+                                        </form>
+                                        <td class="total-price${details.id} first-row money">
+                                                &lt;%&ndash;<fmt:formatNumber
+                                                        pattern="###,###,### VNĐ"
+                                                        value="${details.stock.product.sellPrice * details.quantity}"/>&ndash;%&gt;
+                                                ${details.stock.product.sellPrice * details.quantity}
                                         </td>
-                                    </form>
-                                    <td class="total-price${details.id} first-row money">
-                                            <%--<fmt:formatNumber
-                                                    pattern="###,###,### VNĐ"
-                                                    value="${details.stock.product.sellPrice * details.quantity}"/>--%>
-                                            ${details.stock.product.sellPrice * details.quantity}
-                                    </td>
-                                    <td class="close-td first-row">
-                                        <button detail-id="${details.id}" class="deleteBtn" type="button"
-                                                style="outline: none; border: none;background-color: #fff;">
-                                            <i class="ti-close"></i>
-                                        </button>
-                                    </td>
-                                </tr>
-                            </c:forEach>
+                                        <td class="close-td first-row">
+                                            <button detail-id="${details.id}" class="deleteBtn" type="button"
+                                                    style="outline: none; border: none;background-color: #fff;">
+                                                <i class="ti-close"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                </c:forEach>
+                            </c:if>--%>
+                            <%--end--%>
+                            <%--test cart begin--%>
+                                <%--<c:if test="${empty USERMODEL}">--%>
+                                    <c:forEach var="details" items="${CART.cartDetailsList}">
+                                        <c:if test="${not empty USERMODEL}">
+                                        <input type="hidden" name="id" value="${details.id}"></input>
+                                        <input type="hidden" name="cartId" value="${details.cartId}"></input>
+                                        <input type="hidden" name="stockId"
+                                               value="${details.stockId}"></input>
+                                        </c:if>
+                                        <tr class="row${details.stock.id}">
+                                            <td style="width: 80px;" class="cart-pic first-row">
+                                                <img src="<c:url value="${details.stock.product.imageUrl}"/>"
+                                                     alt="Ảnh sản phẩm">
+                                            </td>
+                                            <td class="cart-title first-row" style="text-align: center">
+                                                <h5>${details.stock.product.name}</h5>
+                                            </td>
+                                            <td style="text-align: center"
+                                                class="cart-title first-row">${details.stock.size.name}</td>
+                                            <td style="text-align: center"
+                                                class="cart-title first-row">${details.stock.color.name}</td>
+                                            <td class="p-price${details.stock.id} first-row money">
+                                                    <%--<fmt:formatNumber
+                                                            pattern="###,###,### VNĐ"
+                                                            value="${details.stock.product.sellPrice}"/>--%>
+                                                    ${details.stock.product.sellPrice}
+                                            </td>
+                                            <form id="form-detail${details.stock.id}">
+                                                <c:if test="${not empty USERMODEL}">
+                                                    <input type="hidden" name="id" value="${details.id}"></input>
+                                                     <input type="hidden" name="cartId" value="${details.cartId}"></input>
+                                                </c:if>
+                                                <input type="hidden" name="stockId"
+                                                       value="${details.stockId}">
+                                                <td class="qua-col first-row">
+                                                    <div class="quantity">
+                                                        <div class="pro-qty">
+                                                <span class="dec qtybtn">
+                                                        <button type="button"
+                                                                detail-id="${details.stock.id}"
+                                                                style="border: none; outline: none; background-color: #ffffff;"
+                                                                class="subBtn dec qtybtn">-</button>
+                                                </span>
+                                                            <input id="quan${details.stock.id}"
+                                                                   name="quantity" type="text"
+                                                                   value="${details.quantity}"></input>
+                                                            <span class="inc qtybtn">
+                                                        <button type="button"
+                                                                detail-id="${details.stock.id}"
+                                                                style="border: none; outline: none; background-color: #ffffff;"
+                                                                class="plusBtn inc qtybtn">+</button>
+                                                </span>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                            </form>
+                                            <td class="total-price${details.stock.id} first-row money">
+                                                    <%--<fmt:formatNumber
+                                                            pattern="###,###,### VNĐ"
+                                                            value="${details.stock.product.sellPrice * details.quantity}"/>--%>
+                                                    ${details.stock.product.sellPrice * details.quantity}
+                                            </td>
+                                            <td class="close-td first-row">
+                                                <button detail-id="${details.stock.id}" class="deleteBtn" type="button"
+                                                        style="outline: none; border: none;background-color: #fff;">
+                                                    <i class="ti-close"></i>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    </c:forEach>
+                                <%--</c:if>--%>
+                                <%--test cart end--%>
                             </tbody>
                         </table>
                     </div>
@@ -136,7 +213,7 @@
                                         </span>
                                     </li>
                                 </ul>
-                                <a href="#" class="proceed-btn">THANH TOÁN</a>
+                                <a href="<c:url value="/thanh-toan"/>" class="proceed-btn">THANH TOÁN</a>
                             </div>
                         </div>
                     </div>

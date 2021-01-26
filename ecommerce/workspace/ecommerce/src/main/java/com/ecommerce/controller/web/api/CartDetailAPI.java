@@ -39,8 +39,45 @@ public class CartDetailAPI extends HttpServlet {
         resp.setContentType("application/json");
         User user = (User) req.getSession().getAttribute("USERMODEL");
         if (user == null) {
-            Cart cart = (Cart)req.getSession();
+            //insert khong co user
+            Cart cart = (Cart) req.getSession().getAttribute("CART");
+            if (cart == null) {
+                cart = new Cart();
+                cart.setCartDetailsList(new ArrayList<CartDetails>());
+            }
+            Stock stock = HTTPUtil.of(req.getReader()).toModel(Stock.class);
+            stock = stockService.findOne(stock.getSizeId(), stock.getColorId(), stock.getProductId());
+            stock.setColor(productColorService.findOne(stock.getColorId()));
+            stock.setSize(productSizeService.findOne(stock.getSizeId()));
+            stock.setProduct(productService.findOne(stock.getProductId()));
+            if(cart.getCartDetailsList().size() == 0){
+                CartDetails cartDetails = new CartDetails();
+                cartDetails.setStock(stock);
+                cartDetails.setStockId(stock.getId());
+                cartDetails.setQuantity(1);
+                cart.getCartDetailsList().add(cartDetails);
+            }else{
+                boolean cons = false;
+                for(int i = 0; i < cart.getCartDetailsList().size(); i++){
+                    if(cart.getCartDetailsList().get(i).getStockId() == stock.getId())
+                    {
+                        int quantity = cart.getCartDetailsList().get(i).getQuantity();
+                        cart.getCartDetailsList().get(i).setQuantity(quantity + 1);
+                        cons = true;
+                        break;
+                    }
+                }
+                if(!cons){
+                    CartDetails cartDetails = new CartDetails();
+                    cartDetails.setStock(stock);
+                    cartDetails.setStockId(stock.getId());
+                    cartDetails.setQuantity(1);
+                    cart.getCartDetailsList().add(cartDetails);
+                }
+            }
+            req.getSession().setAttribute("CART", cart);
         } else {
+            //insert co user
             ObjectMapper mapper = new ObjectMapper();
             Cart cart = (Cart) req.getSession().getAttribute("CART");
             if (cart == null) {
@@ -65,9 +102,6 @@ public class CartDetailAPI extends HttpServlet {
                 cartDetails.setStockId(stock.getId());
                 cartDetails.setQuantity(1);
                 cartDetails.setCartId(cart.getId());
-
-
-
                 try {
                     cartDetails = cartDetailService.insert(cartDetails);
                     //set khoa ngoai
@@ -81,15 +115,15 @@ public class CartDetailAPI extends HttpServlet {
             }
             boolean constains = false;
             try {
-            for (CartDetails c : cart.getCartDetailsList()) {
-                if (cartDetails.getId() == c.getId()) {
-                    c.setQuantity(c.getQuantity() + 1);
-                    cartDetailService.update(c);
-                    constains = true;
-                    break;
+                for (CartDetails c : cart.getCartDetailsList()) {
+                    if (cartDetails.getId() == c.getId()) {
+                        c.setQuantity(c.getQuantity() + 1);
+                        cartDetailService.update(c);
+                        constains = true;
+                        break;
+                    }
                 }
-            }
-            }catch (Exception e){
+            } catch (Exception e) {
                 e.printStackTrace();
             }
             if (!constains) {
@@ -110,35 +144,58 @@ public class CartDetailAPI extends HttpServlet {
     protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.setCharacterEncoding("UTF-8");
         resp.setContentType("application/json");
+        User user = (User) req.getSession().getAttribute("USERMODEL");
+        if(user == null){
+            ObjectMapper mapper = new ObjectMapper();
+            CartDetails cartDetails = HTTPUtil.of(req.getReader()).toModel(CartDetails.class);
+            //boolean updated = cartDetailService.update(cartDetails);
 
-        ObjectMapper mapper = new ObjectMapper();
-        CartDetails cartDetails = HTTPUtil.of(req.getReader()).toModel(CartDetails.class);
-        boolean updated = cartDetailService.update(cartDetails);
+            Cart cart = (Cart) req.getSession().getAttribute("CART");
+            for (CartDetails c : cart.getCartDetailsList()) {
+                if (c.getStockId() == cartDetails.getStockId())
+                    c.setQuantity(cartDetails.getQuantity());
+            }
+            //mapper.writeValue(resp.getOutputStream(), updated);
+        }else {
+            ObjectMapper mapper = new ObjectMapper();
+            CartDetails cartDetails = HTTPUtil.of(req.getReader()).toModel(CartDetails.class);
+            boolean updated = cartDetailService.update(cartDetails);
 
-        Cart cart = (Cart) req.getSession().getAttribute("CART");
-        for (CartDetails c : cart.getCartDetailsList()) {
-            if (c.getId() == cartDetails.getId())
-                c.setQuantity(cartDetails.getQuantity());
+            Cart cart = (Cart) req.getSession().getAttribute("CART");
+            for (CartDetails c : cart.getCartDetailsList()) {
+                if (c.getId() == cartDetails.getId())
+                    c.setQuantity(cartDetails.getQuantity());
+            }
+            mapper.writeValue(resp.getOutputStream(), updated);
         }
-
-
-        mapper.writeValue(resp.getOutputStream(), updated);
     }
 
     @Override
     protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.setCharacterEncoding("UTF-8");
         resp.setContentType("application/json");
-
-        ObjectMapper mapper = new ObjectMapper();
-        CartDetails cartDetails = HTTPUtil.of(req.getReader()).toModel(CartDetails.class);
-        boolean deleted = cartDetailService.delete(cartDetails.getId());
-        Cart cart = (Cart) req.getSession().getAttribute("CART");
-        for (CartDetails c : cart.getCartDetailsList()) {
-            if (c.getId() == cartDetails.getId())
-                cart.getCartDetailsList().remove(c);
+        User user = (User) req.getSession().getAttribute("USERMODEL");
+        if(user == null){
+            ObjectMapper mapper = new ObjectMapper();
+            CartDetails cartDetails = HTTPUtil.of(req.getReader()).toModel(CartDetails.class);
+            Cart cart = (Cart) req.getSession().getAttribute("CART");
+            for (CartDetails c : cart.getCartDetailsList()) {
+                if (c.getStockId() == cartDetails.getStockId())
+                    cart.getCartDetailsList().remove(c);
+            }
+            req.getSession().setAttribute("CART", cart);
+            mapper.writeValue(resp.getOutputStream(), true);
+        }else {
+            ObjectMapper mapper = new ObjectMapper();
+            CartDetails cartDetails = HTTPUtil.of(req.getReader()).toModel(CartDetails.class);
+            boolean deleted = cartDetailService.delete(cartDetails.getId());
+            Cart cart = (Cart) req.getSession().getAttribute("CART");
+            for (CartDetails c : cart.getCartDetailsList()) {
+                if (c.getId() == cartDetails.getId())
+                    cart.getCartDetailsList().remove(c);
+            }
+            req.getSession().setAttribute("CART", cart);
+            mapper.writeValue(resp.getOutputStream(), deleted);
         }
-        req.getSession().setAttribute("CART", cart);
-        mapper.writeValue(resp.getOutputStream(), deleted);
     }
 }

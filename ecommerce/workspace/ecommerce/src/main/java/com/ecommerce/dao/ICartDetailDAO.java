@@ -11,4 +11,7 @@ public interface ICartDetailDAO extends IGenericDAO<CartDetails> {
     boolean delete(Integer detailCartId);
     CartDetails findById(Integer id);
     CartDetails findOne(Integer cartId, Integer stockId);
+
+
+    boolean deleteByCartId(Integer id);
 }

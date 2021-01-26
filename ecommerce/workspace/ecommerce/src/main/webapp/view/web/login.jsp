@@ -63,7 +63,7 @@
                             <div class="gi-more">
                                 <label for="save-pass">
                                     Lưu Mật Khẩu
-                                    <input type="checkbox" id="save-pass">
+                                    <input type="checkbox" checked="checked" id="save-pass">
                                     <span class="checkmark"></span>
                                 </label>
                                 <a href="<c:url value="quen-mat-khau"/> " class="forget-pass">Quên Mật Khẩu</a>

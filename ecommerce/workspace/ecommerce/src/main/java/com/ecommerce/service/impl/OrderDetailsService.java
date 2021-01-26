@@ -36,5 +36,9 @@ public class OrderDetailsService implements IOrderDetailsService{
 		}
 		return result;
 	}
-
+	@Override
+	public OrderDetails insert(OrderDetails orderDetails) {
+		Integer id = odDAO.insert(orderDetails);
+		return odDAO.findById(id);
+	}
 }

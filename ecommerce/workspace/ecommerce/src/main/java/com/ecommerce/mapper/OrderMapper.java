@@ -19,7 +19,7 @@ public class OrderMapper implements RowMapper<Order>{
 			order.setStatus(resultSet.getString("status"));
 			order.setCouponId(resultSet.getInt("coupon"));
 			order.setUserId(resultSet.getInt("user_id"));
-			order.setDateSell(resultSet.getTimestamp("date_sell"));
+			order.setDateSell(resultSet.getDate("date_sell"));
 			return order;
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

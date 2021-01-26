@@ -13,5 +13,9 @@ public class FeedbackDAO extends AbstractDAO<Feedback> implements IFeedbackDAO{
 		String sql = "select * from feedbacks";
 		return query(sql, new FeedbackMapper());
 	}
-
+	@Override
+	public void insert(Feedback feedback) {
+		String sql = "insert into feedbacks(problem, content, user_id) values(?,?,?)";
+		insert(sql, feedback.getProblem(),feedback.getContent(),feedback.getUserId());
+	}
 }

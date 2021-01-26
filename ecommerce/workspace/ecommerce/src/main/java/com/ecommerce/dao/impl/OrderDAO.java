@@ -19,7 +19,8 @@ public class OrderDAO extends AbstractDAO<Order> implements IOrderDAO{
 	@Override
 	public Order findOne(Integer id) {
 		String sql = "select * from orders where id = ?";
-		return query(sql, new OrderMapper(), id).get(0);
+		List<Order> list = query(sql, new OrderMapper(), id);
+		return list.size() == 0 ? null : list.get(0);
 	}
 
 	@Override
@@ -46,5 +47,17 @@ public class OrderDAO extends AbstractDAO<Order> implements IOrderDAO{
 		String sql = "select * from orders where user_id = ?";
 		return query(sql, new OrderMapper(), id);
 	}
-	
+	@Override
+	public Integer insert(Order order) {
+		String sql = "insert into orders (code, total_sell_price,total_discount,total_money,status," +
+				"coupon,user_id,date_sell) values (?,?,?,?,?,?,?,?)";
+		return insert(sql,order.getCode(),order.getTotalSellPrice(),order.getTotalDiscount(),
+				order.getTotalSellPrice(), order.getStatus(), order.getCouponId(), order.getUserId()
+				,order.getDateSell());
+	}
+	@Override
+	public void update(Order order) {
+		String sql = "update orders set status = ? where id = ?";
+		update(sql, order.getStatus(), order.getId());
+	}
 }

@@ -37,30 +37,34 @@
                     <h4>Thông Tin Thanh Toán</h4>
                     <div class="row">
                         <div class="col-lg-6">
-                            <label for="fname">Họ<span>*</span></label>
-                            <input type="text" id="fname" name="fname"
+                            <label for="firstName">Họ<span>*</span></label>
+                            <input type="text" id="firstName" name="firstName"
                                 value="<c:if test="${not empty USERMODEL}">${USERMODEL.firstName}</c:if>">
+                            <label style="color: red;"  id="fname-error" class="error" for="firstName"></label>
                         </div>
                         <div class="col-lg-6">
-                            <label for="lname">Tên<span>*</span></label>
-                            <input type="text" id="lname" name="lname"
+                            <label for="lastName">Tên<span>*</span></label>
+                            <input type="text" id="lastName" name="lastName"
                                    value="<c:if test="${not empty USERMODEL}">${USERMODEL.lastName}</c:if>">
+                            <label style="color: red;"  id="lname-error" class="error" for="lastName"></label>
                         </div>
                         <div class="col-lg-6">
                             <label for="email">Email<span>*</span></label>
                             <input type="email" name="email" id="email"
                                    value="<c:if test="${not empty USERMODEL}">${USERMODEL.email}</c:if>">
+                            <label style="color: red;"  id="email-error" class="error" for="email"></label>
                         </div>
                         <div class="col-lg-6">
                             <label for="phone">Số điện thoại<span>*</span></label>
                             <input type="text" id="phone" name="phone"
                                    value="<c:if test="${not empty USERMODEL}">${USERMODEL.phone}</c:if>">
+                            <label style="color: red;"  id="phone-error" class="error" for="phone"></label>
                         </div>
                         <div class="col-lg-12">
-                            <label for="street">Địa chỉ nhận hàng<span>*</span></label>
+                            <label for="address">Địa chỉ nhận hàng<span>*</span></label>
                             <input type="text" id="address" name="address" class="street-first"
                                    value="<c:if test="${not empty USERMODEL}">${USERMODEL.address}</c:if>">
-                   
+                            <label style="color: red;" id="address-error" class="error" for="address"></label>
                         </div>
                         <div class="col-lg-12">
                             <div class="create-item">
@@ -87,25 +91,30 @@
                                         <span>
                                             <fmt:formatNumber
                                                     pattern="###,###,### VNĐ"
-                                                    value="${details.stock.product.sellPrice}"/>
+                                                    value="${details.stock.product.sellPrice
+                                                    * details.quantity}"/>
                                         </span>
                                     </li>
                                 </c:forEach>
                                 <li class="total-price">Tổng tiền
                                     <span>
                                         <fmt:formatNumber
-                                        pattern="###,###,### VNĐ"
-                                        value="${CART.totalPrice()}"/>
+                                        pattern="###,###,### đ"
+                                        value="${CART.totalOriginPrice()}"/>
                                     </span>
                                 </li>
                                 <li class="total-price">Giá giảm
                                     <span>
-                                        330.000đ
+                                        <fmt:formatNumber
+                                                pattern="###,###,### đ"
+                                                value="${CART.totalDiscount()}"/>
                                     </span>
                                 </li>
                                 <li class="total-price">Thành tiền
                                     <span>
-                                        330.000đ
+                                        <fmt:formatNumber
+                                                pattern="###,###,### đ"
+                                                value="${CART.totalPrice()}"/>
                                     </span>
                                 </li>
                             </ul>
@@ -113,16 +122,16 @@
                                 <div class="pc-item">
                                     <label for="pc-check">
                                         Thanh toán khi nhận hàng
-                                        <input type="checkbox" id="pc-check">
+                                        <input checked="checked" type="checkbox" id="pc-check">
                                         <span class="checkmark"></span>
                                     </label>
                                 </div>
                             </div>
-                            <c:if test="${not empty USERMODEL}">
+                           <%-- <c:if test="${not empty CART}">--%>
                                 <div class="order-btn">
                                     <button type="submit" class="site-btn place-btn">Đặt Hàng</button>
                                 </div>
-                            </c:if>
+                            <%--</c:if>--%>
                         </div>
                     </div>
                 </div>
@@ -131,5 +140,49 @@
     </div>
 </section>
 <!-- Shopping Cart Section End -->
+    <script>
+        $().ready(function () {
+            $("#checkout-form").validate({
+                rules: {
+                    firstName: {
+                        required: true
+                    },
+                    lastName: {
+                        required: true
+                    },
+                    email: {
+                        email: true,
+                        required: true
+                    },
+                    phone:{
+                        number:true,
+                        required: true
+                    },
+                    address:{
+                        required:true
+                    }
+                },
+                messages: {
+                    firstName: {
+                        required: "Vui lòng điền họ"
+                    },
+                    lastName: {
+                        required: "Vui lòng điền tên"
+                    },
+                    email: {
+                        required: "Vui lòng điền địa chỉ email",
+                        email: "Địa chỉ email không hợp lệ"
+                    },
+                    phone:{
+                        number: "SĐT là chữ số",
+                        required: "Vui lòng điền SĐT"
+                    },
+                    address:{
+                        required: "Vui lòng điền Địa chỉ"
+                    }
+                }
+            });
+        })
+    </script>
 </body>
 </html>

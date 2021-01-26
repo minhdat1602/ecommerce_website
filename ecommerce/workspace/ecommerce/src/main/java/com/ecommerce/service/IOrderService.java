@@ -16,4 +16,7 @@ public interface IOrderService {
 	Order findOne(String code);
 
 	List<Order> findAllByUserId(Integer id);
+
+	Order insert(Order order);
+	Order update(Order order);
 }

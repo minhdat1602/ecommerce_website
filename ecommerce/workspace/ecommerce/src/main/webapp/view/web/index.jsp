@@ -79,30 +79,30 @@
                 <div class="product-large set-bg"
                      data-setbg="<c:url value="/template/img/products/women-large.jpg"/>">
                     <h2>Thời Trang Nữ</h2>
-                    <a href="#">Xem Ngay</a>
+                    <a href="<c:url value="/cuahang?groupNameStr=Nữ"/>">Xem Ngay</a>
                 </div>
             </div>
             <div class="col-lg-8 offset-lg-1">
                 <div class="filter-control">
                     <ul>
                         <c:forEach items="${groupWomen}" var="wo">
-                            <a href="<c:url value="/trang-chu?men=${men}&&women=${wo.name}"/> "
-                               style="padding-right: 30px;">
-                                <li  <c:if test="${(women == null and wo.code eq 'AONU') or wo.name eq women}">
+                            <%--<a href="<c:url value="/trang-chu?men=${men}&&women=${wo.name}"/> "
+                               style="padding-right: 30px;">--%>
+                                <li  <c:if test="${wo.name eq 'Áo nữ'}">
                                     class = "active" </c:if>>
                                         ${wo.name}
                                 </li>
-                            </a>
+                            <%--</a>--%>
                         </c:forEach>
                     </ul>
                 </div>
                 <div class="product-slider owl-carousel">
-                    <c:forEach items="${listWomen}" var="product">
+                    <c:forEach items="${listAoNu}" var="aonu">
                         <div class="product-item">
-                            <a href="<c:url value="/sanpham?id=${product.id}"/>">
+                            <a href="<c:url value="/sanpham?id=${aonu.id}"/>">
                                 <div class="pi-pic">
-                                    <img src="${product.imageUrl}" alt="product picture">
-                                    <c:if test="${product.originPrice - product.sellPrice > 0}">
+                                    <img src="${aonu.imageUrl}" alt="product picture">
+                                    <c:if test="${aonu.originPrice - aonu.sellPrice > 0}">
                                         <div class="sale">SALE</div>
                                     </c:if>
                                     <div class="icon">
@@ -110,24 +110,24 @@
                                     </div>
                                 </div>
                                 <div class="pi-text">
-                                    <div class="catagory-name">${product.groupProduct}</div>
+                                    <div class="catagory-name">${aonu.groupProduct}</div>
                                     <a>
-                                        <h5>${product.name}</h5>
+                                        <h5>${aonu.name}</h5>
                                     </a>
                                     <div class="product-price">
-                                        <c:if test="${product.sellPrice < product.originPrice}">
-                                            ${PriceUtils.convert(product.sellPrice)} đ<span>${PriceUtils.convert(product.originPrice)}đ</span>
+                                        <c:if test="${aonu.sellPrice < aonu.originPrice}">
+                                            ${PriceUtils.convert(aonu.sellPrice)} đ<span>${PriceUtils.convert(aonu.originPrice)}đ</span>
                                         </c:if>
-                                        <c:if test="${product.sellPrice >= product.originPrice}">
-                                            ${PriceUtils.convert(product.sellPrice)} đ
+                                        <c:if test="${aonu.sellPrice >= aonu.originPrice}">
+                                            ${PriceUtils.convert(aonu.sellPrice)} đ
                                         </c:if>
                                     </div>
                                 </div>
                             </a>
                         </div>
                     </c:forEach>
-
                 </div>
+
             </div>
         </div>
     </div>
@@ -143,27 +143,27 @@
                 <div class="filter-control">
                     <ul>
                         <c:forEach items="${groupMen}" var="m">
-                            <a href="<c:url value="/trang-chu?men=${m.name}&&women=${women}"/> "
-                               style="padding-left: 30px;">
-                                <li <c:if test="${(men == null and m.code eq 'AONAM') or m.name eq men}">
+                            <%--<a href="<c:url value="/trang-chu?men=${m.name}&&women=${women}"/> "
+                               style="padding-left: 30px;">--%>
+                                <li data-group="${m.name}" id="${m.id}" <c:if test="${m.name eq 'Áo nam'}">
                                     class = "active" </c:if>>
                                         ${m.name}
                                 </li>
-                            </a>
+                           <%-- </a>--%>
                         </c:forEach>
                     </ul>
                 </div>
-                <div class="product-slider owl-carousel">
-                    <c:forEach begin="0" end="5" items="${listMen}" var="product">
+                <div id="Áo nam" class="product-slider owl-carousel">
+                    <c:forEach begin="0" end="5" items="${listAoNam}" var="aonam">
                         <div class="product-item">
-                            <a href="<c:url value="/sanpham?id=${product.id}"/>"
+                            <a href="<c:url value="/sanpham?id=${aonam.id}"/>"
                                style="padding-left: 20px;">
                                 <div class="pi-pic">
                                     <img
-                                            src="${product.imageUrl}"
+                                            src="${aonam.imageUrl}"
                                             alt="product picture">
 
-                                    <c:if test="${product.originPrice - product.sellPrice > 0}">
+                                    <c:if test="${aonam.originPrice - aonam.sellPrice > 0}">
                                         <div class="sale">SALE</div>
                                     </c:if>
 
@@ -172,32 +172,107 @@
                                     </div>
                                 </div>
                                 <div class="pi-text">
-                                    <div class="catagory-name">${product.groupProduct}</div>
+                                    <div class="catagory-name">${aonam.groupProduct}</div>
                                     <a>
-                                        <h5>${product.name}</h5>
+                                        <h5>${aonam.name}</h5>
                                     </a>
                                     <div class="product-price">
-                                        <c:if test="${product.sellPrice < product.originPrice}">
-                                            ${PriceUtils.convert(product.sellPrice)}
-                                            <span>${PriceUtils.convert(product.originPrice)}</span>
+                                        <c:if test="${aonam.sellPrice < aonam.originPrice}">
+                                            ${PriceUtils.convert(aonam.sellPrice)}
+                                            <span>${PriceUtils.convert(aonam.originPrice)}</span>
                                         </c:if>
-                                        <c:if test="${product.sellPrice >= product.originPrice}">
-                                            ${PriceUtils.convert(product.sellPrice)}
+                                        <c:if test="${aonam.sellPrice >= aonam.originPrice}">
+                                            ${PriceUtils.convert(aonam.sellPrice)}
                                         </c:if>
                                     </div>
                                 </div>
-
                             </a>
                         </div>
                     </c:forEach>
-
                 </div>
+
+                <div id="Quần nam" class="product-slider owl-carousel" type="hidden">
+                <c:forEach begin="0" end="5" items="${listQuanNam}" var="quannam">
+                    <div class="product-item">
+                        <a href="<c:url value="/sanpham?id=${quannam.id}"/>"
+                           style="padding-left: 20px;">
+                            <div class="pi-pic">
+                                <img
+                                        src="${quannam.imageUrl}"
+                                        alt="product picture">
+
+                                <c:if test="${quannam.originPrice - quannam.sellPrice > 0}">
+                                    <div class="sale">SALE</div>
+                                </c:if>
+
+                                <div class="icon">
+                                    <i class="icon_heart_alt"></i>
+                                </div>
+                            </div>
+                            <div class="pi-text">
+                                <div class="catagory-name">${quannam.groupProduct}</div>
+                                <a>
+                                    <h5>${quannam.name}</h5>
+                                </a>
+                                <div class="product-price">
+                                    <c:if test="${quannam.sellPrice < quannam.originPrice}">
+                                        ${PriceUtils.convert(quannam.sellPrice)}
+                                        <span>${PriceUtils.convert(quannam.originPrice)}</span>
+                                    </c:if>
+                                    <c:if test="${quannam.sellPrice >= quannam.originPrice}">
+                                        ${PriceUtils.convert(quannam.sellPrice)}
+                                    </c:if>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </c:forEach>
+            </div>
+
+            <div id="Phụ kiện nam" class="product-slider owl-carousel" style="display: none;">
+            <c:forEach begin="0" end="5" items="${listPKNam}" var="phukiennam">
+                <div class="product-item">
+                    <a href="<c:url value="/sanpham?id=${phukiennam.id}"/>"
+                       style="padding-left: 20px;">
+                        <div class="pi-pic">
+                            <img
+                                    src="${phukiennam.imageUrl}"
+                                    alt="product picture">
+
+                            <c:if test="${phukiennam.originPrice - phukiennam.sellPrice > 0}">
+                                <div class="sale">SALE</div>
+                            </c:if>
+
+                            <div class="icon">
+                                <i class="icon_heart_alt"></i>
+                            </div>
+                        </div>
+                        <div class="pi-text">
+                            <div class="catagory-name">${phukiennam.groupProduct}</div>
+                            <a>
+                                <h5>${phukiennam.name}</h5>
+                            </a>
+                            <div class="product-price">
+                                <c:if test="${phukiennam.sellPrice < phukiennam.originPrice}">
+                                    ${PriceUtils.convert(phukiennam.sellPrice)}
+                                    <span>${PriceUtils.convert(phukiennam.originPrice)}</span>
+                                </c:if>
+                                <c:if test="${phukiennam.sellPrice >= phukiennam.originPrice}">
+                                    ${PriceUtils.convert(phukiennam.sellPrice)}
+                                </c:if>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </c:forEach>
+        </div>
+
             </div>
             <div class="col-lg-3 offset-lg-1">
                 <div class="product-large set-bg m-large"
                      data-setbg="<c:url value="/template/img/products/man-large.jpg"/>">
                     <h2>Thời Trang Nam</h2>
-                    <a href="#">Xem Ngay</a>
+                    <a href="<c:url value="/cuahang?groupNameStr=Nam"/>">Xem Ngay</a>
                 </div>
             </div>
         </div>
@@ -267,5 +342,6 @@
 </div>
 <!-- Instagram Section End -->
 </body>
-
+<script>
+</script>
 </html>

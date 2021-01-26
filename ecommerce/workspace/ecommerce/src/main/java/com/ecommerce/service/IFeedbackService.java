@@ -6,4 +6,5 @@ import com.ecommerce.model.Feedback;
 
 public interface IFeedbackService {
 	List<Feedback> findAll();
+	void insert(Feedback feedback);
 }

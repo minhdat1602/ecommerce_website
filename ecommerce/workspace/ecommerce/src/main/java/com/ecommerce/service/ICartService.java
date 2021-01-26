@@ -12,4 +12,5 @@ public interface ICartService {
     boolean updateItem(CartDetails cartDetails);
     CartDetails insertItem(CartDetails cartDetails);
     Cart insert(Cart cart);
+
 }

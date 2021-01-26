@@ -46,4 +46,9 @@ public class CartDetailService implements ICartDetailService {
     public void setForeign(CartDetails cartDetails) {
         cartDetails.setStock(stockDAO.findOne(cartDetails.getStockId()));
     }
+
+    @Override
+    public boolean deleteByCartId(Integer id) {
+        return cartDetailDAO.deleteByCartId(id);
+    }
 }

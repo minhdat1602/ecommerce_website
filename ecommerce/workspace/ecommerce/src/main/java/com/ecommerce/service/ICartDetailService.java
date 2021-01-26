@@ -10,5 +10,5 @@ public interface ICartDetailService {
     boolean update(CartDetails cartDetails);
     boolean delete(Integer id);
     void setForeign(CartDetails cartDetails);
-
+    boolean deleteByCartId(Integer id);
 }

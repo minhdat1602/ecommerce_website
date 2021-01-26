@@ -42,5 +42,15 @@ public class OrderService implements IOrderService{
 	public List<Order> findAllByUserId(Integer id) {
 		return orderDAO.findAllByUserId(id);
 	}
-
+	//this is cua dat
+	@Override
+	public Order insert(Order order) {
+		Integer id = orderDAO.insert(order);
+		return orderDAO.findOne(id);
+	}
+	@Override
+	public Order update(Order order) {
+		orderDAO.update(order);
+		return order;
+	}
 }

@@ -36,6 +36,17 @@ public class Cart extends AbstractModel {
         }
         return total;
     }
+    public Integer totalOriginPrice() {
+        Integer total = 0;
+        for (CartDetails cd : cartDetailsList) {
+            total += cd.getQuantity() * cd.getStock().getProduct().getOriginPrice();
+        }
+        return total;
+    }
+    public Integer totalDiscount(){
+        int result = totalOriginPrice() - totalPrice();
+        return result;
+    }
     public CartDetails getItem(Integer itemId){
         for (CartDetails cd : cartDetailsList) {
             if(cd.getId() == itemId)
@@ -43,6 +54,7 @@ public class Cart extends AbstractModel {
         }
         return null;
     }
+
 
     public boolean removeItem(Integer itemId) {
         for (CartDetails cd : cartDetailsList) {

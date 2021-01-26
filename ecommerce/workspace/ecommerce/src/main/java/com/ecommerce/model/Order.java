@@ -1,5 +1,6 @@
 package com.ecommerce.model;
 
+import java.sql.Date;
 import java.sql.Timestamp;
 import java.util.List;
 
@@ -11,7 +12,7 @@ public class Order extends AbstractModel{
 	private String status;
 	private Integer couponId;
 	private Integer userId;
-	private Timestamp dateSell;
+	private Date  dateSell;
 	private List<OrderDetails> listOrderDetails;
 	private User user;
 	public Order() {
@@ -54,10 +55,10 @@ public class Order extends AbstractModel{
 	public void setUserId(Integer userId) {
 		this.userId = userId;
 	}
-	public Timestamp getDateSell() {
+	public Date  getDateSell() {
 		return dateSell;
 	}
-	public void setDateSell(Timestamp dateSell) {
+	public void setDateSell(Date dateSell) {
 		this.dateSell = dateSell;
 	}
 	public String getStatus() {

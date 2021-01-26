@@ -7,5 +7,5 @@ import com.ecommerce.model.OrderDetails;
 public interface IOrderDetailsService {
 
 	List<OrderDetails> findAllOrderDetail(Integer id);
-	
+	OrderDetails insert(OrderDetails orderDetails);
 }

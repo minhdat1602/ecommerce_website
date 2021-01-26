@@ -10,6 +10,13 @@ public class OrderDetails extends AbstractModel{
 	private String size;
 	private String product;
 	private Integer totalPrice;
+	private Stock stock;
+	public Stock getStock() {
+		return stock;
+	}
+	public void setStock(Stock stock) {
+		this.stock = stock;
+	}
 	
 	public String getColor() {
 		return color;

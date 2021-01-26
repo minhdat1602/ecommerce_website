@@ -11,5 +11,6 @@ public interface IOrderDetailsDAO extends IGenericDAO<OrderDetails>{
 	Integer getBuyTimesByProductGroupId(Integer id,String filter);
 
 	Integer getSalesByProductGroupId(Integer id,String filter);
-	
+	OrderDetails findById(Integer id);
+	Integer insert(OrderDetails orderDetails);
 }

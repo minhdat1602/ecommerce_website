@@ -49,4 +49,17 @@ public class OrderDetailsDAO extends AbstractDAO<OrderDetails> implements IOrder
 		sql.append(filter);
 		return count(sql.toString(), id, filter);
 	}
+	@Override
+	public OrderDetails findById(Integer id) {
+		String sql = "select * from orders_detail where id = ?";
+		List<OrderDetails> list = query(sql, new OrderDetailsMapper(),id);
+		return list.size() == 0 ? null : list.get(0);
+	}
+	@Override
+	public Integer insert(OrderDetails orderDetails) {
+		String sql = "insert into orders_detail (order_id, price, discount,quantity,stock_id) " +
+				"values (?,?,?,?,?)";
+		return insert(sql, orderDetails.getOrderId(), orderDetails.getPrice(), orderDetails.getDiscount(),
+				orderDetails.getQuantity(),orderDetails.getStockId());
+	}
 }

@@ -88,9 +88,13 @@ public class ProductDAO extends AbstractDAO<Product> implements IProductDAO {
 
 	@Override
 	public List<Product> findRelatedProduct(Integer groupId) {
-		// TODO Auto-generated method stub
-		return null;
+		String sql = "select p.*, gr.name as category, br.name as brand, cl.name as collection " +
+				"from products p join products_group gr on gr.id = p.group_id" +
+				" join products_brand br on br.id = p.brand_id join products_collection cl on cl.id = p.collection_id" +
+				" where p.group_id = ?";
+		return query(sql, new ProductMapper(), groupId);
 	}
+
 
 	@Override
 	public List<Product> findAllByCollectionId(Integer id) {

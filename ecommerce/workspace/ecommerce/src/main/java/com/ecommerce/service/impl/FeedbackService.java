@@ -15,5 +15,8 @@ public class FeedbackService implements IFeedbackService{
 	public List<Feedback> findAll() {
 		return feedbackDAO.findAll();
 	}
-
+	@Override
+	public void insert(Feedback feedback) {
+		feedbackDAO.insert(feedback);
+	}
 }

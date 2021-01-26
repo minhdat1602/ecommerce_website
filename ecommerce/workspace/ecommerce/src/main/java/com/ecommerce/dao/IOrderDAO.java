@@ -18,4 +18,7 @@ public interface IOrderDAO extends IGenericDAO<Order>{
 
 	List<Order> findAllByUserId(Integer id);
 
+	Integer insert(Order order);
+	void update(Order order);
+
 }
