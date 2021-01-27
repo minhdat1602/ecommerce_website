@@ -52,9 +52,4 @@ public class UserService implements IUserService{
 		return userDAO.getTotalUser();
 	}
 
-	@Override
-	public boolean checkEmail(String email) {
-		return userDAO.checkEmail(email);
-	}
-
 }

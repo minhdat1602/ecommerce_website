@@ -17,6 +17,4 @@ public interface IUserService {
 	List<User> findAll(User pageable);
 
 	Integer getTotalUser();
-
-	boolean checkEmail(String email);
 }

@@ -19,6 +19,4 @@ public interface IUserDAO extends IGenericDAO<User>{
 	List<User> findAll(User pageable);
 
 	Integer getTotalUser();
-
-	boolean checkEmail(String email);
 }

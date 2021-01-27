@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.sql.Timestamp;
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -24,7 +26,7 @@ public class ChangeInfoController extends HttpServlet {
         response.setCharacterEncoding("UTF-8");
         String page = request.getParameter("page");
         User user = (User) request.getSession().getAttribute("USERMODEL");
-        if (user == null)
+        if(user == null)
             System.out.println("USER NOT EXIST");
         if (page.equals("info")) {
             String fname = request.getParameter("fname");
@@ -39,19 +41,12 @@ public class ChangeInfoController extends HttpServlet {
             } catch (ParseException e) {
                 e.printStackTrace();
             }
-            java.sql.Date birthday;
-            if (date != null)
-                birthday = new java.sql.Date(date.getTime());
-            else
-                birthday = null;
+            java.sql.Date birthday = new java.sql.Date(date.getTime());
 
             String address = request.getParameter("address");
             String pwd = request.getParameter("password");
-            pwd = PasswordEncryption.MD5(pwd);
 
-            boolean checkEmail = userService.checkEmail(email);
-
-            if (pwd.equals(user.getPassword()) && (checkEmail || user.getEmail().equals(email))) {
+            if (pwd.equals(user.getPassword())) {
                 user.setFirstName(fname);
                 user.setLastName(lname);
                 user.setEmail(email);
@@ -63,17 +58,19 @@ public class ChangeInfoController extends HttpServlet {
                 System.out.println("Update: " + updated);
                 response.sendRedirect(request.getContextPath() + "/trang-chu");
             } else {
+<<<<<<< HEAD
                 if (!checkEmail || !user.getEmail().equals(email))
                     request.setAttribute("email-err", "Mật Email này đã tồn tại");
                 if (!pwd.equals(user.getPassword()))
                     request.setAttribute("pwd-err", "Mật khẩu không chính xác");
+=======
+                request.setAttribute("pwd-err", "Mật khẩu không chính xác");
+>>>>>>> parent of 5a06246... comit
                 request.getRequestDispatcher("/view/web/change-information.jsp").forward(request, response);
             }
         } else if (page.equals("pwd")) {
             String oldPwd = request.getParameter("oldPassword");
-            oldPwd = PasswordEncryption.MD5(oldPwd);
             String newPwd = request.getParameter("newPassword");
-            newPwd = PasswordEncryption.MD5(newPwd);
             if (oldPwd.equals(user.getPassword())) {
                 user.setPassword(newPwd);
                 boolean updated = userService.update(user);

@@ -22,7 +22,7 @@
                             <span>${promotion.header}</span>
                             <h1 class="text-left">${promotion.name}</h1>
                             <p>${promotion.descriptions}</p>
-                            <a href="<c:url value="/sale?id=${promotion.id}"/> " class="primary-btn">Mua sắm
+                            <a href="<c:url value="/sale?${promotion.id}"/> " class="primary-btn">Mua sắm
                                 ngay</a>
                         </div>
                     </div>

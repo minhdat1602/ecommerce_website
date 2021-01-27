@@ -54,10 +54,7 @@
                             <label for="email">Địa chỉ email *</label>
                             <input type="email" name="email" id="email"
                                    value="<%=request.getAttribute("email")==null?"":request.getAttribute("email")%>">
-                            <label style="color: #F00" class="error" for="email">
-                                <%=request.getAttribute("email-err") == null ? "" :
-                                        request.getAttribute("email-err")%>
-                            </label>
+                            <label style="color: #F00" class="error" for="email"></label>
                         </div>
                         <div class="group-input">
                             <label for="password">Mật khẩu *</label>

@@ -162,8 +162,11 @@ public class User extends AbstractModel {
 	}
 
 	public boolean isAdmin() {
+<<<<<<< HEAD
 		if (listPermission == null)
 			return false;
+=======
+>>>>>>> parent of 5a06246... comit
 		for (Permission permission : listPermission) {
 			if (permission.getName().contains("admin")) {
 				return true;

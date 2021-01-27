@@ -221,6 +221,7 @@
 										${promotion.name}</a></li>
 							</c:forEach>
 
+<<<<<<< HEAD
 						</ul></li>
 					<li class="contact-page"><a
 						href="<c:url value = "/view/web/contact.jsp"/>">Liên Hệ</a></li>
@@ -237,6 +238,26 @@
 			<div id="mobile-menu-wrap"></div>
 		</div>
 	</div>
+=======
+                        </ul>
+                    </li>
+                    <li class="contact-page"><a
+                            href="<c:url value = "/view/web/contact.jsp"/>">Liên Hệ</a></li>
+                    <li class="pages"><a>Trang</a>
+                        <ul class="dropdown">
+                            <li class="pages"><a
+                                    href="<c:url value = "/view/web/faq.jsp"/>">Câu hỏi</a></li>
+                            <li class="pages"><a
+                                    href="<c:url value = "/view/web/about.jsp"/>">Giới thiệu</a></li>
+                            <li class="pages"><a href="<c:url value = "/gop-y"/>">Góp ý</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </nav>
+            <div id="mobile-menu-wrap"></div>
+        </div>
+    </div>
+>>>>>>> parent of 5a06246... comit
 </header>
 <!-- Header End -->
 
