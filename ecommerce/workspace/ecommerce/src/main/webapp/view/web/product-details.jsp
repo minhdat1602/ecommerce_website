@@ -267,7 +267,9 @@
                                                         <span>${review.dateReview }</span>
                                                             ${review.vote} sao
                                                     </h5>
-                                                    <div class="at-reply">${review.comment}</div>
+                                                     <p style = "font-weight:500;font-size:18;margin:0px;">${review.comment}</p> 
+                                                    <c:if test="${not empty review.reply}"></c:if>
+                                                     <span style = "font-weight:600">Fashi:</span> ${review.reply}
                                                 </div>
                                             </div>
                                         </c:forEach>
