@@ -25,7 +25,7 @@
                 <c:if test="${not empty USERMODEL}">
                     <a style="width: 170px"
                        href="<c:url value = "/capnhat?page=info"/>" class="login-panel">
-                        <i class="fa fa-user"></i> Xin chào: ${USERMODEL.lastName}
+                        <i class="fa fa-user"></i> ${USERMODEL.firstName} ${USERMODEL.lastName}
                     </a>
                     <ul class="dropdown" id="userOption">
                         <c:if test="${not empty USERMODEL && USERMODEL.isAdmin()}">

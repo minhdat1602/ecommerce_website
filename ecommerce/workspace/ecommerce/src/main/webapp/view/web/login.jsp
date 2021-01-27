@@ -79,6 +79,7 @@
                                     : request.getAttribute("err-captcha")%>
                         </div>--%>
                         <button id="loginBtn" type="button" class="site-btn login-btn">Đăng Nhập</button>
+                        <a id="facebook" href="https://www.facebook.com/dialog/oauth?client_id=798415874362188&redirect_uri=http://localhost:8080/ecommerce/dang-nhap/facebook"/><i class="fa fa-facebook"></i></a>
                     </form>
 
                     <div class="switch-login">

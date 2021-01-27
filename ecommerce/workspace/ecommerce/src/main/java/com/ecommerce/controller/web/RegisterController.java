@@ -30,7 +30,6 @@ public class RegisterController extends HttpServlet {
         String username = req.getParameter("username");
         String password = req.getParameter("password");
         password = PasswordEncryption.MD5(password);
-        System.out.println(password);
         String email = req.getParameter("email");
 
         boolean checkEmail = userService.checkEmail(email);

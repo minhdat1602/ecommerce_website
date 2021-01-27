@@ -32,6 +32,7 @@ public class AuthorizationFilter implements Filter {
 			throws IOException, ServletException {
 		HttpServletRequest request = (HttpServletRequest) servletRequest;
 		HttpServletResponse response = (HttpServletResponse) servletResponse;
+		
 		StringBuffer url = request.getRequestURL();
 		url.append("?");
 		url.append(request.getQueryString());
@@ -45,48 +46,14 @@ public class AuthorizationFilter implements Filter {
 			} else {
 				List<Permission> listPermission = user.getListPermission();
 				if (user.isAdmin()) {
-					if (url.toString().contains("danh-sach-san-pham?type=add")) {
-						if (user.containsPremission("admin-add-product")) {
-							chain.doFilter(servletRequest, servletResponse);
-							return;
-						} else {
-							session.setAttribute("message", "Bạn không có quyền thực hiện thao tác này");
-							response.sendRedirect(request.getContextPath() + "/dang-nhap");
-							return;
-						}
+					if (user.containsURL(url.toString())) {
+						chain.doFilter(servletRequest, servletResponse);
+						return;
+					} else {
+						session.setAttribute("message", "Bạn không có quyền thực hiện thao tác này");
+						response.sendRedirect(request.getContextPath() + "/dang-nhap");
+						return;
 					}
-					if (url.toString().contains("danh-sach-san-pham?type=edit")) {
-						if (user.containsPremission("admin-edit-product")) {
-							chain.doFilter(servletRequest, servletResponse);
-							return;
-						} else {
-							session.setAttribute("message", "Bạn không có quyền thực hiện thao tác này");
-							response.sendRedirect(request.getContextPath() + "/dang-nhap");
-							return;
-						}
-					}
-					if (url.toString().contains("danh-sach-khuyen-mai?type=add")) {
-						if (user.containsPremission("admin-add-promotion")) {
-							chain.doFilter(servletRequest, servletResponse);
-							return;
-						} else {
-							session.setAttribute("message", "Bạn không có quyền thực hiện thao tác này");
-							response.sendRedirect(request.getContextPath() + "/dang-nhap");
-							return;
-						}
-					}
-					if (url.toString().contains("danh-sach-khuyen-mai?type=edit")) {
-						if (user.containsPremission("admin-edit-promotion")) {
-							chain.doFilter(servletRequest, servletResponse);
-							return;
-						} else {
-							session.setAttribute("message", "Bạn không có quyền thực hiện thao tác này");
-							response.sendRedirect(request.getContextPath() + "/dang-nhap");
-							return;
-						}
-					}
-					chain.doFilter(servletRequest, servletResponse);
-					return;
 				} else {
 					session.setAttribute("message", "Bạn không có quyền thực hiện thao tác này");
 					response.sendRedirect(request.getContextPath() + "/dang-nhap");
