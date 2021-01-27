@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.sql.Date;
 
 @WebServlet(urlPatterns = "/dang-ky")
 public class RegisterController extends HttpServlet {
@@ -44,6 +45,8 @@ public class RegisterController extends HttpServlet {
             user.setEmail(email);
             user.setStatus(1);
             user.setGroupId(1);
+            Date date = new Date(System.currentTimeMillis());
+            user.setDateRegister(date);
             //chua dung
             //user.setCreatedDate(new Timestamp(Calendar.getInstance().getTimeInMillis()));
             try {

@@ -74,8 +74,8 @@ public class UserDAO extends AbstractDAO<User> implements IUserDAO{
 	@Override
 	public Integer insert(User user) {
 		StringBuilder sql = new StringBuilder("insert into users " +
-				"(fname,lname,username, password, email,status,group_id) ");
-		sql.append("value (?,?,?,?,?,?,?) ");
+				"(fname,lname,username, password, email,status,group_id,date_register) ");
+		sql.append("value (?,?,?,?,?,?,?,?) ");
 		return insert(sql.toString(),
 				user.getFirstName(),
 				user.getLastName(),
@@ -83,7 +83,8 @@ public class UserDAO extends AbstractDAO<User> implements IUserDAO{
 				user.getPassword(),
 				user.getEmail(),
 				user.getStatus(),
-				user.getGroupId());
+				user.getGroupId(),
+				user.getDateRegister());
 	}
 
 
