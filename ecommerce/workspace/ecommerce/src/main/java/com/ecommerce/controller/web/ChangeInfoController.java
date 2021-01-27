@@ -59,7 +59,11 @@ public class ChangeInfoController extends HttpServlet {
                 response.sendRedirect(request.getContextPath() + "/trang-chu");
             } else {
 <<<<<<< HEAD
+<<<<<<< HEAD
                 if (!checkEmail || !user.getEmail().equals(email))
+=======
+                if (!checkEmail && user.getEmail().equals(email))
+>>>>>>> parent of b3fa020... permission
                     request.setAttribute("email-err", "Mật Email này đã tồn tại");
                 if (!pwd.equals(user.getPassword()))
                     request.setAttribute("pwd-err", "Mật khẩu không chính xác");
