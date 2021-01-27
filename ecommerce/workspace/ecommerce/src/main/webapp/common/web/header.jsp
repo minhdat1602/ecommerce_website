@@ -237,7 +237,7 @@
                                     href="<c:url value = "/view/web/faq.jsp"/>">Câu hỏi</a></li>
                             <li class="pages"><a
                                     href="<c:url value = "/view/web/about.jsp"/>">Giới thiệu</a></li>
-                            <li class="pages"><a href="<c:url value = "/gop-y"/>">Góp ý</a></li>
+                            <li class="pages"><a href="#">Góp ý</a></li>
                         </ul>
                     </li>
                 </ul>

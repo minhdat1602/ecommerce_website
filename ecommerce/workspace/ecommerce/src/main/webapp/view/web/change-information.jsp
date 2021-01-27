@@ -47,6 +47,8 @@
                             <label for="email">Địa chỉ email *</label>
                             <input type="email" value ='${USERMODEL.email}' name="email"  id="email">
                             <label style="color:#F00;" for="email" class="error">
+                                <%=request.getAttribute("email-err") == null ? "" :
+                                        request.getAttribute("email-err")%>
                             </label>
                         </div>
                         <div class="group-input">

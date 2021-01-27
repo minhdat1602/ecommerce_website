@@ -90,10 +90,18 @@
                                             <span class="money d-inline-block float-right text-default">${order.totalDiscount}</span>
                                         </li>
                                         <li class="mid pb-3 text-dark"> THÀNH TIỀN
-                                            <span class="money d-inline-block float-right text-default">${order.totalMoney}</span>
+                                            <span class="money d-inline-block float-right text-default">
+                                                ${order.totalSellPrice - order.totalDiscount}</span>
                                         </li>
                                     </ul>
-                                    <a href="#" id="huy" class="btn btn-block mt-2 btn-lg btn-danger btn-pill">${order.status}</a>
+                                    <a href="#" id="huy" class="btn btn-block mt-2 btn-lg btn-danger btn-pill">
+                                        <c:if test="${order.status eq 'Chờ xác nhận'}">
+                                            Hủy đơn hàng
+                                        </c:if>
+                                        <c:if test="${order.status != 'Chờ xác nhận'}">
+                                            ${order.status}
+                                        </c:if>
+                                    </a>
                                 </div>
                             </div>
                         </div>
@@ -117,8 +125,7 @@
                 })
                 cancel(data);
             }
-        }
-        else{
+        } else {
             alert("bạn đã hủy đơn hàng này")
         }
     })

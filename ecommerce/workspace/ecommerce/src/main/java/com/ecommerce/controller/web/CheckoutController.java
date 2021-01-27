@@ -71,34 +71,35 @@ public class CheckoutController extends HttpServlet {
             e.printStackTrace();
         }
         order.setListOrderDetails(new ArrayList<>());
-        OrderDetails orderDetails;
-        for (int i = 0; i < cart.getCartDetailsList().size(); i++) {
-            orderDetails = new OrderDetails();
-            orderDetails.setOrderId(order.getId());
-            orderDetails.setPrice(cart.getCartDetailsList().get(i).getStock().getProduct().getOriginPrice());
-            orderDetails.setDiscount(cart.getCartDetailsList().get(i).getStock().getProduct().getOriginPrice()
-                    - cart.getCartDetailsList().get(i).getStock().getProduct().getSellPrice());
-            orderDetails.setQuantity(cart.getCartDetailsList().get(i).getQuantity());
-            orderDetails.setStockId(cart.getCartDetailsList().get(i).getStockId());
-            try {
-                orderDetails = orderDetailsService.insert(orderDetails);
-                Stock stock = cart.getCartDetailsList().get(i).getStock();
-                stock.setQuantity(stock.getQuantity() - orderDetails.getQuantity());
-                boolean updated = stockService.update(stock);
-                orderDetails.setStock(stock);
-                order.getListOrderDetails().add(orderDetails);
-            }catch (Exception e)
-            {
-                e.printStackTrace();
+        if (order != null) {
+            OrderDetails orderDetails;
+            for (int i = 0; i < cart.getCartDetailsList().size(); i++) {
+                orderDetails = new OrderDetails();
+                orderDetails.setOrderId(order.getId());
+                orderDetails.setPrice(cart.getCartDetailsList().get(i).getStock().getProduct().getOriginPrice());
+                orderDetails.setDiscount(cart.getCartDetailsList().get(i).getStock().getProduct().getOriginPrice()
+                        - cart.getCartDetailsList().get(i).getStock().getProduct().getSellPrice());
+                orderDetails.setQuantity(cart.getCartDetailsList().get(i).getQuantity());
+                orderDetails.setStockId(cart.getCartDetailsList().get(i).getStockId());
+                try {
+                    orderDetails = orderDetailsService.insert(orderDetails);
+                    Stock stock = cart.getCartDetailsList().get(i).getStock();
+                    stock.setQuantity(stock.getQuantity() - orderDetails.getQuantity());
+                    boolean updated = stockService.update(stock);
+                    orderDetails.setStock(stock);
+                    order.getListOrderDetails().add(orderDetails);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
+            req.setAttribute("order", order);
+            req.setAttribute("user", user);
+            if (usermodel != null) {
+                cartDetailService.deleteByCartId(cart.getId());
+            }
+            cart.setCartDetailsList(new ArrayList<>());
+            req.getSession().setAttribute("CART", cart);
+            req.getRequestDispatcher("/view/web/order-details.jsp").forward(req, resp);
         }
-        req.setAttribute("order",order);
-        req.setAttribute("user", user);
-        if(usermodel != null) {
-            cartDetailService.deleteByCartId(cart.getId());
-        }
-        cart.setCartDetailsList(new ArrayList<>());
-        req.getSession().setAttribute("CART", cart);
-        req.getRequestDispatcher("/view/web/order-details.jsp").forward(req,resp);
     }
 }

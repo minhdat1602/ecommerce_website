@@ -10,8 +10,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.sql.Timestamp;
-import java.util.Calendar;
 
 @WebServlet(urlPatterns = "/dang-ky")
 public class RegisterController extends HttpServlet {
@@ -35,8 +33,10 @@ public class RegisterController extends HttpServlet {
         System.out.println(password);
         String email = req.getParameter("email");
 
+        boolean checkEmail = userService.checkEmail(email);
+
         User tmp = userService.getUser(username);
-        if (tmp == null) {
+        if (tmp == null && checkEmail) {
             User user = new User();
             user.setFirstName(fname);
             user.setLastName(lname);
@@ -50,16 +50,20 @@ public class RegisterController extends HttpServlet {
             try {
                 user = userService.insert(user);
                 req.getSession().setAttribute("USERMODEL", user);
-            }catch (Exception e){
+            } catch (Exception e) {
                 resp.sendRedirect(req.getContextPath() + "/trang-chu");
             }
             resp.sendRedirect(req.getContextPath() + "/capnhat?page=info");
         } else {
-            req.setAttribute("fname",fname);
-            req.setAttribute("lname",lname);
-            req.setAttribute("email",email);
-            req.setAttribute("uname-err", "Tên tài khoản đã tồn tại");
-            req.getRequestDispatcher("/view/web/register.jsp").forward(req,resp);
+            if (!checkEmail)
+                req.setAttribute("email-err", "Email này đã tồn tại");
+            if (tmp != null)
+                req.setAttribute("uname-err", "Tên tài khoản đã tồn tại");
+            req.setAttribute("fname", fname);
+            req.setAttribute("lname", lname);
+            req.setAttribute("email", email);
+
+            req.getRequestDispatcher("/view/web/register.jsp").forward(req, resp);
         }
     }
 }

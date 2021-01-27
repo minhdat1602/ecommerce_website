@@ -58,20 +58,20 @@ public class ForgotPasswordController extends HttpServlet {
                 String code = request.getParameter("otp");
 
                 if (code.equals(userVerify.getCode().getCode())) {
-                    if (userVerify.getCode().timeout(1)) //3 phút
+                    if (userVerify.getCode().timeout(60)) //1 phút
                         request.getRequestDispatcher("/view/web/new-password.jsp").forward(request, response);
                     else {
-                        request.setAttribute("otp-err", "Mã xác nhận quá hạn");
+                        request.setAttribute("otp-err", "Mã xác nhận quá hạn, vui longf");
                         request.getRequestDispatcher("/view/web/otp.jsp").forward(request, response);
                     }
                 } else {
-                    request.setAttribute("otp-err", "Mã xác nhận không hợp lệ");
+                    request.setAttribute("otp-err", "Mã xác nhận không hợp lệ, Vui lòng nhấn gửi lại!");
                     request.getRequestDispatcher("/view/web/otp.jsp").forward(request, response);
                 }
                 break;
             case "newPwd":
                 String pwd = request.getParameter("newPassword");
-                PasswordEncryption.MD5(pwd);
+                pwd = PasswordEncryption.MD5(pwd);
                 HttpSession ss3 = request.getSession();
                 User user = (User) ss3.getAttribute("authcode");
 
