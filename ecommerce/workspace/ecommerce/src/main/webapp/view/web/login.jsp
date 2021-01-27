@@ -29,16 +29,16 @@
         <div class="row">
             <div class="col-lg-6 offset-lg-3">
                 <div class="login-form">
-                	<input type="hidden" id="message" value ="${message}">
-            		<script type="text/javascript">
-	            		$().ready(function () {
-	            	       if ($('#message').val()!="") {
-								alert($('#message').val());
-							}
-	            	    })
-            		</script>
+                    <input type="hidden" id="message" value="${message}">
+                    <script type="text/javascript">
+                        $().ready(function () {
+                            if ($('#message').val() != "") {
+                                alert($('#message').val());
+                            }
+                        })
+                    </script>
                     <h2>Đăng Nhập</h2>
-						
+
                     <form id="login" action="<c:url value="/dang-nhap"/> " method="POST">
                         <div class="group-input">
                             <label for="username">Tên tài khoản *</label>
@@ -69,7 +69,16 @@
                                 <a href="<c:url value="quen-mat-khau"/> " class="forget-pass">Quên Mật Khẩu</a>
                             </div>
                         </div>
-                        <button id="loginBtn" type="submit" class="site-btn login-btn">Đăng Nhập</button>
+
+                        <div class="g-recaptcha" data-sitekey="6LeWAD4aAAAAANPHjKDcdFsscu27bjNcvKmPGPUL"
+                        <%--data-callback='onSubmit'--%>>
+                            <%--Submit--%>
+                        </div>
+                        <%--<div style="color:#F00;" for="password" class="error">
+                            <%=request.getAttribute("err-captcha") == null ? ""
+                                    : request.getAttribute("err-captcha")%>
+                        </div>--%>
+                        <button id="loginBtn" type="button" class="site-btn login-btn">Đăng Nhập</button>
                     </form>
 
                     <div class="switch-login">
@@ -101,6 +110,16 @@
                 username: "Tên tài khoản không được bỏ trống"
             }
         });
+    })
+    $("#loginBtn").click(function () {
+        var response = grecaptcha.getResponse();
+
+        if (response.length == 0){
+            alert("Vui lòng xác nhận captcha")
+        }
+        else{
+            $("#login").submit();
+        }
     })
 </script>
 

@@ -12,7 +12,7 @@
                     <i class=" fa fa-envelope"></i> fashi@gmail.com
                 </div>
                 <div class="phone-service">
-                    <i class=" fa fa-phone"></i> +84 123456789
+                    <i class=" fa fa-phone"></i> +84359996543
                 </div>
             </div>
             <div class="ht-right">
@@ -107,10 +107,11 @@
                 </script>
                 <div class="col-lg-3 text-right col-md-3"  id="reload">
                     <ul class="nav-right">
-                        <li class="heart-icon"><a
+                        <%--<li class="heart-icon"><a
                                 href="<c:url value = "/view/web/favorite-products.jsp"/>"> <i
                                 class="icon_heart_alt"></i> <span>3</span>
-                        </a></li>
+                        </a>
+                        </li>--%>
                         <li class="cart-icon"><a href="<c:url value = "/gio-hang"/>">
                             <i class="icon_bag_alt"></i> <span class="qty"> <c:if
                                 test="${(empty CART) or (CART.cartDetailsList.size() == 0)}">

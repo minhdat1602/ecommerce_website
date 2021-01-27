@@ -20,6 +20,8 @@
     <script src="<c:url value="/template/web/js/jquery.validate.min.js"/> "></script>
     <script src="<c:url value="/template/pagination/jquery.twbsPagination.js" />"></script>
 
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+
 
 </head>
 <body>
