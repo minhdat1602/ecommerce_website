@@ -31,6 +31,8 @@ public class RegisterController extends HttpServlet {
         String lname = req.getParameter("lname");
         String username = req.getParameter("username");
         String password = req.getParameter("password");
+        password = PasswordEncryption.MD5(password);
+        System.out.println(password);
         String email = req.getParameter("email");
 
         User tmp = userService.getUser(username);
@@ -44,7 +46,7 @@ public class RegisterController extends HttpServlet {
             user.setStatus(1);
             user.setGroupId(1);
             //chua dung
-            user.setCreatedDate(new Timestamp(Calendar.getInstance().getTimeInMillis()));
+            //user.setCreatedDate(new Timestamp(Calendar.getInstance().getTimeInMillis()));
             try {
                 user = userService.insert(user);
                 req.getSession().setAttribute("USERMODEL", user);

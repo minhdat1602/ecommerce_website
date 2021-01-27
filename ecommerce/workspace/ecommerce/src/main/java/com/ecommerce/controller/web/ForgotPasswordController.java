@@ -71,6 +71,7 @@ public class ForgotPasswordController extends HttpServlet {
                 break;
             case "newPwd":
                 String pwd = request.getParameter("newPassword");
+                PasswordEncryption.MD5(pwd);
                 HttpSession ss3 = request.getSession();
                 User user = (User) ss3.getAttribute("authcode");
 

@@ -44,6 +44,7 @@ public class LoginController extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String username = req.getParameter("username");
         String password = req.getParameter("password");
+        password = PasswordEncryption.MD5(password);
         User user = userService.getUser(username.trim());
         if (user != null) {
             if (user.getPassword().equals(password)) {
